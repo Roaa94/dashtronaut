@@ -15,14 +15,41 @@ class TileWrapper extends StatefulWidget {
 }
 
 class _TileWrapperState extends State<TileWrapper> {
+  late double leftPosition;
+  late double topPosition;
+
+  @override
+  void initState() {
+    leftPosition = widget.tile.position.left;
+    topPosition = widget.tile.position.top;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 1),
       width: widget.tile.width,
       height: widget.tile.width,
-      left: widget.tile.position.left,
-      top: widget.tile.position.top,
-      child: TileContainer(value: widget.tile.value),
+      left: leftPosition,
+      top: topPosition,
+      child: GestureDetector(
+        onHorizontalDragUpdate: (DragUpdateDetails details) {
+          if (widget.tile.isMovable) {
+            setState(() {
+              leftPosition += details.delta.dx;
+            });
+          }
+        },
+        onVerticalDragUpdate: (DragUpdateDetails details) {
+          if (widget.tile.isMovable) {
+            setState(() {
+              topPosition += details.delta.dy;
+            });
+          }
+        },
+        child: TileContainer(tile: widget.tile),
+      ),
     );
   }
 }

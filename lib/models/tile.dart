@@ -5,12 +5,16 @@ class Tile {
   int value;
   double width;
   Position position;
-  // Location location;
+  bool isMovable;
+  bool isWhiteSpaceTile;
+  Location location;
 
   Tile({
     required this.value,
     required this.width,
     required this.position,
-    // required this.location,
+    required this.location,
+    this.isMovable = false,
+    this.isWhiteSpaceTile = false,
   });
 }

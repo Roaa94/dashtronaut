@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:flutter_puzzle_hack/models/tiles_data.dart';
 
 class Puzzle {
   final BuildContext context;
@@ -20,25 +22,28 @@ class Puzzle {
 
   int get tileCount => dimensions - 1;
 
-  List<double> get _tilesLeftPositions => _tilesPositions['left']!;
+  List<Position> get _tilesPositions => _tilesData.positions;
 
-  List<double> get _tilesTopPositions => _tilesPositions['top']!;
+  List<Location> get _tilesLocations => _tilesData.locations;
 
-  Map<String, List<double>> get _tilesPositions {
-    List<double> __tilesLeftPositions = [];
-    List<double> __tilesTopPositions = [];
+  TilesData get _tilesData {
+    List<Position> __tilesPositions = [];
+    List<Location> __tileLocations = [];
+
     // If dimension is 3 (3x3)
     // i = 0, 1, 2
     for (int i = 0; i < dimension; i++) {
       for (int j = 0; j < dimension; j++) {
-        __tilesLeftPositions.add(j * _tileContainerWidth);
-        __tilesTopPositions.add(i * _tileContainerWidth);
+        __tilesPositions.add(Position(left: j * _tileContainerWidth, top: i * _tileContainerWidth));
+        __tileLocations.add(Location(x: i + 1, y: j + 1));
       }
     }
-    return {
-      'left': __tilesLeftPositions,
-      'top': __tilesTopPositions,
-    };
+    assert(__tilesPositions.length == tileCount + 1);
+    assert(__tileLocations.length == tileCount + 1);
+    return TilesData(
+      positions: __tilesPositions,
+      locations: __tileLocations,
+    );
   }
 
   List<Tile> get tiles {
@@ -47,19 +52,23 @@ class Puzzle {
       (i) => Tile(
         value: i + 1,
         width: _tileContainerWidth,
-        position: Position(
-          top: _tilesTopPositions[i],
-          left: _tilesLeftPositions[i],
-        ),
+        position: _tilesPositions[i],
+        location: _tilesLocations[i],
+        isMovable: false,
       ),
     );
   }
 
+  Tile get whiteSpaceTile => Tile(
+        value: 0,
+        width: _tileContainerWidth,
+        position: _tilesPositions[tileCount + 1],
+        location: _tilesLocations[tileCount + 1],
+      );
+
   void printData() {
     print('Puzzle dimensions: ${dimension}x$dimension');
     // print('Puzzle Container Width: $containerWidth');
-    print('Puzzle Tile Container Width: $_tileContainerWidth');
-    print('Puzzle tiles left positions array: $_tilesLeftPositions');
-    print('Puzzle tiles top positions array: $_tilesTopPositions');
+    // print('Puzzle Tile Container Width: $_tileContainerWidth');
   }
 }
