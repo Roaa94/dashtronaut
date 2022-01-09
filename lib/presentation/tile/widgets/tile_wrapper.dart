@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_container.dart';
+import 'package:provider/provider.dart';
 
 class TileWrapper extends StatefulWidget {
   final Tile tile;
@@ -27,29 +29,38 @@ class _TileWrapperState extends State<TileWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-      duration: const Duration(milliseconds: 1),
-      width: widget.tile.width,
-      height: widget.tile.width,
-      left: leftPosition,
-      top: topPosition,
-      child: GestureDetector(
-        onHorizontalDragUpdate: (DragUpdateDetails details) {
-          if (widget.tile.isMovable) {
-            setState(() {
-              leftPosition += details.delta.dx;
-            });
-          }
-        },
-        onVerticalDragUpdate: (DragUpdateDetails details) {
-          if (widget.tile.isMovable) {
-            setState(() {
-              topPosition += details.delta.dy;
-            });
-          }
-        },
-        child: TileContainer(tile: widget.tile),
-      ),
+    return Consumer<PuzzleProvider>(
+      builder: (c, puzzleProvider, _) {
+        bool isTileMovable = puzzleProvider.puzzle.isTileMovable(widget.tile);
+
+        return AnimatedPositioned(
+          duration: const Duration(milliseconds: 1),
+          width: widget.tile.width,
+          height: widget.tile.width,
+          left: leftPosition,
+          top: topPosition,
+          child: GestureDetector(
+            onHorizontalDragUpdate: (DragUpdateDetails details) {
+              if (isTileMovable) {
+                setState(() {
+                  leftPosition += details.delta.dx;
+                });
+              }
+            },
+            onVerticalDragUpdate: (DragUpdateDetails details) {
+              if (isTileMovable) {
+                setState(() {
+                  topPosition += details.delta.dy;
+                });
+              }
+            },
+            child: TileContainer(
+              tile: widget.tile,
+              isTileMovable: isTileMovable,
+            ),
+          ),
+        );
+      },
     );
   }
 }

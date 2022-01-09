@@ -17,6 +17,12 @@ class Location extends Equatable {
     print(locationsMap);
   }
 
+  bool isLocatedAround(Location _location) {
+    return _location.x == x && (_location.y == y - 1 || _location.y == y + 1) || _location.y == y && (_location.x == x - 1 || _location.x == x + 1);
+  }
+
+  String get asString => '($x, $y)';
+
   @override
   List<Object> get props => [x, y];
 }
