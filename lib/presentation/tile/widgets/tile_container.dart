@@ -13,7 +13,7 @@ class TileContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.cyan,
+        color: tile.isWhiteSpaceTile ? Colors.white : Colors.cyan,
         borderRadius: BorderRadius.circular(12),
       ),
       margin: const EdgeInsets.all(5),
@@ -22,7 +22,7 @@ class TileContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('${tile.value}'),
-          Text('(${tile.location.x},${tile.location.y})')
+          Text('(${tile.currentLocation.x},${tile.currentLocation.y})'),
         ],
       ),
     );

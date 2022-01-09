@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_wrapper.dart';
+import 'package:provider/provider.dart';
 
-class PuzzleBoard extends StatelessWidget {
+class PuzzleBoard extends StatefulWidget {
   const PuzzleBoard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final puzzle = Puzzle(context: context, dimension: 3);
-    puzzle.printData();
+  State<PuzzleBoard> createState() => _PuzzleBoardState();
+}
 
+class _PuzzleBoardState extends State<PuzzleBoard> {
+  bool _isInit = true;
+
+  late PuzzleProvider puzzleProvider;
+  double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
+      puzzleProvider.generate(puzzleContainerWidth);
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      width: puzzle.containerWidth,
-      height: puzzle.containerWidth,
+      width: puzzleContainerWidth,
+      height: puzzleContainerWidth,
       margin: const EdgeInsets.all(UI.screenHPadding),
       color: Colors.grey.withOpacity(0.5),
       child: Stack(
         children: List.generate(
-          puzzle.tileCount,
-          (index) => TileWrapper(tile: puzzle.tiles[index]),
+          puzzleProvider.puzzle.tiles.length,
+          (index) => TileWrapper(tile: puzzleProvider.puzzle.tiles[index]),
         ),
       ),
     );
