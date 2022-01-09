@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PuzzleTile extends StatelessWidget {
+class TileContainer extends StatelessWidget {
   final int value;
 
-  const PuzzleTile({
+  const TileContainer({
     Key? key,
     required this.value,
   }) : super(key: key);
