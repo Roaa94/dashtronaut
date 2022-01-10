@@ -1,88 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_container.dart';
-import 'package:provider/provider.dart';
 
-class TileWrapper extends StatefulWidget {
+class TileWrapper extends StatelessWidget {
   final Tile tile;
+  final Puzzle puzzle;
+  final ValueChanged<Tile> swapTiles;
 
   const TileWrapper({
     Key? key,
     required this.tile,
+    required this.puzzle,
+    required this.swapTiles,
   }) : super(key: key);
 
   @override
-  _TileWrapperState createState() => _TileWrapperState();
-}
-
-class _TileWrapperState extends State<TileWrapper> {
-  late ValueNotifier<Position> tilePositionNotifier;
-
-  @override
-  void initState() {
-    tilePositionNotifier = ValueNotifier<Position>(Position(
-      left: widget.tile.position.left,
-      top: widget.tile.position.top,
-    ));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    tilePositionNotifier.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Consumer<PuzzleProvider>(
-      builder: (c, puzzleProvider, _) {
-        Puzzle puzzle = puzzleProvider.puzzle;
-        bool isMovableOnX = puzzle.tileIsMovableOnXAxis(widget.tile);
-        bool isMovableOnY = puzzle.tileIsMovableOnYAxis(widget.tile);
-        bool tileIsRightOfWhiteSpace = puzzle.tileIsRightOfWhiteSpace(widget.tile);
-        bool tileIsTopOfWhiteSpace = puzzle.tileIsTopOfWhiteSpace(widget.tile);
+    bool isMovableOnX = puzzle.tileIsMovableOnXAxis(tile);
+    bool isMovableOnY = puzzle.tileIsMovableOnYAxis(tile);
+    bool tileIsRightOfWhiteSpace = puzzle.tileIsRightOfWhiteSpace(tile);
+    bool tileIsLeftOfWhiteSpace = puzzle.tileIsLeftOfWhiteSpace(tile);
+    bool tileIsTopOfWhiteSpace = puzzle.tileIsTopOfWhiteSpace(tile);
+    bool tileIsBottomOfWhiteSpace = puzzle.tileIsBottomOfWhiteSpace(tile);
 
-        return ValueListenableBuilder(
-          valueListenable: tilePositionNotifier,
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeOut,
+      width: tile.width,
+      height: tile.width,
+      left: tile.position.left,
+      top: tile.position.top,
+      child: IgnorePointer(
+        ignoring: tile.isWhiteSpaceTile,
+        child: GestureDetector(
+          onHorizontalDragEnd: (DragEndDetails details) {
+            if (isMovableOnX) {
+              if ((tileIsRightOfWhiteSpace && details.velocity.pixelsPerSecond.dx < 0) ||
+                  (tileIsLeftOfWhiteSpace && details.velocity.pixelsPerSecond.dx > 0)) {
+                swapTiles(tile);
+              }
+            }
+          },
+          onVerticalDragEnd: (DragEndDetails details) {
+            if (isMovableOnY) {
+              if ((tileIsTopOfWhiteSpace && details.velocity.pixelsPerSecond.dy > 0) ||
+                  (tileIsBottomOfWhiteSpace && details.velocity.pixelsPerSecond.dy < 0)) {
+                swapTiles(tile);
+              }
+            }
+          },
           child: TileContainer(
-            tile: widget.tile,
+            tile: tile,
             isTileMovable: isMovableOnX || isMovableOnY,
-            extraText: puzzle.getTileLocationText(widget.tile),
+            // extraText: puzzle.getTileLocationText(tile),
           ),
-          builder: (c, Position tilePosition, child) => AnimatedPositioned(
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.easeInOut,
-            width: widget.tile.width,
-            height: widget.tile.width,
-            left: tilePosition.left,
-            top: tilePosition.top,
-            child: IgnorePointer(
-              ignoring: widget.tile.isWhiteSpaceTile,
-              child: GestureDetector(
-                onHorizontalDragUpdate: (DragUpdateDetails details) {
-                  if (isMovableOnX) {
-                    if ((tileIsRightOfWhiteSpace && details.delta.dx < 0) || (!tileIsRightOfWhiteSpace && details.delta.dx > 0)) {
-                      tilePositionNotifier.value = puzzle.whiteSpaceTile.position;
-                    }
-                  }
-                },
-                onVerticalDragUpdate: (DragUpdateDetails details) {
-                  if (isMovableOnY) {
-                    if ((tileIsTopOfWhiteSpace && details.delta.dy > 0) || (!tileIsTopOfWhiteSpace && details.delta.dy < 0)) {
-                      tilePositionNotifier.value = puzzle.whiteSpaceTile.position;
-                    }
-                  }
-                },
-                child: child!,
-              ),
-            ),
-          ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

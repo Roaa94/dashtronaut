@@ -9,7 +9,7 @@ class TileContainer extends StatelessWidget {
   const TileContainer({
     Key? key,
     required this.tile,
-    required this.isTileMovable,
+    this.isTileMovable = false,
     this.extraText,
   }) : super(key: key);
 
@@ -17,9 +17,9 @@ class TileContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: tile.isWhiteSpaceTile ? Colors.white : Colors.cyan,
+        color: tile.isWhiteSpaceTile ? Colors.white.withOpacity(0.4) : Colors.cyan,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: isTileMovable ? Colors.red : Colors.transparent, width: 2),
+        // border: Border.all(color: isTileMovable ? Colors.red : Colors.transparent, width: 2),
       ),
       margin: const EdgeInsets.all(5),
       alignment: Alignment.center,

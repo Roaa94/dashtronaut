@@ -20,4 +20,20 @@ class Tile {
   Position get position {
     return Position(top: (currentLocation.y - 1) * width, left: (currentLocation.x - 1) * width);
   }
+
+  Tile copyWith({
+    value,
+    width,
+    correctLocation,
+    currentLocation,
+    isWhiteSpaceTile,
+  }) {
+    return Tile(
+      value: value ?? this.value,
+      width: width ?? this.width,
+      correctLocation: correctLocation ?? this.correctLocation,
+      currentLocation: currentLocation ?? this.currentLocation,
+      isWhiteSpaceTile: isWhiteSpaceTile ?? this.isWhiteSpaceTile,
+    );
+  }
 }
