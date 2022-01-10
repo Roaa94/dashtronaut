@@ -1,17 +1,21 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_puzzle_hack/enums/direction.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 
 class PuzzleProvider with ChangeNotifier {
-  final int n = 4;
+  final int n = 3;
 
-  late Puzzle puzzle;
+  Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
+
+  late List<Tile> tiles;
+
   final Random random = Random();
 
-  List<Tile> get tilesWithoutWhitespace => puzzle.tiles.where((tile) => !tile.isWhiteSpaceTile).toList();
+  List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.isWhiteSpaceTile).toList();
 
   List<Tile> generateTiles(double tileWidth) {
     List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
@@ -30,42 +34,31 @@ class PuzzleProvider with ChangeNotifier {
     );
   }
 
-  List<Tile> swapTileWithWhiteSpace(Tile tile) {
-    List<Tile> _oldTiles = List.from(puzzle.tiles);
-    List<Tile> _updatedTiles = [];
-    Location whiteSpaceTileLocation = _oldTiles.firstWhere((tile) => tile.isWhiteSpaceTile).currentLocation;
-
-    // print('Whitespace tile location:');
-    // print(whiteSpaceTileLocation.asString);
-    for (Tile _tile in _oldTiles) {
-      if (_tile.value == tile.value) {
-        _updatedTiles.add(
-          _tile.copyWith(
-            currentLocation: whiteSpaceTileLocation,
-          ),
-        );
-      } else if (_tile.isWhiteSpaceTile) {
-        _updatedTiles.add(
-          _tile.copyWith(
-            currentLocation: tile.currentLocation,
-          ),
-        );
-      } else {
-        _updatedTiles.add(_tile);
-      }
-    }
-    return _updatedTiles;
+  void swapTilesAndUpdatePuzzle(Tile tile) {
+    int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
+    int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.isWhiteSpaceTile);
+    Tile _movedTile = tiles[movedTileIndex];
+    Tile _whiteSpaceTile = tiles[whiteSpaceTileIndex];
+    tiles[movedTileIndex] = _movedTile.copyWith(
+      currentLocation: _whiteSpaceTile.currentLocation,
+    );
+    tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
+    notifyListeners();
   }
 
-  void swapTilesAndUpdatePuzzle(Tile tile) {
-    List<Tile> _updatedTiles = swapTileWithWhiteSpace(tile);
-    puzzle = Puzzle(n: n, tiles: _updatedTiles);
-    notifyListeners();
+  void handleDrag({required Direction direction, required Tile tile}) {
+    bool moveTileLeft = direction == Direction.left && puzzle.tileIsRightOfWhiteSpace(tile);
+    bool moveTileRight = direction == Direction.right && puzzle.tileIsLeftOfWhiteSpace(tile);
+    bool moveTileUp = direction == Direction.up && puzzle.tileIsTopOfWhiteSpace(tile);
+    bool moveTileDown = direction == Direction.down && puzzle.tileIsBottomOfWhiteSpace(tile);
+
+    if (moveTileLeft || moveTileRight || moveTileUp || moveTileDown) {
+      swapTilesAndUpdatePuzzle(tile);
+    }
   }
 
   void generate(double puzzleContainerWidth) {
     double _tileContainerWidth = puzzleContainerWidth / n;
-    List<Tile> tiles = generateTiles(_tileContainerWidth);
-    puzzle = Puzzle(n: n, tiles: tiles);
+    tiles = generateTiles(_tileContainerWidth);
   }
 }
