@@ -12,7 +12,7 @@ class PuzzleProvider with ChangeNotifier {
 
   PuzzleProvider(this.context);
 
-  final int n = 3;
+  final int n = 4;
 
   double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
 
