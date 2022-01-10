@@ -26,17 +26,18 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: puzzleContainerWidth,
-      height: puzzleContainerWidth,
-      margin: const EdgeInsets.all(UI.screenHPadding),
-      color: Colors.grey.withOpacity(0.5),
-      child: Stack(
-        children: List.generate(
-          puzzleProvider.tilesWithoutWhitespace.length,
-          (index) => TileWrapper(
-            tile: puzzleProvider.tilesWithoutWhitespace[index],
-            handleDrag: (Direction direction, Tile tile) => puzzleProvider.handleDrag(direction: direction, tile: tile),
+    return Center(
+      child: Container(
+        width: puzzleContainerWidth,
+        height: puzzleContainerWidth,
+        margin: const EdgeInsets.all(UI.screenHPadding),
+        child: Stack(
+          children: List.generate(
+            puzzleProvider.tilesWithoutWhitespace.length,
+            (index) => TileWrapper(
+              tile: puzzleProvider.tilesWithoutWhitespace[index],
+              handleDrag: (Direction direction, Tile tile) => puzzleProvider.handleDrag(direction: direction, tile: tile),
+            ),
           ),
         ),
       ),

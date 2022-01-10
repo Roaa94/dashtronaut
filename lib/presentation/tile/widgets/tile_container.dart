@@ -27,7 +27,10 @@ class TileContainer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('${tile.value}'),
+          Text(
+            '${tile.value}',
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+          ),
           tile.currentLocation == tile.correctLocation ? const Text('✅') : Text(tile.currentLocation.asString),
           Text(
             tile.correctLocation.asString,

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/app_providers.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:provider/provider.dart';
 
 import 'presentation/home/pages/home_page.dart';
 
@@ -20,7 +17,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Puzzle Hack',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.system,
       home: const HomePage(),
     );
   }

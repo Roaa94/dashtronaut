@@ -10,11 +10,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => PuzzleProvider(context)..generate(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Home'),
-        ),
-        body: const PuzzleBoard(),
+      child: const Scaffold(
+        body: PuzzleBoard(),
       ),
     );
   }
