@@ -1,43 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/enums/direction.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_container.dart';
-import 'package:provider/provider.dart';
 
 class TileWrapper extends StatelessWidget {
-  final int tileValue;
+  final Tile tile;
+  final Stream<Tile> stream;
+  final Function handleDrag;
 
   const TileWrapper({
     Key? key,
-    required this.tileValue,
+    required this.tile,
+    required this.stream,
+    required this.handleDrag,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PuzzleProvider>(
-      builder: (c, puzzleProvider, child) {
-        Tile tile = puzzleProvider.tiles.firstWhere((_tile) => _tile.value == tileValue);
+    return StreamBuilder<Tile>(
+      stream: stream,
+      initialData: tile,
+      builder: (c, AsyncSnapshot<Tile> snapshot) {
+        Tile _tile = snapshot.data ?? tile;
 
         return AnimatedPositioned(
           duration: const Duration(milliseconds: 100),
           curve: Curves.easeOut,
-          width: tile.width,
-          height: tile.width,
-          left: tile.position.left,
-          top: tile.position.top,
+          width: _tile.width,
+          height: _tile.width,
+          left: _tile.position.left,
+          top: _tile.position.top,
           child: IgnorePointer(
-            ignoring: tile.isWhiteSpaceTile,
+            ignoring: _tile.isWhiteSpaceTile,
             child: GestureDetector(
-              onHorizontalDragEnd: (DragEndDetails details) => puzzleProvider.handleDrag(
-                tile: tile,
-                direction: details.velocity.pixelsPerSecond.dx < 0 ? Direction.left : Direction.right,
+              onHorizontalDragEnd: (DragEndDetails details) => handleDrag(
+                details.velocity.pixelsPerSecond.dx < 0 ? Direction.left : Direction.right,
+                _tile,
               ),
-              onVerticalDragEnd: (DragEndDetails details) => puzzleProvider.handleDrag(
-                tile: tile,
-                direction: details.velocity.pixelsPerSecond.dy > 0 ? Direction.up : Direction.down,
+              onVerticalDragEnd: (DragEndDetails details) => handleDrag(
+                details.velocity.pixelsPerSecond.dy > 0 ? Direction.up : Direction.down,
+                _tile,
               ),
-              child: TileContainer(tile: tile),
+              child: TileContainer(tile: _tile),
             ),
           ),
         );

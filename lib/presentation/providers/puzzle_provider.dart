@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ class PuzzleProvider with ChangeNotifier {
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
   late List<Tile> tiles;
+  late Map<int, StreamController<Tile>> tileStreamControllers;
 
   final Random random = Random();
 
@@ -42,7 +44,9 @@ class PuzzleProvider with ChangeNotifier {
     tiles[movedTileIndex] = _movedTile.copyWith(
       currentLocation: _whiteSpaceTile.currentLocation,
     );
+    tileStreamControllers[tiles[movedTileIndex].value]!.add(tiles[movedTileIndex]);
     tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
+    tileStreamControllers[tiles[whiteSpaceTileIndex].value]!.add(tiles[whiteSpaceTileIndex]);
     notifyListeners();
   }
 
@@ -60,5 +64,8 @@ class PuzzleProvider with ChangeNotifier {
   void generate(double puzzleContainerWidth) {
     double _tileContainerWidth = puzzleContainerWidth / n;
     tiles = generateTiles(_tileContainerWidth);
+    tileStreamControllers = <int, StreamController<Tile>>{
+      for (var tile in tiles) tile.value: StreamController<Tile>(),
+    };
   }
 }

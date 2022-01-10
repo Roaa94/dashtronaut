@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/enums/direction.dart';
+import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_wrapper.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +32,7 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   @override
   Widget build(BuildContext context) {
+    // print('Rebuilt puzzle board!');
     return Container(
       width: puzzleContainerWidth,
       height: puzzleContainerWidth,
@@ -39,7 +42,9 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
         children: List.generate(
           puzzleProvider.tilesWithoutWhitespace.length,
           (index) => TileWrapper(
-            tileValue: puzzleProvider.tilesWithoutWhitespace[index].value,
+            tile: puzzleProvider.tilesWithoutWhitespace[index],
+            stream: puzzleProvider.tileStreamControllers[puzzleProvider.tilesWithoutWhitespace[index].value]!.stream,
+            handleDrag: (Direction direction, Tile tile) => puzzleProvider.handleDrag(direction: direction, tile: tile),
           ),
         ),
       ),
