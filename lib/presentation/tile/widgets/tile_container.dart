@@ -28,7 +28,15 @@ class TileContainer extends StatelessWidget {
         children: [
           Text('${tile.value}'),
           Text(tile.currentLocation.asString),
-          if(extraText != null) Text(extraText!),
+          Text(
+            '${tile.correctLocation.asString} ✅',
+            style: TextStyle(color: tile.isWhiteSpaceTile ? Colors.cyan : Colors.white),
+          ),
+          if (extraText != null)
+            Text(
+              extraText!,
+              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.w700, fontSize: 10),
+            ),
         ],
       ),
     );
