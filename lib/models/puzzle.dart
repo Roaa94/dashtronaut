@@ -13,13 +13,52 @@ class Puzzle {
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.isWhiteSpaceTile);
 
+  Location get _whiteSpaceTileLocation => whiteSpaceTile.currentLocation;
+
   bool isTileMovable(Tile tile) {
     if (tile.isWhiteSpaceTile) {
       return false;
     }
     Location _tileLocation = tile.currentLocation;
-    Location _whiteSpaceTileLocation = whiteSpaceTile.currentLocation;
     return _tileLocation.isLocatedAround(_whiteSpaceTileLocation);
+  }
+
+  double tileMovableXDistance(Tile tile) {
+    /// If the tile is left of OR right of the whitespace tile, then it can only move on the X direction
+    if (tile.currentLocation.isLeftOf(_whiteSpaceTileLocation)) {
+      /// And it can only move a distance equal to the tile width in the +x direction
+      return tile.width;
+    }
+    if (tile.currentLocation.isRightOf(_whiteSpaceTileLocation)) {
+      /// And it can only move a distance equal to the tile width in the -x direction
+      return -tile.width;
+    }
+    return 0;
+  }
+
+  double tileMovableYDistance(Tile tile) {
+    /// If the tile is top of OR bottom of the whitespace tile, then it can only move on the Y direction
+    if (tile.currentLocation.isTopOf(_whiteSpaceTileLocation)) {
+      /// And it can only move a distance equal to the tile width in the -y direction
+      return -tile.width;
+    }
+    if (tile.currentLocation.isBottomOf(_whiteSpaceTileLocation)) {
+      /// And it can only move a distance equal to the tile width in the +y direction
+      return tile.width;
+    }
+    return 0;
+  }
+
+  String? getTileLocationText(Tile tile) {
+    return tile.currentLocation.isLeftOf(_whiteSpaceTileLocation)
+        ? 'Left'
+        : tile.currentLocation.isTopOf(_whiteSpaceTileLocation)
+            ? 'Top'
+            : tile.currentLocation.isBottomOf(_whiteSpaceTileLocation)
+                ? 'Bottom'
+                : tile.currentLocation.isRightOf(_whiteSpaceTileLocation)
+                    ? 'Right'
+                    : null;
   }
 
   void printData() {

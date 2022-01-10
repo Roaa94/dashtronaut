@@ -4,11 +4,13 @@ import 'package:flutter_puzzle_hack/models/tile.dart';
 class TileContainer extends StatelessWidget {
   final Tile tile;
   final bool isTileMovable;
+  final String? extraText;
 
   const TileContainer({
     Key? key,
     required this.tile,
     required this.isTileMovable,
+    this.extraText,
   }) : super(key: key);
 
   @override
@@ -25,7 +27,8 @@ class TileContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('${tile.value}'),
-          Text('(${tile.currentLocation.x},${tile.currentLocation.y})'),
+          Text(tile.currentLocation.asString),
+          if(extraText != null) Text(extraText!),
         ],
       ),
     );

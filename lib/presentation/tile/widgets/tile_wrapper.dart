@@ -32,6 +32,8 @@ class _TileWrapperState extends State<TileWrapper> {
     return Consumer<PuzzleProvider>(
       builder: (c, puzzleProvider, _) {
         bool isTileMovable = puzzleProvider.puzzle.isTileMovable(widget.tile);
+        double tileMovableXDistance = puzzleProvider.puzzle.tileMovableXDistance(widget.tile);
+        double tileMovableYDistance = puzzleProvider.puzzle.tileMovableYDistance(widget.tile);
 
         return AnimatedPositioned(
           duration: const Duration(milliseconds: 1),
@@ -41,14 +43,14 @@ class _TileWrapperState extends State<TileWrapper> {
           top: topPosition,
           child: GestureDetector(
             onHorizontalDragUpdate: (DragUpdateDetails details) {
-              if (isTileMovable) {
+              if (isTileMovable && tileMovableXDistance != 0) {
                 setState(() {
                   leftPosition += details.delta.dx;
                 });
               }
             },
             onVerticalDragUpdate: (DragUpdateDetails details) {
-              if (isTileMovable) {
+              if (isTileMovable && tileMovableYDistance != 0) {
                 setState(() {
                   topPosition += details.delta.dy;
                 });
@@ -57,6 +59,7 @@ class _TileWrapperState extends State<TileWrapper> {
             child: TileContainer(
               tile: widget.tile,
               isTileMovable: isTileMovable,
+              extraText: puzzleProvider.puzzle.getTileLocationText(widget.tile),
             ),
           ),
         );

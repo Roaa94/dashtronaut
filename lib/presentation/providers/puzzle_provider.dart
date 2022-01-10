@@ -15,12 +15,14 @@ class PuzzleProvider with ChangeNotifier {
     List<Location> _tilesCorrectLocations = [];
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        _tilesCorrectLocations.add(Location(x: i + 1, y: j + 1));
+        Location _location = Location(y: i + 1, x: j + 1);
+        // print(_location.asString);
+        _tilesCorrectLocations.add(_location);
       }
     }
 
     List<Location> _tilesCurrentLocations = _tilesCorrectLocations;
-    // _tilesCurrentLocations.shuffle(random);
+    _tilesCurrentLocations.shuffle(random);
     // Location.printLocations(_tilesCurrentLocations);
     return List.generate(
       n * n,

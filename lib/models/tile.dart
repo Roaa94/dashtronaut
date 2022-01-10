@@ -18,6 +18,6 @@ class Tile {
 
   /// Top & Left positions values based on current location
   Position get position {
-    return Position(top: (currentLocation.x - 1) * width, left: (currentLocation.y - 1) * width);
+    return Position(top: (currentLocation.y - 1) * width, left: (currentLocation.x - 1) * width);
   }
 }
