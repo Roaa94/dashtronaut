@@ -25,16 +25,7 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
   }
 
   @override
-  void dispose() {
-    puzzleProvider.tileStreamControllers.forEach((tileValue, tileStreamController) {
-      tileStreamController.close();
-    });
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // print('Rebuilt puzzle board!');
     return Container(
       width: puzzleContainerWidth,
       height: puzzleContainerWidth,
@@ -45,7 +36,6 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
           puzzleProvider.tilesWithoutWhitespace.length,
           (index) => TileWrapper(
             tile: puzzleProvider.tilesWithoutWhitespace[index],
-            stream: puzzleProvider.tileStreamControllers[puzzleProvider.tilesWithoutWhitespace[index].value]!.stream,
             handleDrag: (Direction direction, Tile tile) => puzzleProvider.handleDrag(direction: direction, tile: tile),
           ),
         ),
