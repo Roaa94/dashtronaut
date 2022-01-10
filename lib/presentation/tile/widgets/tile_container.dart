@@ -16,11 +16,11 @@ class TileContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print('Rebuilt tile ${tile.value}');
+    bool isAtCorrectLocation = tile.currentLocation == tile.correctLocation;
     return Container(
       decoration: BoxDecoration(
-        color: tile.tileIsWhiteSpace ? Colors.white.withOpacity(0.4) : Colors.cyan,
+        color: isAtCorrectLocation ? Colors.pinkAccent : Colors.cyan,
         borderRadius: BorderRadius.circular(12),
-        // border: Border.all(color: tileIsMovable ? Colors.red : Colors.transparent, width: 2),
       ),
       margin: const EdgeInsets.all(5),
       alignment: Alignment.center,
@@ -29,18 +29,8 @@ class TileContainer extends StatelessWidget {
         children: [
           Text(
             '${tile.value}',
-            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
           ),
-          tile.currentLocation == tile.correctLocation ? const Text('✅') : Text(tile.currentLocation.asString),
-          Text(
-            tile.correctLocation.asString,
-            style: TextStyle(color: tile.tileIsWhiteSpace ? Colors.cyan : Colors.white),
-          ),
-          if (extraText != null)
-            Text(
-              extraText!,
-              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.w700, fontSize: 10),
-            ),
         ],
       ),
     );
