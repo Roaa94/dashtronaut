@@ -58,4 +58,61 @@ class Puzzle {
     }
     return _tilesCorrectLocations;
   }
+
+  /// Determines if the two tiles are inverted.
+  bool _isInversion(Tile a, Tile b) {
+    if (!b.tileIsWhiteSpace && a.value != b.value) {
+      if (b.value < a.value) {
+        return b.currentLocation.compareTo(a.currentLocation) > 0;
+      } else {
+        return a.currentLocation.compareTo(b.currentLocation) > 0;
+      }
+    }
+    return false;
+  }
+
+  /// Gives the number of inversions in a puzzle given its tile arrangement.
+  ///
+  /// An inversion is when a tile of a lower value is in a greater position than
+  /// a tile of a higher value.
+  int countInversions() {
+    var count = 0;
+    for (var a = 0; a < tiles.length; a++) {
+      final tileA = tiles[a];
+      if (tileA.tileIsWhiteSpace) {
+        continue;
+      }
+
+      for (var b = a + 1; b < tiles.length; b++) {
+        final tileB = tiles[b];
+        if (_isInversion(tileA, tileB)) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  /// Determines if the puzzle is solvable.
+  bool isSolvable() {
+    final height = tiles.length ~/ n;
+    assert(
+      n * height == tiles.length,
+      'tiles must be equal to n * height',
+    );
+    final inversions = countInversions();
+
+    if (n.isOdd) {
+      return inversions.isEven;
+    }
+
+    final whitespace = tiles.singleWhere((tile) => tile.tileIsWhiteSpace);
+    final whitespaceRow = whitespace.currentLocation.y;
+
+    if (((height - whitespaceRow) + 1).isOdd) {
+      return inversions.isEven;
+    } else {
+      return inversions.isOdd;
+    }
+  }
 }

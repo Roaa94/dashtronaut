@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Location extends Equatable {
+class Location extends Equatable implements Comparable<Location> {
   final int x;
   final int y;
 
@@ -37,6 +37,23 @@ class Location extends Equatable {
       locationsMap[i] = '(${locations[i].y}, ${locations[i].x})';
     }
     print(locationsMap);
+  }
+
+  @override
+  int compareTo(Location other) {
+    if (y < other.y) {
+      return -1;
+    } else if (y > other.y) {
+      return 1;
+    } else {
+      if (x < other.x) {
+        return -1;
+      } else if (x > other.x) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
   }
 
   @override

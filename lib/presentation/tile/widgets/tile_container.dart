@@ -15,7 +15,7 @@ class TileContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Rebuilt tile ${tile.value}');
+    // print('Rebuilt tile ${tile.value}');
     return Container(
       decoration: BoxDecoration(
         color: tile.tileIsWhiteSpace ? Colors.white.withOpacity(0.4) : Colors.cyan,

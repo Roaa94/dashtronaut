@@ -67,5 +67,6 @@ class PuzzleProvider with ChangeNotifier {
   void generate() {
     double _tileContainerWidth = puzzleContainerWidth / n;
     tiles = generateTiles(_tileContainerWidth);
+    print('Solvable: ${puzzle.isSolvable()}');
   }
 }
