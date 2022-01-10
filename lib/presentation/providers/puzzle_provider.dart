@@ -21,7 +21,7 @@ class PuzzleProvider with ChangeNotifier {
       }
     }
 
-    List<Location> _tilesCurrentLocations = _tilesCorrectLocations;
+    List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
     _tilesCurrentLocations.shuffle(random);
     // Location.printLocations(_tilesCurrentLocations);
     return List.generate(
