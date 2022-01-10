@@ -31,7 +31,7 @@ class TileWrapper extends StatelessWidget {
           left: _tile.position.left,
           top: _tile.position.top,
           child: IgnorePointer(
-            ignoring: _tile.isWhiteSpaceTile,
+            ignoring: _tile.tileIsWhiteSpace,
             child: GestureDetector(
               onHorizontalDragEnd: (DragEndDetails details) => handleDrag(
                 details.velocity.pixelsPerSecond.dx < 0 ? Direction.left : Direction.right,

@@ -3,13 +3,13 @@ import 'package:flutter_puzzle_hack/models/tile.dart';
 
 class TileContainer extends StatelessWidget {
   final Tile tile;
-  final bool isTileMovable;
+  final bool tileIsMovable;
   final String? extraText;
 
   const TileContainer({
     Key? key,
     required this.tile,
-    this.isTileMovable = false,
+    this.tileIsMovable = false,
     this.extraText,
   }) : super(key: key);
 
@@ -18,9 +18,9 @@ class TileContainer extends StatelessWidget {
     // print('Rebuilt tile ${tile.value}');
     return Container(
       decoration: BoxDecoration(
-        color: tile.isWhiteSpaceTile ? Colors.white.withOpacity(0.4) : Colors.cyan,
+        color: tile.tileIsWhiteSpace ? Colors.white.withOpacity(0.4) : Colors.cyan,
         borderRadius: BorderRadius.circular(12),
-        // border: Border.all(color: isTileMovable ? Colors.red : Colors.transparent, width: 2),
+        // border: Border.all(color: tileIsMovable ? Colors.red : Colors.transparent, width: 2),
       ),
       margin: const EdgeInsets.all(5),
       alignment: Alignment.center,
@@ -31,7 +31,7 @@ class TileContainer extends StatelessWidget {
           tile.currentLocation == tile.correctLocation ? const Text('✅') : Text(tile.currentLocation.asString),
           Text(
             tile.correctLocation.asString,
-            style: TextStyle(color: tile.isWhiteSpaceTile ? Colors.cyan : Colors.white),
+            style: TextStyle(color: tile.tileIsWhiteSpace ? Colors.cyan : Colors.white),
           ),
           if (extraText != null)
             Text(

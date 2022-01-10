@@ -11,12 +11,12 @@ class Puzzle {
   }) : assert(n < 10);
 
   /// Get whitespace tile
-  Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.isWhiteSpaceTile);
+  Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
 
   Location get _whiteSpaceTileLocation => whiteSpaceTile.currentLocation;
 
-  bool isTileMovable(Tile tile) {
-    if (tile.isWhiteSpaceTile) {
+  bool tileIsMovable(Tile tile) {
+    if (tile.tileIsWhiteSpace) {
       return false;
     }
     Location _tileLocation = tile.currentLocation;
@@ -40,11 +40,11 @@ class Puzzle {
   }
 
   bool tileIsMovableOnXAxis(Tile tile) {
-    return isTileMovable(tile) && (tileIsRightOfWhiteSpace(tile) || tileIsLeftOfWhiteSpace(tile));
+    return tileIsMovable(tile) && (tileIsRightOfWhiteSpace(tile) || tileIsLeftOfWhiteSpace(tile));
   }
 
   bool tileIsMovableOnYAxis(Tile tile) {
-    return isTileMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
+    return tileIsMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
   }
 
   String? getTileLocationText(Tile tile) {

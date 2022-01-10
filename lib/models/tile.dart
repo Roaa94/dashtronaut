@@ -4,7 +4,7 @@ import 'package:flutter_puzzle_hack/models/position.dart';
 class Tile {
   int value;
   double width;
-  bool isWhiteSpaceTile;
+  bool tileIsWhiteSpace;
   Location correctLocation;
   Location currentLocation;
 
@@ -13,7 +13,7 @@ class Tile {
     required this.width,
     required this.correctLocation,
     required this.currentLocation,
-    this.isWhiteSpaceTile = false,
+    this.tileIsWhiteSpace = false,
   });
 
   /// Top & Left positions values based on current location
@@ -26,14 +26,14 @@ class Tile {
     width,
     correctLocation,
     currentLocation,
-    isWhiteSpaceTile,
+    tileIsWhiteSpace,
   }) {
     return Tile(
       value: value ?? this.value,
       width: width ?? this.width,
       correctLocation: correctLocation ?? this.correctLocation,
       currentLocation: currentLocation ?? this.currentLocation,
-      isWhiteSpaceTile: isWhiteSpaceTile ?? this.isWhiteSpaceTile,
+      tileIsWhiteSpace: tileIsWhiteSpace ?? this.tileIsWhiteSpace,
     );
   }
 }

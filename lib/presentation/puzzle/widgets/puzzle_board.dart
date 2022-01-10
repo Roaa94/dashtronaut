@@ -34,7 +34,7 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   @override
   Widget build(BuildContext context) {
-    print('Rebuilt puzzle board!');
+    // print('Rebuilt puzzle board!');
     return Container(
       width: puzzleContainerWidth,
       height: puzzleContainerWidth,

@@ -26,7 +26,7 @@ class PuzzleProvider with ChangeNotifier {
 
   final Random random = Random();
 
-  List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.isWhiteSpaceTile).toList();
+  List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
   List<Tile> generateTiles(double tileWidth) {
     List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
@@ -40,14 +40,14 @@ class PuzzleProvider with ChangeNotifier {
         width: tileWidth,
         correctLocation: _tilesCorrectLocations[i],
         currentLocation: _tilesCurrentLocations[i],
-        isWhiteSpaceTile: i == n * n - 1,
+        tileIsWhiteSpace: i == n * n - 1,
       ),
     );
   }
 
   void swapTilesAndUpdatePuzzle(Tile tile) {
     int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
-    int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.isWhiteSpaceTile);
+    int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);
     Tile _movedTile = tiles[movedTileIndex];
     Tile _whiteSpaceTile = tiles[whiteSpaceTileIndex];
     tiles[movedTileIndex] = _movedTile.copyWith(
