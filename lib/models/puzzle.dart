@@ -115,4 +115,19 @@ class Puzzle {
       return inversions.isOdd;
     }
   }
+
+  bool get isSolved => getNumberOfCorrectTiles() == tiles.length - 1;
+
+  /// Gets the number of tiles that are currently in their correct position.
+  int getNumberOfCorrectTiles() {
+    var numberOfCorrectTiles = 0;
+    for (final tile in tiles) {
+      if (!tile.tileIsWhiteSpace) {
+        if (tile.currentLocation == tile.correctLocation) {
+          numberOfCorrectTiles++;
+        }
+      }
+    }
+    return numberOfCorrectTiles;
+  }
 }

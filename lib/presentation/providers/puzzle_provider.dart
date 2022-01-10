@@ -50,6 +50,8 @@ class PuzzleProvider with ChangeNotifier {
       currentLocation: _whiteSpaceTile.currentLocation,
     );
     tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
+    print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()}');
+    print('Is solved: ${puzzle.isSolved}');
     notifyListeners();
   }
 
@@ -64,9 +66,45 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
+  List<Tile> _getTilesList({
+    required int n,
+    required double tileWidth,
+    required List<Location> correctLocations,
+    required List<Location> currentLocations,
+  }) {
+    return List.generate(
+      n * n,
+      (i) => Tile(
+        value: i + 1,
+        width: tileWidth,
+        correctLocation: correctLocations[i],
+        currentLocation: currentLocations[i],
+        tileIsWhiteSpace: i == n * n - 1,
+      ),
+    );
+  }
+
   void generate() {
     double _tileContainerWidth = puzzleContainerWidth / n;
-    tiles = generateTiles(_tileContainerWidth);
-    print('Solvable: ${puzzle.isSolvable()}');
+    List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
+    List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
+
+    tiles = _getTilesList(
+      n: n,
+      tileWidth: _tileContainerWidth,
+      correctLocations: _tilesCorrectLocations,
+      currentLocations: _tilesCurrentLocations,
+    );
+
+    while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
+      _tilesCurrentLocations.shuffle(random);
+
+      tiles = _getTilesList(
+        n: n,
+        tileWidth: _tileContainerWidth,
+        correctLocations: _tilesCorrectLocations,
+        currentLocations: _tilesCurrentLocations,
+      );
+    }
   }
 }
