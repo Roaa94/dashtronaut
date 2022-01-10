@@ -14,25 +14,27 @@ class PuzzleBoard extends StatefulWidget {
 }
 
 class _PuzzleBoardState extends State<PuzzleBoard> {
-  bool _isInit = true;
-
   late PuzzleProvider puzzleProvider;
 
   double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
 
   @override
-  void didChangeDependencies() {
-    if (_isInit) {
-      puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
-      puzzleProvider.generate(puzzleContainerWidth);
-    }
-    _isInit = false;
-    super.didChangeDependencies();
+  void initState() {
+    puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    puzzleProvider.tileStreamControllers.forEach((tileValue, tileStreamController) {
+      tileStreamController.close();
+    });
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // print('Rebuilt puzzle board!');
+    print('Rebuilt puzzle board!');
     return Container(
       width: puzzleContainerWidth,
       height: puzzleContainerWidth,

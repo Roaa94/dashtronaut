@@ -2,13 +2,22 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/enums/direction.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 
 class PuzzleProvider with ChangeNotifier {
+  final BuildContext context;
+
+  PuzzleProvider(this.context) {
+    generate();
+  }
+
   final int n = 3;
+
+  double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
 
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
@@ -61,7 +70,7 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
-  void generate(double puzzleContainerWidth) {
+  void generate() {
     double _tileContainerWidth = puzzleContainerWidth / n;
     tiles = generateTiles(_tileContainerWidth);
     tileStreamControllers = <int, StreamController<Tile>>{
