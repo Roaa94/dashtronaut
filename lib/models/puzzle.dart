@@ -47,18 +47,6 @@ class Puzzle {
     return tileIsMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
   }
 
-  String? getTileLocationText(Tile tile) {
-    return tile.currentLocation.isLeftOf(_whiteSpaceTileLocation)
-        ? 'Left'
-        : tile.currentLocation.isTopOf(_whiteSpaceTileLocation)
-            ? 'Top'
-            : tile.currentLocation.isBottomOf(_whiteSpaceTileLocation)
-                ? 'Bottom'
-                : tile.currentLocation.isRightOf(_whiteSpaceTileLocation)
-                    ? 'Right'
-                    : null;
-  }
-
   static List<Location> generateTileCorrectLocations(int _n) {
     List<Location> _tilesCorrectLocations = [];
     for (int i = 0; i < _n; i++) {
@@ -69,9 +57,5 @@ class Puzzle {
       }
     }
     return _tilesCorrectLocations;
-  }
-
-  void printData() {
-    print('Puzzle dimensions: ${n}x$n');
   }
 }
