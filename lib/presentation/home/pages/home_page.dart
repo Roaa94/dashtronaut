@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => PuzzleProvider(context),
+      create: (_) => PuzzleProvider(context)..generate(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Home'),

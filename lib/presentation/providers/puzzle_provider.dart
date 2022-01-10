@@ -10,9 +10,7 @@ import 'package:flutter_puzzle_hack/models/tile.dart';
 class PuzzleProvider with ChangeNotifier {
   final BuildContext context;
 
-  PuzzleProvider(this.context) {
-    generate();
-  }
+  PuzzleProvider(this.context);
 
   final int n = 3;
 
