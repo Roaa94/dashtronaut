@@ -12,15 +12,7 @@ class PuzzleProvider with ChangeNotifier {
   final Random random = Random();
 
   List<Tile> generateTiles(double tileWidth) {
-    List<Location> _tilesCorrectLocations = [];
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++) {
-        Location _location = Location(y: i + 1, x: j + 1);
-        // print(_location.asString);
-        _tilesCorrectLocations.add(_location);
-      }
-    }
-
+    List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
     _tilesCurrentLocations.shuffle(random);
     // Location.printLocations(_tilesCurrentLocations);

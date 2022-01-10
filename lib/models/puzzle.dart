@@ -61,6 +61,18 @@ class Puzzle {
                     : null;
   }
 
+  static List<Location> generateTileCorrectLocations(int _n) {
+    List<Location> _tilesCorrectLocations = [];
+    for (int i = 0; i < _n; i++) {
+      for (int j = 0; j < _n; j++) {
+        Location _location = Location(y: i + 1, x: j + 1);
+        // print(_location.asString);
+        _tilesCorrectLocations.add(_location);
+      }
+    }
+    return _tilesCorrectLocations;
+  }
+
   void printData() {
     print('Puzzle dimensions: ${n}x$n');
   }
