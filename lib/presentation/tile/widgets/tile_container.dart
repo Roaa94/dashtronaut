@@ -27,9 +27,9 @@ class TileContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('${tile.value}'),
-          Text(tile.currentLocation.asString),
+          tile.currentLocation == tile.correctLocation ? const Text('✅') : Text(tile.currentLocation.asString),
           Text(
-            '${tile.correctLocation.asString} ✅',
+            tile.correctLocation.asString,
             style: TextStyle(color: tile.isWhiteSpaceTile ? Colors.cyan : Colors.white),
           ),
           if (extraText != null)
