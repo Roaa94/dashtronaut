@@ -23,30 +23,28 @@ class Puzzle {
     return _tileLocation.isLocatedAround(_whiteSpaceTileLocation);
   }
 
-  double tileMovableXDistance(Tile tile) {
-    /// If the tile is left of OR right of the whitespace tile, then it can only move on the X direction
-    if (tile.currentLocation.isLeftOf(_whiteSpaceTileLocation)) {
-      /// And it can only move a distance equal to the tile width in the +x direction
-      return tile.width;
-    }
-    if (tile.currentLocation.isRightOf(_whiteSpaceTileLocation)) {
-      /// And it can only move a distance equal to the tile width in the -x direction
-      return -tile.width;
-    }
-    return 0;
+  bool tileIsLeftOfWhiteSpace(Tile tile) {
+    return tile.currentLocation.isLeftOf(_whiteSpaceTileLocation);
   }
 
-  double tileMovableYDistance(Tile tile) {
-    /// If the tile is top of OR bottom of the whitespace tile, then it can only move on the Y direction
-    if (tile.currentLocation.isTopOf(_whiteSpaceTileLocation)) {
-      /// And it can only move a distance equal to the tile width in the -y direction
-      return -tile.width;
-    }
-    if (tile.currentLocation.isBottomOf(_whiteSpaceTileLocation)) {
-      /// And it can only move a distance equal to the tile width in the +y direction
-      return tile.width;
-    }
-    return 0;
+  bool tileIsRightOfWhiteSpace(Tile tile) {
+    return tile.currentLocation.isRightOf(_whiteSpaceTileLocation);
+  }
+
+  bool tileIsTopOfWhiteSpace(Tile tile) {
+    return tile.currentLocation.isTopOf(_whiteSpaceTileLocation);
+  }
+
+  bool tileIsBottomOfWhiteSpace(Tile tile) {
+    return tile.currentLocation.isBottomOf(_whiteSpaceTileLocation);
+  }
+
+  bool tileIsMovableOnXAxis(Tile tile) {
+    return isTileMovable(tile) && (tileIsRightOfWhiteSpace(tile) || tileIsLeftOfWhiteSpace(tile));
+  }
+
+  bool tileIsMovableOnYAxis(Tile tile) {
+    return isTileMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
   }
 
   String? getTileLocationText(Tile tile) {
