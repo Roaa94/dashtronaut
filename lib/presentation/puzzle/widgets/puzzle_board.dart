@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_wrapper.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,7 @@ class PuzzleBoard extends StatefulWidget {
 
 class _PuzzleBoardState extends State<PuzzleBoard> {
   late PuzzleProvider puzzleProvider;
+  final FocusNode keyboardListenerFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -21,23 +24,35 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      // color: Colors.cyan,
-      child: Center(
-        child: Container(
-          width: puzzleProvider.puzzleContainerWidth,
-          height: puzzleProvider.puzzleContainerWidth,
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Stack(
-            children: List.generate(
-              puzzleProvider.tilesWithoutWhitespace.length,
-              (index) => TileWrapper(tile: puzzleProvider.tilesWithoutWhitespace[index]),
-            ),
+    return kIsWeb
+        ? RawKeyboardListener(
+            focusNode: keyboardListenerFocusNode,
+            autofocus: true,
+            onKey: (RawKeyEvent event) {
+              if (event is RawKeyDownEvent) {
+                if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
+                  print('Tab pressed!');
+                }
+              }
+            },
+            child: _buildPuzzleBoard,
+          )
+        : _buildPuzzleBoard;
+  }
+
+  Widget get _buildPuzzleBoard {
+    return Center(
+      child: Container(
+        width: puzzleProvider.puzzleContainerWidth,
+        height: puzzleProvider.puzzleContainerWidth,
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Stack(
+          children: List.generate(
+            puzzleProvider.tilesWithoutWhitespace.length,
+            (index) => TileWrapper(tile: puzzleProvider.tilesWithoutWhitespace[index]),
           ),
         ),
       ),
