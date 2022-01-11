@@ -61,15 +61,20 @@ class _TileWrapperState extends State<TileWrapper> {
                       direction: details.delta.dx > 0 ? Direction(Destination.right) : Direction(Destination.left),
                       distance: details.delta.dx,
                       tile: _tile,
+                      currentPosition: tilePosition,
                     );
+                    // print('Original position: ${widget.tile.position.asString}');
+                    // print(_newPosition?.asString);
                     if (_newPosition != null) {
                       tilePositionNotifier.value = _newPosition;
                     }
+                    //   tilePositionNotifier.value = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
                   },
                   onVerticalDragUpdate: (DragUpdateDetails details) {
                     Position? _newPosition = puzzleProvider.getPositionFromDragUpdate(
                       direction: details.delta.dy > 0 ? Direction(Destination.bottom) : Direction(Destination.top),
                       distance: details.delta.dy,
+                      currentPosition: tilePosition,
                       tile: _tile,
                     );
                     if (_newPosition != null) {
