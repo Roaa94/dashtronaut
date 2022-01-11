@@ -6,7 +6,7 @@ class Direction {
 
   const Direction.horizontal(this.dx) : dy = null;
 
-  const Direction.vertical(this.dx) : dy = null;
+  const Direction.vertical(this.dy) : dx = null;
 
   bool get left => dx != null && dx! < 0;
 
