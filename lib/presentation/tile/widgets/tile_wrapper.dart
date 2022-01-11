@@ -41,16 +41,12 @@ class _TileWrapperState extends State<TileWrapper> {
           valueListenable: tilePositionNotifier,
           child: TileContainer(tile: _tile),
           builder: (c, Position tilePosition, child) {
-            void onDragEnd() {
-              if (puzzleProvider.puzzle.tileIsMovable(_tile)) {
-                // Snap to destination if crossed distance is > tileWidth / 2
-                // Snap back to original position if crossed distance is < tileWidth / 2
-                animationDurationNotifier.value = snapAnimationDuration;
-                tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
-                Future.delayed(snapAnimationDuration, () {
-                  animationDurationNotifier.value = dragAnimationDuration;
-                });
-              }
+            void handleDragEnd() {
+              animationDurationNotifier.value = snapAnimationDuration;
+              tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
+              Future.delayed(snapAnimationDuration, () {
+                animationDurationNotifier.value = dragAnimationDuration;
+              });
             }
 
             return ValueListenableBuilder(
@@ -69,8 +65,16 @@ class _TileWrapperState extends State<TileWrapper> {
               child: IgnorePointer(
                 ignoring: _tile.tileIsWhiteSpace,
                 child: GestureDetector(
-                  onHorizontalDragEnd: (_) => onDragEnd(),
-                  onVerticalDragEnd: (_) => onDragEnd(),
+                  onHorizontalDragEnd: (_) {
+                    if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile)) {
+                      handleDragEnd();
+                    }
+                  },
+                  onVerticalDragEnd: (_) {
+                    if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile)) {
+                      handleDragEnd();
+                    }
+                  },
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
                     Position _newPosition = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
                     if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
