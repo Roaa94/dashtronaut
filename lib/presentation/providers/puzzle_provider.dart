@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/enums/direction.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 
@@ -12,7 +13,7 @@ class PuzzleProvider with ChangeNotifier {
 
   PuzzleProvider(this.context);
 
-  final int n = 4;
+  final int n = 3;
 
   double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
 
@@ -29,15 +30,11 @@ class PuzzleProvider with ChangeNotifier {
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
     _tilesCurrentLocations.shuffle(random);
     // Location.printLocations(_tilesCurrentLocations);
-    return List.generate(
-      n * n,
-      (i) => Tile(
-        value: i + 1,
-        width: tileWidth,
-        correctLocation: _tilesCorrectLocations[i],
-        currentLocation: _tilesCurrentLocations[i],
-        tileIsWhiteSpace: i == n * n - 1,
-      ),
+    return _getTilesList(
+      n: n,
+      tileWidth: tileWidth,
+      correctLocations: _tilesCorrectLocations,
+      currentLocations: _tilesCurrentLocations,
     );
   }
 
@@ -55,7 +52,7 @@ class PuzzleProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void handleDrag({required Direction direction, required Tile tile}) {
+  void handleDragEnd({required Direction direction, required Tile tile}) {
     bool moveTileLeft = direction == Direction.left && puzzle.tileIsRightOfWhiteSpace(tile);
     bool moveTileRight = direction == Direction.right && puzzle.tileIsLeftOfWhiteSpace(tile);
     bool moveTileUp = direction == Direction.up && puzzle.tileIsTopOfWhiteSpace(tile);
@@ -64,6 +61,11 @@ class PuzzleProvider with ChangeNotifier {
     if (moveTileLeft || moveTileRight || moveTileUp || moveTileDown) {
       swapTilesAndUpdatePuzzle(tile);
     }
+  }
+
+  Position? getPositionFromDragUpdate({required double distance, required Tile tile}) {
+    // Return new position
+    return null;
   }
 
   List<Tile> _getTilesList({

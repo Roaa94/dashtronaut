@@ -36,7 +36,8 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
             puzzleProvider.tilesWithoutWhitespace.length,
             (index) => TileWrapper(
               tile: puzzleProvider.tilesWithoutWhitespace[index],
-              handleDrag: (Direction direction, Tile tile) => puzzleProvider.handleDrag(direction: direction, tile: tile),
+              handleDragEnd: puzzleProvider.handleDragEnd,
+              getPositionFromDragUpdate: puzzleProvider.getPositionFromDragUpdate,
             ),
           ),
         ),
