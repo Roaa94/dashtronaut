@@ -39,7 +39,7 @@ class PuzzleProvider with ChangeNotifier {
     );
   }
 
-  void swapTilesAndUpdatePuzzle(Tile tile) {
+  Position swapTilesAndUpdatePuzzle(Tile tile) {
     int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
     int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);
     Tile _movedTile = tiles[movedTileIndex];
@@ -51,6 +51,7 @@ class PuzzleProvider with ChangeNotifier {
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()}');
     print('Is solved: ${puzzle.isSolved}');
     notifyListeners();
+    return tiles[movedTileIndex].position;
   }
 
   bool _canSwapTiles({required Destination destination, required Tile tile}) {

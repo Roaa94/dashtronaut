@@ -21,6 +21,11 @@ class Tile {
     return Position(top: (currentLocation.y - 1) * width, left: (currentLocation.x - 1) * width);
   }
 
+  bool passedMidPoint(Position _newPosition) {
+    double midPoint = width / 4;
+    return (_newPosition.left - position.left).abs() >= midPoint || (_newPosition.top - position.top).abs() >= midPoint;
+  }
+
   Tile copyWith({
     value,
     width,
