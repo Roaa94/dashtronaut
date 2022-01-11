@@ -42,13 +42,15 @@ class _TileWrapperState extends State<TileWrapper> {
           child: TileContainer(tile: _tile),
           builder: (c, Position tilePosition, child) {
             void onDragEnd() {
-              // Snap to destination if crossed distance is > tileWidth / 2
-              // Snap back to original position if crossed distance is < tileWidth / 2
-              animationDurationNotifier.value = snapAnimationDuration;
-              tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
-              Future.delayed(snapAnimationDuration, () {
-                animationDurationNotifier.value = dragAnimationDuration;
-              });
+              if (puzzleProvider.puzzle.tileIsMovable(_tile)) {
+                // Snap to destination if crossed distance is > tileWidth / 2
+                // Snap back to original position if crossed distance is < tileWidth / 2
+                animationDurationNotifier.value = snapAnimationDuration;
+                tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
+                Future.delayed(snapAnimationDuration, () {
+                  animationDurationNotifier.value = dragAnimationDuration;
+                });
+              }
             }
 
             return ValueListenableBuilder(
@@ -67,8 +69,8 @@ class _TileWrapperState extends State<TileWrapper> {
               child: IgnorePointer(
                 ignoring: _tile.tileIsWhiteSpace,
                 child: GestureDetector(
-                  onHorizontalDragEnd: (DragEndDetails details) => onDragEnd(),
-                  onVerticalDragEnd: (DragEndDetails details) => onDragEnd(),
+                  onHorizontalDragEnd: (_) => onDragEnd(),
+                  onVerticalDragEnd: (_) => onDragEnd(),
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
                     Position _newPosition = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
                     if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
