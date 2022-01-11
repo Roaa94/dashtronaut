@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
-import 'package:flutter_puzzle_hack/enums/direction.dart';
+import 'package:flutter_puzzle_hack/enums/destination.dart';
+import 'package:flutter_puzzle_hack/models/direction.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
@@ -52,18 +53,24 @@ class PuzzleProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void handleDragEnd({required Direction direction, required Tile tile}) {
-    bool moveTileLeft = direction == Direction.left && puzzle.tileIsRightOfWhiteSpace(tile);
-    bool moveTileRight = direction == Direction.right && puzzle.tileIsLeftOfWhiteSpace(tile);
-    bool moveTileUp = direction == Direction.up && puzzle.tileIsTopOfWhiteSpace(tile);
-    bool moveTileDown = direction == Direction.down && puzzle.tileIsBottomOfWhiteSpace(tile);
+  bool _canSwapTiles({required Destination destination, required Tile tile}) {
+    bool moveTileLeft = destination == Destination.left && puzzle.tileIsRightOfWhiteSpace(tile);
+    bool moveTileRight = destination == Destination.right && puzzle.tileIsLeftOfWhiteSpace(tile);
+    bool moveTileUp = destination == Destination.top && puzzle.tileIsBottomOfWhiteSpace(tile);
+    bool moveTileDown = destination == Destination.bottom && puzzle.tileIsTopOfWhiteSpace(tile);
 
-    if (moveTileLeft || moveTileRight || moveTileUp || moveTileDown) {
+    return moveTileLeft || moveTileRight || moveTileUp || moveTileDown;
+  }
+
+  void handleDragEnd({required Direction direction, required Tile tile}) {
+    bool canSwapTiles = _canSwapTiles(destination: direction.destination, tile: tile);
+
+    if (canSwapTiles) {
       swapTilesAndUpdatePuzzle(tile);
     }
   }
 
-  Position? getPositionFromDragUpdate({required double distance, required Tile tile}) {
+  Position? getPositionFromDragUpdate({required Direction direction, required double distance, required Tile tile}) {
     // Return new position
     return null;
   }

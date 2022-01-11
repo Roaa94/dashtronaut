@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
-import 'package:flutter_puzzle_hack/enums/direction.dart';
+import 'package:flutter_puzzle_hack/enums/destination.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_wrapper.dart';

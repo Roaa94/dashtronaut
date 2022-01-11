@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/enums/destination.dart';
+import 'package:flutter_puzzle_hack/models/direction.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
@@ -8,7 +10,7 @@ import 'package:provider/provider.dart';
 class TileWrapper extends StatefulWidget {
   final Tile tile;
   final Function handleDragEnd;
-  final Position? Function({required double distance, required Tile tile}) getPositionFromDragUpdate;
+  final Position? Function({required Direction direction, required double distance, required Tile tile}) getPositionFromDragUpdate;
 
   const TileWrapper({
     Key? key,
@@ -58,6 +60,7 @@ class _TileWrapperState extends State<TileWrapper> {
                   },
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
                     Position? _newPosition = widget.getPositionFromDragUpdate(
+                      direction: details.delta.dx > 0 ? Direction(Destination.right) : Direction(Destination.left),
                       distance: details.delta.dx,
                       tile: _tile,
                     );
@@ -67,6 +70,7 @@ class _TileWrapperState extends State<TileWrapper> {
                   },
                   onVerticalDragUpdate: (DragUpdateDetails details) {
                     Position? _newPosition = widget.getPositionFromDragUpdate(
+                      direction: details.delta.dy > 0 ? Direction(Destination.bottom) : Direction(Destination.top),
                       distance: details.delta.dy,
                       tile: _tile,
                     );
