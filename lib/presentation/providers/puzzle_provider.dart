@@ -71,8 +71,16 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   Position? getPositionFromDragUpdate({required Direction direction, required double distance, required Tile tile}) {
-    // Return new position
-    return null;
+    Position? _newPosition;
+    if (direction.isHorizontal && puzzle.tileIsMovableOnXAxis(tile)) {
+      _newPosition = Position(left: tile.position.left + distance, top: tile.position.top);
+    } else if (direction.isVertical && puzzle.tileIsMovableOnYAxis(tile)) {
+      _newPosition = Position(left: tile.position.left, top: tile.position.top + distance);
+    }
+    if (_newPosition != null) {
+      // print('New Position: ${_newPosition.asString}');
+      return _newPosition;
+    }
   }
 
   List<Tile> _getTilesList({
