@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_wrapper.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +13,6 @@ class PuzzleBoard extends StatefulWidget {
 class _PuzzleBoardState extends State<PuzzleBoard> {
   late PuzzleProvider puzzleProvider;
 
-  double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
-
   @override
   void initState() {
     puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
@@ -24,15 +21,23 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: puzzleContainerWidth,
-        height: puzzleContainerWidth,
-        margin: const EdgeInsets.all(UI.screenHPadding),
-        child: Stack(
-          children: List.generate(
-            puzzleProvider.tilesWithoutWhitespace.length,
-            (index) => TileWrapper(tile: puzzleProvider.tilesWithoutWhitespace[index]),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      // color: Colors.cyan,
+      child: Center(
+        child: Container(
+          width: puzzleProvider.puzzleContainerWidth,
+          height: puzzleProvider.puzzleContainerWidth,
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Stack(
+            children: List.generate(
+              puzzleProvider.tilesWithoutWhitespace.length,
+              (index) => TileWrapper(tile: puzzleProvider.tilesWithoutWhitespace[index]),
+            ),
           ),
         ),
       ),

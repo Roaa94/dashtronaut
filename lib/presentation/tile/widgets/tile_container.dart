@@ -22,7 +22,7 @@ class TileContainer extends StatelessWidget {
         color: isAtCorrectLocation ? Colors.pinkAccent : Colors.cyan,
         borderRadius: BorderRadius.circular(12),
       ),
-      margin: const EdgeInsets.all(5),
+      margin: const EdgeInsets.all(10),
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
