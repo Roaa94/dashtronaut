@@ -22,7 +22,7 @@ class Tile {
   }
 
   bool passedMidPoint(Position _newPosition) {
-    double midPoint = width / 4;
+    double midPoint = width / 5;
     return (_newPosition.left - position.left).abs() >= midPoint || (_newPosition.top - position.top).abs() >= midPoint;
   }
 

@@ -17,8 +17,12 @@ class TileWrapper extends StatefulWidget {
   State<TileWrapper> createState() => _TileWrapperState();
 }
 
+const Duration dragAnimationDuration = Duration(milliseconds: 0);
+const Duration snapAnimationDuration = Duration(milliseconds: 150);
+
 class _TileWrapperState extends State<TileWrapper> {
   late final ValueNotifier<Position> tilePositionNotifier;
+  final ValueNotifier<Duration> animationDurationNotifier = ValueNotifier<Duration>(dragAnimationDuration);
   late PuzzleProvider puzzleProvider;
 
   @override
@@ -40,20 +44,26 @@ class _TileWrapperState extends State<TileWrapper> {
             void onDragEnd() {
               // Snap to destination if crossed distance is > tileWidth / 2
               // Snap back to original position if crossed distance is < tileWidth / 2
-              if (_tile.passedMidPoint(tilePosition)) {
-                tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
-              } else {
-                tilePositionNotifier.value = _tile.position;
-              }
+              animationDurationNotifier.value = snapAnimationDuration;
+              tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
+              Future.delayed(snapAnimationDuration, () {
+                animationDurationNotifier.value = dragAnimationDuration;
+              });
             }
 
-            return AnimatedPositioned(
-              duration: const Duration(milliseconds: 50),
-              curve: Curves.easeOut,
-              width: _tile.width,
-              height: _tile.width,
-              left: tilePosition.left,
-              top: tilePosition.top,
+            return ValueListenableBuilder(
+              valueListenable: animationDurationNotifier,
+              builder: (c, Duration animationDuration, child) {
+                return AnimatedPositioned(
+                  duration: animationDuration,
+                  curve: Curves.easeOut,
+                  width: _tile.width,
+                  height: _tile.width,
+                  left: tilePosition.left,
+                  top: tilePosition.top,
+                  child: child!,
+                );
+              },
               child: IgnorePointer(
                 ignoring: _tile.tileIsWhiteSpace,
                 child: GestureDetector(
