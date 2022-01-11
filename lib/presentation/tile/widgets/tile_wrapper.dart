@@ -9,14 +9,10 @@ import 'package:provider/provider.dart';
 
 class TileWrapper extends StatefulWidget {
   final Tile tile;
-  final Function handleDragEnd;
-  final Position? Function({required Direction direction, required double distance, required Tile tile}) getPositionFromDragUpdate;
 
   const TileWrapper({
     Key? key,
     required this.tile,
-    required this.handleDragEnd,
-    required this.getPositionFromDragUpdate,
   }) : super(key: key);
 
   @override
@@ -25,10 +21,12 @@ class TileWrapper extends StatefulWidget {
 
 class _TileWrapperState extends State<TileWrapper> {
   late final ValueNotifier<Position> tilePositionNotifier;
+  late PuzzleProvider puzzleProvider;
 
   @override
   void initState() {
     tilePositionNotifier = ValueNotifier<Position>(widget.tile.position);
+    puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
     super.initState();
   }
 
@@ -59,7 +57,7 @@ class _TileWrapperState extends State<TileWrapper> {
                     // Snap back to original position if crossed distance is < tileWidth / 2
                   },
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
-                    Position? _newPosition = widget.getPositionFromDragUpdate(
+                    Position? _newPosition = puzzleProvider.getPositionFromDragUpdate(
                       direction: details.delta.dx > 0 ? Direction(Destination.right) : Direction(Destination.left),
                       distance: details.delta.dx,
                       tile: _tile,
@@ -69,7 +67,7 @@ class _TileWrapperState extends State<TileWrapper> {
                     }
                   },
                   onVerticalDragUpdate: (DragUpdateDetails details) {
-                    Position? _newPosition = widget.getPositionFromDragUpdate(
+                    Position? _newPosition = puzzleProvider.getPositionFromDragUpdate(
                       direction: details.delta.dy > 0 ? Direction(Destination.bottom) : Direction(Destination.top),
                       distance: details.delta.dy,
                       tile: _tile,
