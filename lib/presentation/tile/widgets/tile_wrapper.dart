@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/enums/destination.dart';
-import 'package:flutter_puzzle_hack/models/direction.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
@@ -37,10 +35,11 @@ class _TileWrapperState extends State<TileWrapper> {
       builder: (c, Tile _tile, _) {
         return ValueListenableBuilder(
           valueListenable: tilePositionNotifier,
+          child: TileContainer(tile: _tile),
           builder: (c, Position tilePosition, child) {
             return AnimatedPositioned(
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeOut,
+              duration: const Duration(milliseconds: 50),
+              // curve: Curves.easeOut,
               width: _tile.width,
               height: _tile.width,
               left: tilePosition.left,
@@ -57,31 +56,18 @@ class _TileWrapperState extends State<TileWrapper> {
                     // Snap back to original position if crossed distance is < tileWidth / 2
                   },
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
-                    Position? _newPosition = puzzleProvider.getPositionFromDragUpdate(
-                      direction: details.delta.dx > 0 ? Direction(Destination.right) : Direction(Destination.left),
-                      distance: details.delta.dx,
-                      tile: _tile,
-                      currentPosition: tilePosition,
-                    );
-                    // print('Original position: ${widget.tile.position.asString}');
-                    // print(_newPosition?.asString);
-                    if (_newPosition != null) {
+                    Position _newPosition = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
+                    if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
                       tilePositionNotifier.value = _newPosition;
                     }
-                    //   tilePositionNotifier.value = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
                   },
                   onVerticalDragUpdate: (DragUpdateDetails details) {
-                    Position? _newPosition = puzzleProvider.getPositionFromDragUpdate(
-                      direction: details.delta.dy > 0 ? Direction(Destination.bottom) : Direction(Destination.top),
-                      distance: details.delta.dy,
-                      currentPosition: tilePosition,
-                      tile: _tile,
-                    );
-                    if (_newPosition != null) {
+                    Position _newPosition = Position(left: tilePosition.left, top: tilePosition.top + details.delta.dy);
+                    if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
                       tilePositionNotifier.value = _newPosition;
                     }
                   },
-                  child: TileContainer(tile: _tile),
+                  child: child,
                 ),
               ),
             );

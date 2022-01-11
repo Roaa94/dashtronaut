@@ -1,4 +1,5 @@
 import 'package:flutter_puzzle_hack/models/location.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 
 class Puzzle {
@@ -45,6 +46,10 @@ class Puzzle {
 
   bool tileIsMovableOnYAxis(Tile tile) {
     return tileIsMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
+  }
+
+  bool tileCanMoveTo(Tile tile, Position newPosition) {
+    return newPosition.isBetween(tile.position, whiteSpaceTile.position);
   }
 
   static List<Location> generateTileCorrectLocations(int _n) {
