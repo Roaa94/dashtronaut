@@ -1,11 +1,22 @@
-import 'package:flutter_puzzle_hack/enums/destination.dart';
-
 class Direction {
-  Destination destination;
+  final double? dx;
+  final double? dy;
 
-  Direction(this.destination);
+  const Direction({this.dx, this.dy});
 
-  bool get isHorizontal => destination == Destination.left || destination == Destination.right;
+  const Direction.horizontal(this.dx) : dy = null;
 
-  bool get isVertical => destination == Destination.top || destination == Destination.bottom;
+  const Direction.vertical(this.dx) : dy = null;
+
+  bool get left => dx != null && dx! < 0;
+
+  bool get right => dx != null && dx! > 0;
+
+  bool get top => dy != null && dy! < 0;
+
+  bool get bottom => dy != null && dy! > 0;
+
+  bool get horizontal => left || right;
+
+  bool get vertical => top || bottom;
 }

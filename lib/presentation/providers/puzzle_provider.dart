@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
-import 'package:flutter_puzzle_hack/enums/destination.dart';
-import 'package:flutter_puzzle_hack/models/direction.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
@@ -52,23 +50,6 @@ class PuzzleProvider with ChangeNotifier {
     print('Is solved: ${puzzle.isSolved}');
     notifyListeners();
     return tiles[movedTileIndex].position;
-  }
-
-  bool _canSwapTiles({required Destination destination, required Tile tile}) {
-    bool moveTileLeft = destination == Destination.left && puzzle.tileIsRightOfWhiteSpace(tile);
-    bool moveTileRight = destination == Destination.right && puzzle.tileIsLeftOfWhiteSpace(tile);
-    bool moveTileUp = destination == Destination.top && puzzle.tileIsBottomOfWhiteSpace(tile);
-    bool moveTileDown = destination == Destination.bottom && puzzle.tileIsTopOfWhiteSpace(tile);
-
-    return moveTileLeft || moveTileRight || moveTileUp || moveTileDown;
-  }
-
-  void handleDragEnd({required Direction direction, required Tile tile}) {
-    bool canSwapTiles = _canSwapTiles(destination: direction.destination, tile: tile);
-
-    if (canSwapTiles) {
-      swapTilesAndUpdatePuzzle(tile);
-    }
   }
 
   List<Tile> _getTilesList({
