@@ -31,7 +31,7 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
             onKey: (RawKeyEvent event) {
               if (event is RawKeyDownEvent) {
                 if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
-                  print('Tab pressed!');
+                  puzzleProvider.setNextActiveTile();
                 }
               }
             },

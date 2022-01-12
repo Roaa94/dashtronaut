@@ -39,7 +39,6 @@ class _TileWrapperState extends State<TileWrapper> {
       builder: (c, Tile _tile, _) {
         return ValueListenableBuilder(
           valueListenable: tilePositionNotifier,
-          child: TileContainer(tile: _tile),
           builder: (c, Position tilePosition, child) {
             void handleDragEnd() {
               animationDurationNotifier.value = snapAnimationDuration;
@@ -87,7 +86,10 @@ class _TileWrapperState extends State<TileWrapper> {
                       tilePositionNotifier.value = _newPosition;
                     }
                   },
-                  child: child,
+                  child: TileContainer(
+                    tile: _tile,
+                    isActiveTile: _tile.isActive,
+                  ),
                 ),
               ),
             );

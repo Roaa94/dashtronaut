@@ -20,8 +20,7 @@ class Puzzle {
     if (tile.tileIsWhiteSpace) {
       return false;
     }
-    Location _tileLocation = tile.currentLocation;
-    return _tileLocation.isLocatedAround(_whiteSpaceTileLocation);
+    return tile.currentLocation.isLocatedAround(_whiteSpaceTileLocation);
   }
 
   bool tileIsLeftOfWhiteSpace(Tile tile) {
@@ -51,6 +50,8 @@ class Puzzle {
   bool tileCanMoveTo(Tile tile, Position newPosition) {
     return newPosition.isBetween(tile.position, whiteSpaceTile.position);
   }
+
+  List<Tile> get tilesAroundWhitespace => tiles.where((tile) => tileIsMovable(tile)).toList();
 
   static List<Location> generateTileCorrectLocations(int _n) {
     List<Location> _tilesCorrectLocations = [];

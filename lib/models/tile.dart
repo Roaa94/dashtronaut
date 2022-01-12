@@ -7,6 +7,7 @@ class Tile {
   bool tileIsWhiteSpace;
   Location correctLocation;
   Location currentLocation;
+  bool isActive;
 
   Tile({
     required this.value,
@@ -14,6 +15,7 @@ class Tile {
     required this.correctLocation,
     required this.currentLocation,
     this.tileIsWhiteSpace = false,
+    this.isActive = false,
   });
 
   /// Top & Left positions values based on current location
