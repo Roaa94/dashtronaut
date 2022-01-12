@@ -16,13 +16,10 @@ class TileContainer extends StatelessWidget {
     // print('Built tile ${tile.value}');
     return Selector<PuzzleProvider, int>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.activeTileValue,
-      shouldRebuild: (int previousActiveTile, int nextActiveTile) {
-        return previousActiveTile != nextActiveTile;
-      },
       builder: (c, int activeTileValue, child) {
-        print('Rebuilt active tile $activeTileValue');
+        // print('Rebuilt active tile $activeTileValue');
         return Transform.scale(
-          scale: activeTileValue == tile.value ? 1.2 : 1,
+          scale: activeTileValue == tile.value ? 1.1 : 1,
           child: child,
         );
       },
