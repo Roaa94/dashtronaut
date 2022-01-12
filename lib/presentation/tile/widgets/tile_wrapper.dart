@@ -36,9 +36,12 @@ class _TileWrapperState extends State<TileWrapper> {
   Widget build(BuildContext context) {
     return Selector<PuzzleProvider, Tile>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.tiles.firstWhere((_tile) => _tile.value == widget.tile.value),
-      builder: (c, Tile _tile, _) {
+      child: TileContainer(tile: widget.tile),
+      builder: (c, Tile _tile, child) {
+        print('Rebuilt tile ${_tile.value}');
         return ValueListenableBuilder(
           valueListenable: tilePositionNotifier,
+          child: child,
           builder: (c, Position tilePosition, child) {
             void handleDragEnd() {
               animationDurationNotifier.value = snapAnimationDuration;
@@ -86,10 +89,7 @@ class _TileWrapperState extends State<TileWrapper> {
                       tilePositionNotifier.value = _newPosition;
                     }
                   },
-                  child: TileContainer(
-                    tile: _tile,
-                    isActiveTile: _tile.isActive,
-                  ),
+                  child: child!,
                 ),
               ),
             );
