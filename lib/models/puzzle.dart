@@ -51,8 +51,6 @@ class Puzzle {
     return newPosition.isBetween(tile.position, whiteSpaceTile.position);
   }
 
-  List<Tile> get tilesAroundWhitespace => tiles.where((tile) => tileIsMovable(tile)).toList();
-
   static List<Location> generateTileCorrectLocations(int _n) {
     List<Location> _tilesCorrectLocations = [];
     for (int i = 0; i < _n; i++) {

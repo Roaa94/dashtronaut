@@ -18,20 +18,21 @@ class PuzzleProvider with ChangeNotifier {
 
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
-  final List<int> _visitedActiveTileValues = [];
+  List<int> _visitedActiveTileValues = [];
 
   late int activeTileValue;
 
   Tile get activeTile => tiles.singleWhere((tile) => tile.value == activeTileValue);
 
   void setNextActiveTile() {
-    if (_visitedActiveTileValues.length == puzzle.tilesAroundWhitespace.length) {
+    if (_visitedActiveTileValues.length == tilesAroundWhiteSpace.length) {
       print('All tiles were visited, clearing...');
       _visitedActiveTileValues.clear();
     }
     for (final tile in tilesAroundWhiteSpace) {
-      if (tile.value != activeTileValue) {
+      if (tile.value != activeTileValue && !_visitedActiveTileValues.contains(tile.value)) {
         activeTileValue = tile.value;
+        _visitedActiveTileValues.add(activeTileValue);
         notifyListeners();
         break;
       }
@@ -44,7 +45,7 @@ class PuzzleProvider with ChangeNotifier {
 
   List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
-  List<Tile> get tilesAroundWhiteSpace => puzzle.tilesAroundWhitespace;
+  List<Tile> get tilesAroundWhiteSpace => tiles.where((tile) => puzzle.tileIsMovable(tile)).toList();
 
   Position swapTilesAndUpdatePuzzle(Tile tile) {
     int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
@@ -57,6 +58,9 @@ class PuzzleProvider with ChangeNotifier {
     tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()}');
     print('Is solved: ${puzzle.isSolved}');
+    if (!puzzle.tileIsMovable(activeTile)) {
+      activeTileValue = tilesAroundWhiteSpace[0].value;
+    }
     notifyListeners();
     return tiles[movedTileIndex].position;
   }
@@ -100,9 +104,9 @@ class PuzzleProvider with ChangeNotifier {
         correctLocations: _tilesCorrectLocations,
         currentLocations: _tilesCurrentLocations,
       );
-      Tile _activeTile = puzzle.tilesAroundWhitespace[0];
+      Tile _activeTile = tilesAroundWhiteSpace[0];
       activeTileValue = _activeTile.value;
-      _visitedActiveTileValues.add(activeTileValue);
+      _visitedActiveTileValues = [activeTileValue];
     }
   }
 }
