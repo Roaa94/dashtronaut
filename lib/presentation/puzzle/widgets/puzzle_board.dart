@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
@@ -24,20 +23,18 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return kIsWeb
-        ? RawKeyboardListener(
-            focusNode: keyboardListenerFocusNode,
-            autofocus: true,
-            onKey: (RawKeyEvent event) {
-              if (event is RawKeyDownEvent) {
-                if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
-                  puzzleProvider.setNextActiveTile();
-                }
-              }
-            },
-            child: _buildPuzzleBoard,
-          )
-        : _buildPuzzleBoard;
+    return RawKeyboardListener(
+      focusNode: keyboardListenerFocusNode,
+      autofocus: true,
+      onKey: (RawKeyEvent event) {
+        if (event is RawKeyDownEvent) {
+          if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
+            puzzleProvider.setNextActiveTile();
+          }
+        }
+      },
+      child: _buildPuzzleBoard,
+    );
   }
 
   Widget get _buildPuzzleBoard {
