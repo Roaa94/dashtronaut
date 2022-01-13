@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
@@ -78,10 +79,10 @@ class PuzzleProvider with ChangeNotifier {
   List<int> _visitedActiveTileValues = [];
 
   /// Selects the next selectable tile with the keyboard tab key
-  void setNextActiveTile() {
+  void _setNextActiveTile() {
     /// If all tiles around the white space were visited, clear the
     /// [_visitedActiveTileValues] list to allow looping over them again
-    if (_visitedActiveTileValues.length == tilesAroundWhiteSpace.length) {
+    if (_visitedActiveTileValues.length >= tilesAroundWhiteSpace.length) {
       // print('All tiles were visited, clearing...');
       _visitedActiveTileValues.clear();
     }
@@ -92,6 +93,18 @@ class PuzzleProvider with ChangeNotifier {
         notifyListeners();
         break;
       }
+    }
+  }
+
+  void handleKeyboardEvent(RawKeyEvent event) {
+    if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
+      _setNextActiveTile();
+    }
+    if (event.isKeyPressed(LogicalKeyboardKey.arrowUp) ||
+        event.isKeyPressed(LogicalKeyboardKey.arrowDown) ||
+        event.isKeyPressed(LogicalKeyboardKey.arrowLeft) ||
+        event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+      swapTilesAndUpdatePuzzle(activeTile);
     }
   }
 
