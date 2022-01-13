@@ -31,6 +31,12 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
           if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
             puzzleProvider.setNextActiveTile();
           }
+          if (event.isKeyPressed(LogicalKeyboardKey.arrowUp) ||
+              event.isKeyPressed(LogicalKeyboardKey.arrowDown) ||
+              event.isKeyPressed(LogicalKeyboardKey.arrowLeft) ||
+              event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+            puzzleProvider.swapTilesAndUpdatePuzzle(puzzleProvider.activeTile);
+          }
         }
       },
       child: _buildPuzzleBoard,
