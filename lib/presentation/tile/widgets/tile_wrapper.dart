@@ -17,17 +17,11 @@ class TileWrapper extends StatefulWidget {
   State<TileWrapper> createState() => _TileWrapperState();
 }
 
-const Duration dragAnimationDuration = Duration(milliseconds: 0);
-const Duration snapAnimationDuration = Duration(milliseconds: 150);
-
 class _TileWrapperState extends State<TileWrapper> {
-  late final ValueNotifier<Position> tilePositionNotifier;
-  final ValueNotifier<Duration> animationDurationNotifier = ValueNotifier<Duration>(dragAnimationDuration);
   late PuzzleProvider puzzleProvider;
 
   @override
   void initState() {
-    tilePositionNotifier = ValueNotifier<Position>(widget.tile.position);
     puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
     super.initState();
   }
@@ -35,24 +29,16 @@ class _TileWrapperState extends State<TileWrapper> {
   @override
   Widget build(BuildContext context) {
     return Selector<PuzzleProvider, Tile>(
-      selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.tiles.firstWhere((_tile) => _tile.value == widget.tile.value),
+      selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.getTileFromValue(widget.tile.value),
       child: TileContainer(tile: widget.tile),
       builder: (c, Tile _tile, child) {
         print('Rebuilt tile ${_tile.value}');
-        return ValueListenableBuilder(
-          valueListenable: tilePositionNotifier,
+        return Selector<PuzzleProvider, Position>(
+          selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.draggedTilePositions[_tile.value]!,
           child: child,
           builder: (c, Position tilePosition, child) {
-            void handleDragEnd() {
-              animationDurationNotifier.value = snapAnimationDuration;
-              tilePositionNotifier.value = puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
-              Future.delayed(snapAnimationDuration, () {
-                animationDurationNotifier.value = dragAnimationDuration;
-              });
-            }
-
-            return ValueListenableBuilder(
-              valueListenable: animationDurationNotifier,
+            return Selector<PuzzleProvider, Duration>(
+              selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.tileDragDurations[_tile.value]!,
               builder: (c, Duration animationDuration, child) {
                 return AnimatedPositioned(
                   duration: animationDuration,
@@ -69,24 +55,24 @@ class _TileWrapperState extends State<TileWrapper> {
                 child: GestureDetector(
                   onHorizontalDragEnd: (_) {
                     if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile)) {
-                      handleDragEnd();
+                      puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
                     }
                   },
                   onVerticalDragEnd: (_) {
                     if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile)) {
-                      handleDragEnd();
+                      puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
                     }
                   },
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
                     Position _newPosition = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
                     if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
-                      tilePositionNotifier.value = _newPosition;
+                      puzzleProvider.setDraggedTilePosition(_tile.value, _newPosition);
                     }
                   },
                   onVerticalDragUpdate: (DragUpdateDetails details) {
                     Position _newPosition = Position(left: tilePosition.left, top: tilePosition.top + details.delta.dy);
                     if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
-                      tilePositionNotifier.value = _newPosition;
+                      puzzleProvider.setDraggedTilePosition(_tile.value, _newPosition);
                     }
                   },
                   child: child!,

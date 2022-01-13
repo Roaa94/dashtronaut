@@ -36,11 +36,23 @@ class PuzzleProvider with ChangeNotifier {
   /// Random value used in shuffling tiles
   final Random random = Random();
 
+  static const Duration dragAnimationDuration = Duration(milliseconds: 0);
+  static const Duration snapAnimationDuration = Duration(milliseconds: 150);
+
   /// Puzzle outer container width
   double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
 
   /// List of tiles of the puzzle
   late List<Tile> tiles;
+
+  /// Map of {tileValue [int]: tilePosition [Position]} for dragged tiles
+  late Map<int, Position> draggedTilePositions;
+
+  /// Map of {tileValue [int]: tileDragDurations [Duration]} for dragging tiles
+  /// This is needed because there are 2 type of animation when dragging a tile
+  /// 1. When dragging is in progress (drag update) duration should be 0 to prevent delay between input movement
+  /// 2. When dragging is released (drag end) duration should be > 0 to show smooth snapping animation
+  late Map<int, Duration> tileDragDurations;
 
   /// list of [tiles] excluding white space tile
   List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
@@ -57,6 +69,8 @@ class PuzzleProvider with ChangeNotifier {
   /// Getter for puzzle object
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
+  Tile getTileFromValue(int tileValue) => tiles.singleWhere((tile) => tile.value == tileValue);
+
   /// Stores the tile values already visited by pressing keyboard tab key
   /// for the purpose of not selecting them again until all selectable tiles (all tiles around the white space) are visited
   /// Cleared once its length == [tilesAroundWhiteSpace]'s length
@@ -67,7 +81,7 @@ class PuzzleProvider with ChangeNotifier {
     /// If all tiles around the white space were visited, clear the
     /// [_visitedActiveTileValues] list to allow looping over them again
     if (_visitedActiveTileValues.length == tilesAroundWhiteSpace.length) {
-      print('All tiles were visited, clearing...');
+      // print('All tiles were visited, clearing...');
       _visitedActiveTileValues.clear();
     }
     for (final tile in tilesAroundWhiteSpace) {
@@ -80,27 +94,39 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
+  void setDraggedTilePosition(int _tileValue, Position _tilePosition) {
+    draggedTilePositions[_tileValue] = _tilePosition;
+    notifyListeners();
+  }
+
   /// Action that switches the [Location]'s => [Position]'s of the tile
   /// dragged by the user & the whitespace tile
   /// This causes the [Tile.position] getter to get the correct position based on new [Location]'s
-  Position swapTilesAndUpdatePuzzle(Tile tile) {
+  void swapTilesAndUpdatePuzzle(Tile tile) {
     int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
     int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);
     // Store instances of the moved tile and the white space tile before changing their locations
     Tile _movedTile = tiles[movedTileIndex];
     Tile _whiteSpaceTile = tiles[whiteSpaceTileIndex];
-    tiles[movedTileIndex] = tiles[movedTileIndex].copyWith(
-      currentLocation: _whiteSpaceTile.currentLocation,
-    );
+
+    tileDragDurations[_movedTile.value] = snapAnimationDuration;
+    tiles[movedTileIndex] = tiles[movedTileIndex].copyWith(currentLocation: _whiteSpaceTile.currentLocation);
+    draggedTilePositions[_movedTile.value] = tiles[movedTileIndex].position;
+
     tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
+    draggedTilePositions[_whiteSpaceTile.value] = tiles[whiteSpaceTileIndex].position;
+
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
     // If the above switch in positions causes the `activeTile` to become not around
     // the white space tile (not movable) reset the value of the `activeTileValue` to the first movable tile's value
     if (!puzzle.tileIsMovable(activeTile)) {
       activeTileValue = tilesAroundWhiteSpace[0].value;
+      _visitedActiveTileValues = [activeTileValue];
     }
+    Future.delayed(snapAnimationDuration, () {
+      tileDragDurations[_movedTile.value] = dragAnimationDuration;
+    });
     notifyListeners();
-    return tiles[movedTileIndex].position;
   }
 
   /// Generates tiles with shuffle
@@ -130,5 +156,8 @@ class PuzzleProvider with ChangeNotifier {
     activeTileValue = tilesAroundWhiteSpace[0].value;
     // Add the active tile to the visited tiles list
     _visitedActiveTileValues = [activeTileValue];
+    // Set initial values of dragged tiles positions and durations
+    draggedTilePositions = {for (final tile in tiles) tile.value: tile.position};
+    tileDragDurations = {for (final tile in tiles) tile.value: dragAnimationDuration};
   }
 }
