@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/background/widgets/background.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +11,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => PuzzleProvider(context)..generate(),
-      child: const Scaffold(
-        body: PuzzleBoard(),
+      child: Scaffold(
+        body: Stack(
+          children: const [
+            Positioned.fill(child: Background()),
+            PuzzleBoard(),
+          ],
+        ),
       ),
     );
   }

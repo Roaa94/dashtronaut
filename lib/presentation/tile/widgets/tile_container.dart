@@ -26,7 +26,7 @@ class TileContainer extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: tile.currentLocation == tile.correctLocation ? Colors.pinkAccent : Colors.cyan,
+          color: tile.currentLocation == tile.correctLocation ? Colors.pinkAccent : Colors.white.withOpacity(0.2),
           borderRadius: BorderRadius.circular(12),
         ),
         margin: const EdgeInsets.all(10),

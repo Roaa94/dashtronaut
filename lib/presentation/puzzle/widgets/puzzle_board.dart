@@ -33,13 +33,9 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
 
   Widget get _buildPuzzleBoard {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: puzzleProvider.puzzleContainerWidth,
         height: puzzleProvider.puzzleContainerWidth,
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(15),
-        ),
         child: Stack(
           children: List.generate(
             puzzleProvider.tilesWithoutWhitespace.length,
