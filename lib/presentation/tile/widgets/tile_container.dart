@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
@@ -19,7 +20,7 @@ class TileContainer extends StatelessWidget {
       builder: (c, int activeTileValue, child) {
         // print('Rebuilt active tile $activeTileValue');
         return Transform.scale(
-          scale: activeTileValue == tile.value ? 1.1 : 1,
+          scale: activeTileValue == tile.value && kIsWeb ? 1.1 : 1,
           child: child,
         );
       },
