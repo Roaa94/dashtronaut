@@ -17,9 +17,14 @@ import 'package:flutter_puzzle_hack/models/tile.dart';
 ///
 /// Getters:
 /// 1. [puzzle] => based on puzzle size and tiles [Puzzle]
-/// 2. [activeTile] => from activeTileValue
+/// 2. [activeTile] => from [activeTileValue]
 /// 3. [tilesWithoutWhitespace] => list of [tiles] excluding white space tile
 /// 4. [tilesAroundWhiteSpace] => list of [tiles] top of || bottom of || left of || right of white space tile
+///
+/// Methods:
+/// 1. [generate] generates solvable puzzle tiles and sets initial values of [activeTileValue]
+/// 2. [swapTilesAndUpdatePuzzle] called when tile movement is released by
+///    the user (Drag End) to notify tile rebuild with new locations
 class PuzzleProvider with ChangeNotifier {
   final BuildContext context;
 
@@ -28,10 +33,13 @@ class PuzzleProvider with ChangeNotifier {
   /// One dimensional size of the puzzle => size = n x n
   final int n = 3;
 
+  /// Random value used in shuffling tiles
   final Random random = Random();
 
+  /// Puzzle outer container width
   double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
 
+  /// List of tiles of the puzzle
   late List<Tile> tiles;
 
   /// list of [tiles] excluding white space tile
@@ -46,6 +54,7 @@ class PuzzleProvider with ChangeNotifier {
   /// Active tile [Tile] from [activeTileValue]
   Tile get activeTile => tiles.singleWhere((tile) => tile.value == activeTileValue);
 
+  /// Getter for puzzle object
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
   /// Stores the tile values already visited by pressing keyboard tab key
