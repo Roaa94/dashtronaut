@@ -63,6 +63,25 @@ class Puzzle {
     return _tilesCorrectLocations;
   }
 
+  /// Returns a list of tiles from current & correct locations lists
+  static List<Tile> getTilesFromLocations({
+    required int n,
+    required double tileWidth,
+    required List<Location> correctLocations,
+    required List<Location> currentLocations,
+  }) {
+    return List.generate(
+      n * n,
+      (i) => Tile(
+        value: i + 1,
+        width: tileWidth,
+        correctLocation: correctLocations[i],
+        currentLocation: currentLocations[i],
+        tileIsWhiteSpace: i == n * n - 1,
+      ),
+    );
+  }
+
   /// Determines if the two tiles are inverted.
   bool _isInversion(Tile a, Tile b) {
     if (!b.tileIsWhiteSpace && a.value != b.value) {
