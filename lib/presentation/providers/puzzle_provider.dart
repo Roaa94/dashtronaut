@@ -69,6 +69,7 @@ class PuzzleProvider with ChangeNotifier {
   /// Getter for puzzle object
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
+  /// Return a [Tile] from its value
   Tile getTileFromValue(int tileValue) => tiles.singleWhere((tile) => tile.value == tileValue);
 
   /// Stores the tile values already visited by pressing keyboard tab key
@@ -94,6 +95,7 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
+  /// Change the dragging [Position] of a tile
   void setDraggedTilePosition(int _tileValue, Position _tilePosition) {
     draggedTilePositions[_tileValue] = _tilePosition;
     notifyListeners();
