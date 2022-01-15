@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/background/background_helper.dart';
 
 class Background extends StatefulWidget {
   const Background({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class Background extends StatefulWidget {
 
 class _BackgroundState extends State<Background> with AutomaticKeepAliveClientMixin {
   late AssetImage bgImage;
+  List<AssetImage> backgroundLayers = [];
 
   @override
   void initState() {
@@ -29,9 +31,17 @@ class _BackgroundState extends State<Background> with AutomaticKeepAliveClientMi
       decoration: BoxDecoration(
         image: DecorationImage(image: bgImage),
       ),
+      width: double.infinity,
+      height: double.infinity,
+      alignment: Alignment.topLeft,
       child: Flow(
-        delegate: BackgroundFlowDelegate(),
-        children: [],
+        delegate: BackgroundFlowDelegate(screenSize: MediaQuery.of(context).size),
+        children: List.generate(
+          BackgroundHelper.layerUrls.length,
+          (index) => Image.asset(
+            BackgroundHelper.layerUrls[index],
+          ),
+        ),
       ),
     );
   }
@@ -41,9 +51,18 @@ class _BackgroundState extends State<Background> with AutomaticKeepAliveClientMi
 }
 
 class BackgroundFlowDelegate extends FlowDelegate {
+  final Size screenSize;
+
+  BackgroundFlowDelegate({required this.screenSize});
+
   @override
   void paintChildren(FlowPaintingContext context) {
-    // TODO: implement paintChildren
+    for (int i = 0; i <= BackgroundHelper.layerUrls.length - 1; i++) {
+      context.paintChild(
+        i,
+        transform: BackgroundHelper.getLayers(screenSize)[i].transform,
+      );
+    }
   }
 
   @override
