@@ -29,7 +29,8 @@ class Location extends Equatable implements Comparable<Location> {
     return _location.x == x && _location.y == y - 1;
   }
 
-  String get asString => '($y, $x)';
+  @override
+  String toString() => '($y, $x)';
 
   static void printLocations(List<Location> locations) {
     Map<int, String> locationsMap = {};
