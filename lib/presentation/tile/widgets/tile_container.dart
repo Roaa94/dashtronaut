@@ -15,19 +15,22 @@ class TileContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print('Built tile ${tile.value}');
+    bool _isInCorrectLocation = tile.currentLocation == tile.correctLocation;
+
     return Selector<PuzzleProvider, int>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.activeTileValue,
       builder: (c, int activeTileValue, child) {
-        // print('Rebuilt active tile $activeTileValue');
-        return Transform.scale(
+        return AnimatedScale(
           scale: activeTileValue == tile.value && kIsWeb ? 1.1 : 1,
+          duration: const Duration(milliseconds: 200),
           child: child,
         );
       },
       child: Container(
         decoration: BoxDecoration(
-          color: tile.currentLocation == tile.correctLocation ? Colors.pinkAccent.withOpacity(0.3) : Colors.white.withOpacity(0.2),
+          color: Colors.white.withOpacity(_isInCorrectLocation ? 0.22 : 0.1),
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white.withOpacity(_isInCorrectLocation ? 0.5 : 0.4), width: 1),
         ),
         margin: const EdgeInsets.all(10),
         alignment: Alignment.center,
