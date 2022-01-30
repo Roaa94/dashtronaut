@@ -31,7 +31,7 @@ class BackgroundProvider with ChangeNotifier {
   List<double> get randomStarSizes {
     List<double> _sizes = [];
     for (int i = 0; i <= Background.totalStarsCount; i++) {
-      _sizes.add(random.nextDouble() + 0.4);
+      _sizes.add(random.nextDouble() + 0.7);
     }
     return _sizes;
   }
