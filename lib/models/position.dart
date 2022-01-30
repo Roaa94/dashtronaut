@@ -20,4 +20,11 @@ class Position extends Equatable {
 
   @override
   List<Object?> get props => [left, top];
+
+  Position copyWith({double? left, double? top}) {
+    return Position(
+      left: left ?? this.left,
+      top: top ?? this.top,
+    );
+  }
 }

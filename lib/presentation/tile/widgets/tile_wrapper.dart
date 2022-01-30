@@ -31,7 +31,6 @@ class _TileWrapperState extends State<TileWrapper> {
     return Selector<PuzzleProvider, Tile>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.getTileFromValue(widget.tile.value),
       builder: (c, Tile _tile, _) {
-        print('Rebuilt tile ${_tile.value}');
         return Selector<PuzzleProvider, Position>(
           selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.draggedTilePositions[_tile.value]!,
           child: TileContainer(tile: _tile),
