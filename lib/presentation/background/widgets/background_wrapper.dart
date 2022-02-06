@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/background.dart';
+import 'package:flutter_puzzle_hack/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/background_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class _BackgroundState extends State<BackgroundWrapper> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    List<BackgroundLayer> _layers = Background.getLayers(screenSize);
     print('Rebuilt Background');
 
     return Scaffold(
@@ -53,10 +55,10 @@ class _BackgroundState extends State<BackgroundWrapper> {
               ),
             ),
             ...List.generate(
-              Background.layerUrls.length,
+              _layers.length,
               (i) {
-                int inverseIndex = Background.layerUrls.length - i;
-                Position initialLayerPosition = Background.getLayers(screenSize)[i].position;
+                int inverseIndex = _layers.length - i;
+                Position initialLayerPosition = _layers[i].position;
                 // Position dynamicLayerPosition = Position(
                 //   left: initialLayerPosition.left + gyroscopeVector.y * inverseIndex,
                 //   top: initialLayerPosition.top + gyroscopeVector.x * inverseIndex,
@@ -67,8 +69,9 @@ class _BackgroundState extends State<BackgroundWrapper> {
                   left: initialLayerPosition.left,
                   top: initialLayerPosition.top,
                   child: Image.asset(
-                    Background.layerUrls[i],
-                    width: screenSize.width,
+                    _layers[i].assetUrl,
+                    width: _layers[i].size.width,
+                    // height: _layers[i].size.height,
                   ),
                 );
               },

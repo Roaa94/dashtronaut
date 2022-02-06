@@ -10,16 +10,34 @@ class Background {
   static List<BackgroundLayer> getLayers([Size screenSize = const Size(0, 0)]) {
     return [
       BackgroundLayer(
-        assetUrl: 'assets/images/background/moons.png',
-        position: const Position(left: -70, top: 90),
+        assetUrl: 'assets/images/background/top-right-planet.png',
+        size: Size(screenSize.width * 0.9, screenSize.height * 0.3),
+        position: Position(left: screenSize.width * 0.4, top: -screenSize.height * 0.031),
+      ),
+      BackgroundLayer(
+        assetUrl: 'assets/images/background/top-left-planet.png',
+        size: Size(screenSize.width * 0.36, screenSize.height * 0.16),
+        position: Position(left: -screenSize.width * 0.15, top: -screenSize.height * 0.06),
+      ),
+      BackgroundLayer(
+        assetUrl: 'assets/images/background/top-bg-planet.png',
+        size: Size(screenSize.width * 0.16, screenSize.height * 0.16),
+        position: Position(left: screenSize.width * 0.5, top: screenSize.height * 0.13),
       ),
       BackgroundLayer(
         assetUrl: 'assets/images/background/bottom-left-planet.png',
-        position: Position(left: -150, top: screenSize.height - 250),
+        size: Size(screenSize.width * 0.7, screenSize.height * 0.23),
+        position: Position(left: -screenSize.width * 0.3, top: screenSize.height * 0.75),
       ),
       BackgroundLayer(
-        assetUrl: 'assets/images/background/big-planet.png',
-        position: Position(left: screenSize.width - 270, top: -80),
+        assetUrl: 'assets/images/background/bottom-bg-planet.png',
+        size: Size(screenSize.width * 0.28, screenSize.height * 0.12),
+        position: Position(left: screenSize.width * 0.56, top: screenSize.height * 0.8),
+      ),
+      BackgroundLayer(
+        assetUrl: 'assets/images/background/bottom-right-planet.png',
+        size: Size(screenSize.width * 0.7, screenSize.height * 0.25),
+        position: Position(left: screenSize.width * 0.63, top: screenSize.height * 0.8),
       ),
     ];
   }
