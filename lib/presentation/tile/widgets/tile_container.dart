@@ -26,13 +26,15 @@ class TileContainer extends StatelessWidget {
           child: child,
         );
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(_isInCorrectLocation ? 0.22 : 0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white.withOpacity(_isInCorrectLocation ? 0.5 : 0.4), width: 1),
+          color: _isInCorrectLocation ? const Color(0xff50e6ff).withOpacity(0.2) : Colors.transparent,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.white.withOpacity(_isInCorrectLocation ? 1 : 0.6), width: 2),
+          boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
         ),
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(8),
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
