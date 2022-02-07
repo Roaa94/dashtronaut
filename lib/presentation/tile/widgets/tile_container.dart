@@ -21,7 +21,7 @@ class TileContainer extends StatelessWidget {
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.activeTileValue,
       builder: (c, int activeTileValue, child) {
         return AnimatedScale(
-          scale: activeTileValue == tile.value && kIsWeb ? 1.1 : 1,
+          scale: activeTileValue == tile.value && kIsWeb ? 1.05 : 1,
           duration: const Duration(milliseconds: 200),
           child: child,
         );
