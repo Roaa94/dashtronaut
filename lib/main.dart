@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
+        fontFamily: 'PaytoneOne',
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.dark,
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       darkTheme: ThemeData(
+        fontFamily: 'PaytoneOne',
         brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(

@@ -39,7 +39,7 @@ class TileContainer extends StatelessWidget {
           children: [
             Text(
               '${tile.value}',
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 40),
             ),
           ],
         ),
