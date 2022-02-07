@@ -59,10 +59,18 @@ class BackgroundLayer {
         _size = _size * 1;
         break;
       case ScreenType.medium:
-        _size = _size * 1.2;
+        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+          _size = _size * 1;
+        } else {
+          _size = _size * 1.2;
+        }
         break;
       case ScreenType.large:
-        _size = _size * 2;
+        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+          _size = _size * 1;
+        } else {
+          _size = _size * 2;
+        }
         break;
     }
     return _size;

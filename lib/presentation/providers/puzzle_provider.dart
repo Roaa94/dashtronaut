@@ -50,6 +50,11 @@ class PuzzleProvider with ChangeNotifier {
       case ScreenType.small:
         return MediaQuery.of(context).size.width - UI.screenHPadding * 2;
       case ScreenType.medium:
+        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+          return MediaQuery.of(context).size.flipped.width - UI.screenHPadding * 2;
+        } else {
+          return 500;
+        }
       case ScreenType.large:
         return 500;
     }
