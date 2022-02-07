@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 enum BackgroundLayerType {
   topRightPlanet,
@@ -20,6 +21,8 @@ class BackgroundLayer {
   });
 
   String get assetUrl => 'assets/images/background/${type.name}.png';
+
+  ScreenType get screenType => ScreenTypeHelper(context).type;
 
   Size get size {
     late Size _size;
@@ -45,6 +48,21 @@ class BackgroundLayer {
         break;
       default:
         _size = Size.zero;
+        break;
+    }
+
+    switch (screenType) {
+      case ScreenType.xSmall:
+        _size = _size * 0.8;
+        break;
+      case ScreenType.small:
+        _size = _size * 1;
+        break;
+      case ScreenType.medium:
+        _size = _size * 1.2;
+        break;
+      case ScreenType.large:
+        _size = _size * 2;
         break;
     }
     return _size;

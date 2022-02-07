@@ -7,6 +7,7 @@ import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 /// PuzzleProvider handles:
 /// Parameters
@@ -40,8 +41,19 @@ class PuzzleProvider with ChangeNotifier {
   static const Duration dragAnimationDuration = Duration(milliseconds: 0);
   static const Duration snapAnimationDuration = Duration(milliseconds: 150);
 
+  ScreenType get screenType => ScreenTypeHelper(context).type;
+
   /// Puzzle outer container width
-  double get puzzleContainerWidth => MediaQuery.of(context).size.width - UI.screenHPadding * 2;
+  double get puzzleContainerWidth {
+    switch (screenType) {
+      case ScreenType.xSmall:
+      case ScreenType.small:
+        return MediaQuery.of(context).size.width - UI.screenHPadding * 2;
+      case ScreenType.medium:
+      case ScreenType.large:
+        return 500;
+    }
+  }
 
   /// List of tiles of the puzzle
   late List<Tile> tiles;
