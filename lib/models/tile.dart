@@ -22,8 +22,10 @@ class Tile {
   }
 
   bool passedMidPoint(Position _newPosition) {
+    assert(_newPosition.left != null && _newPosition.top != null);
+    assert(position.left != null && _newPosition.top != null);
     double midPoint = width / 5;
-    return (_newPosition.left - position.left).abs() >= midPoint || (_newPosition.top - position.top).abs() >= midPoint;
+    return (_newPosition.left! - position.left!).abs() >= midPoint || (_newPosition.top! - position.top!).abs() >= midPoint;
   }
 
   Tile copyWith({

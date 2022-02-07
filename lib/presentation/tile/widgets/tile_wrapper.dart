@@ -62,13 +62,13 @@ class _TileWrapperState extends State<TileWrapper> {
                     }
                   },
                   onHorizontalDragUpdate: (DragUpdateDetails details) {
-                    Position _newPosition = Position(left: tilePosition.left + details.delta.dx, top: tilePosition.top);
+                    Position _newPosition = Position(left: tilePosition.left! + details.delta.dx, top: tilePosition.top);
                     if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
                       puzzleProvider.setDraggedTilePosition(_tile.value, _newPosition);
                     }
                   },
                   onVerticalDragUpdate: (DragUpdateDetails details) {
-                    Position _newPosition = Position(left: tilePosition.left, top: tilePosition.top + details.delta.dy);
+                    Position _newPosition = Position(left: tilePosition.left, top: tilePosition.top! + details.delta.dy);
                     if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
                       puzzleProvider.setDraggedTilePosition(_tile.value, _newPosition);
                     }
