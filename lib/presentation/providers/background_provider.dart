@@ -10,11 +10,9 @@ class BackgroundProvider with ChangeNotifier {
 
   final Random random = Random();
 
-  double get starsMaxXOffset =>
-      MediaQuery.of(context).orientation == Orientation.landscape ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.width;
+  double get starsMaxXOffset => MediaQuery.of(context).size.width;
 
-  double get starsMaxYOffset =>
-      MediaQuery.of(context).orientation == Orientation.landscape ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
+  double get starsMaxYOffset => MediaQuery.of(context).size.height;
 
   List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(starsMaxXOffset.floor());
 

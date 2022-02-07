@@ -9,6 +9,8 @@ class Position extends Equatable {
     required this.top,
   });
 
+  const Position.zero() : left = 0, top = 0;
+
   @override
   String toString() => 'Left: ${left.toStringAsFixed(2)} | Top: ${top.toStringAsFixed(2)}';
 

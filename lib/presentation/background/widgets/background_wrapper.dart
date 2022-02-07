@@ -23,8 +23,9 @@ class _BackgroundState extends State<BackgroundWrapper> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    List<BackgroundLayer> _layers = Background.getLayers(screenSize);
-    print('Rebuilt Background');
+    Size dynamicScreenSize = MediaQuery.of(context).orientation == Orientation.portrait ? screenSize : screenSize.flipped;
+
+    List<BackgroundLayer> _layers = Background.getLayers(screenSize, MediaQuery.of(context).orientation);
 
     return Scaffold(
       body: Container(
@@ -54,28 +55,22 @@ class _BackgroundState extends State<BackgroundWrapper> {
                 ),
               ),
             ),
-            ...List.generate(
-              _layers.length,
-              (i) {
-                int inverseIndex = _layers.length - i;
-                Position initialLayerPosition = _layers[i].position;
-                // Position dynamicLayerPosition = Position(
-                //   left: initialLayerPosition.left + gyroscopeVector.y * inverseIndex,
-                //   top: initialLayerPosition.top + gyroscopeVector.x * inverseIndex,
-                // );
-
-                return AnimatedPositioned(
-                  duration: const Duration(milliseconds: 100),
-                  left: initialLayerPosition.left,
-                  top: initialLayerPosition.top,
-                  child: Image.asset(
-                    _layers[i].assetUrl,
-                    width: _layers[i].size.width,
-                    // height: _layers[i].size.height,
-                  ),
-                );
-              },
-            ),
+            // ...List.generate(
+            //   _layers.length,
+            //   (i) {
+            //     Position initialLayerPosition = _layers[i].position;
+            //     return AnimatedPositioned(
+            //       duration: const Duration(milliseconds: 100),
+            //       left: initialLayerPosition.left,
+            //       top: initialLayerPosition.top,
+            //       child: Image.asset(
+            //         _layers[i].assetUrl,
+            //         width: _layers[i].size.width,
+            //         // height: _layers[i].size.height,
+            //       ),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

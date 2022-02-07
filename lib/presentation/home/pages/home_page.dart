@@ -19,10 +19,10 @@ class HomePage extends StatelessWidget {
               child: BackgroundWrapper(),
             ),
           ),
-          ChangeNotifierProvider(
-            create: (_) => PuzzleProvider(context)..generate(),
-            child: const PuzzleBoard(),
-          ),
+          // ChangeNotifierProvider(
+          //   create: (_) => PuzzleProvider(context)..generate(),
+          //   child: const PuzzleBoard(),
+          // ),
         ],
       ),
     );
