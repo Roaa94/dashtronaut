@@ -22,22 +22,32 @@ class BackgroundLayer {
   String get assetUrl => 'assets/images/background/${type.name}.png';
 
   Size get size {
+    late Size _size;
+
     switch (type) {
       case BackgroundLayerType.topRightPlanet:
-        return const Size(356, 241);
+        _size = const Size(356, 241);
+        break;
       case BackgroundLayerType.topLeftPlanet:
-        return const Size(144, 142);
+        _size = const Size(144, 142);
+        break;
       case BackgroundLayerType.topBgPlanet:
-        return const Size(63, 63);
+        _size = const Size(63, 63);
+        break;
       case BackgroundLayerType.bottomLeftPlanet:
-        return const Size(276, 196);
+        _size = const Size(276, 196);
+        break;
       case BackgroundLayerType.bottomRightPlanet:
-        return const Size(275, 216);
+        _size = const Size(275, 216);
+        break;
       case BackgroundLayerType.bottomBgPlanet:
-        return const Size(112, 104);
+        _size = const Size(112, 104);
+        break;
       default:
-        return Size.zero;
+        _size = Size.zero;
+        break;
     }
+    return _size;
   }
 
   Position get position {

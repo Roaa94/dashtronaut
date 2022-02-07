@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/background.dart';
 import 'package:flutter_puzzle_hack/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/background_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_puzzle_hack/models/stars_layer.dart';
 
 class BackgroundWrapper extends StatefulWidget {
   const BackgroundWrapper({Key? key}) : super(key: key);
@@ -24,7 +23,8 @@ class _BackgroundState extends State<BackgroundWrapper> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    List<BackgroundLayer> _layers = Background.getLayers(context);
+    List<BackgroundLayer> _backgroundLayers = Background.getLayers(context);
+    StarsLayer _starsLayer = StarsLayer(context);
 
     return Scaffold(
       body: Container(
@@ -39,26 +39,14 @@ class _BackgroundState extends State<BackgroundWrapper> {
         ),
         child: Stack(
           children: [
-            Consumer<BackgroundProvider>(
-              builder: (c, backgroundProvider, _) => CustomPaint(
-                painter: StarsPainter(
-                  xOffsets: backgroundProvider.randomStarXOffsets,
-                  yOffsets: backgroundProvider.randomStarYOffsets,
-                  sizes: backgroundProvider.randomStarSizes,
-                  color: Colors.white.withOpacity(0.2),
-                ),
-                foregroundPainter: StarsPainter(
-                  xOffsets: backgroundProvider.randomStarXOffsets,
-                  yOffsets: backgroundProvider.randomStarYOffsets,
-                  sizes: backgroundProvider.randomStarSizes,
-                ),
-              ),
+            CustomPaint(
+              painter: _starsLayer.getPainter(color: Colors.white.withOpacity(0.2)),
+              foregroundPainter: _starsLayer.getPainter(),
             ),
             ...List.generate(
-              _layers.length,
+              _backgroundLayers.length,
               (i) {
-                Position initialLayerPosition = _layers[i].position;
-                print(_layers[i]);
+                Position initialLayerPosition = _backgroundLayers[i].position;
                 return AnimatedPositioned(
                   duration: const Duration(milliseconds: 100),
                   left: initialLayerPosition.left,
@@ -66,9 +54,8 @@ class _BackgroundState extends State<BackgroundWrapper> {
                   right: initialLayerPosition.right,
                   bottom: initialLayerPosition.bottom,
                   child: Image.asset(
-                    _layers[i].assetUrl,
-                    width: _layers[i].size.width,
-                    // height: _layers[i].size.height,
+                    _backgroundLayers[i].assetUrl,
+                    width: _backgroundLayers[i].size.width,
                   ),
                 );
               },
@@ -78,35 +65,4 @@ class _BackgroundState extends State<BackgroundWrapper> {
       ),
     );
   }
-}
-
-class StarsPainter extends CustomPainter {
-  final List<int> xOffsets;
-  final List<int> yOffsets;
-  final List<double> sizes;
-  final Color? color;
-
-  StarsPainter({
-    required this.xOffsets,
-    required this.yOffsets,
-    required this.sizes,
-    this.color,
-  });
-
-  final Paint _paint = Paint();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    _paint.color = color ?? Colors.white.withOpacity(0.5);
-    for (int i = 0; i <= Background.totalStarsCount; i++) {
-      canvas.drawCircle(
-        Offset(xOffsets[i].toDouble(), yOffsets[i].toDouble()),
-        sizes[i],
-        _paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -1,12 +1,14 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_puzzle_hack/models/background.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/background/stars_painter.dart';
 
-class BackgroundProvider with ChangeNotifier {
+class StarsLayer {
   final BuildContext context;
 
-  BackgroundProvider(this.context);
+  StarsLayer(this.context);
+
+  static const int totalStarsCount = 300;
 
   final Random random = Random();
 
@@ -20,7 +22,7 @@ class BackgroundProvider with ChangeNotifier {
 
   List<int> _getRandomStarsOffsetsList(int max) {
     List<int> _offsets = [];
-    for (int i = 0; i <= Background.totalStarsCount; i++) {
+    for (int i = 0; i <= totalStarsCount; i++) {
       _offsets.add(random.nextInt(max));
     }
     return _offsets;
@@ -28,9 +30,18 @@ class BackgroundProvider with ChangeNotifier {
 
   List<double> get randomStarSizes {
     List<double> _sizes = [];
-    for (int i = 0; i <= Background.totalStarsCount; i++) {
+    for (int i = 0; i <= totalStarsCount; i++) {
       _sizes.add(random.nextDouble() + 0.7);
     }
     return _sizes;
+  }
+
+  CustomPainter getPainter({Color? color}) {
+    return StarsPainter(
+      xOffsets: randomStarXOffsets,
+      yOffsets: randomStarYOffsets,
+      sizes: randomStarSizes,
+      color: color,
+    );
   }
 }
