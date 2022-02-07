@@ -3,7 +3,7 @@ import 'package:flutter_puzzle_hack/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 
 class Background {
-  static const int totalStarsCount = 500;
+  static const int totalStarsCount = 300;
 
   static List<BackgroundLayerType> backgroundLayerTypes = [
     BackgroundLayerType.topRightPlanet,

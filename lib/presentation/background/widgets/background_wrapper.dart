@@ -55,22 +55,22 @@ class _BackgroundState extends State<BackgroundWrapper> {
                 ),
               ),
             ),
-            // ...List.generate(
-            //   _layers.length,
-            //   (i) {
-            //     Position initialLayerPosition = _layers[i].position;
-            //     return AnimatedPositioned(
-            //       duration: const Duration(milliseconds: 100),
-            //       left: initialLayerPosition.left,
-            //       top: initialLayerPosition.top,
-            //       child: Image.asset(
-            //         _layers[i].assetUrl,
-            //         width: _layers[i].size.width,
-            //         // height: _layers[i].size.height,
-            //       ),
-            //     );
-            //   },
-            // ),
+            ...List.generate(
+              _layers.length,
+              (i) {
+                Position initialLayerPosition = _layers[i].position;
+                return AnimatedPositioned(
+                  duration: const Duration(milliseconds: 100),
+                  left: initialLayerPosition.left,
+                  top: initialLayerPosition.top,
+                  child: Image.asset(
+                    _layers[i].assetUrl,
+                    width: _layers[i].size.width,
+                    // height: _layers[i].size.height,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
