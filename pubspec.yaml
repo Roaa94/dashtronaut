@@ -90,4 +90,4 @@ flutter:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "dev_assets/app-icon-with-dash-4.png"
+  image_path: "dev_assets/app-icon-with-dash-ltr.png"
