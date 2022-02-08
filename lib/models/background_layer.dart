@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum BackgroundLayerType {
   topRightPlanet,
@@ -59,14 +60,14 @@ class BackgroundLayer {
         _size = _size * 1;
         break;
       case ScreenType.medium:
-        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+        if (MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb) {
           _size = _size * 1;
         } else {
           _size = _size * 1.2;
         }
         break;
       case ScreenType.large:
-        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+        if (MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb) {
           _size = _size * 1;
         } else {
           _size = _size * 2;
