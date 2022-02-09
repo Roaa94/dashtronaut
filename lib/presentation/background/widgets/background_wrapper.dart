@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/background.dart';
 import 'package:flutter_puzzle_hack/models/background_layer.dart';
@@ -26,8 +24,8 @@ class _BackgroundState extends State<BackgroundWrapper> {
     List<BackgroundLayer> _backgroundLayers = Background.getLayers(context);
     StarsLayer _starsLayer = StarsLayer(context);
 
-    return Scaffold(
-      body: Container(
+    return Positioned.fill(
+      child: Container(
         height: screenSize.height,
         width: screenSize.width,
         decoration: const BoxDecoration(

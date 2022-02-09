@@ -60,6 +60,12 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
+  double get distanceOutsidePuzzle {
+    double screenHeight =
+        MediaQuery.of(context).orientation == Orientation.landscape ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
+    return ((screenHeight - puzzleContainerWidth) / 2) + puzzleContainerWidth;
+  }
+
   /// List of tiles of the puzzle
   late List<Tile> tiles;
 
@@ -191,5 +197,6 @@ class PuzzleProvider with ChangeNotifier {
     // Set initial values of dragged tiles positions and durations
     draggedTilePositions = {for (final tile in tiles) tile.value: tile.position};
     tileDragDurations = {for (final tile in tiles) tile.value: dragAnimationDuration};
+    notifyListeners();
   }
 }
