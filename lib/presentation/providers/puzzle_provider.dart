@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
@@ -61,8 +62,9 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   double get distanceOutsidePuzzle {
-    double screenHeight =
-        MediaQuery.of(context).orientation == Orientation.landscape ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
+        ? MediaQuery.of(context).size.width
+        : MediaQuery.of(context).size.height;
     return ((screenHeight - puzzleContainerWidth) / 2) + puzzleContainerWidth;
   }
 
