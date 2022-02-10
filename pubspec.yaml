@@ -82,7 +82,12 @@ flutter:
   fonts:
    - family: PaytoneOne
      fonts:
-       - asset: assets/fonts/PaytoneOne-Regular.ttf
+       - asset: assets/fonts/PaytoneOne/PaytoneOne-Regular.ttf
+   - family: Montserrat
+     fonts:
+       - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+       - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+         weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
