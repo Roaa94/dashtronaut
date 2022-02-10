@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class TileContainer extends StatelessWidget {
@@ -41,7 +42,7 @@ class TileContainer extends StatelessWidget {
           children: [
             Text(
               '${tile.value}',
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 40),
+              style: AppTextStyles.tile,
             ),
           ],
         ),

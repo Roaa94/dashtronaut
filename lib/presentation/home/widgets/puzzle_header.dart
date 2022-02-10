@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 
 class PuzzleHeader extends StatelessWidget {
   const PuzzleHeader({Key? key}) : super(key: key);
@@ -11,8 +12,12 @@ class PuzzleHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text('Dashtronaut', style: TextStyle(fontSize: 25)),
-          Text('Solve This Slide Puzzle..'),
+          Text('Dashtronaut', style: AppTextStyles.title),
+          SizedBox(height: 5),
+          Text(
+            'Solve This Slide Puzzle..',
+            style: AppTextStyles.body,
+          ),
         ],
       ),
     );

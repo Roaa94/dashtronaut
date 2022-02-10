@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {
@@ -25,8 +26,8 @@ class ResetPuzzleButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: const [
             Icon(Icons.refresh),
-            SizedBox(width: 5),
-            Text('Reset'),
+            SizedBox(width: 7),
+            Text('Reset', style: AppTextStyles.button),
           ],
         ),
       ),

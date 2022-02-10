@@ -1,20 +1,26 @@
 PODS:
   - Flutter (1.0.0)
+  - package_info_plus (0.4.5):
+    - Flutter
   - sensors_plus (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   sensors_plus:
     :path: ".symlinks/plugins/sensors_plus/ios"
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d

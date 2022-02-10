@@ -1,12 +1,20 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/models/background.dart';
 import 'package:flutter_puzzle_hack/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:provider/provider.dart';
 
 import 'presentation/home/pages/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runZonedGuarded<Future<void>>(() async {
+    await SettingsProvider().bootActions();
+    runApp(const MyApp());
+  }, (e, _) => throw e);
 }
 
 class MyApp extends StatefulWidget {
@@ -31,34 +39,27 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Puzzle Hack',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
-        fontFamily: 'PaytoneOne',
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarIconBrightness: Brightness.dark,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SettingsProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Dashtronaut - Slide Puzzle Game',
+        darkTheme: ThemeData(
+          fontFamily: AppTextStyles.secondaryFontFamily,
+          brightness: Brightness.dark,
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.light,
+              systemNavigationBarIconBrightness: Brightness.light,
+            ),
           ),
         ),
+        themeMode: ThemeMode.dark,
+        home: const HomePage(),
       ),
-      darkTheme: ThemeData(
-        fontFamily: 'PaytoneOne',
-        brightness: Brightness.dark,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.light,
-            statusBarIconBrightness: Brightness.light,
-            systemNavigationBarIconBrightness: Brightness.light,
-          ),
-        ),
-      ),
-      themeMode: ThemeMode.dark,
-      home: const HomePage(),
     );
   }
 }

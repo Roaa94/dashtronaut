@@ -30,7 +30,7 @@ class PuzzleView extends StatelessWidget {
       return [
         Positioned(
           width: puzzleProvider.distanceOutsidePuzzle - puzzleProvider.puzzleContainerWidth - MediaQuery.of(context).padding.left,
-          top: 20,
+          top: MediaQuery.of(context).padding.bottom,
           left: MediaQuery.of(context).padding.left,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
