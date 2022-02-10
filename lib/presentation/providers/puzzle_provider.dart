@@ -177,7 +177,6 @@ class PuzzleProvider with ChangeNotifier {
 
   /// Generates tiles with shuffle
   void generate() {
-    print('n: $n');
     double _tileContainerWidth = puzzleContainerWidth / n;
     List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);

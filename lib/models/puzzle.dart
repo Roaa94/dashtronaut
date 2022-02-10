@@ -62,7 +62,6 @@ class Puzzle {
         _tilesCorrectLocations.add(_location);
       }
     }
-    print('count: ${_tilesCorrectLocations.length}');
     return _tilesCorrectLocations;
   }
 
