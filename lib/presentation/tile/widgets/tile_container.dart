@@ -15,7 +15,6 @@ class TileContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('Built tile ${tile.value}');
     bool _isInCorrectLocation = tile.currentLocation == tile.correctLocation;
 
     return Selector<PuzzleProvider, int>(
@@ -27,25 +26,36 @@ class TileContainer extends StatelessWidget {
           child: child,
         );
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        decoration: BoxDecoration(
-          color: _isInCorrectLocation ? const Color(0xff50e6ff).withOpacity(0.2) : Colors.transparent,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.white.withOpacity(_isInCorrectLocation ? 1 : 0.6), width: 2),
-          boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
-        ),
-        margin: const EdgeInsets.all(8),
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '${tile.value}',
-              style: AppTextStyles.tile,
+      child: Selector<PuzzleProvider, int>(
+        selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
+        builder: (c, puzzleSize, child) {
+          // print('Built tile ${tile.value}');
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              color: _isInCorrectLocation ? const Color(0xff50e6ff).withOpacity(0.2) : Colors.transparent,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.white.withOpacity(_isInCorrectLocation ? 1 : 0.6), width: 2),
+              boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
             ),
-          ],
-        ),
+            margin: EdgeInsets.all(puzzleSize > 3 ? 5 : 8),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${tile.value}',
+                  style: AppTextStyles.tile.copyWith(
+                      fontSize: puzzleSize > 4
+                          ? 25
+                          : puzzleSize > 3
+                              ? 30
+                              : null),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

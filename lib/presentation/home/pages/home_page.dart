@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/home/widgets/app_drawer.dart';
+import 'package:flutter_puzzle_hack/presentation/drawer/widgets/app_drawer.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/views/puzzle_view.dart';
@@ -24,11 +24,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const AppDrawer(),
-      body: ChangeNotifierProvider(
-        create: (_) => PuzzleProvider(context)..generate(),
-        child: const PuzzleView(),
+    return ChangeNotifierProvider(
+      create: (_) => PuzzleProvider(context)..generate(),
+      child: const Scaffold(
+        drawer: AppDrawer(),
+        body: PuzzleView(),
       ),
     );
   }

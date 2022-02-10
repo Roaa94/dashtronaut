@@ -26,7 +26,10 @@ class _PuzzleBoardState extends State<PuzzleBoard> {
       focusNode: keyboardListenerFocusNode,
       autofocus: true,
       onKey: (RawKeyEvent event) => puzzleProvider.handleKeyboardEvent(event),
-      child: _buildPuzzleBoard,
+      child: Selector<PuzzleProvider, int>(
+        selector: (context, puzzleProvider) => puzzleProvider.n,
+        builder: (c, int size, _) => _buildPuzzleBoard,
+      ),
     );
   }
 

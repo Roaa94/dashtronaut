@@ -34,7 +34,13 @@ class PuzzleProvider with ChangeNotifier {
   PuzzleProvider(this.context);
 
   /// One dimensional size of the puzzle => size = n x n
-  final int n = 3;
+  int n = Puzzle.supportedPuzzleSizes[0];
+
+  void resetPuzzleSize(int size) {
+    assert(Puzzle.supportedPuzzleSizes.contains(size));
+    n = size;
+    generate();
+  }
 
   /// Random value used in shuffling tiles
   final Random random = Random();
@@ -171,6 +177,7 @@ class PuzzleProvider with ChangeNotifier {
 
   /// Generates tiles with shuffle
   void generate() {
+    print('n: $n');
     double _tileContainerWidth = puzzleContainerWidth / n;
     List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);

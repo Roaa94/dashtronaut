@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AppTextStyles {
   static const String primaryFontFamily = 'PaytoneOne';
@@ -15,6 +16,16 @@ class AppTextStyles {
   static const TextStyle title = TextStyle(
     fontFamily: primaryFontFamily,
     fontSize: 25,
+  );
+
+  static const TextStyle h1 = TextStyle(
+    fontFamily: secondaryFontFamily,
+    fontSize: 20,
+  );
+
+  static const TextStyle h2 = TextStyle(
+    fontFamily: secondaryFontFamily,
+    fontSize: 18,
   );
 
   static const TextStyle body = TextStyle(

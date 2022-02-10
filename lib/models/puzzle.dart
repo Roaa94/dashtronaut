@@ -11,6 +11,8 @@ class Puzzle {
     required this.tiles,
   }) : assert(n < 10);
 
+  static List<int> supportedPuzzleSizes = [3, 4, 5];
+
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
 
@@ -60,6 +62,7 @@ class Puzzle {
         _tilesCorrectLocations.add(_location);
       }
     }
+    print('count: ${_tilesCorrectLocations.length}');
     return _tilesCorrectLocations;
   }
 
