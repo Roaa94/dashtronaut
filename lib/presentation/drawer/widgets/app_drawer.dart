@@ -17,7 +17,7 @@ class AppDrawer extends StatelessWidget {
     EdgeInsetsGeometry drawerStartPadding = MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
         ? EdgeInsets.only(left: MediaQuery.of(context).padding.left, top: 20, bottom: 20, right: 20)
         : const EdgeInsets.all(20);
-    print('rebuilt drawer');
+
     return SafeArea(
       left: false,
       child: ClipRect(
