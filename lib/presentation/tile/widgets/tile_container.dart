@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_rive_animation.dart';
 import 'package:provider/provider.dart';
 
 class TileContainer extends StatelessWidget {
@@ -15,7 +16,7 @@ class TileContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _isInCorrectLocation = tile.currentLocation == tile.correctLocation;
+    bool isAtCorrectLocation = tile.currentLocation == tile.correctLocation;
 
     return Selector<PuzzleProvider, int>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.activeTileValue,
@@ -28,29 +29,31 @@ class TileContainer extends StatelessWidget {
       },
       child: Selector<PuzzleProvider, int>(
         selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
-        builder: (c, puzzleSize, child) {
+        child: TileRiveAnimation(isAtCorrectLocation: isAtCorrectLocation),
+        builder: (c, puzzleSize, tileRiveAnimation) {
           // print('Built tile ${tile.value}');
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+          return Container(
             decoration: BoxDecoration(
-              color: _isInCorrectLocation ? const Color(0xff50e6ff).withOpacity(0.2) : Colors.transparent,
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.white.withOpacity(_isInCorrectLocation ? 1 : 0.6), width: 2),
-              boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
+              // boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), blurRadius: 10)],
             ),
             margin: EdgeInsets.all(puzzleSize > 3 ? 5 : 8),
             alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
               children: [
-                Text(
-                  '${tile.value}',
-                  style: AppTextStyles.tile.copyWith(
-                      fontSize: puzzleSize > 4
-                          ? 25
-                          : puzzleSize > 3
-                              ? 30
-                              : null),
+                tileRiveAnimation!,
+                Positioned.fill(
+                  child: Center(
+                    child: Text(
+                      '${tile.value}',
+                      style: AppTextStyles.tile.copyWith(
+                          fontSize: puzzleSize > 4
+                              ? 25
+                              : puzzleSize > 3
+                                  ? 30
+                                  : null),
+                    ),
+                  ),
                 ),
               ],
             ),
