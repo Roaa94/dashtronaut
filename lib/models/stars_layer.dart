@@ -16,9 +16,9 @@ class StarsLayer {
 
   double get starsMaxYOffset => MediaQuery.of(context).size.height;
 
-  List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(starsMaxXOffset.floor());
+  List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(starsMaxXOffset.ceil() <= 0 ? 1 : starsMaxXOffset.ceil());
 
-  List<int> get randomStarYOffsets => _getRandomStarsOffsetsList(starsMaxYOffset.floor());
+  List<int> get randomStarYOffsets => _getRandomStarsOffsetsList(starsMaxYOffset.ceil() <= 0 ? 1 : starsMaxYOffset.ceil());
 
   List<int> _getRandomStarsOffsetsList(int max) {
     List<int> _offsets = [];
