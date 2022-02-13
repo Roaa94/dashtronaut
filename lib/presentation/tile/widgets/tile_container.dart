@@ -54,11 +54,13 @@ class TileContainer extends StatelessWidget {
                     child: Text(
                       '${tile.value}',
                       style: AppTextStyles.tile.copyWith(
-                          fontSize: puzzleSize > 4
-                              ? 25
-                              : puzzleSize > 3
-                                  ? 30
-                                  : null),
+                          fontSize: puzzleSize > 5
+                              ? 20
+                              : puzzleSize > 4
+                                  ? 25
+                                  : puzzleSize > 3
+                                      ? 30
+                                      : null),
                     ),
                   ),
                 ),

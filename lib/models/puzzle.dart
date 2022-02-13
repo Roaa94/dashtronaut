@@ -11,7 +11,7 @@ class Puzzle {
     required this.tiles,
   }) : assert(n < 10);
 
-  static List<int> supportedPuzzleSizes = [3, 4, 5];
+  static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
 
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
