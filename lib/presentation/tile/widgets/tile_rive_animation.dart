@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:rive/rive.dart';
 
 class TileRiveAnimation extends StatefulWidget {
   final bool isAtCorrectLocation;
+  final bool isPuzzleSolved;
+  final Tile tile;
 
-  const TileRiveAnimation({this.isAtCorrectLocation = false, Key? key}) : super(key: key);
+  const TileRiveAnimation({
+    this.isAtCorrectLocation = false,
+    this.isPuzzleSolved = false,
+    required this.tile,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _TileRiveAnimationState createState() => _TileRiveAnimationState();
@@ -12,14 +20,14 @@ class TileRiveAnimation extends StatefulWidget {
 
 class _TileRiveAnimationState extends State<TileRiveAnimation> {
   SMIBool? _isAtCorrectPositionSM;
-  late RiveAnimationController tileRiveAnimationController;
+  SMIBool? _isPuzzleSolvedSM;
+  late RiveAnimationController correctPositionAnimationController;
+  late RiveAnimationController nonCorrectPositionAnimationController;
 
   @override
   void initState() {
-    tileRiveAnimationController = SimpleAnimation(
-      'correctPosition',
-      autoplay: false,
-    );
+    correctPositionAnimationController = OneShotAnimation('correctPosition', autoplay: false);
+    nonCorrectPositionAnimationController = OneShotAnimation('nonCorrectPosition', autoplay: false);
     super.initState();
   }
 
@@ -32,12 +40,13 @@ class _TileRiveAnimationState extends State<TileRiveAnimation> {
 
     artboard.addController(controller!);
     _isAtCorrectPositionSM = controller.findInput<bool>('isAtCorrectPosition') as SMIBool?;
+    _isPuzzleSolvedSM = controller.findInput<bool>('isPuzzleSolved') as SMIBool?;
   }
 
   @override
   void didUpdateWidget(covariant TileRiveAnimation oldWidget) {
-    print('Is at correct location: ${widget.isAtCorrectLocation}');
     _isAtCorrectPositionSM?.value = widget.isAtCorrectLocation;
+    _isPuzzleSolvedSM?.value = widget.isPuzzleSolved;
     super.didUpdateWidget(oldWidget);
   }
 
@@ -46,7 +55,8 @@ class _TileRiveAnimationState extends State<TileRiveAnimation> {
     return RiveAnimation.asset(
       'assets/rive/tile.riv',
       onInit: _onRiveInit,
-      controllers: [tileRiveAnimationController],
+      stateMachines: const ['tile'],
+      controllers: [correctPositionAnimationController, nonCorrectPositionAnimationController],
     );
   }
 }

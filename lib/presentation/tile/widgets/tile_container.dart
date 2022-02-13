@@ -29,13 +29,20 @@ class TileContainer extends StatelessWidget {
       },
       child: Selector<PuzzleProvider, int>(
         selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
-        child: TileRiveAnimation(isAtCorrectLocation: isAtCorrectLocation),
+        child: Selector<PuzzleProvider, bool>(
+          selector: (c, puzzleProvider) => puzzleProvider.puzzle.isSolved,
+          builder: (c, bool isPuzzleSolved, _) => TileRiveAnimation(
+            isAtCorrectLocation: isAtCorrectLocation,
+            isPuzzleSolved: isPuzzleSolved,
+            tile: tile,
+          ),
+        ),
         builder: (c, puzzleSize, tileRiveAnimation) {
           // print('Built tile ${tile.value}');
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              // boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), blurRadius: 10)],
+              boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), blurRadius: 10)],
             ),
             margin: EdgeInsets.all(puzzleSize > 3 ? 5 : 8),
             alignment: Alignment.center,
