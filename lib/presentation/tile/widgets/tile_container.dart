@@ -42,7 +42,7 @@ class TileContainer extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), blurRadius: 10)],
+              boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
             ),
             margin: EdgeInsets.all(puzzleSize > 3 ? 5 : 8),
             alignment: Alignment.center,
