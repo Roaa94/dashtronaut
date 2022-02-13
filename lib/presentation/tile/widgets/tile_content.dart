@@ -6,12 +6,14 @@ import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_rive_animation.dart';
 import 'package:provider/provider.dart';
 
-class TileContainer extends StatelessWidget {
+class TileContent extends StatelessWidget {
   final Tile tile;
+  final bool isPuzzleSolved;
 
-  const TileContainer({
+  const TileContent({
     Key? key,
     required this.tile,
+    required this.isPuzzleSolved,
   }) : super(key: key);
 
   @override
@@ -29,16 +31,8 @@ class TileContainer extends StatelessWidget {
       },
       child: Selector<PuzzleProvider, int>(
         selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
-        child: Selector<PuzzleProvider, bool>(
-          selector: (c, puzzleProvider) => puzzleProvider.puzzle.isSolved,
-          builder: (c, bool isPuzzleSolved, _) => TileRiveAnimation(
-            isAtCorrectLocation: isAtCorrectLocation,
-            isPuzzleSolved: isPuzzleSolved,
-            tile: tile,
-          ),
-        ),
-        builder: (c, puzzleSize, tileRiveAnimation) {
-          // print('Built tile ${tile.value}');
+        builder: (c, puzzleSize, _) {
+          print('Built tile ${tile.value}');
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
@@ -48,7 +42,11 @@ class TileContainer extends StatelessWidget {
             alignment: Alignment.center,
             child: Stack(
               children: [
-                tileRiveAnimation!,
+                TileRiveAnimation(
+                  isAtCorrectLocation: isAtCorrectLocation,
+                  isPuzzleSolved: isPuzzleSolved,
+                  tile: tile,
+                ),
                 Positioned.fill(
                   child: Center(
                     child: Text(

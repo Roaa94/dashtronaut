@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_container.dart';
+import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_animated_positioned.dart';
+import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_content.dart';
+import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_gesture_detector.dart';
 import 'package:provider/provider.dart';
 
 class TileWrapper extends StatefulWidget {
@@ -30,56 +32,25 @@ class _TileWrapperState extends State<TileWrapper> {
   Widget build(BuildContext context) {
     return Selector<PuzzleProvider, Tile>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.getTileFromValue(widget.tile.value),
-      builder: (c, Tile _tile, _) {
-        return Selector<PuzzleProvider, Position>(
+      builder: (c, Tile _tile, _) => Selector<PuzzleProvider, bool>(
+        selector: (c, puzzleProvider) => puzzleProvider.puzzle.isSolved,
+        builder: (c, bool isPuzzleSolved, _) => Selector<PuzzleProvider, Position>(
           selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.draggedTilePositions[_tile.value]!,
-          child: TileContainer(tile: _tile),
-          builder: (c, Position tilePosition, child) {
-            return Selector<PuzzleProvider, Duration>(
-              selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.tileDragDurations[_tile.value]!,
-              builder: (c, Duration animationDuration, child) {
-                return AnimatedPositioned(
-                  duration: animationDuration,
-                  curve: Curves.easeOut,
-                  width: _tile.width,
-                  height: _tile.width,
-                  left: tilePosition.left,
-                  top: tilePosition.top,
-                  child: child!,
-                );
-              },
-              child: IgnorePointer(
-                ignoring: _tile.tileIsWhiteSpace,
-                child: GestureDetector(
-                  onHorizontalDragEnd: (_) {
-                    if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile)) {
-                      puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
-                    }
-                  },
-                  onVerticalDragEnd: (_) {
-                    if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile)) {
-                      puzzleProvider.swapTilesAndUpdatePuzzle(_tile);
-                    }
-                  },
-                  onHorizontalDragUpdate: (DragUpdateDetails details) {
-                    Position _newPosition = Position(left: tilePosition.left! + details.delta.dx, top: tilePosition.top);
-                    if (puzzleProvider.puzzle.tileIsMovableOnXAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
-                      puzzleProvider.setDraggedTilePosition(_tile.value, _newPosition);
-                    }
-                  },
-                  onVerticalDragUpdate: (DragUpdateDetails details) {
-                    Position _newPosition = Position(left: tilePosition.left, top: tilePosition.top! + details.delta.dy);
-                    if (puzzleProvider.puzzle.tileIsMovableOnYAxis(_tile) && puzzleProvider.puzzle.tileCanMoveTo(_tile, _newPosition)) {
-                      puzzleProvider.setDraggedTilePosition(_tile.value, _newPosition);
-                    }
-                  },
-                  child: child!,
-                ),
+          child: TileContent(tile: _tile, isPuzzleSolved: isPuzzleSolved),
+          builder: (c, Position tilePosition, tileContent) {
+            return TileAnimatedPositioned(
+              tilePosition: tilePosition,
+              tile: _tile,
+              tileGestureDetector: TileGestureDetector(
+                tile: _tile,
+                child: tileContent!,
+                tilePosition: tilePosition,
+                isPuzzleSolved: isPuzzleSolved,
               ),
             );
           },
-        );
-      },
+        ),
+      ),
     );
   }
 }
