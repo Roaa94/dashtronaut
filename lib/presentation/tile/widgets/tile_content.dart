@@ -32,7 +32,7 @@ class TileContent extends StatelessWidget {
       child: Selector<PuzzleProvider, int>(
         selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
         builder: (c, puzzleSize, _) {
-          print('Built tile ${tile.value}');
+          // print('Built tile ${tile.value}');
           return Padding(
             padding: EdgeInsets.all(puzzleSize > 5
                 ? 2
