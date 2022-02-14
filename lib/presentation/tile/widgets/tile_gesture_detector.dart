@@ -25,13 +25,19 @@ class TileGestureDetector extends StatelessWidget {
     return IgnorePointer(
       ignoring: tile.tileIsWhiteSpace || isPuzzleSolved,
       child: GestureDetector(
-        onHorizontalDragEnd: (_) {
-          if (puzzleProvider.puzzle.tileIsMovableOnXAxis(tile)) {
+        onHorizontalDragEnd: (details) {
+          bool _canMoveRight = details.velocity.pixelsPerSecond.dx >= 0 && puzzleProvider.puzzle.tileIsLeftOfWhiteSpace(tile);
+          bool _canMoveLeft = details.velocity.pixelsPerSecond.dx <= 0 && puzzleProvider.puzzle.tileIsRightOfWhiteSpace(tile);
+          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovableOnXAxis(tile);
+          if (_tileIsMovable && (_canMoveLeft || _canMoveRight)) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
           }
         },
-        onVerticalDragEnd: (_) {
-          if (puzzleProvider.puzzle.tileIsMovableOnYAxis(tile)) {
+        onVerticalDragEnd: (details) {
+          bool _canMoveUp = details.velocity.pixelsPerSecond.dy <= 0 && puzzleProvider.puzzle.tileIsBottomOfWhiteSpace(tile);
+          bool _canMoveDown = details.velocity.pixelsPerSecond.dy >= 0 && puzzleProvider.puzzle.tileIsTopOfWhiteSpace(tile);
+          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovableOnYAxis(tile);
+          if (_tileIsMovable && (_canMoveUp || _canMoveDown)) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
           }
         },
