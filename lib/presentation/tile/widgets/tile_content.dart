@@ -33,13 +33,12 @@ class TileContent extends StatelessWidget {
         selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
         builder: (c, puzzleSize, _) {
           print('Built tile ${tile.value}');
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
-            ),
-            margin: EdgeInsets.all(puzzleSize > 5 ? 2 : puzzleSize > 3 ? 5 : 8),
-            alignment: Alignment.center,
+          return Padding(
+            padding: EdgeInsets.all(puzzleSize > 5
+                ? 2
+                : puzzleSize > 3
+                    ? 5
+                    : 8),
             child: Stack(
               children: [
                 TileRiveAnimation(
