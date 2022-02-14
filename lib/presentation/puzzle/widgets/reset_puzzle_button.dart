@@ -18,7 +18,7 @@ class ResetPuzzleButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
+          border: Border.all(color: Colors.white, width: 2),
           boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 10)],
         ),
         child: Row(
