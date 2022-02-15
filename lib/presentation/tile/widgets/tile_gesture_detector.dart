@@ -28,17 +28,21 @@ class TileGestureDetector extends StatelessWidget {
         onHorizontalDragEnd: (details) {
           bool _canMoveRight = details.velocity.pixelsPerSecond.dx >= 0 && puzzleProvider.puzzle.tileIsLeftOfWhiteSpace(tile);
           bool _canMoveLeft = details.velocity.pixelsPerSecond.dx <= 0 && puzzleProvider.puzzle.tileIsRightOfWhiteSpace(tile);
-          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovableOnXAxis(tile);
+          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveLeft || _canMoveRight)) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
+          } else {
+            puzzleProvider.setDraggedTilePosition(tile.value, tile.position);
           }
         },
         onVerticalDragEnd: (details) {
           bool _canMoveUp = details.velocity.pixelsPerSecond.dy <= 0 && puzzleProvider.puzzle.tileIsBottomOfWhiteSpace(tile);
           bool _canMoveDown = details.velocity.pixelsPerSecond.dy >= 0 && puzzleProvider.puzzle.tileIsTopOfWhiteSpace(tile);
-          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovableOnYAxis(tile);
+          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveUp || _canMoveDown)) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
+          } else {
+            puzzleProvider.setDraggedTilePosition(tile.value, tile.position);
           }
         },
         onHorizontalDragUpdate: (DragUpdateDetails details) {
