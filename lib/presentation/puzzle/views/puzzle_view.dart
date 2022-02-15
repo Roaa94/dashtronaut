@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/reset_puzzle_button.dart';
@@ -26,12 +29,18 @@ class PuzzleView extends StatelessWidget {
   }
 
   List<Widget> _buildUIElements(BuildContext context, PuzzleProvider puzzleProvider) {
-    if (MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb) {
+    if (MediaQuery.of(context).orientation == Orientation.landscape &&
+        !kIsWeb &&
+        MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.small]!) {
+      // Landscape orientation for phones only
       return [
         Positioned(
-          width: puzzleProvider.distanceOutsidePuzzle - puzzleProvider.puzzleContainerWidth - MediaQuery.of(context).padding.left,
-          top: MediaQuery.of(context).padding.bottom,
-          left: MediaQuery.of(context).padding.left,
+          width: puzzleProvider.distanceOutsidePuzzle -
+              puzzleProvider.puzzleContainerWidth -
+              MediaQuery.of(context).padding.left -
+              (!kIsWeb && Platform.isAndroid ? UI.space : 0),
+          top: !kIsWeb && Platform.isAndroid ? MediaQuery.of(context).padding.top + UI.space : MediaQuery.of(context).padding.bottom,
+          left: !kIsWeb && Platform.isAndroid ? UI.space : MediaQuery.of(context).padding.left,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
@@ -44,16 +53,21 @@ class PuzzleView extends StatelessWidget {
         ),
       ];
     } else {
+      // Portrait view for all devices and platforms
       return [
         Positioned(
-          top: MediaQuery.of(context).padding.top,
+          top: kIsWeb
+              ? UI.space
+              : !kIsWeb && Platform.isAndroid
+                  ? MediaQuery.of(context).padding.top + UI.space
+                  : MediaQuery.of(context).padding.top,
           left: UI.screenHPadding,
           child: const DrawerButton(),
         ),
         Positioned(
           bottom: puzzleProvider.distanceOutsidePuzzle,
-          width: puzzleProvider.distanceOutsidePuzzle - puzzleProvider.puzzleContainerWidth,
-          left: UI.screenHPadding,
+          width: puzzleProvider.puzzleContainerWidth,
+          left: (MediaQuery.of(context).size.width - puzzleProvider.puzzleContainerWidth) / 2,
           child: const PuzzleHeader(),
         ),
         Positioned(

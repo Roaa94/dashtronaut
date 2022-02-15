@@ -43,9 +43,20 @@ class AppTextStyles {
     fontSize: 12,
   );
 
+  static const TextStyle bodyXxs = TextStyle(
+    fontFamily: secondaryFontFamily,
+    fontSize: 10,
+  );
+
   static const TextStyle button = TextStyle(
     fontFamily: primaryFontFamily,
     fontSize: 16,
+    height: 1,
+  );
+
+  static const TextStyle buttonSm = TextStyle(
+    fontFamily: primaryFontFamily,
+    fontSize: 14,
     height: 1,
   );
 }

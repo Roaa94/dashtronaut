@@ -30,14 +30,14 @@ class PuzzleSizeItem extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(_isSelected ? 1 : 0.1),
-                  border: Border.all(color: Colors.white, width: 2),
+                  border: Border.all(color: Colors.white, width: 1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Center(
                   child: Text(
                     '$size x $size',
-                    style: AppTextStyles.button.copyWith(color: _isSelected ? AppColors.primary : Colors.white),
+                    style: AppTextStyles.buttonSm.copyWith(color: _isSelected ? AppColors.primary : Colors.white),
                   ),
                 ),
               ),
@@ -45,7 +45,7 @@ class PuzzleSizeItem extends StatelessWidget {
           },
         ),
         const SizedBox(height: 5),
-        Text('${(size * size) - 1} Tiles'),
+        Text('${(size * size) - 1} Tiles', style: AppTextStyles.bodyXxs),
       ],
     );
   }

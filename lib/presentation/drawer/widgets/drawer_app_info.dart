@@ -9,7 +9,7 @@ class DrawerAppInfo extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: 'Built with ',
-        style: AppTextStyles.bodyXs,
+        style: AppTextStyles.bodyXs.copyWith(color: Colors.white),
         children: <TextSpan>[
           TextSpan(
             text: 'Flutter 💙',

@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> {
               statusBarBrightness: Brightness.light,
               statusBarIconBrightness: Brightness.light,
               systemNavigationBarIconBrightness: Brightness.light,
+              systemNavigationBarColor: Colors.black,
             ),
           ),
         ),

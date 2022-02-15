@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_app_info.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/puzzle_size_settings.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
@@ -26,8 +28,8 @@ class AppDrawer extends StatelessWidget {
           child: Transform(
             transform: Matrix4.translationValues(-2, 0, 0),
             child: Container(
-              width: kIsWeb || MediaQuery.of(context).orientation == Orientation.landscape ? 500 : MediaQuery.of(context).size.width - 100,
-              margin: kIsWeb
+              width: kIsWeb || MediaQuery.of(context).orientation == Orientation.landscape ? 500 : MediaQuery.of(context).size.width * 0.8,
+              margin: kIsWeb || Platform.isAndroid
                   ? const EdgeInsets.symmetric(vertical: 20)
                   : EdgeInsets.only(top: MediaQuery.of(context).orientation == Orientation.landscape ? MediaQuery.of(context).padding.bottom : 0),
               decoration: BoxDecoration(
@@ -40,8 +42,8 @@ class AppDrawer extends StatelessWidget {
                 children: [
                   Padding(
                     padding: MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
-                        ? EdgeInsets.only(left: MediaQuery.of(context).padding.left, top: 20, bottom: 20, right: 20)
-                        : const EdgeInsets.all(20),
+                        ? EdgeInsets.only(left: Platform.isAndroid ? UI.space : MediaQuery.of(context).padding.left, top: UI.space, bottom: UI.space, right: UI.space)
+                        : const EdgeInsets.all(UI.space),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
