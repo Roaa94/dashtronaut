@@ -6,7 +6,6 @@ import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/reset_puzzle_button.dart';
@@ -29,9 +28,7 @@ class PuzzleView extends StatelessWidget {
   }
 
   List<Widget> _buildUIElements(BuildContext context, PuzzleProvider puzzleProvider) {
-    if (MediaQuery.of(context).orientation == Orientation.landscape &&
-        !kIsWeb &&
-        MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.small]!) {
+    if (puzzleProvider.landscapeMode) {
       // Landscape orientation for phones only
       return [
         Positioned(

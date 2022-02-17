@@ -67,10 +67,13 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
+  bool get landscapeMode =>
+      MediaQuery.of(context).orientation == Orientation.landscape &&
+      !kIsWeb &&
+      MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.small]!;
+
   double get distanceOutsidePuzzle {
-    double screenHeight = MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
-        ? MediaQuery.of(context).size.width
-        : MediaQuery.of(context).size.height;
+    double screenHeight = landscapeMode ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
     return ((screenHeight - puzzleContainerWidth) / 2) + puzzleContainerWidth;
   }
 
