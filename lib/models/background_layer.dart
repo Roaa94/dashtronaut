@@ -25,6 +25,11 @@ class BackgroundLayer {
 
   ScreenType get screenType => ScreenTypeHelper(context).type;
 
+  bool get landscapeMode =>
+      MediaQuery.of(context).orientation == Orientation.landscape &&
+          !kIsWeb &&
+          MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
+
   Size get size {
     late Size _size;
 
@@ -60,14 +65,14 @@ class BackgroundLayer {
         _size = _size * 1;
         break;
       case ScreenType.medium:
-        if (MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb) {
+        if (landscapeMode) {
           _size = _size * 1;
         } else {
           _size = _size * 1.2;
         }
         break;
       case ScreenType.large:
-        if (MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb) {
+        if (landscapeMode) {
           _size = _size * 1;
         } else {
           _size = _size * 2;

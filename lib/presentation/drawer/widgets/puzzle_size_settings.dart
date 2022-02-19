@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
@@ -12,10 +10,13 @@ class PuzzleSizeSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double drawerStartPadding = MediaQuery.of(context).padding.left == 0
+        ? UI.space
+        : MediaQuery.of(context).padding.left;
+
     return Container(
-      padding: MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
-          ? EdgeInsets.only(left: Platform.isAndroid ? UI.space : MediaQuery.of(context).padding.left, top: 0, bottom: UI.space, right: UI.space)
-          : const EdgeInsets.only(right: UI.space, left: UI.space, bottom: UI.space),
+      padding: EdgeInsets.only(
+          right: UI.space, left: drawerStartPadding, bottom: UI.space),
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.white, width: 2)),
       ),
@@ -37,7 +38,10 @@ class PuzzleSizeSettings extends StatelessWidget {
               (index) => Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(
-                      end: index < Puzzle.supportedPuzzleSizes.length - 1 ? UI.spaceXs / 2 : 0, start: index > 0 ? UI.spaceXs / 2 : 0),
+                      end: index < Puzzle.supportedPuzzleSizes.length - 1
+                          ? UI.spaceXs / 2
+                          : 0,
+                      start: index > 0 ? UI.spaceXs / 2 : 0),
                   child: PuzzleSizeItem(
                     size: Puzzle.supportedPuzzleSizes[index],
                   ),

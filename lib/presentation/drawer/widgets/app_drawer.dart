@@ -16,9 +16,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    EdgeInsetsGeometry drawerStartPadding = MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
-        ? EdgeInsets.only(left: MediaQuery.of(context).padding.left, top: 20, bottom: 20, right: 20)
-        : const EdgeInsets.all(20);
+    double drawerStartPadding = MediaQuery.of(context).padding.left == 0 ? UI.space : MediaQuery.of(context).padding.left;
 
     return SafeArea(
       left: false,
@@ -41,9 +39,7 @@ class AppDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: MediaQuery.of(context).orientation == Orientation.landscape && !kIsWeb
-                        ? EdgeInsets.only(left: Platform.isAndroid ? UI.space : MediaQuery.of(context).padding.left, top: UI.space, bottom: UI.space, right: UI.space)
-                        : const EdgeInsets.all(UI.space),
+                    padding: EdgeInsets.only(left: drawerStartPadding, right: UI.space, top: UI.space, bottom: UI.space),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -72,7 +68,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: drawerStartPadding,
+                    padding: EdgeInsets.only(left: drawerStartPadding, right: UI.space, top: UI.space, bottom: UI.space),
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       border: Border(top: BorderSide(color: Colors.white, width: 2)),

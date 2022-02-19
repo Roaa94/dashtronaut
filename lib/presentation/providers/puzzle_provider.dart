@@ -57,7 +57,7 @@ class PuzzleProvider with ChangeNotifier {
       case ScreenType.small:
         return MediaQuery.of(context).size.width - UI.screenHPadding * 2;
       case ScreenType.medium:
-        if (MediaQuery.of(context).orientation == Orientation.landscape) {
+        if (landscapeMode) {
           return MediaQuery.of(context).size.flipped.width - UI.screenHPadding * 2;
         } else {
           return 500;
@@ -70,7 +70,7 @@ class PuzzleProvider with ChangeNotifier {
   bool get landscapeMode =>
       MediaQuery.of(context).orientation == Orientation.landscape &&
       !kIsWeb &&
-      MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.small]!;
+      MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
 
   double get distanceOutsidePuzzle {
     double screenHeight = landscapeMode ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
