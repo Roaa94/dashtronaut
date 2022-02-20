@@ -57,6 +57,16 @@ class _MyAppState extends State<MyApp> {
               systemNavigationBarColor: Colors.black,
             ),
           ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: const BorderSide(color: Colors.white, width: 2),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+              primary: Colors.white.withOpacity(0.2),
+            ),
+          ),
         ),
         themeMode: ThemeMode.dark,
         home: const HomePage(),
