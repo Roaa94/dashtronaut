@@ -2,9 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
-
-import '../../styles/app_colors.dart';
 
 class AppAlertDialog extends StatelessWidget {
   final String title;

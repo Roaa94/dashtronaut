@@ -5,13 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 class Vector extends Equatable {
-  double x;
-  double y;
-  double z;
+  final double x;
+  final double y;
+  final double z;
 
-  Vector(this.x, this.y, this.z);
+  const Vector(this.x, this.y, this.z);
 
-  factory Vector.zero() => Vector(0, 0, 0);
+  factory Vector.zero() => const Vector(0, 0, 0);
 
   factory Vector.fromGyroscopeEvent(GyroscopeEvent event) => Vector(sin(event.x), sin(event.y), sin(event.z));
 
