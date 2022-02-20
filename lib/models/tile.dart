@@ -43,4 +43,9 @@ class Tile {
       tileIsWhiteSpace: tileIsWhiteSpace ?? this.tileIsWhiteSpace,
     );
   }
+
+  @override
+  String toString() {
+    return 'Tile($value)';
+  }
 }
