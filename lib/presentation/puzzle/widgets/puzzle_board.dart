@@ -12,22 +12,17 @@ class PuzzleBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<PuzzleProvider>(
-      builder: (c, PuzzleProvider puzzleProvider, _) => RawKeyboardListener(
-        focusNode: keyboardListenerFocusNode,
-        autofocus: true,
-        onKey: (RawKeyEvent event) => puzzleProvider.handleKeyboardEvent(event),
-        child: Center(
-          child: SizedBox(
-            width: Puzzle.containerWidth(context),
-            height: Puzzle.containerWidth(context),
-            child: Stack(
-              children: List.generate(
-                puzzleProvider.tilesWithoutWhitespace.length,
-                (index) => TileWrapper(
-                  tile: puzzleProvider.tilesWithoutWhitespace[index],
-                  isPuzzleSolved: puzzleProvider.puzzle.isSolved,
-                  puzzleSize: puzzleProvider.n,
-                ),
+      builder: (c, PuzzleProvider puzzleProvider, _) => Center(
+        child: SizedBox(
+          width: Puzzle.containerWidth(context),
+          height: Puzzle.containerWidth(context),
+          child: Stack(
+            children: List.generate(
+              puzzleProvider.tilesWithoutWhitespace.length,
+              (index) => TileWrapper(
+                tile: puzzleProvider.tilesWithoutWhitespace[index],
+                isPuzzleSolved: puzzleProvider.puzzle.isSolved,
+                puzzleSize: puzzleProvider.n,
               ),
             ),
           ),

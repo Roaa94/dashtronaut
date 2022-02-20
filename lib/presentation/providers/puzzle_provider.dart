@@ -2,32 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
-/// PuzzleProvider handles:
-/// Parameters
-/// 1. Puzzle size [n] of type [int] (final size = n x n)
-/// 2. Puzzle tiles [tiles] [List<tile>]
-/// 3. Puzzle container width [double]
-///    Calculated from context and used in the [generate()] function to give values to tile width based on it
-/// 4. Active tile value [int] value from 1 => n*n
-///
-/// Getters:
-/// 1. [puzzle] => based on puzzle size and tiles [Puzzle]
-/// 2. [activeTile] => from [activeTileValue]
-/// 3. [tilesWithoutWhitespace] => list of [tiles] excluding white space tile
-/// 4. [tilesAroundWhiteSpace] => list of [tiles] top of || bottom of || left of || right of white space tile
-///
-/// Methods:
-/// 1. [generate] generates solvable puzzle tiles and sets initial values of [activeTileValue]
-/// 2. [swapTilesAndUpdatePuzzle] called when tile movement is released by
-///    the user (Drag End) to notify tile rebuild with new locations
 class PuzzleProvider with ChangeNotifier {
   /// One dimensional size of the puzzle => size = n x n
   int n = Puzzle.supportedPuzzleSizes[0];
@@ -53,52 +32,11 @@ class PuzzleProvider with ChangeNotifier {
   /// list of [tiles] top of || bottom of || left of || right of white space tile
   List<Tile> get tilesAroundWhiteSpace => tiles.where((tile) => puzzle.tileIsMovable(tile)).toList();
 
-  /// Active tile value (for keyboard on web/desktop)
-  late int activeTileValue;
-
-  /// Active tile [Tile] from [activeTileValue]
-  Tile get activeTile => tiles.singleWhere((tile) => tile.value == activeTileValue);
-
   /// Getter for puzzle object
   Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
 
   /// Return a [Tile] from its value
   Tile getTileFromValue(int tileValue) => tiles.singleWhere((tile) => tile.value == tileValue);
-
-  /// Stores the tile values already visited by pressing keyboard tab key
-  /// for the purpose of not selecting them again until all selectable tiles (all tiles around the white space) are visited
-  /// Cleared once its length == [tilesAroundWhiteSpace]'s length
-  List<int> _visitedActiveTileValues = [];
-
-  /// Selects the next selectable tile with the keyboard tab key
-  void _setNextActiveTile() {
-    /// If all tiles around the white space were visited, clear the
-    /// [_visitedActiveTileValues] list to allow looping over them again
-    if (_visitedActiveTileValues.length >= tilesAroundWhiteSpace.length) {
-      // print('All tiles were visited, clearing...');
-      _visitedActiveTileValues.clear();
-    }
-    for (final tile in tilesAroundWhiteSpace) {
-      if (tile.value != activeTileValue && !_visitedActiveTileValues.contains(tile.value)) {
-        activeTileValue = tile.value;
-        _visitedActiveTileValues.add(activeTileValue);
-        notifyListeners();
-        break;
-      }
-    }
-  }
-
-  void handleKeyboardEvent(RawKeyEvent event) {
-    if (event.isKeyPressed(LogicalKeyboardKey.tab)) {
-      _setNextActiveTile();
-    }
-    if (event.isKeyPressed(LogicalKeyboardKey.arrowUp) ||
-        event.isKeyPressed(LogicalKeyboardKey.arrowDown) ||
-        event.isKeyPressed(LogicalKeyboardKey.arrowLeft) ||
-        event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
-      swapTilesAndUpdatePuzzle(activeTile);
-    }
-  }
 
   /// Action that switches the [Location]'s => [Position]'s of the tile
   /// dragged by the user & the whitespace tile
@@ -116,10 +54,6 @@ class PuzzleProvider with ChangeNotifier {
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
     // If the above switch in positions causes the `activeTile` to become not around
     // the white space tile (not movable) reset the value of the `activeTileValue` to the first movable tile's value
-    if (!puzzle.tileIsMovable(activeTile)) {
-      activeTileValue = tilesAroundWhiteSpace[0].value;
-      _visitedActiveTileValues = [activeTileValue];
-    }
     notifyListeners();
   }
 
@@ -143,11 +77,6 @@ class PuzzleProvider with ChangeNotifier {
         currentLocations: _tilesCurrentLocations,
       );
     }
-    // Set initial value of the active tile
-    activeTileValue = tilesAroundWhiteSpace[0].value;
-    // Add the active tile to the visited tiles list
-    _visitedActiveTileValues = [activeTileValue];
-    // Set initial values of dragged tiles positions and durations
     notifyListeners();
   }
 }
