@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +35,12 @@ class TileGestureDetector extends StatelessWidget {
           bool _canMoveDown = details.velocity.pixelsPerSecond.dy >= 0 && puzzleProvider.puzzle.tileIsTopOfWhiteSpace(tile);
           bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveUp || _canMoveDown)) {
+            puzzleProvider.swapTilesAndUpdatePuzzle(tile);
+          }
+        },
+        onTap: () {
+          bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
+          if (_tileIsMovable) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
           }
         },
