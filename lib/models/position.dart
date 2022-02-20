@@ -20,13 +20,13 @@ class Position extends Equatable {
         right = 0;
 
   @override
-  String toString() =>
-      '${top?.toStringAsFixed(2)}, ${right?.toStringAsFixed(2)}, ${bottom?.toStringAsFixed(2)}, ${left?.toStringAsFixed(2)}';
+  String toString() => '${top?.toStringAsFixed(2)}, ${right?.toStringAsFixed(2)}, ${bottom?.toStringAsFixed(2)}, ${left?.toStringAsFixed(2)}';
 
   bool isBetween(Position a, Position b) {
-    assert(left != null && a.left !=null && b.left !=null);
+    assert(left != null && a.left != null && b.left != null);
     assert(top != null && a.top != null && b.top != null);
-    return (left! >= a.left! && left! <= b.left! && top! >= a.top! && top! <= b.top!) || (left! >= b.left! && left! <= a.left! && top! >= b.top! && top! <= a.top!);
+    return (left! >= a.left! && left! <= b.left! && top! >= a.top! && top! <= b.top!) ||
+        (left! >= b.left! && left! <= a.left! && top! >= b.top! && top! <= a.top!);
   }
 
   @override

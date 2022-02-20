@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 enum BackgroundLayerType {
   topRightPlanet,
@@ -27,8 +27,8 @@ class BackgroundLayer {
 
   bool get landscapeMode =>
       MediaQuery.of(context).orientation == Orientation.landscape &&
-          !kIsWeb &&
-          MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
+      !kIsWeb &&
+      MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
 
   Size get size {
     late Size _size;

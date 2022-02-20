@@ -12,7 +12,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
   );
 
-
   static const TextStyle title = TextStyle(
     fontFamily: primaryFontFamily,
     fontSize: 25,
