@@ -34,7 +34,9 @@ class PuzzleSizeSettings extends StatelessWidget {
               (index) => Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(
-                      end: index < Puzzle.supportedPuzzleSizes.length - 1 ? UI.spaceXs / 2 : 0, start: index > 0 ? UI.spaceXs / 2 : 0),
+                    end: index < Puzzle.supportedPuzzleSizes.length - 1 ? UI.spaceXs / 2 : 0,
+                    start: index > 0 ? UI.spaceXs / 2 : 0,
+                  ),
                   child: PuzzleSizeItem(
                     size: Puzzle.supportedPuzzleSizes[index],
                   ),

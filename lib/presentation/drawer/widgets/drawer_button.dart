@@ -5,20 +5,15 @@ class DrawerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return ElevatedButton(
+      onPressed: () {
         Scaffold.of(context).openDrawer();
       },
-      child: Container(
-        child: const Icon(Icons.menu),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.white.withOpacity(1), width: 2),
-          boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.3), blurRadius: 10)],
-        ),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+        minimumSize: const Size(55, 50),
       ),
+      child: const Icon(Icons.menu),
     );
   }
 }

@@ -17,29 +17,27 @@ class PuzzleSizeItem extends StatelessWidget {
         Consumer<PuzzleProvider>(
           builder: (c, puzzleProvider, _) {
             bool _isSelected = puzzleProvider.n == size;
-            return GestureDetector(
-              onTap: _isSelected
-                  ? null
-                  : () {
-                      puzzleProvider.resetPuzzleSize(size);
-                      if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
-                        Navigator.of(context).pop();
-                      }
-                    },
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(_isSelected ? 1 : 0.1),
-                  border: Border.all(color: Colors.white, width: 1),
+            return ElevatedButton(
+              onPressed: () {
+                if (!_isSelected) {
+                  puzzleProvider.resetPuzzleSize(size);
+                  if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
+                    Navigator.of(context).pop();
+                  }
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(width: 1, color: Colors.white),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Center(
-                  child: Text(
-                    '$size x $size',
-                    style: AppTextStyles.buttonSm.copyWith(color: _isSelected ? AppColors.primary : Colors.white),
-                  ),
-                ),
+                minimumSize: const Size.fromHeight(50),
+                primary: _isSelected ? Colors.white : null,
+              ),
+              child: Text(
+                '$size x $size',
+                style: AppTextStyles.buttonSm.copyWith(color: _isSelected ? AppColors.primary : Colors.white),
               ),
             );
           },

@@ -63,6 +63,8 @@ class _MyAppState extends State<MyApp> {
                 borderRadius: BorderRadius.circular(15),
                 side: const BorderSide(color: Colors.white, width: 2),
               ),
+              fixedSize: const Size.fromHeight(50),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
               primary: Colors.white.withOpacity(0.2),
             ),
