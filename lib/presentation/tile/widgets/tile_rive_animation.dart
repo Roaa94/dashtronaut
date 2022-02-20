@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:rive/rive.dart';
 
 class TileRiveAnimation extends StatefulWidget {
   final bool isAtCorrectLocation;
   final bool isPuzzleSolved;
-  final Tile tile;
 
   const TileRiveAnimation({
     this.isAtCorrectLocation = false,
     this.isPuzzleSolved = false,
-    required this.tile,
     Key? key,
   }) : super(key: key);
 

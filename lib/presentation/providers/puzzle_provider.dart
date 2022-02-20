@@ -80,15 +80,6 @@ class PuzzleProvider with ChangeNotifier {
   /// List of tiles of the puzzle
   late List<Tile> tiles;
 
-  /// Map of {tileValue [int]: tilePosition [Position]} for dragged tiles
-  late Map<int, Position> draggedTilePositions;
-
-  /// Map of {tileValue [int]: tileDragDurations [Duration]} for dragging tiles
-  /// This is needed because there are 2 type of animation when dragging a tile
-  /// 1. When dragging is in progress (drag update) duration should be 0 to prevent delay between input movement
-  /// 2. When dragging is released (drag end) duration should be > 0 to show smooth snapping animation
-  late Map<int, Duration> tileDragDurations;
-
   /// list of [tiles] excluding white space tile
   List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
@@ -142,12 +133,6 @@ class PuzzleProvider with ChangeNotifier {
     }
   }
 
-  /// Change the dragging [Position] of a tile
-  void setDraggedTilePosition(int _tileValue, Position _tilePosition) {
-    draggedTilePositions[_tileValue] = _tilePosition;
-    notifyListeners();
-  }
-
   /// Action that switches the [Location]'s => [Position]'s of the tile
   /// dragged by the user & the whitespace tile
   /// This causes the [Tile.position] getter to get the correct position based on new [Location]'s
@@ -158,12 +143,8 @@ class PuzzleProvider with ChangeNotifier {
     Tile _movedTile = tiles[movedTileIndex];
     Tile _whiteSpaceTile = tiles[whiteSpaceTileIndex];
 
-    tileDragDurations[_movedTile.value] = snapAnimationDuration;
     tiles[movedTileIndex] = tiles[movedTileIndex].copyWith(currentLocation: _whiteSpaceTile.currentLocation);
-    draggedTilePositions[_movedTile.value] = tiles[movedTileIndex].position;
-
     tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
-    draggedTilePositions[_whiteSpaceTile.value] = tiles[whiteSpaceTileIndex].position;
 
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
     // If the above switch in positions causes the `activeTile` to become not around
@@ -172,9 +153,6 @@ class PuzzleProvider with ChangeNotifier {
       activeTileValue = tilesAroundWhiteSpace[0].value;
       _visitedActiveTileValues = [activeTileValue];
     }
-    Future.delayed(snapAnimationDuration, () {
-      tileDragDurations[_movedTile.value] = dragAnimationDuration;
-    });
     notifyListeners();
   }
 
@@ -206,8 +184,6 @@ class PuzzleProvider with ChangeNotifier {
     // Add the active tile to the visited tiles list
     _visitedActiveTileValues = [activeTileValue];
     // Set initial values of dragged tiles positions and durations
-    draggedTilePositions = {for (final tile in tiles) tile.value: tile.position};
-    tileDragDurations = {for (final tile in tiles) tile.value: dragAnimationDuration};
     notifyListeners();
   }
 }

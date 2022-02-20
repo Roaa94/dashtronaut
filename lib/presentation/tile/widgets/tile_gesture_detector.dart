@@ -8,12 +8,10 @@ class TileGestureDetector extends StatelessWidget {
   final Tile tile;
   final bool isPuzzleSolved;
   final Widget child;
-  final Position tilePosition;
 
   const TileGestureDetector({
     Key? key,
     required this.tile,
-    required this.tilePosition,
     required this.isPuzzleSolved,
     required this.child,
   }) : super(key: key);
@@ -31,8 +29,6 @@ class TileGestureDetector extends StatelessWidget {
           bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveLeft || _canMoveRight)) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
-          } else {
-            puzzleProvider.setDraggedTilePosition(tile.value, tile.position);
           }
         },
         onVerticalDragEnd: (details) {
@@ -41,20 +37,6 @@ class TileGestureDetector extends StatelessWidget {
           bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveUp || _canMoveDown)) {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
-          } else {
-            puzzleProvider.setDraggedTilePosition(tile.value, tile.position);
-          }
-        },
-        onHorizontalDragUpdate: (DragUpdateDetails details) {
-          Position _newPosition = Position(left: tilePosition.left! + details.delta.dx, top: tilePosition.top);
-          if (puzzleProvider.puzzle.tileIsMovableOnXAxis(tile) && puzzleProvider.puzzle.tileCanMoveTo(tile, _newPosition)) {
-            puzzleProvider.setDraggedTilePosition(tile.value, _newPosition);
-          }
-        },
-        onVerticalDragUpdate: (DragUpdateDetails details) {
-          Position _newPosition = Position(left: tilePosition.left, top: tilePosition.top! + details.delta.dy);
-          if (puzzleProvider.puzzle.tileIsMovableOnYAxis(tile) && puzzleProvider.puzzle.tileCanMoveTo(tile, _newPosition)) {
-            puzzleProvider.setDraggedTilePosition(tile.value, _newPosition);
           }
         },
         child: child,

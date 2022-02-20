@@ -4,18 +4,8 @@ import 'package:flutter_puzzle_hack/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/stars_layer.dart';
 
-class BackgroundWrapper extends StatefulWidget {
+class BackgroundWrapper extends StatelessWidget {
   const BackgroundWrapper({Key? key}) : super(key: key);
-
-  @override
-  State<BackgroundWrapper> createState() => _BackgroundState();
-}
-
-class _BackgroundState extends State<BackgroundWrapper> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +27,11 @@ class _BackgroundState extends State<BackgroundWrapper> {
         ),
         child: Stack(
           children: [
-            CustomPaint(
-              painter: _starsLayer.getPainter(color: Colors.white.withOpacity(0.2)),
-              foregroundPainter: _starsLayer.getPainter(),
+            Positioned.fill(
+              child: CustomPaint(
+                painter: _starsLayer.getPainter(color: Colors.white.withOpacity(0.2)),
+                foregroundPainter: _starsLayer.getPainter(),
+              ),
             ),
             ...List.generate(
               _backgroundLayers.length,

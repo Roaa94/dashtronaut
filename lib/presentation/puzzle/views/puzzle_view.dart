@@ -22,7 +22,7 @@ class PuzzleView extends StatelessWidget {
       children: [
         const BackgroundWrapper(),
         ..._buildUIElements(context, puzzleProvider),
-        const PuzzleBoard(),
+        PuzzleBoard(),
       ],
     );
   }

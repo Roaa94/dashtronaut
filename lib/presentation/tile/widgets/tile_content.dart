@@ -9,16 +9,18 @@ import 'package:provider/provider.dart';
 class TileContent extends StatelessWidget {
   final Tile tile;
   final bool isPuzzleSolved;
+  final int puzzleSize;
 
   const TileContent({
     Key? key,
     required this.tile,
     required this.isPuzzleSolved,
+    required this.puzzleSize,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool isAtCorrectLocation = tile.currentLocation == tile.correctLocation;
+    print('Built tile $tile');
 
     return Selector<PuzzleProvider, int>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.activeTileValue,
@@ -29,42 +31,35 @@ class TileContent extends StatelessWidget {
           child: child,
         );
       },
-      child: Selector<PuzzleProvider, int>(
-        selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.n,
-        builder: (c, puzzleSize, _) {
-          // print('Built tile ${tile.value}');
-          return Padding(
-            padding: EdgeInsets.all(puzzleSize > 5
-                ? 2
-                : puzzleSize > 3
-                    ? 5
-                    : 8),
-            child: Stack(
-              children: [
-                TileRiveAnimation(
-                  isAtCorrectLocation: isAtCorrectLocation,
-                  isPuzzleSolved: isPuzzleSolved,
-                  tile: tile,
-                ),
-                Positioned.fill(
-                  child: Center(
-                    child: Text(
-                      '${tile.value}',
-                      style: AppTextStyles.tile.copyWith(
-                          fontSize: puzzleSize > 5
-                              ? 20
-                              : puzzleSize > 4
-                                  ? 25
-                                  : puzzleSize > 3
-                                      ? 30
-                                      : null),
-                    ),
-                  ),
-                ),
-              ],
+      child: Padding(
+        padding: EdgeInsets.all(puzzleSize > 5
+            ? 2
+            : puzzleSize > 3
+                ? 5
+                : 8),
+        child: Stack(
+          children: [
+            TileRiveAnimation(
+              isAtCorrectLocation: tile.currentLocation == tile.correctLocation,
+              isPuzzleSolved: isPuzzleSolved,
             ),
-          );
-        },
+            Positioned.fill(
+              child: Center(
+                child: Text(
+                  '${tile.value}',
+                  style: AppTextStyles.tile.copyWith(
+                      fontSize: puzzleSize > 5
+                          ? 20
+                          : puzzleSize > 4
+                              ? 25
+                              : puzzleSize > 3
+                                  ? 30
+                                  : null),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

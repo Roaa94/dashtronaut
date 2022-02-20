@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_puzzle_hack/models/location.dart';
 
 class Position extends Equatable {
   final double? left;
@@ -31,6 +32,9 @@ class Position extends Equatable {
 
   @override
   List<Object?> get props => [left, top];
+
+  factory Position.fromLocation(Location location, double tileWidth) =>
+      Position(top: (location.y - 1) * tileWidth, left: (location.x - 1) * tileWidth);
 
   Position copyWith({double? left, double? top}) {
     return Position(
