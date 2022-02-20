@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
@@ -28,12 +29,12 @@ class PuzzleView extends StatelessWidget {
   }
 
   List<Widget> _buildUIElements(BuildContext context, PuzzleProvider puzzleProvider) {
-    if (puzzleProvider.landscapeMode) {
+    if (Puzzle.landscapeMode(context)) {
       // Landscape orientation for phones only
       return [
         Positioned(
-          width: puzzleProvider.distanceOutsidePuzzle -
-              puzzleProvider.puzzleContainerWidth -
+          width: Puzzle.distanceOutsidePuzzle(context) -
+              Puzzle.containerWidth(context) -
               MediaQuery.of(context).padding.left -
               (!kIsWeb && Platform.isAndroid ? UI.space : 0),
           top: !kIsWeb && Platform.isAndroid ? MediaQuery.of(context).padding.top + UI.space : MediaQuery.of(context).padding.bottom,
@@ -62,13 +63,13 @@ class PuzzleView extends StatelessWidget {
           child: const DrawerButton(),
         ),
         Positioned(
-          bottom: puzzleProvider.distanceOutsidePuzzle,
-          width: puzzleProvider.puzzleContainerWidth,
-          left: (MediaQuery.of(context).size.width - puzzleProvider.puzzleContainerWidth) / 2,
+          bottom: Puzzle.distanceOutsidePuzzle(context),
+          width: Puzzle.containerWidth(context),
+          left: (MediaQuery.of(context).size.width - Puzzle.containerWidth(context)) / 2,
           child: const PuzzleHeader(),
         ),
         Positioned(
-          top: puzzleProvider.distanceOutsidePuzzle,
+          top: Puzzle.distanceOutsidePuzzle(context),
           right: 0,
           left: 0,
           child: const Center(child: ResetPuzzleButton()),

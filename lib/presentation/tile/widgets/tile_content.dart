@@ -20,8 +20,6 @@ class TileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Built tile $tile');
-
     return Selector<PuzzleProvider, int>(
       selector: (c, PuzzleProvider puzzleProvider) => puzzleProvider.activeTileValue,
       builder: (c, int activeTileValue, child) {

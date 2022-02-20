@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => PuzzleProvider(context)..generate(),
+      create: (_) => PuzzleProvider()..generate(),
       child: const Scaffold(
         drawer: AppDrawer(),
         body: PuzzleView(),

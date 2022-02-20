@@ -29,10 +29,6 @@ import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart'
 /// 2. [swapTilesAndUpdatePuzzle] called when tile movement is released by
 ///    the user (Drag End) to notify tile rebuild with new locations
 class PuzzleProvider with ChangeNotifier {
-  final BuildContext context;
-
-  PuzzleProvider(this.context);
-
   /// One dimensional size of the puzzle => size = n x n
   int n = Puzzle.supportedPuzzleSizes[0];
 
@@ -47,35 +43,6 @@ class PuzzleProvider with ChangeNotifier {
 
   static const Duration dragAnimationDuration = Duration(milliseconds: 0);
   static const Duration snapAnimationDuration = Duration(milliseconds: 150);
-
-  ScreenType get screenType => ScreenTypeHelper(context).type;
-
-  /// Puzzle outer container width
-  double get puzzleContainerWidth {
-    switch (screenType) {
-      case ScreenType.xSmall:
-      case ScreenType.small:
-        return MediaQuery.of(context).size.width - UI.screenHPadding * 2;
-      case ScreenType.medium:
-        if (landscapeMode) {
-          return MediaQuery.of(context).size.flipped.width - UI.screenHPadding * 2;
-        } else {
-          return 500;
-        }
-      case ScreenType.large:
-        return 500;
-    }
-  }
-
-  bool get landscapeMode =>
-      MediaQuery.of(context).orientation == Orientation.landscape &&
-      !kIsWeb &&
-      MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
-
-  double get distanceOutsidePuzzle {
-    double screenHeight = landscapeMode ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
-    return ((screenHeight - puzzleContainerWidth) / 2) + puzzleContainerWidth;
-  }
 
   /// List of tiles of the puzzle
   late List<Tile> tiles;
@@ -158,13 +125,11 @@ class PuzzleProvider with ChangeNotifier {
 
   /// Generates tiles with shuffle
   void generate() {
-    double _tileContentWidth = puzzleContainerWidth / n;
     List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
 
     tiles = Puzzle.getTilesFromLocations(
       n: n,
-      tileWidth: _tileContentWidth,
       correctLocations: _tilesCorrectLocations,
       currentLocations: _tilesCurrentLocations,
     );
@@ -174,7 +139,6 @@ class PuzzleProvider with ChangeNotifier {
 
       tiles = Puzzle.getTilesFromLocations(
         n: n,
-        tileWidth: _tileContentWidth,
         correctLocations: _tilesCorrectLocations,
         currentLocations: _tilesCurrentLocations,
       );

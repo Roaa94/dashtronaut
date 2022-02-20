@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_content.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_gesture_detector.dart';
@@ -17,13 +19,17 @@ class TileWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(tile);
+    double tileWidth = Puzzle.containerWidth(context) / puzzleSize;
+    Position tilePosition = tile.getPosition(context, tileWidth);
+
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 150),
       curve: Curves.easeInOut,
-      width: tile.width,
-      height: tile.width,
-      left: tile.position.left,
-      top: tile.position.top,
+      width: tileWidth,
+      height: tileWidth,
+      left: tilePosition.left,
+      top: tilePosition.top,
       child: TileGestureDetector(
         tile: tile,
         isPuzzleSolved: isPuzzleSolved,

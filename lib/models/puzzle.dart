@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 class Puzzle {
   final int n;
@@ -49,9 +53,9 @@ class Puzzle {
     return tileIsMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
   }
 
-  bool tileCanMoveTo(Tile tile, Position newPosition) {
-    return newPosition.isBetween(tile.position, whiteSpaceTile.position);
-  }
+  // bool tileCanMoveTo(Tile tile, Position newPosition) {
+  //   return newPosition.isBetween(tile.position, whiteSpaceTile.position);
+  // }
 
   static List<Location> generateTileCorrectLocations(int _n) {
     List<Location> _tilesCorrectLocations = [];
@@ -68,7 +72,6 @@ class Puzzle {
   /// Returns a list of tiles from current & correct locations lists
   static List<Tile> getTilesFromLocations({
     required int n,
-    required double tileWidth,
     required List<Location> correctLocations,
     required List<Location> currentLocations,
   }) {
@@ -76,7 +79,6 @@ class Puzzle {
       n * n,
       (i) => Tile(
         value: i + 1,
-        width: tileWidth,
         correctLocation: correctLocations[i],
         currentLocation: currentLocations[i],
         tileIsWhiteSpace: i == n * n - 1,
@@ -154,5 +156,34 @@ class Puzzle {
       }
     }
     return numberOfCorrectTiles;
+  }
+
+  static double containerWidth(BuildContext context) {
+    ScreenType screenType = ScreenTypeHelper(context).type;
+
+    switch (screenType) {
+      case ScreenType.xSmall:
+      case ScreenType.small:
+        return MediaQuery.of(context).size.width - UI.screenHPadding * 2;
+      case ScreenType.medium:
+        if (landscapeMode(context)) {
+          return MediaQuery.of(context).size.flipped.width - UI.screenHPadding * 2;
+        } else {
+          return 500;
+        }
+      case ScreenType.large:
+        return 500;
+    }
+  }
+
+  static bool landscapeMode(BuildContext context) {
+    return MediaQuery.of(context).orientation == Orientation.landscape &&
+        !kIsWeb &&
+        MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
+  }
+
+  static double distanceOutsidePuzzle(BuildContext context) {
+    double screenHeight = landscapeMode(context) ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
+    return ((screenHeight - containerWidth(context)) / 2) + containerWidth(context);
   }
 }
