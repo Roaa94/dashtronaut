@@ -6,13 +6,13 @@ import 'package:provider/provider.dart';
 class TileGestureDetector extends StatelessWidget {
   final Tile tile;
   final bool isPuzzleSolved;
-  final Widget child;
+  final Widget tileContent;
 
   const TileGestureDetector({
     Key? key,
     required this.tile,
     required this.isPuzzleSolved,
-    required this.child,
+    required this.tileContent,
   }) : super(key: key);
 
   @override
@@ -44,7 +44,7 @@ class TileGestureDetector extends StatelessWidget {
             puzzleProvider.swapTilesAndUpdatePuzzle(tile);
           }
         },
-        child: child,
+        child: tileContent,
       ),
     );
   }
