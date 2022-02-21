@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
-import 'package:flutter_puzzle_hack/presentation/background/utils/stars_painter.dart';
 
 class Stars extends StatefulWidget {
   const Stars({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
     _animationController.repeat(reverse: true);
 
     _opacity = Tween<double>(
-      begin: 0.7,
+      begin: 0.8,
       end: 0.1,
     ).animate(
       CurvedAnimation(
@@ -45,13 +44,8 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
     StarsLayer _starsLayer = StarsLayer(context);
 
     return CustomPaint(
-      painter: StarsPainter(
-        xOffsets: _starsLayer.randomStarXOffsets,
-        yOffsets: _starsLayer.randomStarYOffsets,
-        sizes: _starsLayer.randomStarSizes,
-        fadeOutStarIndices: _starsLayer.fadeOutStarIndices,
-        fadeInStarIndices: _starsLayer.fadeInStarIndices,
-        opacityAnimation: _opacity,
+      painter: _starsLayer.getPainter(
+        opacity: _opacity,
       ),
     );
   }

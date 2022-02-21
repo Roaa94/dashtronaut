@@ -1,13 +1,27 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/background/utils/stars_painter.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 class StarsLayer {
   final BuildContext context;
 
   StarsLayer(this.context);
 
-  static const int totalStarsCount = 500;
+  int get totalStarsCount {
+    ScreenType screenType = ScreenTypeHelper(context).type;
+    switch (screenType) {
+      case ScreenType.xSmall:
+        return 300;
+      case ScreenType.small:
+        return 500;
+      case ScreenType.medium:
+        return 700;
+      case ScreenType.large:
+        return 1000;
+    }
+  }
 
   final Random random = Random();
 
@@ -53,5 +67,17 @@ class StarsLayer {
       }
     }
     return _indices;
+  }
+
+  CustomPainter getPainter({required Animation<double> opacity}) {
+    return StarsPainter(
+      xOffsets: randomStarXOffsets,
+      yOffsets: randomStarYOffsets,
+      sizes: randomStarSizes,
+      fadeOutStarIndices: fadeOutStarIndices,
+      fadeInStarIndices: fadeInStarIndices,
+      totalStarsCount: totalStarsCount,
+      opacityAnimation: opacity,
+    );
   }
 }
