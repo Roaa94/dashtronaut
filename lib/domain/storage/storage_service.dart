@@ -1,25 +1,23 @@
-class StorageKeys {
-  static const String localeCode = 'locale_code';
-}
+class StorageKey {
+  static const String tiles = 'tiles';
 
-class StorageBoxNames {
-  static const String appBox = 'flutter_festival_sa';
+  static const String puzzleSize = 'n';
 }
 
 abstract class StorageService {
   Future<void> init();
 
-  Future<void> remove(String key, {String boxName = StorageBoxNames.appBox});
+  Future<void> remove(String key);
 
-  dynamic get(String key, {String boxName = StorageBoxNames.appBox});
+  dynamic get(String key);
 
-  dynamic getAll({String boxName = StorageBoxNames.appBox});
+  dynamic getAll();
 
   Future<void> clear();
 
-  Future<void> clearBox({String boxName = StorageBoxNames.appBox});
+  Future<void> clearBox();
 
-  bool has(String key, {String boxName = StorageBoxNames.appBox});
+  bool has(String key);
 
-  Future<void> set(String? key, dynamic data, {String boxName = StorageBoxNames.appBox});
+  Future<void> set(String? key, dynamic data);
 }

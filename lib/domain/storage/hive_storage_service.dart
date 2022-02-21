@@ -5,7 +5,7 @@ class HiveStorageService implements StorageService {
   late Box _hiveAppBox;
 
   Future<void> _openBoxes() async {
-    _hiveAppBox = await Hive.openBox(StorageBoxNames.appBox);
+    _hiveAppBox = await Hive.openBox('dashtronaut');
   }
 
   @override
@@ -14,40 +14,29 @@ class HiveStorageService implements StorageService {
     await _openBoxes();
   }
 
-  Box _getTargetBox(String? boxName) {
-    switch (boxName) {
-      case StorageBoxNames.appBox:
-        return _hiveAppBox;
-      default:
-        return _hiveAppBox;
-    }
+  @override
+  Future<void> remove(String key) async {
+    _hiveAppBox.delete(key);
   }
 
   @override
-  Future<void> remove(String key,
-      {String boxName = StorageBoxNames.appBox}) async {
-    _getTargetBox(boxName).delete(key);
+  dynamic get(String key) {
+    return _hiveAppBox.get(key);
   }
 
   @override
-  dynamic get(String key, {String boxName = StorageBoxNames.appBox}) {
-    return _getTargetBox(boxName).get(key);
+  dynamic getAll() {
+    return _hiveAppBox.values.toList();
   }
 
   @override
-  dynamic getAll({String boxName = StorageBoxNames.appBox}) {
-    return _getTargetBox(boxName).values.toList();
+  bool has(String key) {
+    return _hiveAppBox.containsKey(key);
   }
 
   @override
-  bool has(String key, {String? boxName}) {
-    return _getTargetBox(boxName).containsKey(key);
-  }
-
-  @override
-  Future<void> set(String? key, dynamic data,
-      {String boxName = StorageBoxNames.appBox}) async {
-    _getTargetBox(boxName).put(key, data);
+  Future<void> set(String? key, dynamic data) async {
+    _hiveAppBox.put(key, data);
   }
 
   @override
@@ -56,7 +45,7 @@ class HiveStorageService implements StorageService {
   }
 
   @override
-  Future<void> clearBox({String boxName = StorageBoxNames.appBox}) async {
-    await _getTargetBox(boxName).clear();
+  Future<void> clearBox() async {
+    await _hiveAppBox.clear();
   }
 }

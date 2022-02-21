@@ -13,7 +13,7 @@ class ResetPuzzleButton extends StatelessWidget {
       builder: (context) {
         return AppAlertDialog(
           title: 'Are you sure you want to reset your puzzle?',
-          onConfirm: () => puzzleProvider.generate(),
+          onConfirm: () => puzzleProvider.generate(forceRefresh: true),
         );
       },
     );

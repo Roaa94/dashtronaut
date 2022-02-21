@@ -59,4 +59,18 @@ class Location extends Equatable implements Comparable<Location> {
 
   @override
   List<Object> get props => [x, y];
+
+  factory Location.fromJson(Map<String, dynamic> json) {
+    return Location(
+      x: json['x'],
+      y: json['y'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'x': x,
+      'y': y,
+    };
+  }
 }

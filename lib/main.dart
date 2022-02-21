@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/data/models/background.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/domain/service_locator.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'presentation/home/pages/home_page.dart';
 
 void main() {
+  setupServiceLocator();
+
   runZonedGuarded<Future<void>>(() async {
     await SettingsProvider().bootActions();
     runApp(const MyApp());

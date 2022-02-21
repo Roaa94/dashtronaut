@@ -38,4 +38,22 @@ class Tile {
   String toString() {
     return 'Tile(value: $value, correctLocation: $correctLocation, currentLocation: $currentLocation)';
   }
+
+  factory Tile.fromJson(Map<String, dynamic> json) {
+    return Tile(
+      value: json['value'],
+      tileIsWhiteSpace: json['tileIsWhiteSpace'],
+      correctLocation: Location.fromJson(json['correctLocation']),
+      currentLocation: Location.fromJson(json['currentLocation']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'value': value,
+      'tileIsWhiteSpace': tileIsWhiteSpace,
+      'correctLocation': correctLocation.toJson(),
+      'currentLocation': currentLocation.toJson(),
+    };
+  }
 }
