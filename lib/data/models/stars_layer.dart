@@ -1,14 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/background/utils/stars_painter.dart';
 
 class StarsLayer {
   final BuildContext context;
 
   StarsLayer(this.context);
 
-  static const int totalStarsCount = 300;
+  static const int totalStarsCount = 500;
 
   final Random random = Random();
 
@@ -36,12 +35,23 @@ class StarsLayer {
     return _sizes;
   }
 
-  CustomPainter getPainter({Color? color}) {
-    return StarsPainter(
-      xOffsets: randomStarXOffsets,
-      yOffsets: randomStarYOffsets,
-      sizes: randomStarSizes,
-      color: color,
-    );
+  List<int> get fadeOutStarIndices {
+    List<int> _indices = [];
+    for (int i = 0; i <= totalStarsCount; i++) {
+      if (i % 5 == 0) {
+        _indices.add(i);
+      }
+    }
+    return _indices;
+  }
+
+  List<int> get fadeInStarIndices {
+    List<int> _indices = [];
+    for (int i = 0; i <= totalStarsCount; i++) {
+      if (i % 3 == 0) {
+        _indices.add(i);
+      }
+    }
+    return _indices;
   }
 }

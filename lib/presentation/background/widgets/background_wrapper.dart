@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/background.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
-import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/animated_background_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/background/widgets/stars.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 
 class BackgroundWrapper extends StatelessWidget {
@@ -13,7 +13,6 @@ class BackgroundWrapper extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     List<BackgroundLayer> _backgroundLayers = Background.getLayers(context);
-    StarsLayer _starsLayer = StarsLayer(context);
 
     return Positioned.fill(
       child: Container(
@@ -29,12 +28,7 @@ class BackgroundWrapper extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Positioned.fill(
-              child: CustomPaint(
-                painter: _starsLayer.getPainter(color: Colors.white.withOpacity(0.2)),
-                foregroundPainter: _starsLayer.getPainter(),
-              ),
-            ),
+            const Positioned.fill(child: Stars()),
             ...List.generate(
               _backgroundLayers.length,
               (i) => AnimatedBackgroundLayer(layer: _backgroundLayers[i]),
