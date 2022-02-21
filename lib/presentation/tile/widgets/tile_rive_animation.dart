@@ -38,6 +38,8 @@ class _TileRiveAnimationState extends State<TileRiveAnimation> {
     artboard.addController(controller!);
     _isAtCorrectPositionSM = controller.findInput<bool>('isAtCorrectPosition') as SMIBool?;
     _isPuzzleSolvedSM = controller.findInput<bool>('isPuzzleSolved') as SMIBool?;
+    _isAtCorrectPositionSM?.value = widget.isAtCorrectLocation;
+    _isPuzzleSolvedSM?.value = widget.isPuzzleSolved;
   }
 
   @override
