@@ -18,20 +18,7 @@ class _TilePulseTransitionState extends State<TilePulseTransition> with SingleTi
   late final AnimationController _animationController;
   late final Animation<double> _scale;
 
-  @override
-  void initState() {
-    _animationController = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 800),
-    );
-    _scale = Tween<double>(begin: 1, end: 0.97).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant TilePulseTransition oldWidget) {
+  void _pulseTiles() {
     if (widget.tileIsMovable) {
       _animationController.repeat(reverse: true);
     } else {
@@ -39,6 +26,24 @@ class _TilePulseTransitionState extends State<TilePulseTransition> with SingleTi
         _animationController.stop();
       }
     }
+  }
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+    _scale = Tween<double>(begin: 1, end: 0.97).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+    _pulseTiles();
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant TilePulseTransition oldWidget) {
+    _pulseTiles();
     super.didUpdateWidget(oldWidget);
   }
 
