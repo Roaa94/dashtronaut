@@ -3,6 +3,7 @@ import 'package:flutter_puzzle_hack/data/models/background.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/animated_background_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 
 class BackgroundWrapper extends StatelessWidget {
   const BackgroundWrapper({Key? key}) : super(key: key);
@@ -19,10 +20,11 @@ class BackgroundWrapper extends StatelessWidget {
         height: screenSize.height,
         width: screenSize.width,
         decoration: const BoxDecoration(
-          color: Colors.black54,
-          image: DecorationImage(
-            image: AssetImage('assets/images/background/bg.png'),
-            fit: BoxFit.cover,
+          gradient: RadialGradient(
+            colors: [AppColors.primaryAccent, AppColors.primary],
+            stops: [0, 1],
+            radius: 1.1,
+            center: Alignment.centerLeft,
           ),
         ),
         child: Stack(
