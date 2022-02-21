@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/data/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_animated_positioned.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_content.dart';

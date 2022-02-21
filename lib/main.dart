@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_puzzle_hack/models/background.dart';
-import 'package:flutter_puzzle_hack/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/data/models/background.dart';
+import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
