@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/background.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
-import 'package:flutter_puzzle_hack/data/models/position.dart';
 import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/background/widgets/animated_background_layer.dart';
 
 class BackgroundWrapper extends StatelessWidget {
   const BackgroundWrapper({Key? key}) : super(key: key);
@@ -35,20 +35,7 @@ class BackgroundWrapper extends StatelessWidget {
             ),
             ...List.generate(
               _backgroundLayers.length,
-              (i) {
-                Position initialLayerPosition = _backgroundLayers[i].position;
-                return AnimatedPositioned(
-                  duration: const Duration(milliseconds: 100),
-                  left: initialLayerPosition.left,
-                  top: initialLayerPosition.top,
-                  right: initialLayerPosition.right,
-                  bottom: initialLayerPosition.bottom,
-                  child: Image.asset(
-                    _backgroundLayers[i].assetUrl,
-                    width: _backgroundLayers[i].size.width,
-                  ),
-                );
-              },
+              (i) => AnimatedBackgroundLayer(layer: _backgroundLayers[i]),
             ),
           ],
         ),

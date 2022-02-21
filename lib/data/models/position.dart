@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_puzzle_hack/data/models/location.dart';
 
@@ -36,10 +38,25 @@ class Position extends Equatable {
   factory Position.fromLocation(Location location, double tileWidth) =>
       Position(top: (location.y - 1) * tileWidth, left: (location.x - 1) * tileWidth);
 
-  Position copyWith({double? left, double? top}) {
+  Position copyWith({double? left, double? top, double? right, double? bottom}) {
     return Position(
       left: left ?? this.left,
       top: top ?? this.top,
+      right: right ?? this.right,
+      bottom: bottom ?? this.bottom,
     );
+  }
+
+  static Position lerp(Position? a, Position? b, double t) {
+    if (a == null || b == null) {
+      return const Position.zero();
+    } else {
+      return Position(
+        left: a.left == null && b.left == null ? null : lerpDouble((a.left ?? 0), (b.left ?? 0), t),
+        right: a.right == null && b.right == null ? null : lerpDouble((a.right ?? 0), (b.right ?? 0), t),
+        top: a.top == null && b.top == null ? null : lerpDouble((a.top ?? 0), (b.top ?? 0), t),
+        bottom: a.bottom == null && b.bottom == null ? null : lerpDouble((a.bottom ?? 0), (b.bottom ?? 0), t),
+      );
+    }
   }
 }

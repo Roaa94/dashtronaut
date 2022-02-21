@@ -82,6 +82,23 @@ class BackgroundLayer {
     return _size;
   }
 
+  Position get outOfViewPosition {
+    double _extraSpace = 10;
+
+    switch (type) {
+      case BackgroundLayerType.topRightPlanet:
+      case BackgroundLayerType.topBgPlanet:
+        return Position(right: -(size.width + _extraSpace), top: -(size.height + _extraSpace));
+      case BackgroundLayerType.topLeftPlanet:
+        return Position(left: -(size.width + _extraSpace), top: -(size.height + _extraSpace));
+      case BackgroundLayerType.bottomLeftPlanet:
+        return Position(left: -(size.width + _extraSpace), bottom: -(size.height + _extraSpace));
+      case BackgroundLayerType.bottomRightPlanet:
+      case BackgroundLayerType.bottomBgPlanet:
+        return Position(right: -(size.width + _extraSpace), bottom: -(size.height + _extraSpace));
+    }
+  }
+
   Position get position {
     late Position _position;
 
