@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/animation-utils/animations_manager.dart';
 
 class Stars extends StatefulWidget {
   const Stars({Key? key}) : super(key: key);
@@ -16,17 +17,14 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: AnimationsManager.stars.duration,
     );
     _animationController.repeat(reverse: true);
 
-    _opacity = Tween<double>(
-      begin: 0.8,
-      end: 0.1,
-    ).animate(
+    _opacity = AnimationsManager.stars.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Curves.easeInOut,
+        curve: AnimationsManager.stars.curve,
       ),
     );
 

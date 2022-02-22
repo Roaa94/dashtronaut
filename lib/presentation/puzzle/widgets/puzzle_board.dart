@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_scale_transition.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board_animation.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_animated_positioned.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_content.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_gesture_detector.dart';
@@ -16,7 +16,7 @@ class PuzzleBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PuzzleScaleTransition(
+    return PuzzleBoardAnimation(
       child: Consumer<PuzzleProvider>(
         builder: (c, PuzzleProvider puzzleProvider, _) => Center(
           child: SizedBox(

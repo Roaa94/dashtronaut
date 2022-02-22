@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/data/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/animation-utils/position_tween.dart';
+import 'package:flutter_puzzle_hack/presentation/animation-utils/animations_manager.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {
   final BackgroundLayer layer;
@@ -22,16 +22,16 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer> with 
   @override
   void initState() {
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: AnimationsManager.bgLayer(widget.layer).duration,
       vsync: this,
     )..forward();
 
-    _position = PositionTween(
-      begin: widget.layer.outOfViewPosition,
-      end: widget.layer.position,
-    ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeOutBack),
-    );
+    _position = AnimationsManager.bgLayer(widget.layer).tween.animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: AnimationsManager.bgLayer(widget.layer).curve,
+          ),
+        );
     super.initState();
   }
 

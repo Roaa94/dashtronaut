@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/animation-utils/animations_manager.dart';
 
-class PuzzleScaleTransition extends StatefulWidget {
+class PuzzleBoardAnimation extends StatefulWidget {
   final Widget child;
 
-  const PuzzleScaleTransition({
+  const PuzzleBoardAnimation({
     Key? key,
     required this.child,
   }) : super(key: key);
 
   @override
-  _PuzzleScaleTransitionState createState() => _PuzzleScaleTransitionState();
+  _PuzzleBoardAnimationState createState() => _PuzzleBoardAnimationState();
 }
 
-class _PuzzleScaleTransitionState extends State<PuzzleScaleTransition> with SingleTickerProviderStateMixin {
+class _PuzzleBoardAnimationState extends State<PuzzleBoardAnimation> with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scale;
 
@@ -20,16 +21,13 @@ class _PuzzleScaleTransitionState extends State<PuzzleScaleTransition> with Sing
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: AnimationsManager.puzzleBoard.duration,
     )..forward();
 
-    _scale = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(
+    _scale = AnimationsManager.puzzleBoard.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Curves.easeOutBack,
+        curve: AnimationsManager.puzzleBoard.curve,
       ),
     );
     super.initState();
