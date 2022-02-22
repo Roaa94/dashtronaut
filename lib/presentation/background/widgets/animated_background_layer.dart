@@ -54,10 +54,10 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer> with 
         width: widget.layer.size.width,
       ),
       builder: (c, image) => Positioned(
-        left: _position.value.left,
-        top: _position.value.top,
-        right: _position.value.right,
-        bottom: _position.value.bottom,
+        left: _position.isCompleted ? widget.layer.position.left : _position.value.left,
+        top: _position.isCompleted ? widget.layer.position.top : _position.value.top,
+        right: _position.isCompleted ? widget.layer.position.right : _position.value.right,
+        bottom: _position.isCompleted ? widget.layer.position.bottom : _position.value.bottom,
         child: image!,
       ),
     );
