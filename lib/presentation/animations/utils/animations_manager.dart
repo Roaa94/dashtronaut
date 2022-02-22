@@ -63,4 +63,12 @@ class AnimationsManager {
     tween: Tween<double>(begin: 1, end: 0.96),
     curve: Curves.easeInOut,
   );
+
+  static const Duration phraseBubbleTotalAnimationDuration = Duration(milliseconds: 1000);
+
+  static final AnimatedElement<double> phraseBubble = AnimatedElement<double>(
+    duration: const Duration(milliseconds: 500),
+    tween: Tween<double>(begin: 0, end: 1),
+    curve: Curves.easeOutBack,
+  );
 }

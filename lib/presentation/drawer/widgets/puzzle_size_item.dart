@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/data/models/phrase.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
@@ -13,6 +15,7 @@ class PuzzleSizeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
+    PhrasesProvider phrasesProvider = Provider.of<PhrasesProvider>(context, listen: false);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,6 +28,9 @@ class PuzzleSizeItem extends StatelessWidget {
                 if (!_isSelected) {
                   puzzleProvider.resetPuzzleSize(size);
                   stopWatchProvider.stop();
+                  if (size > 4) {
+                    phrasesProvider.setPhraseState(PhraseState.hardPuzzleSelected);
+                  }
                   if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
                     Navigator.of(context).pop();
                   }

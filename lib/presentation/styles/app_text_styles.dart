@@ -27,6 +27,12 @@ class AppTextStyles {
     fontSize: 18,
   );
 
+  static const TextStyle h3 = TextStyle(
+    fontFamily: secondaryFontFamily,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+  );
+
   static const TextStyle body = TextStyle(
     fontFamily: secondaryFontFamily,
     fontSize: 16,

@@ -8,6 +8,8 @@ import 'package:flutter_puzzle_hack/presentation/background/widgets/background_w
 import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
+import 'package:flutter_puzzle_hack/presentation/phrases/widgets/phrase_bubble.dart';
+import 'package:flutter_puzzle_hack/presentation/phrases/widgets/animated_phrase_bubble.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
@@ -49,6 +51,7 @@ class _PuzzleViewState extends State<PuzzleView> {
         ..._buildUIElements(context, puzzleProvider),
         PuzzleBoard(),
         const DashRiveAnimation(),
+        const AnimatedPhraseBubble(),
       ],
     );
   }
