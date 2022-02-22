@@ -116,7 +116,7 @@ class BackgroundLayer {
         _position = Position(left: -size.width * 0.42, bottom: 0);
         break;
       case BackgroundLayerType.bottomRightPlanet:
-        _position = Position(right: -size.width * 0.45, bottom: -size.height * 0.40);
+        _position = Position(right: -size.width * 0.45, bottom: -size.height * 0.45);
         break;
       case BackgroundLayerType.bottomBgPlanet:
         _position = Position(left: size.width * 0.6, bottom: size.height * 0.8);
