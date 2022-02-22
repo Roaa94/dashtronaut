@@ -34,6 +34,7 @@ class PuzzleProvider with ChangeNotifier {
   List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
   int movesCount = 0;
+  bool get hasStarted => movesCount > 0;
 
   int get correctTilesCount {
     int _count = 0;

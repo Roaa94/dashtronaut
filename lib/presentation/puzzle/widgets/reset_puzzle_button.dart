@@ -15,39 +15,45 @@ class ResetPuzzleButton extends StatelessWidget {
     PuzzleProvider puzzleProvider,
     StopWatchProvider stopWatchProvider,
   ) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AppAlertDialog(
-          title: 'Are you sure you want to reset your puzzle?',
-          onConfirm: () {
-            puzzleProvider.generate(forceRefresh: true);
-            stopWatchProvider.stop();
-          },
-        );
-      },
-    );
+    if (puzzleProvider.hasStarted) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AppAlertDialog(
+            title: 'Are you sure you want to reset your puzzle?',
+            onConfirm: () {
+              puzzleProvider.generate(forceRefresh: true);
+              stopWatchProvider.stop();
+            },
+          );
+        },
+      );
+    } else {
+      puzzleProvider.generate(forceRefresh: true);
+      stopWatchProvider.stop();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    PuzzleProvider puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
     StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
 
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: ElevatedButton(
-          onPressed: () => initResetPuzzle(context, puzzleProvider, stopWatchProvider),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Icon(Icons.refresh),
-              SizedBox(width: 7),
-              Text('Reset', style: AppTextStyles.button),
-            ],
+      child: Consumer<PuzzleProvider>(
+        builder: (c, puzzleProvider, _) => Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: ElevatedButton(
+            onPressed: () => initResetPuzzle(context, puzzleProvider, stopWatchProvider),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.refresh),
+                SizedBox(width: 7),
+                Text('Reset', style: AppTextStyles.button),
+              ],
+            ),
           ),
         ),
       ),
