@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 
-class PuzzleBoardAnimation extends StatefulWidget {
+class ScaleUpTransition extends StatefulWidget {
   final Widget child;
 
-  const PuzzleBoardAnimation({
+  const ScaleUpTransition({
     Key? key,
     required this.child,
   }) : super(key: key);
 
   @override
-  _PuzzleBoardAnimationState createState() => _PuzzleBoardAnimationState();
+  _ScaleUpTransitionState createState() => _ScaleUpTransitionState();
 }
 
-class _PuzzleBoardAnimationState extends State<PuzzleBoardAnimation> with SingleTickerProviderStateMixin {
+class _ScaleUpTransitionState extends State<ScaleUpTransition> with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scale;
 
@@ -21,13 +21,13 @@ class _PuzzleBoardAnimationState extends State<PuzzleBoardAnimation> with Single
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: AnimationsManager.puzzleBoard.duration,
+      duration: AnimationsManager.scaleUp.duration,
     )..forward();
 
-    _scale = AnimationsManager.puzzleBoard.tween.animate(
+    _scale = AnimationsManager.scaleUp.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: AnimationsManager.puzzleBoard.curve,
+        curve: AnimationsManager.scaleUp.curve,
       ),
     );
     super.initState();

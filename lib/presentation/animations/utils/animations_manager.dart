@@ -21,7 +21,7 @@ class AnimatedElement<T> {
 }
 
 class AnimationsManager {
-  static final AnimatedElement<double> puzzleBoard = AnimatedElement<double>(
+  static final AnimatedElement<double> scaleUp = AnimatedElement<double>(
     duration: const Duration(milliseconds: 700),
     tween: Tween<double>(begin: 0, end: 1),
     curve: Curves.easeOutBack,
