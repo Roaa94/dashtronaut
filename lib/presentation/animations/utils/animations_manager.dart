@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/data/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/animation-utils/position_tween.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/position_tween.dart';
 
 enum AnimatedElementType {
   puzzleBoard,
@@ -30,6 +30,12 @@ class AnimationsManager {
   static final AnimatedElement<double> stars = AnimatedElement<double>(
     duration: const Duration(milliseconds: 1000),
     tween: Tween<double>(begin: 0.8, end: 0.1),
+    curve: Curves.easeInOut,
+  );
+
+  static final AnimatedElement<double> fadeIn = AnimatedElement<double>(
+    duration: const Duration(milliseconds: 800),
+    tween: Tween<double>(begin: 0, end: 1),
     curve: Curves.easeInOut,
   );
 

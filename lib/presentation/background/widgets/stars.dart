@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
-import 'package:flutter_puzzle_hack/presentation/animation-utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 
 class Stars extends StatefulWidget {
   const Stars({Key? key}) : super(key: key);

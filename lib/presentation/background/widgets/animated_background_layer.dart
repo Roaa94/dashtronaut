@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/data/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/animation-utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {
   final BackgroundLayer layer;

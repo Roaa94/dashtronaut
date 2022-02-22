@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/animation-utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 
 class PuzzleBoardAnimation extends StatefulWidget {
   final Widget child;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/dialogs/widgets/app_alert_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
@@ -23,18 +24,20 @@ class ResetPuzzleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     PuzzleProvider puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: ElevatedButton(
-        onPressed: () => initResetPuzzle(context, puzzleProvider),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.refresh),
-            SizedBox(width: 7),
-            Text('Reset', style: AppTextStyles.button),
-          ],
+    return FadeInTransition(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: ElevatedButton(
+          onPressed: () => initResetPuzzle(context, puzzleProvider),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Icon(Icons.refresh),
+              SizedBox(width: 7),
+              Text('Reset', style: AppTextStyles.button),
+            ],
+          ),
         ),
       ),
     );
