@@ -12,11 +12,11 @@ class CorrectTilesCount extends StatelessWidget {
       builder: (c, puzzleProvider, _) => RichText(
         text: TextSpan(
           text: 'Correct Tiles: ',
-          style: AppTextStyles.body,
+          style: AppTextStyles.body.copyWith(color: Colors.white),
           children: <TextSpan>[
             TextSpan(
               text: '${puzzleProvider.correctTilesCount}/${puzzleProvider.puzzle.tiles.length}',
-              style: AppTextStyles.bodyBold,
+              style: AppTextStyles.bodyBold.copyWith(color: Colors.white),
             ),
           ],
         ),

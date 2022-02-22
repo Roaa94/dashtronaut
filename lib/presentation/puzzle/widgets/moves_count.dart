@@ -13,11 +13,11 @@ class MovesCount extends StatelessWidget {
       builder: (c, int movesCount, _) => RichText(
         text: TextSpan(
           text: 'Moves: ',
-          style: AppTextStyles.body,
+          style: AppTextStyles.body.copyWith(color: Colors.white),
           children: <TextSpan>[
             TextSpan(
               text: '$movesCount',
-              style: AppTextStyles.bodyBold,
+              style: AppTextStyles.bodyBold.copyWith(color: Colors.white),
             ),
           ],
         ),
