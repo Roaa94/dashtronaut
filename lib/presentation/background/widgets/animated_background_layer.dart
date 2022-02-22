@@ -24,7 +24,7 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer> with 
     _animationController = AnimationController(
       duration: AnimationsManager.bgLayer(widget.layer).duration,
       vsync: this,
-    )..forward();
+    );
 
     _position = AnimationsManager.bgLayer(widget.layer).tween.animate(
           CurvedAnimation(
@@ -32,6 +32,10 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer> with 
             curve: AnimationsManager.bgLayer(widget.layer).curve,
           ),
         );
+
+    Future.delayed(const Duration(milliseconds: 400), () {
+      _animationController.forward();
+    });
     super.initState();
   }
 

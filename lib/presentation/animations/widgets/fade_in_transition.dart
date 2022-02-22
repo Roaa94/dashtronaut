@@ -3,10 +3,12 @@ import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_man
 
 class FadeInTransition extends StatefulWidget {
   final Widget child;
+  final Duration? delay;
 
   const FadeInTransition({
     Key? key,
     required this.child,
+    this.delay,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class _FadeInTransitionState extends State<FadeInTransition> with SingleTickerPr
     _animationController = AnimationController(
       vsync: this,
       duration: AnimationsManager.fadeIn.duration,
-    )..forward();
+    );
 
     _opacity = AnimationsManager.fadeIn.tween.animate(
       CurvedAnimation(
@@ -30,6 +32,13 @@ class _FadeInTransitionState extends State<FadeInTransition> with SingleTickerPr
         curve: AnimationsManager.fadeIn.curve,
       ),
     );
+    if (widget.delay == null) {
+      _animationController.forward();
+    } else {
+      Future.delayed(widget.delay!, () {
+        _animationController.forward();
+      });
+    }
     super.initState();
   }
 

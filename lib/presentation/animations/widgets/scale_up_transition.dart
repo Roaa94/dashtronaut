@@ -3,10 +3,12 @@ import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_man
 
 class ScaleUpTransition extends StatefulWidget {
   final Widget child;
+  final Duration? delay;
 
   const ScaleUpTransition({
     Key? key,
     required this.child,
+    this.delay,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition> with SingleTicker
     _animationController = AnimationController(
       vsync: this,
       duration: AnimationsManager.scaleUp.duration,
-    )..forward();
+    );
 
     _scale = AnimationsManager.scaleUp.tween.animate(
       CurvedAnimation(
@@ -30,6 +32,14 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition> with SingleTicker
         curve: AnimationsManager.scaleUp.curve,
       ),
     );
+
+    if (widget.delay == null) {
+      _animationController.forward();
+    } else {
+      Future.delayed(widget.delay!, () {
+        _animationController.forward();
+      });
+    }
     super.initState();
   }
 

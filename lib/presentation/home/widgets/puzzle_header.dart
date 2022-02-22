@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 
@@ -8,6 +9,7 @@ class PuzzleHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeInTransition(
+      delay: AnimationsManager.bgLayerAnimationDuration,
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         child: Column(

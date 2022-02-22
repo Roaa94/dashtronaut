@@ -39,9 +39,11 @@ class AnimationsManager {
     curve: Curves.easeInOut,
   );
 
+  static const Duration bgLayerAnimationDuration = Duration(milliseconds: 600);
+
   static AnimatedElement<Position> bgLayer(BackgroundLayer layer) {
     return AnimatedElement<Position>(
-      duration: const Duration(milliseconds: 800),
+      duration: bgLayerAnimationDuration,
       tween: PositionTween(
         begin: layer.outOfViewPosition,
         end: layer.position,

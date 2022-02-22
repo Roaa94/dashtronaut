@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/dialogs/widgets/app_alert_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
@@ -25,6 +26,7 @@ class ResetPuzzleButton extends StatelessWidget {
     PuzzleProvider puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
 
     return FadeInTransition(
+      delay: AnimationsManager.bgLayerAnimationDuration,
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: ElevatedButton(
