@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_rive_animation.dart';
 
@@ -27,11 +28,14 @@ class _TileContentState extends State<TileContent> with SingleTickerProviderStat
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 200),
+      duration: AnimationsManager.tileHover.duration,
     );
 
-    _scale = Tween<double>(begin: 1, end: 0.94).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    _scale = AnimationsManager.tileHover.tween.animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: AnimationsManager.tileHover.curve,
+      ),
     );
     super.initState();
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/widgets/pulse_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/scale_up_transition.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_animated_positioned.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_content.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_gesture_detector.dart';
-import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_pulse_transition.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleBoard extends StatelessWidget {
@@ -34,9 +34,9 @@ class PuzzleBoard extends StatelessWidget {
                     tileGestureDetector: TileGestureDetector(
                       tile: puzzleProvider.tilesWithoutWhitespace[index],
                       isPuzzleSolved: puzzleProvider.puzzle.isSolved,
-                      tileContent: TilePulseTransition(
-                        tileIsMovable: puzzleProvider.puzzle.tileIsMovable(_tile),
-                        tileContent: TileContent(
+                      tileContent: PulseTransition(
+                        isActive: puzzleProvider.puzzle.tileIsMovable(_tile),
+                        child: TileContent(
                           tile: _tile,
                           isPuzzleSolved: puzzleProvider.puzzle.isSolved,
                           puzzleSize: puzzleProvider.n,

@@ -49,4 +49,16 @@ class AnimationsManager {
       curve: Curves.easeOutBack,
     );
   }
+
+  static final AnimatedElement<double> tileHover = AnimatedElement<double>(
+    duration: const Duration(milliseconds: 200),
+    tween: Tween<double>(begin: 1, end: 0.94),
+    curve: Curves.easeInOut,
+  );
+
+  static final AnimatedElement<double> pulse = AnimatedElement<double>(
+    duration: const Duration(milliseconds: 800),
+    tween: Tween<double>(begin: 1, end: 0.96),
+    curve: Curves.easeInOut,
+  );
 }
