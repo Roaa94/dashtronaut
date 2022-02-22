@@ -3,19 +3,27 @@ import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_man
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/dialogs/widgets/app_alert_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {
   const ResetPuzzleButton({Key? key}) : super(key: key);
 
-  void initResetPuzzle(BuildContext context, PuzzleProvider puzzleProvider) {
+  void initResetPuzzle(
+    BuildContext context,
+    PuzzleProvider puzzleProvider,
+    StopWatchProvider stopWatchProvider,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
         return AppAlertDialog(
           title: 'Are you sure you want to reset your puzzle?',
-          onConfirm: () => puzzleProvider.generate(forceRefresh: true),
+          onConfirm: () {
+            puzzleProvider.generate(forceRefresh: true);
+            stopWatchProvider.stop();
+          },
         );
       },
     );
@@ -24,13 +32,14 @@ class ResetPuzzleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PuzzleProvider puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
+    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
 
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: ElevatedButton(
-          onPressed: () => initResetPuzzle(context, puzzleProvider),
+          onPressed: () => initResetPuzzle(context, puzzleProvider, stopWatchProvider),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

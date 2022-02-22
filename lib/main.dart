@@ -6,6 +6,7 @@ import 'package:flutter_puzzle_hack/data/models/background.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/domain/service_locator.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +46,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
+        ChangeNotifierProvider(create: (_) => StopWatchProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

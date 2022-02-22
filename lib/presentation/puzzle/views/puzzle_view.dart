@@ -9,17 +9,40 @@ import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/reset_puzzle_button.dart';
 import 'package:provider/provider.dart';
 
-class PuzzleView extends StatelessWidget {
+class PuzzleView extends StatefulWidget {
   const PuzzleView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    PuzzleProvider puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
+  State<PuzzleView> createState() => _PuzzleViewState();
+}
 
+class _PuzzleViewState extends State<PuzzleView> {
+  late PuzzleProvider puzzleProvider;
+  late StopWatchProvider stopWatchProvider;
+
+  @override
+  void initState() {
+    puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
+    stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
+    if (puzzleProvider.movesCount > 1) {
+      stopWatchProvider.start();
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    stopWatchProvider.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         const BackgroundWrapper(),

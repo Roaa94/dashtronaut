@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_stop_watch.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +26,16 @@ class PuzzleHeader extends StatelessWidget {
               style: AppTextStyles.body,
             ),
             const SizedBox(height: 8),
-            Selector<PuzzleProvider, int>(
-              selector: (c, puzzleProvider) => puzzleProvider.movesCount,
-              builder: (c, int movesCount, _) => Text('Moves: $movesCount', style: AppTextStyles.body),
-            ),
+            Wrap(
+              spacing: 20,
+              children: [
+                const PuzzleStopWatch(),
+                Selector<PuzzleProvider, int>(
+                  selector: (c, puzzleProvider) => puzzleProvider.movesCount,
+                  builder: (c, int movesCount, _) => Text('Moves: $movesCount', style: AppTextStyles.body),
+                ),
+              ],
+            )
           ],
         ),
       ),

@@ -1,9 +1,7 @@
 class StorageKey {
-  static const String tiles = 'tiles';
-
   static const String puzzle = 'puzzle';
 
-  static const String puzzleSize = 'n';
+  static const String secondsElapsed = 'secondsElapsed';
 }
 
 abstract class StorageService {
