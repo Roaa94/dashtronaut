@@ -15,6 +15,8 @@ class Tile {
     this.tileIsWhiteSpace = false,
   });
 
+  bool get isAtCorrectLocation => correctLocation == currentLocation;
+
   Position getPosition(BuildContext context, double tileWidth) {
     return Position(top: (currentLocation.y - 1) * tileWidth, left: (currentLocation.x - 1) * tileWidth);
   }

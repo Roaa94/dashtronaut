@@ -9,6 +9,7 @@ class PuzzleStopWatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
+
     return Consumer<StopWatchProvider>(
       builder: (c, stopWatchProvider, _) {
         Duration _duration = Duration(seconds: stopWatchProvider.secondsElapsed);

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/correct_tiles_count.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/moves_count.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_stop_watch.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
-import 'package:provider/provider.dart';
 
 class PuzzleHeader extends StatelessWidget {
   const PuzzleHeader({Key? key}) : super(key: key);
@@ -27,15 +29,19 @@ class PuzzleHeader extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Wrap(
-              spacing: 20,
+              runSpacing: 5,
               children: [
                 ConstrainedBox(
-                  constraints: const BoxConstraints(minWidth: 70),
+                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - UI.space),
                   child: const PuzzleStopWatch(),
                 ),
-                Selector<PuzzleProvider, int>(
-                  selector: (c, puzzleProvider) => puzzleProvider.movesCount,
-                  builder: (c, int movesCount, _) => Text('Moves: $movesCount', style: AppTextStyles.body),
+                ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - UI.space),
+                  child: const MovesCount(),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - UI.space),
+                  child: const CorrectTilesCount(),
                 ),
               ],
             )

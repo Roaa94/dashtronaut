@@ -35,6 +35,16 @@ class PuzzleProvider with ChangeNotifier {
 
   int movesCount = 0;
 
+  int get correctTilesCount {
+    int _count = 0;
+    for (Tile tile in tiles) {
+      if (tile.isAtCorrectLocation && !tile.tileIsWhiteSpace) {
+        _count++;
+      }
+    }
+    return _count;
+  }
+
   /// Getter for puzzle object
   Puzzle get puzzle => Puzzle(
         n: n,
