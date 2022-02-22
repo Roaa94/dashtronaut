@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
+import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
@@ -24,6 +25,7 @@ class PuzzleView extends StatelessWidget {
         const BackgroundWrapper(),
         ..._buildUIElements(context, puzzleProvider),
         PuzzleBoard(),
+        const DashRiveAnimation(),
       ],
     );
   }
@@ -71,7 +73,7 @@ class PuzzleView extends StatelessWidget {
         Positioned(
           top: Puzzle.distanceOutsidePuzzle(context),
           right: 0,
-          left: UI.screenHPadding,
+          left: (MediaQuery.of(context).size.width - Puzzle.containerWidth(context)) / 2,
           child: const Align(
             alignment: Alignment.centerLeft,
             child: ResetPuzzleButton(),
