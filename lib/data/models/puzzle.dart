@@ -8,10 +8,14 @@ import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart'
 class Puzzle {
   final int n;
   final List<Tile> tiles;
+  final int movesCount;
+  final int secondsElapsed;
 
   Puzzle({
     required this.n,
     required this.tiles,
+    this.movesCount = 0,
+    this.secondsElapsed = 0,
   }) : assert(n < 10);
 
   static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
@@ -197,4 +201,20 @@ class Puzzle {
                 ? 30
                 : null;
   }
+
+  factory Puzzle.fromJson(Map<String, dynamic> json) {
+    return Puzzle(
+      tiles: List<Tile>.from(json['tiles'].map((x) => Tile.fromJson(x))),
+      movesCount: json['movesCount'],
+      n: json['n'],
+      secondsElapsed: json['secondsElapsed'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
+        'movesCount': movesCount,
+        'n': n,
+        'secondsElapsed': secondsElapsed,
+      };
 }

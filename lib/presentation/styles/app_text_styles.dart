@@ -32,6 +32,12 @@ class AppTextStyles {
     fontSize: 16,
   );
 
+  static const TextStyle bodyBold = TextStyle(
+    fontFamily: secondaryFontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
+
   static const TextStyle bodySm = TextStyle(
     fontFamily: secondaryFontFamily,
     fontSize: 14,

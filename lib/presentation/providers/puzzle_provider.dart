@@ -19,7 +19,8 @@ class PuzzleProvider with ChangeNotifier {
   void resetPuzzleSize(int size) {
     assert(Puzzle.supportedPuzzleSizes.contains(size));
     n = size;
-    _updatePuzzleSizeInStorage();
+    movesCount = 0;
+    _storageService.remove(StorageKey.puzzle);
     generate(forceRefresh: true);
   }
 
@@ -38,11 +39,14 @@ class PuzzleProvider with ChangeNotifier {
   /// list of [tiles] top of || bottom of || left of || right of white space tile
   List<Tile> get tilesAroundWhiteSpace => tiles.where((tile) => puzzle.tileIsMovable(tile)).toList();
 
-  /// Getter for puzzle object
-  Puzzle get puzzle => Puzzle(n: n, tiles: tiles);
+  int movesCount = 0;
 
-  /// Return a [Tile] from its value
-  Tile getTileFromValue(int tileValue) => tiles.singleWhere((tile) => tile.value == tileValue);
+  /// Getter for puzzle object
+  Puzzle get puzzle => Puzzle(
+        n: n,
+        tiles: tiles,
+        movesCount: movesCount,
+      );
 
   /// Action that switches the [Location]'s => [Position]'s of the tile
   /// dragged by the user & the whitespace tile
@@ -60,51 +64,57 @@ class PuzzleProvider with ChangeNotifier {
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
     // If the above switch in positions causes the `activeTile` to become not around
     // the white space tile (not movable) reset the value of the `activeTileValue` to the first movable tile's value
-    _updateTilesInStorage();
+    movesCount++;
+    _updatePuzzleInStorage();
     notifyListeners();
   }
 
-  void _updateTilesInStorage() {
-    _storageService.set(StorageKey.tiles, List<dynamic>.from(tiles.map((x) => x.toJson())));
+  Puzzle? _getPuzzleFromStorage() {
+    dynamic _puzzle = _storageService.get(StorageKey.puzzle);
+    return Puzzle.fromJson(json.decode(json.encode(_puzzle)));
   }
 
-  List<Tile> _getTilesFromStorage() {
-    List<dynamic> _tiles = _storageService.get(StorageKey.tiles);
-    return List<Tile>.from(_tiles.map((x) => Tile.fromJson(json.decode(json.encode(x)))));
-  }
-
-  void _updatePuzzleSizeInStorage() {
-    _storageService.set(StorageKey.puzzleSize, n);
+  void _updatePuzzleInStorage() {
+    _storageService.set(StorageKey.puzzle, puzzle.toJson());
   }
 
   /// Generates tiles with shuffle
   void generate({bool forceRefresh = false}) {
     // Set tiles & size from locale storage only of they exist and there is no forceRefresh flag (for reset)
-    if (_storageService.has(StorageKey.puzzleSize) && _storageService.has(StorageKey.tiles) && !forceRefresh) {
-      tiles = _getTilesFromStorage();
-      n = _storageService.get(StorageKey.puzzleSize);
-    } else {
-      List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
-      List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
+
+    if (_storageService.has(StorageKey.puzzle) && !forceRefresh) {
+      Puzzle? _puzzle = _getPuzzleFromStorage();
+      if (_puzzle != null) {
+        tiles = _puzzle.tiles;
+        n = _puzzle.n;
+        movesCount = _puzzle.movesCount;
+        return;
+      }
+    }
+    movesCount = 0;
+    _generateNew();
+    _updatePuzzleInStorage();
+    notifyListeners();
+  }
+
+  void _generateNew() {
+    List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
+    List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
+
+    tiles = Puzzle.getTilesFromLocations(
+      n: n,
+      correctLocations: _tilesCorrectLocations,
+      currentLocations: _tilesCurrentLocations,
+    );
+
+    while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
+      _tilesCurrentLocations.shuffle(random);
 
       tiles = Puzzle.getTilesFromLocations(
         n: n,
         correctLocations: _tilesCorrectLocations,
         currentLocations: _tilesCurrentLocations,
       );
-
-      while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
-        _tilesCurrentLocations.shuffle(random);
-
-        tiles = Puzzle.getTilesFromLocations(
-          n: n,
-          correctLocations: _tilesCorrectLocations,
-          currentLocations: _tilesCurrentLocations,
-        );
-      }
     }
-    _updatePuzzleSizeInStorage();
-    _updateTilesInStorage();
-    notifyListeners();
   }
 }
