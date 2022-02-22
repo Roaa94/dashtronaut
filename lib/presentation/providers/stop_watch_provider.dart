@@ -25,7 +25,7 @@ class StopWatchProvider with ChangeNotifier {
   }
 
   void stop() {
-    if (streamSubscription != null) {
+    if (streamSubscription != null && !streamSubscription!.isPaused) {
       streamSubscription!.pause();
       secondsElapsed = 0;
       notifyListeners();
