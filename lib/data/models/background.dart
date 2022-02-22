@@ -3,11 +3,10 @@ import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
 
 class Background {
   static List<BackgroundLayerType> backgroundLayerTypes = [
+    BackgroundLayerType.topBgPlanet,
     BackgroundLayerType.topRightPlanet,
     BackgroundLayerType.topLeftPlanet,
-    BackgroundLayerType.topBgPlanet,
     BackgroundLayerType.bottomLeftPlanet,
-    BackgroundLayerType.bottomBgPlanet,
     BackgroundLayerType.bottomRightPlanet,
   ];
 

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/data/models/location.dart';
-import 'package:flutter_puzzle_hack/data/models/position.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
@@ -185,5 +184,17 @@ class Puzzle {
   static double distanceOutsidePuzzle(BuildContext context) {
     double screenHeight = landscapeMode(context) ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
     return ((screenHeight - containerWidth(context)) / 2) + containerWidth(context);
+  }
+
+  static const double tilePadding = 4;
+
+  static double? tileTextSize(int puzzleSize) {
+    return puzzleSize > 5
+        ? 20
+        : puzzleSize > 4
+            ? 25
+            : puzzleSize > 3
+                ? 30
+                : null;
   }
 }

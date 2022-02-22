@@ -71,8 +71,11 @@ class PuzzleView extends StatelessWidget {
         Positioned(
           top: Puzzle.distanceOutsidePuzzle(context),
           right: 0,
-          left: 0,
-          child: const Center(child: ResetPuzzleButton()),
+          left: UI.screenHPadding,
+          child: const Align(
+            alignment: Alignment.centerLeft,
+            child: ResetPuzzleButton(),
+          ),
         ),
       ];
     }

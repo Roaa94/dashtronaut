@@ -62,7 +62,7 @@ class BackgroundLayer {
         _size = _size * 0.8;
         break;
       case ScreenType.small:
-        _size = _size * 1;
+        _size = _size * 0.9 ;
         break;
       case ScreenType.medium:
         if (landscapeMode) {
@@ -73,7 +73,7 @@ class BackgroundLayer {
         break;
       case ScreenType.large:
         if (landscapeMode) {
-          _size = _size * 1;
+          _size = _size * 0.9;
         } else {
           _size = _size * 2;
         }
@@ -92,9 +92,9 @@ class BackgroundLayer {
       case BackgroundLayerType.topLeftPlanet:
         return Position(left: -(size.width + _extraSpace), top: -(size.height + _extraSpace));
       case BackgroundLayerType.bottomLeftPlanet:
+      case BackgroundLayerType.bottomBgPlanet:
         return Position(left: -(size.width + _extraSpace), bottom: -(size.height + _extraSpace));
       case BackgroundLayerType.bottomRightPlanet:
-      case BackgroundLayerType.bottomBgPlanet:
         return Position(right: -(size.width + _extraSpace), bottom: -(size.height + _extraSpace));
     }
   }
@@ -116,10 +116,10 @@ class BackgroundLayer {
         _position = Position(left: -size.width * 0.42, bottom: 0);
         break;
       case BackgroundLayerType.bottomRightPlanet:
-        _position = Position(right: -size.width * 0.4, bottom: -size.height * 0.30);
+        _position = Position(right: -size.width * 0.45, bottom: -size.height * 0.40);
         break;
       case BackgroundLayerType.bottomBgPlanet:
-        _position = Position(right: size.width * 0.6, bottom: size.height * 0.8);
+        _position = Position(left: size.width * 0.6, bottom: size.height * 0.8);
         break;
       default:
         _position = const Position.zero();
