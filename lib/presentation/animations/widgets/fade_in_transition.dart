@@ -43,6 +43,12 @@ class _FadeInTransitionState extends State<FadeInTransition> with SingleTickerPr
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _opacity,
