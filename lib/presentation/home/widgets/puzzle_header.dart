@@ -29,7 +29,10 @@ class PuzzleHeader extends StatelessWidget {
             Wrap(
               spacing: 20,
               children: [
-                const PuzzleStopWatch(),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: 70),
+                  child: const PuzzleStopWatch(),
+                ),
                 Selector<PuzzleProvider, int>(
                   selector: (c, puzzleProvider) => puzzleProvider.movesCount,
                   builder: (c, int movesCount, _) => Text('Moves: $movesCount', style: AppTextStyles.body),
