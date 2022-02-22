@@ -27,17 +27,11 @@ class PuzzleProvider with ChangeNotifier {
   /// Random value used in shuffling tiles
   final Random random = Random();
 
-  static const Duration dragAnimationDuration = Duration(milliseconds: 0);
-  static const Duration snapAnimationDuration = Duration(milliseconds: 150);
-
   /// List of tiles of the puzzle
   late List<Tile> tiles;
 
   /// list of [tiles] excluding white space tile
   List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
-
-  /// list of [tiles] top of || bottom of || left of || right of white space tile
-  List<Tile> get tilesAroundWhiteSpace => tiles.where((tile) => puzzle.tileIsMovable(tile)).toList();
 
   int movesCount = 0;
 
