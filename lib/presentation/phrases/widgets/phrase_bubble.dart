@@ -16,6 +16,8 @@ class PhraseBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String randomPhrase = PhrasesProvider.getPhrase(state);
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -56,11 +58,10 @@ class PhraseBubble extends StatelessWidget {
             border: Border.all(width: 1, color: AppColors.primary),
           ),
           child: Text(
-            PhrasesProvider.getPhrase(state),
+            randomPhrase,
             style: AppTextStyles.h2.copyWith(
               color: AppColors.primary,
-              fontWeight: FontWeight.w700,
-              fontSize: PhrasesProvider.getPhrase(state).length > 20 ? 16 : 20,
+              fontSize: randomPhrase.length > 20 ? 16 : 20,
             ),
           ),
         ),
