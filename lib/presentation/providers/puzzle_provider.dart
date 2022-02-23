@@ -14,8 +14,8 @@ import 'package:flutter_puzzle_hack/domain/storage/storage_service.dart';
 class PuzzleProvider with ChangeNotifier {
   final StorageService _storageService = getIt<StorageService>();
 
-  /// One dimensional size of the puzzle => size = n x n
-  int n = Puzzle.supportedPuzzleSizes[0];
+  /// One dimensional size of the puzzle => size = n x n (Default = 4x4)
+  int n = Puzzle.supportedPuzzleSizes[1];
 
   void resetPuzzleSize(int size) {
     assert(Puzzle.supportedPuzzleSizes.contains(size));
