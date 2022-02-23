@@ -22,6 +22,12 @@ class AppTextStyles {
     fontSize: 20,
   );
 
+  static const TextStyle h1Bold = TextStyle(
+    fontFamily: secondaryFontFamily,
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+  );
+
   static const TextStyle h2 = TextStyle(
     fontFamily: secondaryFontFamily,
     fontSize: 18,

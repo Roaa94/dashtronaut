@@ -66,6 +66,8 @@ class AnimationsManager {
 
   static const Duration phraseBubbleAnimationDuration = Duration(milliseconds: 500);
 
+  static const Duration puzzleSolvedDialogDelay = Duration(milliseconds: 500);
+
   static Duration phraseBubbleTotalAnimationDuration = phraseBubbleHoldAnimationDuration + phraseBubbleAnimationDuration * 2;
 
   static const Duration phraseBubbleHoldAnimationDuration = Duration(milliseconds: 1000);

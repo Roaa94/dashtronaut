@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/phrase.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle-solved-dialog/widgets/puzzle_solved_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
@@ -9,17 +10,33 @@ import 'package:provider/provider.dart';
 
 class TileGestureDetector extends StatelessWidget {
   final Tile tile;
-  final bool isPuzzleSolved;
   final Widget tileContent;
 
   const TileGestureDetector({
     Key? key,
     required this.tile,
-    required this.isPuzzleSolved,
     required this.tileContent,
   }) : super(key: key);
 
+  Future<void> _showPuzzleSolvedDialog(
+    BuildContext context,
+    PuzzleProvider puzzleProvider,
+    int secondsElapsed,
+  ) async {
+    await showDialog(
+      context: context,
+      builder: (c) {
+        return PuzzleSolvedDialog(
+          puzzleSize: puzzleProvider.n,
+          movesCount: puzzleProvider.movesCount,
+          solvingDuration: Duration(seconds: secondsElapsed),
+        );
+      },
+    );
+  }
+
   void _swapTilesAndUpdatePuzzle(
+    BuildContext context,
     PuzzleProvider puzzleProvider,
     StopWatchProvider stopWatchProvider,
     PhrasesProvider phrasesProvider,
@@ -32,7 +49,17 @@ class TileGestureDetector extends StatelessWidget {
       phrasesProvider.setPhraseState(PhraseState.puzzleStarted);
     } else if (puzzleProvider.puzzle.isSolved) {
       phrasesProvider.setPhraseState(PhraseState.puzzleSolved);
-      stopWatchProvider.stop();
+
+      Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
+        _showPuzzleSolvedDialog(
+          context,
+          puzzleProvider,
+          stopWatchProvider.secondsElapsed,
+        ).then((_) {
+          stopWatchProvider.stop();
+          puzzleProvider.generate(forceRefresh: true);
+        });
+      });
     } else {
       if (phrasesProvider.phraseState != PhraseState.none) {
         if (phrasesProvider.phraseState == PhraseState.puzzleStarted || phrasesProvider.phraseState == PhraseState.dashTapped) {
@@ -53,14 +80,14 @@ class TileGestureDetector extends StatelessWidget {
     PhrasesProvider phrasesProvider = Provider.of<PhrasesProvider>(context, listen: false);
 
     return IgnorePointer(
-      ignoring: tile.tileIsWhiteSpace || isPuzzleSolved,
+      ignoring: tile.tileIsWhiteSpace || puzzleProvider.puzzle.isSolved,
       child: GestureDetector(
         onHorizontalDragEnd: (details) {
           bool _canMoveRight = details.velocity.pixelsPerSecond.dx >= 0 && puzzleProvider.puzzle.tileIsLeftOfWhiteSpace(tile);
           bool _canMoveLeft = details.velocity.pixelsPerSecond.dx <= 0 && puzzleProvider.puzzle.tileIsRightOfWhiteSpace(tile);
           bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveLeft || _canMoveRight)) {
-            _swapTilesAndUpdatePuzzle(puzzleProvider, stopWatchProvider, phrasesProvider);
+            _swapTilesAndUpdatePuzzle(context, puzzleProvider, stopWatchProvider, phrasesProvider);
           }
         },
         onVerticalDragEnd: (details) {
@@ -68,13 +95,13 @@ class TileGestureDetector extends StatelessWidget {
           bool _canMoveDown = details.velocity.pixelsPerSecond.dy >= 0 && puzzleProvider.puzzle.tileIsTopOfWhiteSpace(tile);
           bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable && (_canMoveUp || _canMoveDown)) {
-            _swapTilesAndUpdatePuzzle(puzzleProvider, stopWatchProvider, phrasesProvider);
+            _swapTilesAndUpdatePuzzle(context, puzzleProvider, stopWatchProvider, phrasesProvider);
           }
         },
         onTap: () {
           bool _tileIsMovable = puzzleProvider.puzzle.tileIsMovable(tile);
           if (_tileIsMovable) {
-            _swapTilesAndUpdatePuzzle(puzzleProvider, stopWatchProvider, phrasesProvider);
+            _swapTilesAndUpdatePuzzle(context, puzzleProvider, stopWatchProvider, phrasesProvider);
           }
         },
         child: tileContent,

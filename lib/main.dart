@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/data/models/background.dart';
 import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/domain/service_locator.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
@@ -35,6 +36,13 @@ class _MyAppState extends State<MyApp> {
     for (BackgroundLayerType layerType in Background.backgroundLayerTypes) {
       precacheImage(
         Image.asset('assets/images/background/${layerType.name}.png').image,
+        context,
+      );
+    }
+
+    for (int size in Puzzle.supportedPuzzleSizes) {
+      precacheImage(
+        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
         context,
       );
     }

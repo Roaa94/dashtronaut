@@ -35,9 +35,8 @@ class PuzzleBoard extends StatelessWidget {
                     puzzleSize: puzzleProvider.n,
                     tileGestureDetector: TileGestureDetector(
                       tile: puzzleProvider.tilesWithoutWhitespace[index],
-                      isPuzzleSolved: puzzleProvider.puzzle.isSolved,
                       tileContent: PulseTransition(
-                        isActive: puzzleProvider.puzzle.tileIsMovable(_tile),
+                        isActive: puzzleProvider.puzzle.tileIsMovable(_tile) && !puzzleProvider.puzzle.isSolved,
                         child: TileContent(
                           tile: _tile,
                           isPuzzleSolved: puzzleProvider.puzzle.isSolved,
