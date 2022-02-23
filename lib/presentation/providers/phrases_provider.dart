@@ -81,7 +81,6 @@ class PhrasesProvider with ChangeNotifier {
       } else {
         dashTapCount++;
       }
-      print(dashTapCount);
     }
     notifyListeners();
   }
