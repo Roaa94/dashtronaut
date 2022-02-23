@@ -47,15 +47,13 @@ class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble> with Single
             if (phrasesProvider.phraseState == PhraseState.none) {
               return Container();
             } else {
-              if (!_animationController.isAnimating) {
-                _animationController.forward();
-                Future.delayed(
-                  AnimationsManager.phraseBubble.duration + AnimationsManager.phraseBubbleHoldAnimationDuration,
-                  () {
-                    _animationController.reverse();
-                  },
-                );
-              }
+              _animationController.forward();
+              Future.delayed(
+                AnimationsManager.phraseBubble.duration + AnimationsManager.phraseBubbleHoldAnimationDuration,
+                () {
+                  _animationController.reverse();
+                },
+              );
               return PhraseBubble(state: phrasesProvider.phraseState);
             }
           },
