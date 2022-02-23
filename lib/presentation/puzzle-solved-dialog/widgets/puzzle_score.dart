@@ -39,20 +39,24 @@ class PuzzleScore extends StatelessWidget {
             const SizedBox(height: UI.spaceXs),
             const Text('You solved the puzzle! Share your score to challenge your friends'),
             const SizedBox(height: UI.spaceSm),
-            const Text('Score'),
-            const SizedBox(height: UI.spaceXs),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.watch_later_outlined),
-                const SizedBox(width: 5),
-                Text(
-                  DurationHelper.toFormattedTime(duration),
-                  style: AppTextStyles.h1Bold,
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(Icons.watch_later_outlined),
+                      const SizedBox(width: 5),
+                      Text(
+                        DurationHelper.toFormattedTime(duration),
+                        style: AppTextStyles.h1Bold,
+                      ),
+                    ],
+                  ),
                 ),
+                Expanded(child: Text('$movesCount Moves', style: AppTextStyles.h1Bold)),
               ],
             ),
-            const SizedBox(height: UI.spaceXs),
-            Text('$movesCount Moves', style: AppTextStyles.h1Bold),
             const SizedBox(height: UI.space),
           ],
         ),
