@@ -98,7 +98,7 @@ class PuzzleProvider with ChangeNotifier {
 
     if (_storageService.has(StorageKey.puzzle) && !forceRefresh) {
       Puzzle? _puzzle = _getPuzzleFromStorage();
-      if (_puzzle != null) {
+      if (_puzzle != null && !_puzzle.isSolved) {
         tiles = _puzzle.tiles;
         n = _puzzle.n;
         movesCount = _puzzle.movesCount;
