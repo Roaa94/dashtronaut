@@ -44,6 +44,7 @@ class AppAlertDialog extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(horizontal: UI.screenHPadding, vertical: UI.space),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
                   color: AppColors.primary.withOpacity(0.5),
                 ),
                 child: content ??

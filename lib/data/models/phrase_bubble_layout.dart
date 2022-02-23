@@ -27,8 +27,8 @@ class PhraseBubbleLayout {
         );
       case ScreenType.large:
         return Position(
-          right: _dash.size.width + (_dash.position.right ?? 0) - 60,
-          bottom: _dash.position.bottom,
+          right: _dash.size.width + (_dash.position.right ?? 0) - 70,
+          bottom: (_dash.size.height * 0.1) + (_dash.position.bottom ?? 0),
         );
     }
   }

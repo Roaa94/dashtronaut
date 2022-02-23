@@ -10,12 +10,14 @@ class DrawerButton extends StatelessWidget {
         Scaffold.of(context).openDrawer();
       },
       style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
-          minimumSize: const Size(55, 50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(width: 2, color: Colors.white),
-          )),
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+        minimumSize: const Size(50, 45),
+        fixedSize: const Size.fromHeight(45),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(width: 2, color: Colors.white),
+        ),
+      ),
       child: const Icon(Icons.menu),
     );
   }
