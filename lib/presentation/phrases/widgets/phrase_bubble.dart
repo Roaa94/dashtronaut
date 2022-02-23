@@ -4,6 +4,7 @@ import 'package:flutter_puzzle_hack/data/models/phrase.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:provider/provider.dart';
 
 class PhraseBubble extends StatelessWidget {
   final PhraseState state;
@@ -16,8 +17,6 @@ class PhraseBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String randomPhrase = PhrasesProvider.getPhrase(state);
-
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -57,12 +56,18 @@ class PhraseBubble extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             border: Border.all(width: 1, color: AppColors.primary),
           ),
-          child: Text(
-            randomPhrase,
-            style: AppTextStyles.h2.copyWith(
-              color: AppColors.primary,
-              fontSize: randomPhrase.length > 20 ? 16 : 20,
-            ),
+          child: Consumer<PhrasesProvider>(
+            builder: (c, phrasesProvider, _) {
+              String phrase = phrasesProvider.getPhrase(state);
+
+              return Text(
+                phrase,
+                style: AppTextStyles.h2.copyWith(
+                  color: AppColors.primary,
+                  fontSize: phrase.length > 20 ? 16 : 20,
+                ),
+              );
+            },
           ),
         ),
       ],

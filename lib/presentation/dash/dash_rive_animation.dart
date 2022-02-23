@@ -1,5 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/data/models/dash.dart';
+import 'package:flutter_puzzle_hack/data/models/phrase.dart';
+import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
 class DashRiveAnimation extends StatefulWidget {
@@ -10,14 +16,20 @@ class DashRiveAnimation extends StatefulWidget {
 }
 
 class _DashRiveAnimationState extends State<DashRiveAnimation> {
+  late final PhrasesProvider phrasesProvider;
+
+  final ValueNotifier<bool> _canTapDashNotifier = ValueNotifier<bool>(true);
+
   void _onRiveInit(Artboard artboard) {
-    final controller = StateMachineController.fromArtboard(
-      artboard,
-      'dashtronaut',
-      // onStateChange: onTryStateChange,
-    );
+    final controller = StateMachineController.fromArtboard(artboard, 'dashtronaut');
 
     artboard.addController(controller!);
+  }
+
+  @override
+  void initState() {
+    phrasesProvider = Provider.of<PhrasesProvider>(context, listen: false);
+    super.initState();
   }
 
   @override
@@ -27,13 +39,30 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
     return Positioned(
       right: _dash.position.right,
       bottom: _dash.position.bottom,
-      child: SizedBox(
-        width: _dash.size.width,
-        height: _dash.size.height,
-        child: RiveAnimation.asset(
-          'assets/rive/dashtronaut.riv',
-          onInit: _onRiveInit,
-          stateMachines: const ['dashtronaut'],
+      child: ValueListenableBuilder(
+        valueListenable: _canTapDashNotifier,
+        child: SizedBox(
+          width: _dash.size.width,
+          height: _dash.size.height,
+          child: RiveAnimation.asset(
+            'assets/rive/dashtronaut.riv',
+            onInit: _onRiveInit,
+            stateMachines: const ['dashtronaut'],
+          ),
+        ),
+        builder: (c, bool _canTapDash, child) => GestureDetector(
+          onTap: () {
+            if (_canTapDash) {
+              _canTapDashNotifier.value = false;
+              phrasesProvider.setPhraseState(PhraseState.dashTapped);
+              HapticFeedback.lightImpact();
+              Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
+                phrasesProvider.setPhraseState(PhraseState.none);
+                _canTapDashNotifier.value = true;
+              });
+            }
+          },
+          child: child,
         ),
       ),
     );

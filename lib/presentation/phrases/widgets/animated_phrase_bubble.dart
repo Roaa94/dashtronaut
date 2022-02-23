@@ -49,9 +49,12 @@ class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble> with Single
             } else {
               if (!_animationController.isAnimating) {
                 _animationController.forward();
-                Future.delayed(AnimationsManager.phraseBubble.duration + const Duration(milliseconds: 700), () {
-                  _animationController.reverse();
-                });
+                Future.delayed(
+                  AnimationsManager.phraseBubble.duration + AnimationsManager.phraseBubbleHoldAnimationDuration,
+                  () {
+                    _animationController.reverse();
+                  },
+                );
               }
               return PhraseBubble(state: phrasesProvider.phraseState);
             }

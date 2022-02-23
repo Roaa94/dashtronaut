@@ -3,6 +3,8 @@ enum PhraseState {
   puzzleStarted,
   puzzleSolved,
   hardPuzzleSelected,
+  puzzleTakingTooLong,
+  dashTapped,
 }
 
 class Phrase {

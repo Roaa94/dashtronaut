@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/data/models/phrase.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +10,7 @@ class PuzzleStopWatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PhrasesProvider phrasesProvider = Provider.of<PhrasesProvider>(context, listen: false);
     String twoDigits(int n) => n.toString().padLeft(2, '0');
 
     return Consumer<StopWatchProvider>(
