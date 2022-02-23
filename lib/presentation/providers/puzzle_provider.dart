@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/data/models/location.dart';
-import 'package:flutter_puzzle_hack/data/models/phrase.dart';
 import 'package:flutter_puzzle_hack/data/models/position.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
@@ -69,8 +69,15 @@ class PuzzleProvider with ChangeNotifier {
     tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
 
     print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
-    // If the above switch in positions causes the `activeTile` to become not around
-    // the white space tile (not movable) reset the value of the `activeTileValue` to the first movable tile's value
+
+    if (tiles[movedTileIndex].isAtCorrectLocation) {
+      if (puzzle.isSolved) {
+        HapticFeedback.vibrate();
+      } else {
+        HapticFeedback.mediumImpact();
+      }
+    }
+
     movesCount++;
     _updatePuzzleInStorage();
     notifyListeners();
