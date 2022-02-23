@@ -47,13 +47,13 @@ class PhraseBubble extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: UI.spaceMd, vertical: UI.space),
+          padding: const EdgeInsets.symmetric(horizontal: UI.spaceMd, vertical: UI.spaceSm),
           constraints: const BoxConstraints(
-            maxWidth: 220,
+            maxWidth: 180,
           ),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(18),
             border: Border.all(width: 1, color: AppColors.primary),
           ),
           child: Consumer<PhrasesProvider>(

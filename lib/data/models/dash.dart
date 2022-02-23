@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/data/models/position.dart';
+import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 class Dash {
@@ -8,35 +8,42 @@ class Dash {
 
   Dash(this.context);
 
-  ScreenType get screenType => ScreenTypeHelper(context).type;
+  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
+
+  ScreenType get screenType => screenTypeHelper.type;
 
   Size get size {
-    switch (screenType) {
-      case ScreenType.xSmall:
-        return const Size(170, 230);
-      case ScreenType.small:
-        return const Size(170, 230);
-      case ScreenType.medium:
-        if (!kIsWeb && MediaQuery.of(context).orientation != Orientation.landscape) {
-          return const Size(300, 400);
-        } else {
-          return const Size(200, 250);
-        }
-      case ScreenType.large:
-        return const Size(300, 400);
+    double puzzleWidth = Puzzle.containerWidth(context);
+
+    late double dashHeight;
+
+    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      switch (screenType) {
+        case ScreenType.xSmall:
+        case ScreenType.small:
+          dashHeight = MediaQuery.of(context).size.height * 0.5;
+          break;
+        case ScreenType.medium:
+          dashHeight = MediaQuery.of(context).size.height * 0.5;
+          break;
+        case ScreenType.large:
+          dashHeight = MediaQuery.of(context).size.height * 0.35;
+      }
+    } else {
+      dashHeight = ((MediaQuery.of(context).size.height - puzzleWidth) / 2) * 0.85;
     }
+    return Size(dashHeight, dashHeight);
   }
 
   Position get position {
     switch (screenType) {
       case ScreenType.xSmall:
-        return const Position(right: 0, bottom: 0);
       case ScreenType.small:
-        return const Position(right: 0, bottom: 0);
+        return const Position(right: -10, bottom: 20);
       case ScreenType.medium:
-        return const Position(right: 0, bottom: 0);
+        return const Position(right: 0, bottom: 20);
       case ScreenType.large:
-        return const Position(right: 0, bottom: 100);
+        return const Position(right: 0, bottom: 70);
     }
   }
 }
