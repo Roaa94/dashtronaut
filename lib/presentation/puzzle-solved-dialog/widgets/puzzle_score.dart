@@ -22,6 +22,8 @@ class PuzzleScore extends StatelessWidget {
     required this.puzzleSize,
   }) : super(key: key);
 
+  int get tilesCount => (puzzleSize * puzzleSize) - 1;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,15 +72,15 @@ class PuzzleScore extends StatelessWidget {
                   try {
                     File file = await FileHelper.getImageFileFromUrl(LinksHelper.getPuzzleSolvedImageUrl(puzzleSize));
                     if (kIsWeb) {
-                      await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration));
+                      await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration, tilesCount));
                     } else {
                       await Share.shareFiles(
                         [file.path],
-                        text: LinksHelper.getPuzzleSolvedText(movesCount, duration),
+                        text: LinksHelper.getPuzzleSolvedText(movesCount, duration, tilesCount),
                       );
                     }
                   } catch (e) {
-                    await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration));
+                    await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration, tilesCount));
                     rethrow;
                   }
                 },

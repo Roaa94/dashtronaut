@@ -21,15 +21,15 @@ class LinksHelper {
     }
   }
 
-  static String getPuzzleSolvedText(int movesCount, Duration duration) {
-    return 'I just solved the Dashtronaut slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
+  static String getPuzzleSolvedText(int movesCount, Duration duration, int tilesCount) {
+    return 'I just solved this $tilesCount-Tile Dashtronaut slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
   }
 
-  static String getPuzzleSolvedTextMobile(int movesCount, Duration duration) {
-    return '${getPuzzleSolvedText(movesCount, duration)} \n\n$officialWebsiteUrl';
+  static String getPuzzleSolvedTextMobile(int movesCount, Duration duration, int tilesCount) {
+    return '${getPuzzleSolvedText(movesCount, duration, tilesCount)} \n\n$officialWebsiteUrl';
   }
 
-  static String getTwitterShareLink(int movesCount, Duration duration) {
-    return '$twitterIntentUrl?text=${getPuzzleSolvedText(movesCount, duration)}&url=$officialWebsiteUrl';
+  static String getTwitterShareLink(int movesCount, Duration duration, int tilesCount) {
+    return '$twitterIntentUrl?text=${getPuzzleSolvedText(movesCount, duration, tilesCount)}&url=$officialWebsiteUrl';
   }
 }
