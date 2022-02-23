@@ -76,7 +76,7 @@ class PuzzleScore extends StatelessWidget {
                     } else {
                       await Share.shareFiles(
                         [file.path],
-                        text: LinksHelper.getPuzzleSolvedText(movesCount, duration, tilesCount),
+                        text: LinksHelper.getPuzzleSolvedTextMobile(movesCount, duration, tilesCount),
                       );
                     }
                   } catch (e) {
