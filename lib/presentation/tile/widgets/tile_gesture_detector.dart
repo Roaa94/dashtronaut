@@ -35,7 +35,7 @@ class TileGestureDetector extends StatelessWidget {
       stopWatchProvider.stop();
     } else {
       if (phrasesProvider.phraseState != PhraseState.none) {
-        if (phrasesProvider.phraseState == PhraseState.puzzleStarted) {
+        if (phrasesProvider.phraseState == PhraseState.puzzleStarted || phrasesProvider.phraseState == PhraseState.dashTapped) {
           Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
             phrasesProvider.setPhraseState(PhraseState.none);
           });
