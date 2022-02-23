@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:desktop_window/desktop_window.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/data/models/background.dart';
@@ -14,9 +17,8 @@ import 'package:provider/provider.dart';
 
 import 'presentation/home/pages/home_page.dart';
 
-void main() {
+void main() async {
   setupServiceLocator();
-
   runZonedGuarded<Future<void>>(() async {
     await SettingsProvider().bootActions();
     runApp(const MyApp());
@@ -45,6 +47,13 @@ class _MyAppState extends State<MyApp> {
         Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
         context,
       );
+    }
+    if (!kIsWeb && Platform.isMacOS) {
+      DesktopWindow.getWindowSize().then((size) {
+        DesktopWindow.setMinWindowSize(Size(size.height * 0.5, size.height));
+      }).onError((error, stackTrace) {
+        DesktopWindow.setMinWindowSize(const Size(600, 1000));
+      });
     }
     super.initState();
   }
