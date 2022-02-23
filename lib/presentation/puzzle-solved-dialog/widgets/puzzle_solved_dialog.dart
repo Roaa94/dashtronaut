@@ -16,6 +16,8 @@ class PuzzleSolvedDialog extends StatelessWidget {
     required this.movesCount,
   }) : super(key: key);
 
+  String get imageName => 'solved-${puzzleSize}x$puzzleSize.png';
+
   @override
   Widget build(BuildContext context) {
     ScreenTypeHelper _screenTypeHelper = ScreenTypeHelper(context);
@@ -28,21 +30,25 @@ class PuzzleSolvedDialog extends StatelessWidget {
 
   Widget get _puzzleSolvedImage => ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Image.asset(
-          'assets/images/puzzle-solved/solved-${puzzleSize}x$puzzleSize.png',
-        ),
+        child: Image.asset('assets/images/puzzle-solved/$imageName'),
       );
 
-  Widget get _portraitContent => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _puzzleSolvedImage,
-          const SizedBox(height: UI.spaceSm),
-          PuzzleScore(
-            duration: solvingDuration,
-            movesCount: movesCount,
-          ),
-        ],
+  Widget get _puzzleScoreWidget => PuzzleScore(
+        duration: solvingDuration,
+        movesCount: movesCount,
+        puzzleSize: puzzleSize,
+      );
+
+  Widget get _portraitContent => ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 500),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _puzzleSolvedImage,
+            const SizedBox(height: UI.spaceSm),
+            _puzzleScoreWidget,
+          ],
+        ),
       );
 
   Widget get _landscapeContent => Row(
@@ -50,13 +56,7 @@ class PuzzleSolvedDialog extends StatelessWidget {
         children: [
           Expanded(flex: 3, child: _puzzleSolvedImage),
           const SizedBox(width: UI.space),
-          Expanded(
-            flex: 4,
-            child: PuzzleScore(
-              duration: solvingDuration,
-              movesCount: movesCount,
-            ),
-          ),
+          Expanded(flex: 4, child: _puzzleScoreWidget),
         ],
       );
 }

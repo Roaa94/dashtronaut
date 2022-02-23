@@ -22,15 +22,15 @@ class ResetPuzzleButton extends StatelessWidget {
           return AppAlertDialog(
             title: 'Are you sure you want to reset your puzzle?',
             onConfirm: () {
-              puzzleProvider.generate(forceRefresh: true);
               stopWatchProvider.stop();
+              puzzleProvider.generate(forceRefresh: true);
             },
           );
         },
       );
     } else {
-      puzzleProvider.generate(forceRefresh: true);
       stopWatchProvider.stop();
+      puzzleProvider.generate(forceRefresh: true);
     }
   }
 

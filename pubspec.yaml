@@ -41,6 +41,11 @@ dependencies:
   hive: ^2.0.5
   hive_flutter: ^1.1.0
   get_it: ^7.2.0
+  share_plus: ^3.1.0
+  path_provider: ^2.0.9
+  http: ^0.13.4
+  url_launcher: ^6.0.20
+  font_awesome_flutter: ^9.2.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +74,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/puzzle-solved/
     - assets/rive/
     - assets/images/background/
   #   - images/a_dot_ham.jpeg

@@ -1,16 +1,25 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/helpers/duration_helper.dart';
+import 'package:flutter_puzzle_hack/helpers/file_helper.dart';
+import 'package:flutter_puzzle_hack/helpers/links_helper.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
-import 'package:flutter_puzzle_hack/presentation/ui-helpers/duration_helper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PuzzleScore extends StatelessWidget {
   final Duration duration;
   final int movesCount;
+  final int puzzleSize;
 
   const PuzzleScore({
     Key? key,
     required this.duration,
     required this.movesCount,
+    required this.puzzleSize,
   }) : super(key: key);
 
   @override
@@ -57,9 +66,24 @@ class PuzzleScore extends StatelessWidget {
             const SizedBox(width: UI.spaceSm),
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () async {
+                  try {
+                    File file = await FileHelper.getImageFileFromUrl(LinksHelper.getPuzzleSolvedImageUrl(puzzleSize));
+                    if (kIsWeb) {
+                      await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration));
+                    } else {
+                      await Share.shareFiles(
+                        [file.path],
+                        text: LinksHelper.getPuzzleSolvedText(movesCount, duration),
+                      );
+                    }
+                  } catch (e) {
+                    await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration));
+                    rethrow;
+                  }
+                },
                 label: const Text('Share'),
-                icon: const Icon(Icons.share),
+                icon: kIsWeb ? const Icon(FontAwesomeIcons.twitter) : const Icon(Icons.share),
               ),
             ),
           ],

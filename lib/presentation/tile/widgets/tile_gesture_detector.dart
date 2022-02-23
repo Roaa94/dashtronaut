@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/data/models/phrase.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle-solved-dialog/widgets/puzzle_solved_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle-solved-dialog/widgets/puzzle_solved_dialog.dart';
 import 'package:provider/provider.dart';
 
 class TileGestureDetector extends StatelessWidget {
@@ -49,20 +49,26 @@ class TileGestureDetector extends StatelessWidget {
       phrasesProvider.setPhraseState(PhraseState.puzzleStarted);
     } else if (puzzleProvider.puzzle.isSolved) {
       phrasesProvider.setPhraseState(PhraseState.puzzleSolved);
+      Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
+        phrasesProvider.setPhraseState(PhraseState.none);
+      });
 
       Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
+        int _secondsElapsed = stopWatchProvider.secondsElapsed;
+        stopWatchProvider.stop();
         _showPuzzleSolvedDialog(
           context,
           puzzleProvider,
-          stopWatchProvider.secondsElapsed,
+          _secondsElapsed,
         ).then((_) {
-          stopWatchProvider.stop();
           puzzleProvider.generate(forceRefresh: true);
         });
       });
     } else {
       if (phrasesProvider.phraseState != PhraseState.none) {
-        if (phrasesProvider.phraseState == PhraseState.puzzleStarted || phrasesProvider.phraseState == PhraseState.dashTapped) {
+        if (phrasesProvider.phraseState == PhraseState.puzzleStarted ||
+            phrasesProvider.phraseState == PhraseState.dashTapped ||
+            phrasesProvider.phraseState == PhraseState.puzzleSolved) {
           Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
             phrasesProvider.setPhraseState(PhraseState.none);
           });
