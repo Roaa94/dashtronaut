@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/constants/ui.dart';
@@ -181,7 +183,7 @@ class Puzzle {
 
   static bool landscapeMode(BuildContext context) {
     return MediaQuery.of(context).orientation == Orientation.landscape &&
-        !kIsWeb &&
+        !kIsWeb && !Platform.isMacOS &&
         MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
   }
 

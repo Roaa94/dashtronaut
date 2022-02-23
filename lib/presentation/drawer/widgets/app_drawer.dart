@@ -27,7 +27,7 @@ class AppDrawer extends StatelessWidget {
             transform: Matrix4.translationValues(-2, 0, 0),
             child: Container(
               width: kIsWeb || MediaQuery.of(context).orientation == Orientation.landscape ? 500 : MediaQuery.of(context).size.width * 0.8,
-              margin: kIsWeb || Platform.isAndroid
+              margin: kIsWeb || Platform.isAndroid || Platform.isMacOS
                   ? const EdgeInsets.symmetric(vertical: 20)
                   : EdgeInsets.only(top: MediaQuery.of(context).orientation == Orientation.landscape ? MediaQuery.of(context).padding.bottom : 0),
               decoration: BoxDecoration(

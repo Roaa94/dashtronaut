@@ -83,7 +83,7 @@ class _PuzzleViewState extends State<PuzzleView> {
         Positioned(
           top: kIsWeb
               ? UI.space
-              : !kIsWeb && Platform.isAndroid
+              : !kIsWeb && (Platform.isAndroid || Platform.isMacOS)
                   ? MediaQuery.of(context).padding.top + UI.space
                   : MediaQuery.of(context).padding.top,
           left: UI.screenHPadding,

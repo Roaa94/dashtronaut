@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/data/models/position.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
@@ -24,7 +25,11 @@ class Dash {
           dashHeight = MediaQuery.of(context).size.height * 0.5;
           break;
         case ScreenType.medium:
-          dashHeight = MediaQuery.of(context).size.height * 0.5;
+          if (!kIsWeb) {
+            dashHeight = MediaQuery.of(context).size.height * 0.35;
+          } else {
+            dashHeight = MediaQuery.of(context).size.height * 0.5;
+          }
           break;
         case ScreenType.large:
           dashHeight = MediaQuery.of(context).size.height * 0.35;
