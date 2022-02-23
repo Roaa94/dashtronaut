@@ -49,7 +49,7 @@ class PhrasesProvider with ChangeNotifier {
 
   static final Random random = Random();
 
-  static int maxDashTaps = dashTappedPhrases.length;
+  static int maxDashTaps = dashTappedPhrases.length - 1;
 
   int dashTapCount = -1;
 
@@ -76,7 +76,7 @@ class PhrasesProvider with ChangeNotifier {
   void setPhraseState(PhraseState _phraseState) {
     phraseState = _phraseState;
     if (_phraseState == PhraseState.dashTapped) {
-      if (dashTapCount == maxDashTaps - 1) {
+      if (dashTapCount == maxDashTaps) {
         dashTapCount = 0;
       } else {
         dashTapCount++;
