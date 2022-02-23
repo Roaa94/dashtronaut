@@ -15,7 +15,7 @@ class CorrectTilesCount extends StatelessWidget {
           style: AppTextStyles.body.copyWith(color: Colors.white),
           children: <TextSpan>[
             TextSpan(
-              text: '${puzzleProvider.correctTilesCount}/${puzzleProvider.puzzle.tiles.length}',
+              text: '${puzzleProvider.correctTilesCount}/${puzzleProvider.puzzle.tiles.length - 1}',
               style: AppTextStyles.bodyBold.copyWith(color: Colors.white),
             ),
           ],
