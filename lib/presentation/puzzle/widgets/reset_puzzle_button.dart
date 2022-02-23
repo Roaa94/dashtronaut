@@ -15,7 +15,7 @@ class ResetPuzzleButton extends StatelessWidget {
     PuzzleProvider puzzleProvider,
     StopWatchProvider stopWatchProvider,
   ) {
-    if (puzzleProvider.hasStarted) {
+    if (puzzleProvider.hasStarted && !puzzleProvider.puzzle.isSolved) {
       showDialog(
         context: context,
         builder: (context) {

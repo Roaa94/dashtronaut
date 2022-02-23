@@ -8,7 +8,6 @@ import 'package:flutter_puzzle_hack/presentation/background/widgets/background_w
 import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
-import 'package:flutter_puzzle_hack/presentation/phrases/widgets/phrase_bubble.dart';
 import 'package:flutter_puzzle_hack/presentation/phrases/widgets/animated_phrase_bubble.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
@@ -31,7 +30,7 @@ class _PuzzleViewState extends State<PuzzleView> {
   void initState() {
     puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
     stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
-    if (puzzleProvider.hasStarted) {
+    if (puzzleProvider.movesCount == 1) {
       stopWatchProvider.start();
     }
     super.initState();
