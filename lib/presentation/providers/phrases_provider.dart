@@ -36,15 +36,21 @@ class PhrasesProvider with ChangeNotifier {
 
   static const List<String> dashTappedPhrases = [
     'Hi! I\'m Dash',
-    'Dash the Astronaut',
-    'So you can call me Dashtronaut',
-    'You can stop poking me now',
+    'The mascot for Flutter 💙 & Dart',
+    'Which is what this app is built with!',
+    'And I\'m an astronaut here',
+    'So you can call me Dashtronaut 🚀',
+    'You can stop poking me now 😃',
     'Why don\'t you play with the puzzle instead???',
-    'No really, stop please',
     'You\'re starting to annoy me!',
     'Argh! Never mind!',
     'You\'ll probably keep doing this 😒',
     'I can start over you know!!',
+    'Hi! I\'m Dash',
+    'Nah I didn\'t start over',
+    'Now I will...',
+    'Hi! I\'m Dash',
+    'Still didn\'t',
   ];
 
   static final Random random = Random();
