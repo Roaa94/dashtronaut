@@ -30,7 +30,7 @@ class _PuzzleViewState extends State<PuzzleView> {
   void initState() {
     puzzleProvider = Provider.of<PuzzleProvider>(context, listen: false);
     stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
-    if (puzzleProvider.movesCount == 1) {
+    if (puzzleProvider.hasStarted) {
       stopWatchProvider.start();
     }
     super.initState();
