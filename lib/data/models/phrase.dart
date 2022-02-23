@@ -5,6 +5,7 @@ enum PhraseState {
   hardPuzzleSelected,
   puzzleTakingTooLong,
   dashTapped,
+  doingGreat,
 }
 
 class Phrase {

@@ -10,6 +10,12 @@ class PhrasesProvider with ChangeNotifier {
     'I believe in you!',
   ];
 
+  static const List<String> doingGreatPhrases = [
+    'Keep going!',
+    'You\'r doing great!',
+    'Not much left!',
+  ];
+
   static const List<String> puzzleSolvedPhrases = [
     'You Are AMAZING!',
     'You Are AWESOME!',
@@ -55,7 +61,9 @@ class PhrasesProvider with ChangeNotifier {
       case PhraseState.puzzleSolved:
         return puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)];
       case PhraseState.hardPuzzleSelected:
-        return hardPuzzlePhrases[random.nextInt(puzzleSolvedPhrases.length - 1)];
+        return hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length - 1)];
+      case PhraseState.doingGreat:
+        return doingGreatPhrases[random.nextInt(doingGreatPhrases.length - 1)];
       case PhraseState.dashTapped:
         return dashTappedPhrases[dashTapCount];
       default:
