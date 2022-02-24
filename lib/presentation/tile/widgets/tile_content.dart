@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_rive_animation.dart';
 
@@ -57,7 +57,7 @@ class _TileContentState extends State<TileContent> with SingleTickerProviderStat
       child: ScaleTransition(
         scale: _scale,
         child: Padding(
-          padding: EdgeInsets.all(widget.puzzleSize > 4 ? 2 : Puzzle.tilePadding),
+          padding: EdgeInsets.all(widget.puzzleSize > 4 ? 2 : PuzzleLayout.tilePadding),
           child: Stack(
             children: [
               TileRiveAnimation(
@@ -68,7 +68,7 @@ class _TileContentState extends State<TileContent> with SingleTickerProviderStat
                 child: Center(
                   child: Text(
                     '${widget.tile.value}',
-                    style: AppTextStyles.tile.copyWith(fontSize: Puzzle.tileTextSize(widget.puzzleSize)),
+                    style: AppTextStyles.tile.copyWith(fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize)),
                   ),
                 ),
               ),

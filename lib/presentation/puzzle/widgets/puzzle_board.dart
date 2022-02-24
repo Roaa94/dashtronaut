@@ -4,6 +4,7 @@ import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/pulse_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/scale_up_transition.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_animated_positioned.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/widgets/tile_content.dart';
@@ -22,8 +23,8 @@ class PuzzleBoard extends StatelessWidget {
       child: Consumer<PuzzleProvider>(
         builder: (c, PuzzleProvider puzzleProvider, _) => Center(
           child: SizedBox(
-            width: Puzzle.containerWidth(context),
-            height: Puzzle.containerWidth(context),
+            width: PuzzleLayout.containerWidth(context),
+            height: PuzzleLayout.containerWidth(context),
             child: Stack(
               children: List.generate(
                 puzzleProvider.tilesWithoutWhitespace.length,

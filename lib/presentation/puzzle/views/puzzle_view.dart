@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
 import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_button.dart';
 import 'package:flutter_puzzle_hack/presentation/home/widgets/puzzle_header.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/phrases/widgets/animated_phrase_bubble.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
@@ -56,12 +56,12 @@ class _PuzzleViewState extends State<PuzzleView> {
   }
 
   List<Widget> _buildUIElements(BuildContext context, PuzzleProvider puzzleProvider) {
-    if (Puzzle.landscapeMode(context)) {
+    if (PuzzleLayout.landscapeMode(context)) {
       // Landscape orientation for phones only
       return [
         Positioned(
-          width: Puzzle.distanceOutsidePuzzle(context) -
-              Puzzle.containerWidth(context) -
+          width: PuzzleLayout.distanceOutsidePuzzle(context) -
+              PuzzleLayout.containerWidth(context) -
               MediaQuery.of(context).padding.left -
               (!kIsWeb && Platform.isAndroid ? Spacing.md : 0),
           top: !kIsWeb && Platform.isAndroid ? MediaQuery.of(context).padding.top + Spacing.md : MediaQuery.of(context).padding.bottom,
@@ -90,15 +90,15 @@ class _PuzzleViewState extends State<PuzzleView> {
           child: const DrawerButton(),
         ),
         Positioned(
-          bottom: Puzzle.distanceOutsidePuzzle(context),
-          width: Puzzle.containerWidth(context),
-          left: (MediaQuery.of(context).size.width - Puzzle.containerWidth(context)) / 2,
+          bottom: PuzzleLayout.distanceOutsidePuzzle(context),
+          width: PuzzleLayout.containerWidth(context),
+          left: (MediaQuery.of(context).size.width - PuzzleLayout.containerWidth(context)) / 2,
           child: const PuzzleHeader(),
         ),
         Positioned(
-          top: Puzzle.distanceOutsidePuzzle(context),
+          top: PuzzleLayout.distanceOutsidePuzzle(context),
           right: 0,
-          left: (MediaQuery.of(context).size.width - Puzzle.containerWidth(context)) / 2,
+          left: (MediaQuery.of(context).size.width - PuzzleLayout.containerWidth(context)) / 2,
           child: const Align(
             alignment: Alignment.centerLeft,
             child: ResetPuzzleButton(),

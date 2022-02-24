@@ -2,22 +2,20 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 
 class Puzzle {
   final int n;
   final List<Tile> tiles;
   final int movesCount;
-  final int secondsElapsed;
 
   Puzzle({
     required this.n,
     required this.tiles,
     this.movesCount = 0,
-    this.secondsElapsed = 0,
   }) : assert(n < 10);
 
   static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
@@ -49,18 +47,6 @@ class Puzzle {
   bool tileIsBottomOfWhiteSpace(Tile tile) {
     return tile.currentLocation.isBottomOf(_whiteSpaceTileLocation);
   }
-
-  bool tileIsMovableOnXAxis(Tile tile) {
-    return tileIsMovable(tile) && (tileIsRightOfWhiteSpace(tile) || tileIsLeftOfWhiteSpace(tile));
-  }
-
-  bool tileIsMovableOnYAxis(Tile tile) {
-    return tileIsMovable(tile) && (tileIsTopOfWhiteSpace(tile) || tileIsBottomOfWhiteSpace(tile));
-  }
-
-  // bool tileCanMoveTo(Tile tile, Position newPosition) {
-  //   return newPosition.isBetween(tile.position, whiteSpaceTile.position);
-  // }
 
   static List<Location> generateTileCorrectLocations(int _n) {
     List<Location> _tilesCorrectLocations = [];
@@ -163,53 +149,11 @@ class Puzzle {
     return numberOfCorrectTiles;
   }
 
-  static double containerWidth(BuildContext context) {
-    ScreenType screenType = ScreenTypeHelper(context).type;
-
-    switch (screenType) {
-      case ScreenType.xSmall:
-      case ScreenType.small:
-        return MediaQuery.of(context).size.width - Spacing.screenHPadding * 2;
-      case ScreenType.medium:
-        if (landscapeMode(context)) {
-          return MediaQuery.of(context).size.flipped.width - Spacing.screenHPadding * 2;
-        } else {
-          return 500;
-        }
-      case ScreenType.large:
-        return 500;
-    }
-  }
-
-  static bool landscapeMode(BuildContext context) {
-    return MediaQuery.of(context).orientation == Orientation.landscape &&
-        !kIsWeb && !Platform.isMacOS &&
-        MediaQuery.of(context).size.width < ScreenTypeHelper.breakpoints[ScreenType.medium]!;
-  }
-
-  static double distanceOutsidePuzzle(BuildContext context) {
-    double screenHeight = landscapeMode(context) ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
-    return ((screenHeight - containerWidth(context)) / 2) + containerWidth(context);
-  }
-
-  static const double tilePadding = 4;
-
-  static double? tileTextSize(int puzzleSize) {
-    return puzzleSize > 5
-        ? 20
-        : puzzleSize > 4
-            ? 25
-            : puzzleSize > 3
-                ? 30
-                : null;
-  }
-
   factory Puzzle.fromJson(Map<String, dynamic> json) {
     return Puzzle(
       tiles: List<Tile>.from(json['tiles'].map((x) => Tile.fromJson(x))),
       movesCount: json['movesCount'],
       n: json['n'],
-      secondsElapsed: json['secondsElapsed'],
     );
   }
 
@@ -217,6 +161,5 @@ class Puzzle {
         'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
         'movesCount': movesCount,
         'n': n,
-        'secondsElapsed': secondsElapsed,
       };
 }
