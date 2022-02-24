@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
-class Dash {
+class DashLayout {
   final BuildContext context;
 
-  Dash(this.context);
+  DashLayout(this.context);
 
   ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_puzzle_hack/models/dash.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/dash_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/phrase_bubble_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
@@ -33,7 +33,7 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
 
   @override
   Widget build(BuildContext context) {
-    Dash _dash = Dash(context);
+    DashLayout _dash = DashLayout(context);
 
     return Positioned(
       right: _dash.position.right,

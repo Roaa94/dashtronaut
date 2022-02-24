@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_puzzle_hack/models/dash.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/dash_layout.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
@@ -20,7 +20,7 @@ class PhraseBubbleLayout {
 
   ScreenType get screenType => ScreenTypeHelper(context).type;
 
-  Dash get _dash => Dash(context);
+  DashLayout get _dash => DashLayout(context);
 
   Position get position {
     switch (screenType) {
