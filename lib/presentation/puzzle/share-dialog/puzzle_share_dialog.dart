@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 import 'package:flutter_puzzle_hack/presentation/common/dialogs/app_alert_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle-solved-dialog/widgets/puzzle_score.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/share-dialog/puzzle_score.dart';
 
 class PuzzleSolvedDialog extends StatelessWidget {
   final int puzzleSize;

@@ -5,7 +5,7 @@ import 'package:flutter_puzzle_hack/presentation/layout/phrase_bubble_layout.dar
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle-solved-dialog/widgets/puzzle_solved_dialog.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/share-dialog/puzzle_share_dialog.dart';
 import 'package:provider/provider.dart';
 
 class TileGestureDetector extends StatelessWidget {

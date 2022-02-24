@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/correct_tiles_count.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/moves_count.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_stop_watch.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/ui/correct_tiles_count.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/ui/moves_count.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/ui/puzzle_stop_watch.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 

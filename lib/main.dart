@@ -15,7 +15,7 @@ import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.d
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
-import 'presentation/home/pages/home_page.dart';
+import 'presentation/home/home_page.dart';
 
 void main() async {
   setupServiceLocator();

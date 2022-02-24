@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/app_drawer.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/views/puzzle_view.dart';
+import 'package:flutter_puzzle_hack/presentation/puzzle/ui/puzzle_view.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
