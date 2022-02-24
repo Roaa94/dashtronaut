@@ -6,13 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/models/background.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/services/service_locator.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/background_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/providers/app_providers.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:flutter_puzzle_hack/services/service_locator.dart';
 import 'package:provider/provider.dart';
 
 import 'presentation/home/home_page.dart';
@@ -62,11 +61,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => SettingsProvider()),
-        ChangeNotifierProvider(create: (_) => StopWatchProvider()),
-        ChangeNotifierProvider(create: (_) => PhrasesProvider()),
-      ],
+      providers: AppProviders.changeNotifierProviders,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Dashtronaut - Slide Puzzle Game',
