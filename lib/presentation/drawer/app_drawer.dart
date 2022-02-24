@@ -3,12 +3,12 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
-import 'package:flutter_puzzle_hack/presentation/drawer/drawer_app_info.dart';
-import 'package:flutter_puzzle_hack/presentation/drawer/puzzle_size_settings.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
+import 'package:Dashtronaut/presentation/drawer/drawer_app_info.dart';
+import 'package:Dashtronaut/presentation/drawer/puzzle_size_settings.dart';
+import 'package:Dashtronaut/presentation/providers/settings_provider.dart';
+import 'package:Dashtronaut/presentation/styles/app_colors.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {

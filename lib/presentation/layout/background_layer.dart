@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter_puzzle_hack/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
+import 'package:Dashtronaut/models/position.dart';
+import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
 
 enum BackgroundLayerType {
   topRightPlanet,

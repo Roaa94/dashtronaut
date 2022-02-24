@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
-import 'package:flutter_puzzle_hack/helpers/duration_helper.dart';
-import 'package:flutter_puzzle_hack/helpers/file_helper.dart';
-import 'package:flutter_puzzle_hack/helpers/links_helper.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
+import 'package:Dashtronaut/helpers/duration_helper.dart';
+import 'package:Dashtronaut/helpers/file_helper.dart';
+import 'package:Dashtronaut/helpers/links_helper.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -74,7 +74,7 @@ class PuzzleScore extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () async {
                   try {
-                    File file = await FileHelper.getImageFileFromUrl(LinksHelper.getPuzzleSolvedImageUrl(puzzleSize));
+                    File file = await FileHelper.getFileFromUrl(LinksHelper.getPuzzleSolvedImageUrl(puzzleSize));
                     if (kIsWeb) {
                       await LinksHelper.openLink(LinksHelper.getTwitterShareLink(movesCount, duration, tilesCount));
                     } else {

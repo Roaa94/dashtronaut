@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/background_layer.dart';
-import 'package:flutter_puzzle_hack/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
+import 'package:Dashtronaut/presentation/layout/background_layer.dart';
+import 'package:Dashtronaut/models/position.dart';
+import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {
   final BackgroundLayerLayout layer;

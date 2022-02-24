@@ -1,6 +1,6 @@
-import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
+import 'package:Dashtronaut/presentation/providers/phrases_provider.dart';
+import 'package:Dashtronaut/presentation/providers/settings_provider.dart';
+import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

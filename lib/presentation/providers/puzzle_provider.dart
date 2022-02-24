@@ -4,12 +4,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_puzzle_hack/models/location.dart';
-import 'package:flutter_puzzle_hack/models/position.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/services/service_locator.dart';
-import 'package:flutter_puzzle_hack/services/storage/storage_service.dart';
+import 'package:Dashtronaut/models/location.dart';
+import 'package:Dashtronaut/models/position.dart';
+import 'package:Dashtronaut/models/puzzle.dart';
+import 'package:Dashtronaut/models/tile.dart';
+import 'package:Dashtronaut/services/service_locator.dart';
+import 'package:Dashtronaut/services/storage/storage_service.dart';
 
 class PuzzleProvider with ChangeNotifier {
   final StorageService _storageService = getIt<StorageService>();
@@ -57,7 +57,7 @@ class PuzzleProvider with ChangeNotifier {
 
   /// Action that switches the [Location]'s => [Position]'s of the tile
   /// dragged by the user & the whitespace tile
-  /// This causes the [Tile.position] getter to get the correct position based on new [Location]'s
+  /// This causes the [tile.position] getter to get the correct position based on new [Location]'s
   void swapTilesAndUpdatePuzzle(Tile tile) {
     int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
     int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);

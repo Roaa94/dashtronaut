@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/services/service_locator.dart';
-import 'package:flutter_puzzle_hack/services/storage/storage_service.dart';
+import 'package:Dashtronaut/services/service_locator.dart';
+import 'package:Dashtronaut/services/storage/storage_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsProvider with ChangeNotifier {

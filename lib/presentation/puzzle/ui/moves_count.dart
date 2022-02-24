@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class MovesCount extends StatelessWidget {

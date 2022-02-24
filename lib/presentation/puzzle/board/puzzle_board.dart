@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
-import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/pulse_transition.dart';
-import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/scale_up_transition.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/tile/tile_animated_positioned.dart';
-import 'package:flutter_puzzle_hack/presentation/tile/tile_content.dart';
-import 'package:flutter_puzzle_hack/presentation/tile/tile_gesture_detector.dart';
+import 'package:Dashtronaut/models/tile.dart';
+import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:Dashtronaut/presentation/common/animations/widgets/pulse_transition.dart';
+import 'package:Dashtronaut/presentation/common/animations/widgets/scale_up_transition.dart';
+import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
+import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/presentation/tile/tile_animated_positioned.dart';
+import 'package:Dashtronaut/presentation/tile/tile_content.dart';
+import 'package:Dashtronaut/presentation/tile/tile_gesture_detector.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleBoard extends StatelessWidget {

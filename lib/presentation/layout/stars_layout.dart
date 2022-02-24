@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/background/utils/stars_painter.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
+import 'package:Dashtronaut/presentation/background/utils/stars_painter.dart';
+import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
 
 class StarsLayout {
   final BuildContext context;

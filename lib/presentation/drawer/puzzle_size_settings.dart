@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/presentation/drawer/puzzle_size_item.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
+import 'package:Dashtronaut/models/puzzle.dart';
+import 'package:Dashtronaut/presentation/drawer/puzzle_size_item.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 
 class PuzzleSizeSettings extends StatelessWidget {
   const PuzzleSizeSettings({Key? key}) : super(key: key);

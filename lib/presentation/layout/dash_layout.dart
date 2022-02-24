@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_puzzle_hack/models/position.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
+import 'package:Dashtronaut/models/position.dart';
+import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
+import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
 
 class DashLayout {
   final BuildContext context;

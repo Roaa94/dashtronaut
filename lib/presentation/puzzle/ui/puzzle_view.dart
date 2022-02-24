@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
-import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
-import 'package:flutter_puzzle_hack/presentation/drawer/drawer_button.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/ui/puzzle_header.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
-import 'package:flutter_puzzle_hack/presentation/phrases/animated_phrase_bubble.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/board/puzzle_board.dart';
-import 'package:flutter_puzzle_hack/presentation/puzzle/ui/reset_puzzle_button.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
+import 'package:Dashtronaut/presentation/background/widgets/background_wrapper.dart';
+import 'package:Dashtronaut/presentation/dash/dash_rive_animation.dart';
+import 'package:Dashtronaut/presentation/drawer/drawer_button.dart';
+import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_header.dart';
+import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
+import 'package:Dashtronaut/presentation/phrases/animated_phrase_bubble.dart';
+import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
+import 'package:Dashtronaut/presentation/puzzle/board/puzzle_board.dart';
+import 'package:Dashtronaut/presentation/puzzle/ui/reset_puzzle_button.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleView extends StatefulWidget {

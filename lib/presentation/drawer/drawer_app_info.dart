@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 
 class DrawerAppInfo extends StatelessWidget {
   const DrawerAppInfo({Key? key}) : super(key: key);

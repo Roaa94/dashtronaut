@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_puzzle_hack/models/location.dart';
-import 'package:flutter_puzzle_hack/models/position.dart';
+import 'package:Dashtronaut/models/location.dart';
+import 'package:Dashtronaut/models/position.dart';
 
 class Tile {
   int value;

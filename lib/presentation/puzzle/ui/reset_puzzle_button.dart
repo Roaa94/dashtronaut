@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
-import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/fade_in_transition.dart';
-import 'package:flutter_puzzle_hack/presentation/common/dialogs/app_alert_dialog.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:Dashtronaut/presentation/common/animations/widgets/fade_in_transition.dart';
+import 'package:Dashtronaut/presentation/common/dialogs/app_alert_dialog.dart';
+import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {

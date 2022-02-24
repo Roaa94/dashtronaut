@@ -1,5 +1,5 @@
-import 'package:flutter_puzzle_hack/models/location.dart';
-import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:Dashtronaut/models/location.dart';
+import 'package:Dashtronaut/models/tile.dart';
 
 class Puzzle {
   final int n;

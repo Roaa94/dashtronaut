@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/helpers/duration_helper.dart';
+import 'package:Dashtronaut/helpers/duration_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Helper class that handles links & sharing
+///
+/// e.g. sharing, launching a url, shared text, ...
 class LinksHelper {
   static const String officialWebsiteUrl = 'https://dashtronaut.app';
 

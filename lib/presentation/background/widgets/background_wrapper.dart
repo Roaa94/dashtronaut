@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/background.dart';
-import 'package:flutter_puzzle_hack/presentation/layout/background_layer.dart';
-import 'package:flutter_puzzle_hack/presentation/background/widgets/animated_background_layer.dart';
-import 'package:flutter_puzzle_hack/presentation/background/widgets/stars.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
+import 'package:Dashtronaut/models/background.dart';
+import 'package:Dashtronaut/presentation/layout/background_layer.dart';
+import 'package:Dashtronaut/presentation/background/widgets/animated_background_layer.dart';
+import 'package:Dashtronaut/presentation/background/widgets/stars.dart';
+import 'package:Dashtronaut/presentation/styles/app_colors.dart';
 
 class BackgroundWrapper extends StatelessWidget {
   const BackgroundWrapper({Key? key}) : super(key: key);
