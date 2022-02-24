@@ -14,8 +14,7 @@ class FileHelper {
     final byteData = await rootBundle.load(path);
     Directory _tempDirectory = await getTemporaryDirectory();
     String _tempPath = '${_tempDirectory.path}/$path';
-    final _file = await File(_tempPath).writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    return _file;
+    return await File(_tempPath).writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
   }
 
   /// Returns a type [File] from a url
@@ -27,8 +26,7 @@ class FileHelper {
     final response = await http.get(uri);
     final byteData = response.bodyBytes;
     Directory _tempDirectory = await getTemporaryDirectory();
-    String _tempPath = '${_tempDirectory.path}/image.png';
-    final _file = await File(_tempPath).writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    return _file;
+    String _tempPath = '${_tempDirectory.path}/file.png';
+    return await File(_tempPath).writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
   }
 }
