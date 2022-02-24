@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/background/widgets/background_wrapper.dart';
+import 'package:Dashtronaut/presentation/background/widgets/background_stack.dart';
 import 'package:Dashtronaut/presentation/dash/dash_rive_animation.dart';
 import 'package:Dashtronaut/presentation/drawer/drawer_button.dart';
 import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_header.dart';
@@ -46,7 +46,7 @@ class _PuzzleViewState extends State<PuzzleView> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const BackgroundWrapper(),
+        const BackgroundStack(),
         ..._buildUIElements(context, puzzleProvider),
         PuzzleBoard(),
         const DashRiveAnimation(),

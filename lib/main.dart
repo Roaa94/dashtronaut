@@ -1,17 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:desktop_window/desktop_window.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:Dashtronaut/models/background.dart';
+import 'package:Dashtronaut/helpers/background_helper.dart';
 import 'package:Dashtronaut/models/puzzle.dart';
-import 'package:Dashtronaut/presentation/layout/background_layer.dart';
 import 'package:Dashtronaut/presentation/providers/app_providers.dart';
 import 'package:Dashtronaut/presentation/providers/settings_provider.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/services/service_locator.dart';
+import 'package:desktop_window/desktop_window.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'presentation/home/home_page.dart';
@@ -34,12 +33,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    for (BackgroundLayerType layerType in Background.backgroundLayerTypes) {
-      precacheImage(
-        Image.asset('assets/images/background/${layerType.name}.png').image,
-        context,
-      );
-    }
+    BackgroundHelper.precacheBackgroundLayerImages(context);
 
     for (int size in Puzzle.supportedPuzzleSizes) {
       precacheImage(
