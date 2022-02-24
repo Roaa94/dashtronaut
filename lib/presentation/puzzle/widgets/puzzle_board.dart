@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/widgets/pulse_transition.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/widgets/scale_up_transition.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/pulse_transition.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/scale_up_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/tile_animated_positioned.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
 
 class ScaleUpTransition extends StatefulWidget {
   final Widget child;

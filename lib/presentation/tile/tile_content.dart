@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 import 'package:flutter_puzzle_hack/presentation/tile/tile_rive_animation.dart';

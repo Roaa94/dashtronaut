@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/models/dash.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/phrase_bubble_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:provider/provider.dart';

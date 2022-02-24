@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
+import 'package:flutter_puzzle_hack/presentation/common/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/puzzle_layout.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
-import 'package:flutter_puzzle_hack/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
-import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/correct_tiles_count.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/moves_count.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_stop_watch.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 
 class PuzzleHeader extends StatelessWidget {
   const PuzzleHeader({Key? key}) : super(key: key);
