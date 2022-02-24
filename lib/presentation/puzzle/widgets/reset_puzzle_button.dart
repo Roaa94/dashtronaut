@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
-import 'package:flutter_puzzle_hack/presentation/dialogs/widgets/app_alert_dialog.dart';
+import 'package:flutter_puzzle_hack/presentation/dialogs/app_alert_dialog.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
