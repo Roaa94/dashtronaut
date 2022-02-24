@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/models/location.dart';
 import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 
 class Puzzle {
   final int n;

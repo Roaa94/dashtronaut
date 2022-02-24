@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 import 'package:flutter_puzzle_hack/helpers/duration_helper.dart';
 import 'package:flutter_puzzle_hack/helpers/file_helper.dart';
 import 'package:flutter_puzzle_hack/helpers/links_helper.dart';

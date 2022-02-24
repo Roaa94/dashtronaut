@@ -6,7 +6,7 @@ import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/correct_tiles_co
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/moves_count.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_stop_watch.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 
 class PuzzleHeader extends StatelessWidget {
   const PuzzleHeader({Key? key}) : super(key: key);

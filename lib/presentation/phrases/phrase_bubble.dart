@@ -3,7 +3,7 @@ import 'package:flutter_puzzle_hack/presentation/layout/phrase_bubble_layout.dar
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 import 'package:provider/provider.dart';
 
 class PhraseBubble extends StatelessWidget {

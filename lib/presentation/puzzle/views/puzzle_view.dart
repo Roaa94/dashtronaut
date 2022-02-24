@@ -12,7 +12,7 @@ import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart'
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/reset_puzzle_button.dart';
-import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/spacing.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleView extends StatefulWidget {
