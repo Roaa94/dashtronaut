@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';
 
@@ -42,7 +42,7 @@ class AppAlertDialog extends StatelessWidget {
               filter: ImageFilter.blur(sigmaY: 8, sigmaX: 8),
               child: Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: UI.screenHPadding, vertical: UI.space),
+                padding: const EdgeInsets.symmetric(horizontal: Spacing.screenHPadding, vertical: Spacing.md),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: AppColors.primary.withOpacity(0.6),
@@ -70,7 +70,7 @@ class AppAlertDialog extends StatelessWidget {
                                 child: const Text('Yes'),
                               ),
                             ),
-                            const SizedBox(width: UI.spaceSm),
+                            const SizedBox(width: Spacing.sm),
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: onCancel ?? () => Navigator.of(context).pop(),

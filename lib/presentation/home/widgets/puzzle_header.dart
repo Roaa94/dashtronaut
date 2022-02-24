@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
@@ -32,15 +32,15 @@ class PuzzleHeader extends StatelessWidget {
               runSpacing: 5,
               children: [
                 ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - UI.space),
+                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - Spacing.md),
                   child: const PuzzleStopWatch(),
                 ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - UI.space),
+                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - Spacing.md),
                   child: const MovesCount(),
                 ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - UI.space),
+                  constraints: BoxConstraints(minWidth: (Puzzle.containerWidth(context) / 3) - Spacing.md),
                   child: const CorrectTilesCount(),
                 ),
               ],

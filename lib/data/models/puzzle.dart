@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/data/models/location.dart';
 import 'package:flutter_puzzle_hack/data/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
@@ -169,10 +169,10 @@ class Puzzle {
     switch (screenType) {
       case ScreenType.xSmall:
       case ScreenType.small:
-        return MediaQuery.of(context).size.width - UI.screenHPadding * 2;
+        return MediaQuery.of(context).size.width - Spacing.screenHPadding * 2;
       case ScreenType.medium:
         if (landscapeMode(context)) {
-          return MediaQuery.of(context).size.flipped.width - UI.screenHPadding * 2;
+          return MediaQuery.of(context).size.flipped.width - Spacing.screenHPadding * 2;
         } else {
           return 500;
         }

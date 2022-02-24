@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/drawer_app_info.dart';
 import 'package:flutter_puzzle_hack/presentation/drawer/widgets/puzzle_size_settings.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/settings_provider.dart';
@@ -16,7 +16,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double drawerStartPadding = MediaQuery.of(context).padding.left == 0 ? UI.space : MediaQuery.of(context).padding.left;
+    double drawerStartPadding = MediaQuery.of(context).padding.left == 0 ? Spacing.md : MediaQuery.of(context).padding.left;
 
     return SafeArea(
       left: false,
@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: drawerStartPadding, right: UI.space, top: UI.space, bottom: UI.space),
+                    padding: EdgeInsets.only(left: drawerStartPadding, right: Spacing.md, top: Spacing.md, bottom: Spacing.md),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -68,7 +68,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: drawerStartPadding, right: UI.space, top: UI.space, bottom: UI.space),
+                    padding: EdgeInsets.only(left: drawerStartPadding, right: Spacing.md, top: Spacing.md, bottom: Spacing.md),
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       border: Border(top: BorderSide(color: Colors.white, width: 2)),

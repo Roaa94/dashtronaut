@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/helpers/duration_helper.dart';
 import 'package:flutter_puzzle_hack/helpers/file_helper.dart';
 import 'package:flutter_puzzle_hack/helpers/links_helper.dart';
@@ -36,9 +36,9 @@ class PuzzleScore extends StatelessWidget {
               'Congrats! You did it!',
               style: AppTextStyles.title,
             ),
-            const SizedBox(height: UI.spaceXs),
+            const SizedBox(height: Spacing.xs),
             const Text('You solved the puzzle! Share your score to challenge your friends'),
-            const SizedBox(height: UI.spaceSm),
+            const SizedBox(height: Spacing.sm),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,7 +57,7 @@ class PuzzleScore extends StatelessWidget {
                 Expanded(child: Text('$movesCount Moves', style: AppTextStyles.h1Bold)),
               ],
             ),
-            const SizedBox(height: UI.space),
+            const SizedBox(height: Spacing.md),
           ],
         ),
         Row(
@@ -69,7 +69,7 @@ class PuzzleScore extends StatelessWidget {
                 icon: const Icon(Icons.refresh),
               ),
             ),
-            const SizedBox(width: UI.spaceSm),
+            const SizedBox(width: Spacing.sm),
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: () async {

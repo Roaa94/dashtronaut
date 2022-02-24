@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
 import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/background_wrapper.dart';
 import 'package:flutter_puzzle_hack/presentation/dash/dash_rive_animation.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart'
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/puzzle_board.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/reset_puzzle_button.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleView extends StatefulWidget {
@@ -63,9 +63,9 @@ class _PuzzleViewState extends State<PuzzleView> {
           width: Puzzle.distanceOutsidePuzzle(context) -
               Puzzle.containerWidth(context) -
               MediaQuery.of(context).padding.left -
-              (!kIsWeb && Platform.isAndroid ? UI.space : 0),
-          top: !kIsWeb && Platform.isAndroid ? MediaQuery.of(context).padding.top + UI.space : MediaQuery.of(context).padding.bottom,
-          left: !kIsWeb && Platform.isAndroid ? UI.space : MediaQuery.of(context).padding.left,
+              (!kIsWeb && Platform.isAndroid ? Spacing.md : 0),
+          top: !kIsWeb && Platform.isAndroid ? MediaQuery.of(context).padding.top + Spacing.md : MediaQuery.of(context).padding.bottom,
+          left: !kIsWeb && Platform.isAndroid ? Spacing.md : MediaQuery.of(context).padding.left,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
@@ -82,11 +82,11 @@ class _PuzzleViewState extends State<PuzzleView> {
       return [
         Positioned(
           top: kIsWeb
-              ? UI.space
+              ? Spacing.md
               : !kIsWeb && (Platform.isAndroid || Platform.isMacOS)
-                  ? MediaQuery.of(context).padding.top + UI.space
+                  ? MediaQuery.of(context).padding.top + Spacing.md
                   : MediaQuery.of(context).padding.top,
-          left: UI.screenHPadding,
+          left: Spacing.screenHPadding,
           child: const DrawerButton(),
         ),
         Positioned(

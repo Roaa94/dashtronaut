@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/constants/ui.dart';
+import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
 import 'package:flutter_puzzle_hack/data/models/phrase.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
@@ -47,7 +47,7 @@ class PhraseBubble extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: UI.spaceMd, vertical: UI.spaceSm),
+          padding: const EdgeInsets.symmetric(horizontal: Spacing.md, vertical: Spacing.sm),
           constraints: const BoxConstraints(
             maxWidth: 180,
           ),
