@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
-import 'package:flutter_puzzle_hack/data/models/location.dart';
-import 'package:flutter_puzzle_hack/data/models/tile.dart';
+import 'package:flutter_puzzle_hack/models/location.dart';
+import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 class Puzzle {

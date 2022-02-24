@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/position.dart';
-import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/data/models/tile.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/models/tile.dart';
 
 class TileAnimatedPositioned extends StatelessWidget {
   final Tile tile;

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_puzzle_hack/domain/service_locator.dart';
-import 'package:flutter_puzzle_hack/domain/storage/storage_service.dart';
+import 'package:flutter_puzzle_hack/services/service_locator.dart';
+import 'package:flutter_puzzle_hack/services/storage/storage_service.dart';
 
 class StopWatchProvider with ChangeNotifier {
   Stream<int> timeStream = Stream.periodic(const Duration(seconds: 1), (x) => 1 + x++);

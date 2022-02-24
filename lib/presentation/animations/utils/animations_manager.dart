@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
-import 'package:flutter_puzzle_hack/data/models/position.dart';
+import 'package:flutter_puzzle_hack/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/position_tween.dart';
 
 enum AnimatedElementType {

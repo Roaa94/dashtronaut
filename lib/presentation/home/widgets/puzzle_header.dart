@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
-import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/fade_in_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/puzzle/widgets/correct_tiles_count.dart';

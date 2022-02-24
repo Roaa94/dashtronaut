@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/spacing.dart';
-import 'package:flutter_puzzle_hack/data/models/phrase.dart';
+import 'package:flutter_puzzle_hack/models/phrase.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_text_styles.dart';

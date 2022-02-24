@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/models/background_layer.dart';
 
 class Background {
   static List<BackgroundLayerType> backgroundLayerTypes = [

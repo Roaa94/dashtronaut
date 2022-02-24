@@ -1,4 +1,4 @@
-import 'package:flutter_puzzle_hack/domain/storage/storage_service.dart';
+import 'package:flutter_puzzle_hack/services/storage/storage_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveStorageService implements StorageService {

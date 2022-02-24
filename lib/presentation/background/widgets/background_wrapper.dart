@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/background.dart';
-import 'package:flutter_puzzle_hack/data/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/models/background.dart';
+import 'package:flutter_puzzle_hack/models/background_layer.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/animated_background_layer.dart';
 import 'package:flutter_puzzle_hack/presentation/background/widgets/stars.dart';
 import 'package:flutter_puzzle_hack/presentation/styles/app_colors.dart';

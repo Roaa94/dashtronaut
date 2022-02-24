@@ -4,12 +4,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_puzzle_hack/data/models/location.dart';
-import 'package:flutter_puzzle_hack/data/models/position.dart';
-import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/data/models/tile.dart';
-import 'package:flutter_puzzle_hack/domain/service_locator.dart';
-import 'package:flutter_puzzle_hack/domain/storage/storage_service.dart';
+import 'package:flutter_puzzle_hack/models/location.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/models/tile.dart';
+import 'package:flutter_puzzle_hack/services/service_locator.dart';
+import 'package:flutter_puzzle_hack/services/storage/storage_service.dart';
 
 class PuzzleProvider with ChangeNotifier {
   final StorageService _storageService = getIt<StorageService>();

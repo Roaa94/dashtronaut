@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/stars_layer.dart';
+import 'package:flutter_puzzle_hack/models/stars_layer.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 
 class Stars extends StatefulWidget {

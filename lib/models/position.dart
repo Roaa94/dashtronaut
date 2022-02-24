@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter_puzzle_hack/data/models/location.dart';
+import 'package:flutter_puzzle_hack/models/location.dart';
 
 class Position extends Equatable {
   final double? left;

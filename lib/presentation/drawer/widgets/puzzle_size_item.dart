@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/phrase.dart';
+import 'package:flutter_puzzle_hack/models/phrase.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/puzzle_provider.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/stop_watch_provider.dart';

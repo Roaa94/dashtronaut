@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
-import 'package:flutter_puzzle_hack/data/models/tile.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/models/tile.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/pulse_transition.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/widgets/scale_up_transition.dart';

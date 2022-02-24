@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_puzzle_hack/data/models/position.dart';
-import 'package:flutter_puzzle_hack/data/models/puzzle.dart';
+import 'package:flutter_puzzle_hack/models/position.dart';
+import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
 class Dash {

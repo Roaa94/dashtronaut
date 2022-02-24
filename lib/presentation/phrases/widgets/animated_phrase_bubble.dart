@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/data/models/phrase.dart';
-import 'package:flutter_puzzle_hack/data/models/phrase_bubble_layout.dart';
+import 'package:flutter_puzzle_hack/models/phrase.dart';
+import 'package:flutter_puzzle_hack/models/phrase_bubble_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/animations/utils/animations_manager.dart';
 import 'package:flutter_puzzle_hack/presentation/phrases/widgets/phrase_bubble.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
