@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_puzzle_hack/models/phrase.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/phrase_bubble_layout.dart';
 
 class PhrasesProvider with ChangeNotifier {
   static const List<String> puzzleStartedPhrases = [
