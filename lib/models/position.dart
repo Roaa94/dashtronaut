@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:Dashtronaut/presentation/common/animations/utils/position_tween.dart';
 import 'package:equatable/equatable.dart';
-import 'package:Dashtronaut/models/location.dart';
+import 'package:flutter/material.dart';
 
+/// Model that sets values for left, top, right, and bottom
+/// of a widget to position it at most times in a [Stack] widget
 class Position extends Equatable {
   final double? left;
   final double? top;
@@ -25,18 +28,8 @@ class Position extends Equatable {
   @override
   String toString() => '${top?.toStringAsFixed(2)}, ${right?.toStringAsFixed(2)}, ${bottom?.toStringAsFixed(2)}, ${left?.toStringAsFixed(2)}';
 
-  bool isBetween(Position a, Position b) {
-    assert(left != null && a.left != null && b.left != null);
-    assert(top != null && a.top != null && b.top != null);
-    return (left! >= a.left! && left! <= b.left! && top! >= a.top! && top! <= b.top!) ||
-        (left! >= b.left! && left! <= a.left! && top! >= b.top! && top! <= a.top!);
-  }
-
   @override
   List<Object?> get props => [left, top];
-
-  factory Position.fromLocation(Location location, double tileWidth) =>
-      Position(top: (location.y - 1) * tileWidth, left: (location.x - 1) * tileWidth);
 
   Position copyWith({double? left, double? top, double? right, double? bottom}) {
     return Position(
@@ -47,6 +40,9 @@ class Position extends Equatable {
     );
   }
 
+  /// Lerp implementation for providing the ability to create a [Tween] of type [Position]
+  ///
+  /// See [PositionTween]
   static Position lerp(Position? a, Position? b, double t) {
     if (a == null || b == null) {
       return const Position.zero();

@@ -1,6 +1,7 @@
 import 'package:Dashtronaut/models/location.dart';
 import 'package:Dashtronaut/models/tile.dart';
 
+/// Model for a Puzzle
 class Puzzle {
   final int n;
   final List<Tile> tiles;
@@ -12,42 +13,55 @@ class Puzzle {
     this.movesCount = 0,
   }) : assert(n < 10);
 
+  /// List of supported puzzle sizes
   static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
 
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
 
-  Location get _whiteSpaceTileLocation => whiteSpaceTile.currentLocation;
-
+  /// Check if a [Tile] is movable
+  ///
+  /// A tile if movable if it's not a whitespace tile
+  /// and if it's located around the whitespace tile
+  /// (top of, bottom of, right of, or left of)
   bool tileIsMovable(Tile tile) {
     if (tile.tileIsWhiteSpace) {
       return false;
     }
-    return tile.currentLocation.isLocatedAround(_whiteSpaceTileLocation);
+    return tile.currentLocation.isLocatedAround(whiteSpaceTile.currentLocation);
   }
 
+  /// Check if a tile is left of the whitespace tile
   bool tileIsLeftOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isLeftOf(_whiteSpaceTileLocation);
+    return tile.currentLocation.isLeftOf(whiteSpaceTile.currentLocation);
   }
 
+  /// Check if a tile is right of the whitespace tile
   bool tileIsRightOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isRightOf(_whiteSpaceTileLocation);
+    return tile.currentLocation.isRightOf(whiteSpaceTile.currentLocation);
   }
 
+  /// Check if a tile is top of the whitespace tile
   bool tileIsTopOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isTopOf(_whiteSpaceTileLocation);
+    return tile.currentLocation.isTopOf(whiteSpaceTile.currentLocation);
   }
 
+  /// Check if a tile is bottom of the whitespace tile
   bool tileIsBottomOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isBottomOf(_whiteSpaceTileLocation);
+    return tile.currentLocation.isBottomOf(whiteSpaceTile.currentLocation);
   }
 
+  /// Given a puzzle size, generate a list of tile [Location]s
+  ///
+  /// For example, for a 3x3 puzzle, generated correct locations will be:
+  /// | 1,1 | 2,1 | 3, 1 |
+  /// | 1,2 | 2,2 | 3, 2 |
+  /// | 1,3 | 2,3 | 3, 3 |
   static List<Location> generateTileCorrectLocations(int _n) {
     List<Location> _tilesCorrectLocations = [];
     for (int i = 0; i < _n; i++) {
       for (int j = 0; j < _n; j++) {
         Location _location = Location(y: i + 1, x: j + 1);
-        // print(_location.asString);
         _tilesCorrectLocations.add(_location);
       }
     }
