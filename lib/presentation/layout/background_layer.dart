@@ -12,11 +12,11 @@ enum BackgroundLayerType {
   bottomBgPlanet,
 }
 
-class BackgroundLayer {
+class BackgroundLayerLayout {
   BuildContext context;
   BackgroundLayerType type;
 
-  BackgroundLayer(
+  BackgroundLayerLayout(
     this.context, {
     required this.type,
   });
@@ -129,5 +129,5 @@ class BackgroundLayer {
   }
 
   @override
-  String toString() => 'BackgroundLayer(type: ${type.name}, size: $size, position: $position, assetUrl: $assetUrl)';
+  String toString() => 'BackgroundLayerLayout(type: ${type.name}, size: $size, position: $position, assetUrl: $assetUrl)';
 }

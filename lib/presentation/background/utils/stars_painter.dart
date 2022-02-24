@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/stars_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/stars_layout.dart';
 
 class StarsPainter extends CustomPainter {
   final List<int> xOffsets;

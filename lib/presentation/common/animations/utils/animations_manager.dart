@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/position.dart';
 import 'package:flutter_puzzle_hack/presentation/common/animations/utils/position_tween.dart';
 
@@ -41,7 +41,7 @@ class AnimationsManager {
 
   static const Duration bgLayerAnimationDuration = Duration(milliseconds: 600);
 
-  static AnimatedElement<Position> bgLayer(BackgroundLayer layer) {
+  static AnimatedElement<Position> bgLayer(BackgroundLayerLayout layer) {
     return AnimatedElement<Position>(
       duration: bgLayerAnimationDuration,
       tween: PositionTween(

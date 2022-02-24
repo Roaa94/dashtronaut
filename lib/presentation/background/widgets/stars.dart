@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_hack/models/stars_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/stars_layout.dart';
 import 'package:flutter_puzzle_hack/presentation/common/animations/utils/animations_manager.dart';
 
 class Stars extends StatefulWidget {
@@ -39,7 +39,7 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    StarsLayer _starsLayer = StarsLayer(context);
+    StarsLayout _starsLayer = StarsLayout(context);
 
     return CustomPaint(
       painter: _starsLayer.getPainter(

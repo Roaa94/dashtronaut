@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_hack/presentation/background/utils/stars_painter.dart';
 import 'package:flutter_puzzle_hack/presentation/layout/screen_type_helper.dart';
 
-class StarsLayer {
+class StarsLayout {
   final BuildContext context;
 
-  StarsLayer(this.context);
+  StarsLayout(this.context);
 
   int get totalStarsCount {
     ScreenType screenType = ScreenTypeHelper(context).type;

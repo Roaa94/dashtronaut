@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_puzzle_hack/models/background.dart';
-import 'package:flutter_puzzle_hack/models/background_layer.dart';
+import 'package:flutter_puzzle_hack/presentation/layout/background_layer.dart';
 import 'package:flutter_puzzle_hack/models/puzzle.dart';
 import 'package:flutter_puzzle_hack/services/service_locator.dart';
 import 'package:flutter_puzzle_hack/presentation/providers/phrases_provider.dart';
