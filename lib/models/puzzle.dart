@@ -70,17 +70,16 @@ class Puzzle {
 
   /// Returns a list of tiles from current & correct locations lists
   static List<Tile> getTilesFromLocations({
-    required int n,
     required List<Location> correctLocations,
     required List<Location> currentLocations,
   }) {
     return List.generate(
-      n * n,
+      correctLocations.length,
       (i) => Tile(
         value: i + 1,
         correctLocation: correctLocations[i],
         currentLocation: currentLocations[i],
-        tileIsWhiteSpace: i == n * n - 1,
+        tileIsWhiteSpace: i == correctLocations.length - 1,
       ),
     );
   }

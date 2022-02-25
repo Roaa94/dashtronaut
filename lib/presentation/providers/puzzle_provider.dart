@@ -116,7 +116,6 @@ class PuzzleProvider with ChangeNotifier {
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
 
     tiles = Puzzle.getTilesFromLocations(
-      n: n,
       correctLocations: _tilesCorrectLocations,
       currentLocations: _tilesCurrentLocations,
     );
@@ -125,7 +124,6 @@ class PuzzleProvider with ChangeNotifier {
       _tilesCurrentLocations.shuffle(random);
 
       tiles = Puzzle.getTilesFromLocations(
-        n: n,
         correctLocations: _tilesCorrectLocations,
         currentLocations: _tilesCurrentLocations,
       );
