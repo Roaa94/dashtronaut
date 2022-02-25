@@ -1,15 +1,16 @@
 import 'dart:convert';
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' show Random;
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:Dashtronaut/models/location.dart';
 import 'package:Dashtronaut/models/position.dart';
 import 'package:Dashtronaut/models/puzzle.dart';
 import 'package:Dashtronaut/models/tile.dart';
 import 'package:Dashtronaut/services/service_locator.dart';
 import 'package:Dashtronaut/services/storage/storage_service.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 class PuzzleProvider with ChangeNotifier {
   final StorageService _storageService = getIt<StorageService>();
@@ -84,8 +85,14 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   Puzzle? _getPuzzleFromStorage() {
-    dynamic _puzzle = _storageService.get(StorageKey.puzzle);
-    return Puzzle.fromJson(json.decode(json.encode(_puzzle)));
+    try {
+      dynamic _puzzle = _storageService.get(StorageKey.puzzle);
+      return Puzzle.fromJson(json.decode(json.encode(_puzzle)));
+    } catch (e) {
+      log('Error in local storage, clearing data...');
+      _storageService.clear();
+      return null;
+    }
   }
 
   void _updatePuzzleInStorage() {
