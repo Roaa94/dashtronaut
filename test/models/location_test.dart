@@ -40,5 +40,19 @@ void main() {
       expect(targetLocation.compareTo(const Location(x: 1, y: 1)), 1);
       expect(targetLocation.compareTo(const Location(x: 2, y: 2)), 0);
     });
+
+    test('Returns correct model from json map', () {
+      Map<String, dynamic> locationJson = {'x': 0, 'y': 0};
+      Location expectedLocation = const Location(x: 0, y: 0);
+
+      expect(Location.fromJson(locationJson), expectedLocation);
+    });
+
+    test('Returns json map from model', () {
+      Location location = const Location(x: 0, y: 1);
+      Map<String, dynamic> expectedLocationJson = {'x': 0, 'y': 1};
+
+      expect(location.toJson(), expectedLocationJson);
+    });
   });
 }
