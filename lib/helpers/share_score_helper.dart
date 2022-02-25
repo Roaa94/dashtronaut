@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:Dashtronaut/helpers/duration_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// Helper class that handles links & sharing
+/// Helper class that handles sharing puzzle score
 ///
 /// e.g. sharing, launching a url, shared text, ...
-class LinksHelper {
+class ShareScoreHelper {
   /// The Dashtronaut app official website
   static const String officialWebsiteUrl = 'https://dashtronaut.app';
 
