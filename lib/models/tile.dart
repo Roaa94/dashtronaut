@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:Dashtronaut/models/location.dart';
 import 'package:Dashtronaut/models/position.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
-class Tile {
-  int value;
-  bool tileIsWhiteSpace;
-  Location correctLocation;
-  Location currentLocation;
+class Tile extends Equatable {
+  final int value;
+  final bool tileIsWhiteSpace;
+  final Location correctLocation;
+  final Location currentLocation;
 
-  Tile({
+  const Tile({
     required this.value,
     required this.correctLocation,
     required this.currentLocation,
@@ -60,4 +61,12 @@ class Tile {
       'currentLocation': currentLocation.toJson(),
     };
   }
+
+  @override
+  List<Object?> get props => [
+        value,
+        tileIsWhiteSpace,
+        correctLocation,
+        currentLocation,
+      ];
 }
