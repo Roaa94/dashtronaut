@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/background/widgets/background_stack.dart';
 import 'package:Dashtronaut/presentation/dash/dash_rive_animation.dart';
 import 'package:Dashtronaut/presentation/drawer/drawer_button.dart';
-import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_header.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/presentation/phrases/animated_phrase_bubble.dart';
 import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
 import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
 import 'package:Dashtronaut/presentation/puzzle/board/puzzle_board.dart';
+import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_header.dart';
 import 'package:Dashtronaut/presentation/puzzle/ui/reset_puzzle_button.dart';
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleView extends StatefulWidget {
@@ -47,7 +47,7 @@ class _PuzzleViewState extends State<PuzzleView> {
     return Stack(
       children: [
         const BackgroundStack(),
-        ..._buildUIElements(context, puzzleProvider),
+        ..._buildUIElements(context),
         PuzzleBoard(),
         const DashRiveAnimation(),
         const AnimatedPhraseBubble(),
@@ -55,7 +55,7 @@ class _PuzzleViewState extends State<PuzzleView> {
     );
   }
 
-  List<Widget> _buildUIElements(BuildContext context, PuzzleProvider puzzleProvider) {
+  List<Widget> _buildUIElements(BuildContext context) {
     if (PuzzleLayout.landscapeMode(context)) {
       // Landscape orientation for phones only
       return [
