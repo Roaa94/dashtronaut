@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   Location targetLocation = const Location(x: 2, y: 2);
 
-  group('Location', () {
+  group('Location model', () {
     test('Supports value comparison', () {
       expect(const Location(x: 2, y: 2), equals(targetLocation));
       expect(const Location(x: 3, y: 2), isNot(targetLocation));
