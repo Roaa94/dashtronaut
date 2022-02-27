@@ -1,17 +1,18 @@
+import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:Dashtronaut/models/position.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
 
-class DashLayout {
+class DashLayout implements LayoutDelegate {
+  @override
   final BuildContext context;
 
   DashLayout(this.context);
 
+  @override
   ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
-
-  ScreenType get screenType => screenTypeHelper.type;
 
   PuzzleLayout get puzzleLayout => PuzzleLayout(context);
 
@@ -21,7 +22,7 @@ class DashLayout {
     late double dashHeight;
 
     if (MediaQuery.of(context).orientation == Orientation.landscape) {
-      switch (screenType) {
+      switch (screenTypeHelper.type) {
         case ScreenType.xSmall:
         case ScreenType.small:
           dashHeight = MediaQuery.of(context).size.height * 0.5;
@@ -43,7 +44,7 @@ class DashLayout {
   }
 
   Position get position {
-    switch (screenType) {
+    switch (screenTypeHelper.type) {
       case ScreenType.xSmall:
       case ScreenType.small:
         return const Position(right: -10, bottom: 20);

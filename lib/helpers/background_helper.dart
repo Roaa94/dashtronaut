@@ -1,5 +1,5 @@
 import 'package:Dashtronaut/presentation/background/widgets/background_stack.dart';
-import 'package:Dashtronaut/presentation/layout/background_layer.dart';
+import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 /// Helper class that handles background layers

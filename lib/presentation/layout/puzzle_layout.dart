@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:Dashtronaut/presentation/drawer/drawer_button.dart';
+import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_header.dart';
@@ -8,17 +9,17 @@ import 'package:Dashtronaut/presentation/puzzle/ui/reset_puzzle_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class PuzzleLayout {
+class PuzzleLayout implements LayoutDelegate {
+  @override
   final BuildContext context;
 
   PuzzleLayout(this.context);
 
+  @override
   ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
 
   double get containerWidth {
-    ScreenType screenType = screenTypeHelper.type;
-
-    switch (screenType) {
+    switch (screenTypeHelper.type) {
       case ScreenType.xSmall:
       case ScreenType.small:
         return MediaQuery.of(context).size.width - Spacing.screenHPadding * 2;

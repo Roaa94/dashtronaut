@@ -1,3 +1,4 @@
+import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Dashtronaut/presentation/layout/dash_layout.dart';
 import 'package:Dashtronaut/models/position.dart';
@@ -13,17 +14,19 @@ enum PhraseState {
   doingGreat,
 }
 
-class PhraseBubbleLayout {
+class PhraseBubbleLayout implements LayoutDelegate {
+  @override
   final BuildContext context;
 
   PhraseBubbleLayout(this.context);
 
-  ScreenType get screenType => ScreenTypeHelper(context).type;
+  @override
+  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
 
   DashLayout get _dash => DashLayout(context);
 
   Position get position {
-    switch (screenType) {
+    switch (screenTypeHelper.type) {
       case ScreenType.xSmall:
       case ScreenType.small:
         return Position(

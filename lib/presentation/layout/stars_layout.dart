@@ -1,17 +1,21 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/background/utils/stars_painter.dart';
+import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
+import 'package:flutter/material.dart';
 
-class StarsLayout {
+class StarsLayout implements LayoutDelegate {
+  @override
   final BuildContext context;
 
   StarsLayout(this.context);
 
+  @override
+  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
+
   int get totalStarsCount {
-    ScreenType screenType = ScreenTypeHelper(context).type;
-    switch (screenType) {
+    switch (screenTypeHelper.type) {
       case ScreenType.xSmall:
         return 300;
       case ScreenType.small:

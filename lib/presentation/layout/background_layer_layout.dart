@@ -1,3 +1,4 @@
+import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:Dashtronaut/models/position.dart';
@@ -12,18 +13,21 @@ enum BackgroundLayerType {
   bottomBgPlanet,
 }
 
-class BackgroundLayerLayout {
-  BuildContext context;
-  BackgroundLayerType type;
+class BackgroundLayerLayout implements LayoutDelegate {
+  @override
+  final BuildContext context;
 
-  BackgroundLayerLayout(
+  final BackgroundLayerType type;
+
+  const BackgroundLayerLayout(
     this.context, {
     required this.type,
   });
 
   String get assetUrl => 'assets/images/background/${type.name}.png';
 
-  ScreenType get screenType => ScreenTypeHelper(context).type;
+  @override
+  ScreenTypeHelper get screenTypeHelper => ScreenTypeHelper(context);
 
   bool get landscapeMode =>
       MediaQuery.of(context).orientation == Orientation.landscape &&
@@ -57,7 +61,7 @@ class BackgroundLayerLayout {
         break;
     }
 
-    switch (screenType) {
+    switch (screenTypeHelper.type) {
       case ScreenType.xSmall:
         _size = _size * 0.8;
         break;
