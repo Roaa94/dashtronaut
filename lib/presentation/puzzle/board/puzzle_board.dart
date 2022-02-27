@@ -25,8 +25,8 @@ class PuzzleBoard extends StatelessWidget {
           focusNode: keyboardListenerFocusNode,
           child: Center(
             child: SizedBox(
-              width: PuzzleLayout.containerWidth(context),
-              height: PuzzleLayout.containerWidth(context),
+              width: PuzzleLayout(context).containerWidth,
+              height: PuzzleLayout(context).containerWidth,
               child: Stack(
                 children: List.generate(
                   puzzleProvider.tilesWithoutWhitespace.length,

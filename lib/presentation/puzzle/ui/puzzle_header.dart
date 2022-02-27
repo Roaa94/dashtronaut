@@ -13,6 +13,8 @@ class PuzzleHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PuzzleLayout puzzleLayout = PuzzleLayout(context);
+
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: Container(
@@ -32,15 +34,15 @@ class PuzzleHeader extends StatelessWidget {
               runSpacing: 5,
               children: [
                 ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: (PuzzleLayout.containerWidth(context) / 3) - Spacing.md),
+                  constraints: BoxConstraints(minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
                   child: const PuzzleStopWatch(),
                 ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: (PuzzleLayout.containerWidth(context) / 3) - Spacing.md),
+                  constraints: BoxConstraints(minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
                   child: const MovesCount(),
                 ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: (PuzzleLayout.containerWidth(context) / 3) - Spacing.md),
+                  constraints: BoxConstraints(minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
                   child: const CorrectTilesCount(),
                 ),
               ],

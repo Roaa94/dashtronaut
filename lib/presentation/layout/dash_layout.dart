@@ -13,8 +13,10 @@ class DashLayout {
 
   ScreenType get screenType => screenTypeHelper.type;
 
+  PuzzleLayout get puzzleLayout => PuzzleLayout(context);
+
   Size get size {
-    double puzzleWidth = PuzzleLayout.containerWidth(context);
+    double puzzleWidth = puzzleLayout.containerWidth;
 
     late double dashHeight;
 

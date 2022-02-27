@@ -19,7 +19,7 @@ class TileAnimatedPositioned extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double tileWidth = PuzzleLayout.containerWidth(context) / puzzleSize;
+    double tileWidth = PuzzleLayout(context).containerWidth / puzzleSize;
     Position tilePosition = tile.getPosition(context, tileWidth);
 
     return AnimatedPositioned(
