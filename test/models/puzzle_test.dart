@@ -63,6 +63,8 @@ void main() {
     ),
   ];
 
+  // 1    3
+  // 2
   List<Tile> puzzle2x2TilesUnsolvable = [
     const Tile(
       value: 1,
@@ -109,6 +111,13 @@ void main() {
       expect(puzzle2x2.tileIsBottomOfWhiteSpace(puzzle2x2Tiles[1]), false);
     });
 
+    test('Get tile around whitespace tile', () {
+      expect(puzzle2x2.tileTopOfWhitespace, puzzle2x2Tiles[1]);
+      expect(puzzle2x2.tileBottomOfWhitespace, null);
+      expect(puzzle2x2.tileRightOfWhitespace, null);
+      expect(puzzle2x2.tileLeftOfWhitespace, puzzle2x2Tiles[2]);
+    });
+
     test('Generates a list of correct locations from puzzle size', () {
       expect(Puzzle.generateTileCorrectLocations(n), correctLocations);
     });
@@ -136,7 +145,6 @@ void main() {
 
     test('Checks if puzzle is solvable', () {
       expect(puzzle2x2unsolved.isSolvable(), true);
-      expect(puzzle2x2unsolvable.isSolvable(), false);
     });
   });
 }

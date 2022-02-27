@@ -1,5 +1,6 @@
 import 'package:Dashtronaut/models/location.dart';
 import 'package:Dashtronaut/models/tile.dart';
+import 'package:collection/collection.dart';
 
 /// Model for a Puzzle
 class Puzzle {
@@ -50,6 +51,18 @@ class Puzzle {
   bool tileIsBottomOfWhiteSpace(Tile tile) {
     return tile.currentLocation.isBottomOf(whiteSpaceTile.currentLocation);
   }
+
+  /// Returns the tile at the top of the whitespace tile
+  Tile? get tileTopOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsTopOfWhiteSpace(tile));
+
+  /// Returns the tile at the bottom of the whitespace tile
+  Tile? get tileBottomOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsBottomOfWhiteSpace(tile));
+
+  /// Returns the tile at the right of the whitespace tile
+  Tile? get tileRightOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsRightOfWhiteSpace(tile));
+
+  /// Returns the tile at the left of the whitespace tile
+  Tile? get tileLeftOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsLeftOfWhiteSpace(tile));
 
   /// Given a puzzle size, generate a list of tile [Location]s
   ///

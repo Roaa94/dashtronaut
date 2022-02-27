@@ -56,6 +56,27 @@ class PuzzleProvider with ChangeNotifier {
         movesCount: movesCount,
       );
 
+  /// Handle Keyboard event and move appropriate tile
+  void handleKeyboardEvent(RawKeyEvent event) {
+    if (event is RawKeyDownEvent) {
+      final physicalKey = event.data.physicalKey;
+      Tile? tile;
+      if (physicalKey == PhysicalKeyboardKey.arrowDown) {
+        tile = puzzle.tileTopOfWhitespace;
+      } else if (physicalKey == PhysicalKeyboardKey.arrowUp) {
+        tile = puzzle.tileBottomOfWhitespace;
+      } else if (physicalKey == PhysicalKeyboardKey.arrowRight) {
+        tile = puzzle.tileLeftOfWhitespace;
+      } else if (physicalKey == PhysicalKeyboardKey.arrowLeft) {
+        tile = puzzle.tileRightOfWhitespace;
+      }
+
+      if (tile != null) {
+        swapTilesAndUpdatePuzzle(tile);
+      }
+    }
+  }
+
   /// Action that switches the [Location]'s => [Position]'s of the tile
   /// dragged by the user & the whitespace tile
   /// This causes the [tile.position] getter to get the correct position based on new [Location]'s
