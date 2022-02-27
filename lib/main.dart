@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 import 'presentation/home/home_page.dart';
 
-void main() async {
+void main() {
   setupServiceLocator();
   runZonedGuarded<Future<void>>(() async {
     await SettingsProvider().bootActions();
