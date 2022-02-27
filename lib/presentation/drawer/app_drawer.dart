@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:Dashtronaut/presentation/drawer/latest_scores.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/layout/spacing.dart';
@@ -63,6 +64,7 @@ class AppDrawer extends StatelessWidget {
                       child: Column(
                         children: const [
                           PuzzleSizeSettings(),
+                          LatestScores(),
                         ],
                       ),
                     ),

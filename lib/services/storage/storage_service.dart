@@ -2,6 +2,8 @@ class StorageKey {
   static const String puzzle = 'puzzle';
 
   static const String secondsElapsed = 'secondsElapsed';
+
+  static const String scores = 'scores';
 }
 
 abstract class StorageService {

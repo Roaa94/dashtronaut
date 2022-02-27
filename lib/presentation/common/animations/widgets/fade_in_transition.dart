@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:flutter/material.dart';
 
 class FadeInTransition extends StatefulWidget {
   final Widget child;
@@ -36,7 +36,9 @@ class _FadeInTransitionState extends State<FadeInTransition> with SingleTickerPr
       _animationController.forward();
     } else {
       Future.delayed(widget.delay!, () {
-        _animationController.forward();
+        if (mounted) {
+          _animationController.forward();
+        }
       });
     }
     super.initState();

@@ -5,11 +5,11 @@ import 'dart:math' show Random;
 import 'package:Dashtronaut/models/location.dart';
 import 'package:Dashtronaut/models/position.dart';
 import 'package:Dashtronaut/models/puzzle.dart';
+import 'package:Dashtronaut/models/score.dart';
 import 'package:Dashtronaut/models/tile.dart';
 import 'package:Dashtronaut/services/service_locator.dart';
 import 'package:Dashtronaut/services/storage/storage_service.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class PuzzleProvider with ChangeNotifier {
@@ -95,6 +95,7 @@ class PuzzleProvider with ChangeNotifier {
     if (tiles[movedTileIndex].isAtCorrectLocation) {
       if (puzzle.isSolved) {
         HapticFeedback.vibrate();
+        _updateScoresInStorage();
       } else {
         HapticFeedback.mediumImpact();
       }
@@ -103,6 +104,45 @@ class PuzzleProvider with ChangeNotifier {
     movesCount++;
     _updatePuzzleInStorage();
     notifyListeners();
+  }
+
+  List<Score> scores = <Score>[];
+
+  static const int maxStorableScores = 10;
+
+  void _updateScoresInStorage() {
+    Score newScore = Score(
+      movesCount: movesCount,
+      puzzleSize: n,
+      secondsElapsed: _storageService.get(StorageKey.secondsElapsed),
+    );
+    try {
+      List<Score> _scores = _getScoresFromStorage();
+      if (_scores.length == maxStorableScores) {
+        _scores.removeAt(0);
+      }
+      _scores.add(newScore);
+      _storageService.set(StorageKey.scores, Score.toJsonList(_scores));
+      scores = _scores;
+    } catch (e) {
+      _storageService.remove(StorageKey.scores);
+      log('Error updating scores in storage $e');
+    }
+  }
+
+  List<Score> _getScoresFromStorage() {
+    List<Score> _storedScores = [];
+    try {
+      final scores = _storageService.get(StorageKey.scores);
+      if (scores != null) {
+        _storedScores = Score.fromJsonList(scores);
+      }
+    } catch (e) {
+      _storageService.remove(StorageKey.scores);
+      log('Error retrieving scores from storage');
+      log('$e');
+    }
+    return _storedScores;
   }
 
   Puzzle? _getPuzzleFromStorage() {
@@ -117,13 +157,20 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   void _updatePuzzleInStorage() {
-    _storageService.set(StorageKey.puzzle, puzzle.toJson());
+    try {
+      _storageService.set(StorageKey.puzzle, puzzle.toJson());
+    } catch (e) {
+      log('Error updating puzzle in storage');
+      log('$e');
+    }
   }
 
   /// Generates tiles with shuffle
   void generate({bool forceRefresh = false}) {
+    if (_storageService.has(StorageKey.scores)) {
+      scores = _getScoresFromStorage();
+    }
     // Set tiles & size from locale storage only of they exist and there is no forceRefresh flag (for reset)
-
     if (_storageService.has(StorageKey.puzzle) && !forceRefresh) {
       Puzzle? _puzzle = _getPuzzleFromStorage();
       if (_puzzle != null) {
