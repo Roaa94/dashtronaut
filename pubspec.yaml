@@ -38,7 +38,7 @@ dependencies:
   equatable: ^2.0.3
   package_info_plus: ^1.4.0
   rive: ^0.8.1
-  hive: ^2.0.5
+  hive: ^2.0.6
   hive_flutter: ^1.1.0
   get_it: ^7.2.0
   share_plus: ^3.1.0
