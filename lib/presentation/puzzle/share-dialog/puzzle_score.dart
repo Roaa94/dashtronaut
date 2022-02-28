@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/helpers/duration_helper.dart';
 import 'package:Dashtronaut/helpers/file_helper.dart';
 import 'package:Dashtronaut/helpers/share_score_helper.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -74,10 +74,10 @@ class PuzzleScore extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () async {
                   try {
-                    File file = await FileHelper.getFileFromUrl(ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize));
                     if (kIsWeb) {
                       await ShareScoreHelper.openLink(ShareScoreHelper.getTwitterShareLink(movesCount, duration, tilesCount));
                     } else {
+                      File file = await FileHelper.getFileFromUrl(ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize));
                       await Share.shareFiles(
                         [file.path],
                         text: ShareScoreHelper.getPuzzleSolvedTextMobile(movesCount, duration, tilesCount),
