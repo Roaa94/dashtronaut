@@ -1,5 +1,7 @@
 # Dashtronaut
-##Slide Puzzle Game Built For The Flutter Puzzle Hack Challenge
+
+## Slide Puzzle Game Built For The Flutter Puzzle Hack Challenge
+
 ### Made by Roaa Khaddam [(@roaakdm)](https://twitter.com/roaakdm)
 
 ## Inspiration
@@ -91,6 +93,7 @@ By grabbing a pen & paper and doing a quick sketch, Dashtronaut, Dash the Astron
 ![Dashtronaut Sketch before & after](https://dashtronaut.app/images/dasht-sketch.png)
 
 --- 
+
 ## Educational Content
 
 It felt selfish to me to enjoy the process of creating Dashtronaut that much and not share it! So I dedicated pages in
@@ -99,7 +102,9 @@ well as individual tutorials detailing each feature in the app. And those tutori
 regularly.
 
 ---
+
 ## What's next for Dashtronaut
+
 With Flutter, there are absolutely no limits to what you can do. And Dashtronaut is nothing but a small portion of what
 I wanted to do. But I’m proud of what I accomplished and will do my best to keep updating the app with features in the
 future. Because it turned out to be an amazingly fun project rich with stuff to learn and teach.
