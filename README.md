@@ -12,11 +12,13 @@ importantly, feeling like my life has no meaning, this challenge came to the res
 all the energy I can summon to work on something I’m extremely passionate about. So I dove in and did nothing but
 Flutter day and night for a couple of weeks to create my version of the slide puzzle.
 
+
 I cherished the distraction and brainstormed lots and lots of ideas. I wanted so badly to challenge myself. I had been
 working with Flutter for about 2.5 years and I felt confident that my skills and experience are up to the challenge.
 Also, being passionate about and having some experience in graphic & UI design, I knew that I had the ability and
 opportunity to create something cool visually and
 programmatically! [(Ahm, unicorn developer speaking 🦄)](https://youtu.be/MIepaf7ks40?t=182)
+
 ---
 
 ## About Dashtronaut
@@ -65,10 +67,13 @@ logic and layout. I achieved what I had in mind by adding the ability to swipe t
 and have them animate to it. And I added keyboard and mouse support. At this point the puzzle was a skeleton! It looked
 like this:
 
-![Puzzle Old State](https://dashtronaut.app/images/skeleton-puzzle.png)
+<img src="https://dashtronaut.app/images/skeleton-puzzle.png" alt="Puzzle Old State" width="70%" />
 
 It even had the ability to do this:
-![Fun Puzzle](https://dashtronaut.app/images/fun-puzzle.gif)
+
+
+<img src="https://user-images.githubusercontent.com/50345358/157831017-282fb274-f161-40e2-b69e-b55144c00ebe.gif" alt="Fun Puzzle" width="350px" />
+
 Wouldn’t such a puzzle be much easier to solve!
 
 
@@ -90,7 +95,7 @@ mascot, into the picture!
 
 By grabbing a pen & paper and doing a quick sketch, Dashtronaut, Dash the Astronaut, was born!
 
-![Dashtronaut Sketch before & after](https://dashtronaut.app/images/dasht-sketch.png)
+<img src="https://dashtronaut.app/images/dash-sketch.png" alt="Dashtronaut Sketch before & after" />
 
 --- 
 
