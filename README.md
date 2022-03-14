@@ -4,6 +4,16 @@
 
 ### Made by Roaa Khaddam [(@roaakdm)](https://twitter.com/roaakdm)
 
+---
+
+# Tutorials
+
+1. [Creating and Animating the Background Stars Using CustomPainter](https://dashtronaut.app/tutorials/background-stars)
+
+https://user-images.githubusercontent.com/50345358/158265025-5b66a0ca-6318-4b23-9e6a-1fda364ba11d.mp4
+
+---
+
 ## Inspiration
 
 When the Flutter Puzzle Hack Hackathon was [announced](https://twitter.com/FlutterDev/status/1479184966927872000), I had
