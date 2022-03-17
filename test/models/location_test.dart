@@ -54,5 +54,11 @@ void main() {
 
       expect(location.toJson(), expectedLocationJson);
     });
+
+    test('toString prints correctly', () {
+      Location location = const Location(x: 2, y: 1);
+
+      expect(location.toString(), '(1, 2)');
+    });
   });
 }

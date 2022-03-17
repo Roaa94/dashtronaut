@@ -67,6 +67,7 @@ void main() {
         currentLocation: Location(x: 1, y: 1),
         correctLocation: Location(x: 1, y: 1),
       );
+
       Map<String, dynamic> expectedTileJson = {
         'value': 1,
         'tileIsWhiteSpace': false,
@@ -75,6 +76,18 @@ void main() {
       };
 
       expect(tile.toJson(), expectedTileJson);
+    });
+
+    test('toString prints correctly', () {
+      expect(tile.toString(), equals('Tile(value: 2, correctLocation: (1, 2), currentLocation: (3, 1))'));
+    });
+
+    test('copyWith updates tile', () {
+      expect(tile.copyWith().currentLocation, equals(const Location(x: 1, y: 3)));
+      expect(
+        tile.copyWith(currentLocation: const Location(x: 2, y: 1)).currentLocation,
+        equals(const Location(x: 2, y: 1)),
+      );
     });
   });
 }

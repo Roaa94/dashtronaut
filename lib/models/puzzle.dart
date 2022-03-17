@@ -1,14 +1,15 @@
 import 'package:Dashtronaut/models/location.dart';
 import 'package:Dashtronaut/models/tile.dart';
 import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
 
 /// Model for a Puzzle
-class Puzzle {
+class Puzzle extends Equatable {
   final int n;
   final List<Tile> tiles;
   final int movesCount;
 
-  Puzzle({
+  const Puzzle({
     required this.n,
     required this.tiles,
     this.movesCount = 0,
@@ -182,4 +183,7 @@ class Puzzle {
         'movesCount': movesCount,
         'n': n,
       };
+
+  @override
+  List<Object?> get props => [n, movesCount, tiles];
 }

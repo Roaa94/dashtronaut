@@ -44,6 +44,19 @@ void main() {
       test('Returns same start position if lerp double is 0 and one position param in null', () {
         expect(Position.lerp(startPosition, const Position(left: 10), 0), startPosition);
       });
+
+      test('toString prints correctly', () {
+        Position position = const Position(left: 10.222, top: 20.666);
+
+        expect(position.toString(), '20.67, null, null, 10.22');
+      });
+
+      test('copyWith updates position', () {
+        Position position = const Position(left: 10, top: 20);
+
+        expect(position.copyWith().bottom, isNull);
+        expect(position.copyWith(bottom: 0).bottom, 0);
+      });
     });
   });
 }
