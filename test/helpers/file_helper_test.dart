@@ -23,14 +23,6 @@ void main() {
 
     // Todo: make this test work
     test('returns file from asset', () async {
-      String assetPath = 'assets/images/background/bottomBgPlanet.png';
-      var file = await FileHelper.getFileFromAsset(assetPath);
-
-      expect(file, isA<File>());
-    }, skip: true);
-
-    // Todo: make this test work
-    test('returns file from asset', () async {
       String imageUrl = 'https://dashtronaut.app/images/puzzle-solved/solved-3x3.png';
       var file = await FileHelper.getFileFromUrl(imageUrl);
 
