@@ -26,14 +26,4 @@ class BackgroundHelper {
       (i) => BackgroundLayerLayout(context, type: backgroundLayerTypes[i]),
     );
   }
-
-  /// Precache Background layer images for better performance
-  static void precacheBackgroundLayerImages(BuildContext context) {
-    for (BackgroundLayerType layerType in backgroundLayerTypes) {
-      precacheImage(
-        Image.asset('assets/images/background/${layerType.name}.png').image,
-        context,
-      );
-    }
-  }
 }

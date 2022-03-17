@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:Dashtronaut/helpers/background_helper.dart';
 import 'package:Dashtronaut/models/puzzle.dart';
+import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:Dashtronaut/presentation/providers/app_providers.dart';
 import 'package:Dashtronaut/presentation/providers/settings_provider.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
@@ -33,7 +34,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    BackgroundHelper.precacheBackgroundLayerImages(context);
+    /// Precache Background layer images for better performance
+    for (BackgroundLayerType layerType in BackgroundHelper.backgroundLayerTypes) {
+      precacheImage(
+        Image.asset('assets/images/background/${layerType.name}.png').image,
+        context,
+      );
+    }
 
     for (int size in Puzzle.supportedPuzzleSizes) {
       precacheImage(
