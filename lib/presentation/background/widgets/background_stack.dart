@@ -1,4 +1,4 @@
-import 'package:Dashtronaut/helpers/background_helper.dart';
+import 'package:Dashtronaut/presentation/background/utils/background_layers.dart';
 import 'package:Dashtronaut/presentation/background/widgets/animated_background_layer.dart';
 import 'package:Dashtronaut/presentation/background/widgets/stars.dart';
 import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
@@ -12,7 +12,7 @@ class BackgroundStack extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    List<BackgroundLayerLayout> _backgroundLayers = BackgroundHelper.getLayers(context);
+    List<BackgroundLayerLayout> _backgroundLayers = BackgroundLayers()(context);
 
     return Positioned.fill(
       child: Container(

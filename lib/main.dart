@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:Dashtronaut/helpers/background_helper.dart';
+import 'package:Dashtronaut/presentation/background/utils/background_layers.dart';
 import 'package:Dashtronaut/models/puzzle.dart';
 import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:Dashtronaut/presentation/providers/app_providers.dart';
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     /// Precache Background layer images for better performance
-    for (BackgroundLayerType layerType in BackgroundHelper.backgroundLayerTypes) {
+    for (BackgroundLayerType layerType in BackgroundLayers.types) {
       precacheImage(
         Image.asset('assets/images/background/${layerType.name}.png').image,
         context,

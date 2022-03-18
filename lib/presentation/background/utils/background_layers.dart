@@ -3,12 +3,12 @@ import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 /// Helper class that handles background layers
-class BackgroundHelper {
+class BackgroundLayers {
   /// List of background layers based on their type
   ///
   /// The order of this list determines the z-index order
   /// in which they are laid out in the Stack [BackgroundStack]
-  static List<BackgroundLayerType> backgroundLayerTypes = [
+  static List<BackgroundLayerType> types = [
     BackgroundLayerType.topBgPlanet,
     BackgroundLayerType.topRightPlanet,
     BackgroundLayerType.topLeftPlanet,
@@ -20,10 +20,10 @@ class BackgroundHelper {
   ///
   /// Generate a [BackgroundLayerLayout] from each background layer
   /// And assign it its [BackgroundLayerType] and [BuildContext]
-  static List<BackgroundLayerLayout> getLayers(BuildContext context) {
+  List<BackgroundLayerLayout> call(BuildContext context) {
     return List.generate(
-      backgroundLayerTypes.length,
-      (i) => BackgroundLayerLayout(context, type: backgroundLayerTypes[i]),
+      types.length,
+      (i) => BackgroundLayerLayout(context, type: types[i]),
     );
   }
 }
