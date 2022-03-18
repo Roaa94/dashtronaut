@@ -1,35 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/drawer/app_drawer.dart';
-import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
-import 'package:Dashtronaut/presentation/providers/settings_provider.dart';
 import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_view.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late SettingsProvider settingsProvider;
-
-  @override
-  void initState() {
-    settingsProvider = Provider.of<SettingsProvider>(context, listen: false);
-    settingsProvider.getPackageInfo();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => PuzzleProvider()..generate(),
-      child: const Scaffold(
-        drawer: AppDrawer(),
-        body: PuzzleView(),
-      ),
+    return const Scaffold(
+      drawer: AppDrawer(),
+      body: PuzzleView(),
     );
   }
 }
