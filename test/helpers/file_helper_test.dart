@@ -2,11 +2,9 @@ import 'dart:io';
 
 import 'package:Dashtronaut/helpers/file_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-const String kTemporaryPath = 'temporaryPath';
+import '../mocks.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -29,11 +27,4 @@ void main() {
       expect(file, isA<File>());
     }, skip: true);
   });
-}
-
-class MockPathProviderPlatform extends Mock with MockPlatformInterfaceMixin implements PathProviderPlatform {
-  @override
-  Future<String?> getTemporaryPath() async {
-    return kTemporaryPath;
-  }
 }
