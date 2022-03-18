@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
 import 'package:Dashtronaut/presentation/phrases/phrase_bubble.dart';
-import 'package:Dashtronaut/presentation/providers/phrases_provider.dart';
+import 'package:Dashtronaut/providers/phrases_provider.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedPhraseBubble extends StatefulWidget {

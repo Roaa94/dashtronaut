@@ -3,8 +3,8 @@ import 'package:Dashtronaut/presentation/common/animations/utils/animations_mana
 import 'package:Dashtronaut/presentation/common/animations/widgets/pulse_transition.dart';
 import 'package:Dashtronaut/presentation/common/animations/widgets/scale_up_transition.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
-import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
-import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
+import 'package:Dashtronaut/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/providers/stop_watch_provider.dart';
 import 'package:Dashtronaut/presentation/tile/tile_animated_positioned.dart';
 import 'package:Dashtronaut/presentation/tile/tile_content.dart';
 import 'package:Dashtronaut/presentation/tile/tile_gesture_detector.dart';

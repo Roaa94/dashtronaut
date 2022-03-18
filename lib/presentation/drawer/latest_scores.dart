@@ -1,7 +1,7 @@
 import 'package:Dashtronaut/models/score.dart';
 import 'package:Dashtronaut/presentation/drawer/latest_score_item.dart';
 import 'package:Dashtronaut/presentation/layout/spacing.dart';
-import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/providers/puzzle_provider.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

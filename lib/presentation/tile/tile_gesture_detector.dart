@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:Dashtronaut/models/tile.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
 import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
-import 'package:Dashtronaut/presentation/providers/phrases_provider.dart';
-import 'package:Dashtronaut/presentation/providers/puzzle_provider.dart';
-import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
+import 'package:Dashtronaut/providers/phrases_provider.dart';
+import 'package:Dashtronaut/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/providers/stop_watch_provider.dart';
 import 'package:Dashtronaut/presentation/puzzle/share-dialog/puzzle_share_dialog.dart';
 import 'package:provider/provider.dart';
 

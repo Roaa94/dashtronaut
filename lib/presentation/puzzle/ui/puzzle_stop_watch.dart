@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/providers/stop_watch_provider.dart';
+import 'package:Dashtronaut/providers/stop_watch_provider.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/helpers/duration_helper.dart';
 import 'package:provider/provider.dart';
