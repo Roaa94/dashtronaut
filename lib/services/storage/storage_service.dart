@@ -13,11 +13,7 @@ abstract class StorageService {
 
   dynamic get(String key);
 
-  dynamic getAll();
-
   Future<void> clear();
-
-  Future<void> clearBox();
 
   bool has(String key);
 

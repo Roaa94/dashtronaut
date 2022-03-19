@@ -21,11 +21,6 @@ class HiveStorageService implements StorageService {
   }
 
   @override
-  dynamic getAll() {
-    return _hiveBox.values.toList();
-  }
-
-  @override
   bool has(String key) {
     return _hiveBox.containsKey(key);
   }
@@ -37,11 +32,6 @@ class HiveStorageService implements StorageService {
 
   @override
   Future<void> clear() async {
-    await _hiveBox.clear();
-  }
-
-  @override
-  Future<void> clearBox() async {
     await _hiveBox.clear();
   }
 }
