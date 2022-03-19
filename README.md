@@ -10,7 +10,8 @@
 
 # Tutorials
 
-1. [Creating and Animating the Background Stars Using CustomPainter](https://dashtronaut.app/tutorials/background-stars)
+1. [App Architecture, Folder Structure, and Widget Tree](https://dashtronaut.app/tutorials/app-architecture)
+2. [Creating and Animating the Background Stars Using CustomPainter](https://dashtronaut.app/tutorials/background-stars)
 
 https://user-images.githubusercontent.com/50345358/158265025-5b66a0ca-6318-4b23-9e6a-1fda364ba11d.mp4
 
