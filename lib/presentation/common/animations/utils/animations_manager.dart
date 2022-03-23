@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:Dashtronaut/models/position.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/position_tween.dart';
+import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
+import 'package:flutter/material.dart';
 
 enum AnimatedElementType {
   puzzleBoard,
@@ -64,13 +64,16 @@ class AnimationsManager {
     curve: Curves.easeInOut,
   );
 
-  static const Duration phraseBubbleAnimationDuration = Duration(milliseconds: 500);
+  static const Duration phraseBubbleAnimationDuration =
+      Duration(milliseconds: 500);
 
   static const Duration puzzleSolvedDialogDelay = Duration(milliseconds: 500);
 
-  static Duration phraseBubbleTotalAnimationDuration = phraseBubbleHoldAnimationDuration + phraseBubbleAnimationDuration * 2;
+  static Duration phraseBubbleTotalAnimationDuration =
+      phraseBubbleHoldAnimationDuration + phraseBubbleAnimationDuration * 2;
 
-  static const Duration phraseBubbleHoldAnimationDuration = Duration(milliseconds: 1000);
+  static const Duration phraseBubbleHoldAnimationDuration =
+      Duration(milliseconds: 1000);
 
   static final AnimatedElement<double> phraseBubble = AnimatedElement<double>(
     duration: phraseBubbleAnimationDuration,

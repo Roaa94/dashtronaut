@@ -1,6 +1,6 @@
+import 'package:Dashtronaut/helpers/duration_helper.dart';
 import 'package:Dashtronaut/models/puzzle.dart';
 import 'package:flutter/material.dart';
-import 'package:Dashtronaut/helpers/duration_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Helper class that handles sharing puzzle score
@@ -11,7 +11,8 @@ class ShareScoreHelper {
   static const String officialWebsiteUrl = 'https://dashtronaut.app';
 
   /// Path for images of solved puzzles stored on the official website
-  static const String puzzleSolvedImagesUrlRoot = '$officialWebsiteUrl/images/puzzle-solved';
+  static const String puzzleSolvedImagesUrlRoot =
+      '$officialWebsiteUrl/images/puzzle-solved';
 
   /// Url for Twitter intent to launch twitter with tweet content
   static const String twitterIntentUrl = 'https://twitter.com/intent/tweet';
@@ -36,17 +37,20 @@ class ShareScoreHelper {
   }
 
   /// Get the puzzle solved text based on score
-  static String getPuzzleSolvedText(int movesCount, Duration duration, int tilesCount) {
+  static String getPuzzleSolvedText(
+      int movesCount, Duration duration, int tilesCount) {
     return 'I just solved this $tilesCount-Tile Dashtronaut slide puzzle in ${DurationHelper.toFormattedTime(duration)} with $movesCount moves!';
   }
 
   /// Get the puzzle solved text based on score for mobile
-  static String getPuzzleSolvedTextMobile(int movesCount, Duration duration, int tilesCount) {
+  static String getPuzzleSolvedTextMobile(
+      int movesCount, Duration duration, int tilesCount) {
     return '${getPuzzleSolvedText(movesCount, duration, tilesCount)} \n\n$officialWebsiteUrl';
   }
 
   /// Get the link to Twitter with text and url params filled based on score
-  static String getTwitterShareLink(int movesCount, Duration duration, int tilesCount) {
+  static String getTwitterShareLink(
+      int movesCount, Duration duration, int tilesCount) {
     return '$twitterIntentUrl?text=${getPuzzleSolvedText(movesCount, duration, tilesCount)}&url=$officialWebsiteUrl';
   }
 }

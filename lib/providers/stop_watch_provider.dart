@@ -4,7 +4,8 @@ import 'package:Dashtronaut/services/storage/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class StopWatchProvider with ChangeNotifier {
-  Stream<int> timeStream = Stream.periodic(const Duration(seconds: 1), (x) => 1 + x++);
+  Stream<int> timeStream =
+      Stream.periodic(const Duration(seconds: 1), (x) => 1 + x++);
 
   final StorageService storageService;
 

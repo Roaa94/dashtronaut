@@ -4,10 +4,10 @@ import 'package:Dashtronaut/models/puzzle.dart';
 import 'package:Dashtronaut/presentation/background/utils/background_layers.dart';
 import 'package:Dashtronaut/presentation/home/home_page.dart';
 import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/providers/phrases_provider.dart';
 import 'package:Dashtronaut/providers/puzzle_provider.dart';
 import 'package:Dashtronaut/providers/stop_watch_provider.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/services/storage/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
@@ -40,7 +40,8 @@ class _AppState extends State<App> {
 
     for (int size in Puzzle.supportedPuzzleSizes) {
       precacheImage(
-        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
+        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
+            .image,
         context,
       );
     }
@@ -59,9 +60,15 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => PuzzleProvider(widget.storageService)..generate()),
-        ChangeNotifierProvider(create: (_) => StopWatchProvider(widget.storageService)..init()),
-        ChangeNotifierProvider(create: (_) => PhrasesProvider()),
+        ChangeNotifierProvider(
+          create: (_) => PuzzleProvider(widget.storageService)..generate(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => StopWatchProvider(widget.storageService)..init(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PhrasesProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

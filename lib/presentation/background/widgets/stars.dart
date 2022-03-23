@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/layout/stars_layout.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:Dashtronaut/presentation/layout/stars_layout.dart';
+import 'package:flutter/material.dart';
 
 class Stars extends StatefulWidget {
   const Stars({Key? key}) : super(key: key);

@@ -21,7 +21,9 @@ class Tile extends Equatable {
   /// Get the tile's position in the Stack widget
   /// based on its width and current location
   Position getPosition(BuildContext context, double tileWidth) {
-    return Position(top: (currentLocation.y - 1) * tileWidth, left: (currentLocation.x - 1) * tileWidth);
+    return Position(
+        top: (currentLocation.y - 1) * tileWidth,
+        left: (currentLocation.x - 1) * tileWidth);
   }
 
   Tile copyWith({

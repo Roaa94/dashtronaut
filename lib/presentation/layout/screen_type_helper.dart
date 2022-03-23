@@ -25,7 +25,8 @@ class ScreenTypeHelper {
   bool get landscapeMode =>
       MediaQuery.of(context).orientation == Orientation.landscape &&
       !kIsWeb &&
-      MediaQuery.of(context).size.height < ScreenTypeHelper.breakpoints[ScreenType.small]!;
+      MediaQuery.of(context).size.height <
+          ScreenTypeHelper.breakpoints[ScreenType.small]!;
 
   ScreenType get type {
     if (screenWidth <= breakpoints[ScreenType.xSmall]!) {

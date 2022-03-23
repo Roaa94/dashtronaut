@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
 import 'package:Dashtronaut/presentation/phrases/phrase_bubble.dart';
 import 'package:Dashtronaut/providers/phrases_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedPhraseBubble extends StatefulWidget {
@@ -12,7 +12,8 @@ class AnimatedPhraseBubble extends StatefulWidget {
   State<AnimatedPhraseBubble> createState() => _AnimatedPhraseBubbleState();
 }
 
-class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble> with SingleTickerProviderStateMixin {
+class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scale;
 
@@ -48,7 +49,8 @@ class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble> with Single
             } else {
               _animationController.forward();
               Future.delayed(
-                AnimationsManager.phraseBubble.duration + AnimationsManager.phraseBubbleHoldAnimationDuration,
+                AnimationsManager.phraseBubble.duration +
+                    AnimationsManager.phraseBubbleHoldAnimationDuration,
                 () {
                   _animationController.reverse();
                 },

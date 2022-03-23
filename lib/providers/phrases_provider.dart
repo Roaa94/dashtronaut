@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
+import 'package:flutter/cupertino.dart';
 
 class PhrasesProvider with ChangeNotifier {
   static const List<String> puzzleStartedPhrases = [
@@ -63,9 +63,11 @@ class PhrasesProvider with ChangeNotifier {
     assert(phraseState != PhraseState.none);
     switch (phraseState) {
       case PhraseState.puzzleStarted:
-        return puzzleStartedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)];
+        return puzzleStartedPhrases[
+            random.nextInt(puzzleSolvedPhrases.length - 1)];
       case PhraseState.puzzleSolved:
-        return puzzleSolvedPhrases[random.nextInt(puzzleSolvedPhrases.length - 1)];
+        return puzzleSolvedPhrases[
+            random.nextInt(puzzleSolvedPhrases.length - 1)];
       case PhraseState.hardPuzzleSelected:
         return hardPuzzlePhrases[random.nextInt(hardPuzzlePhrases.length - 1)];
       case PhraseState.doingGreat:

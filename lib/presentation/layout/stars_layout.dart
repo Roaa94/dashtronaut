@@ -33,9 +33,11 @@ class StarsLayout implements LayoutDelegate {
 
   double get starsMaxYOffset => MediaQuery.of(context).size.height;
 
-  List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(starsMaxXOffset.ceil() <= 0 ? 1 : starsMaxXOffset.ceil());
+  List<int> get randomStarXOffsets => _getRandomStarsOffsetsList(
+      starsMaxXOffset.ceil() <= 0 ? 1 : starsMaxXOffset.ceil());
 
-  List<int> get randomStarYOffsets => _getRandomStarsOffsetsList(starsMaxYOffset.ceil() <= 0 ? 1 : starsMaxYOffset.ceil());
+  List<int> get randomStarYOffsets => _getRandomStarsOffsetsList(
+      starsMaxYOffset.ceil() <= 0 ? 1 : starsMaxYOffset.ceil());
 
   List<int> _getRandomStarsOffsetsList(int max) {
     List<int> _offsets = [];

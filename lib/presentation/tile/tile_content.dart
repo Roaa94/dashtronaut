@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/models/tile.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/presentation/tile/tile_rive_animation.dart';
+import 'package:flutter/material.dart';
 
 class TileContent extends StatefulWidget {
   final Tile tile;
@@ -21,7 +21,8 @@ class TileContent extends StatefulWidget {
   State<TileContent> createState() => _TileContentState();
 }
 
-class _TileContentState extends State<TileContent> with SingleTickerProviderStateMixin {
+class _TileContentState extends State<TileContent>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late Animation<double> _scale;
 
@@ -57,18 +58,21 @@ class _TileContentState extends State<TileContent> with SingleTickerProviderStat
       child: ScaleTransition(
         scale: _scale,
         child: Padding(
-          padding: EdgeInsets.all(widget.puzzleSize > 4 ? 2 : PuzzleLayout.tilePadding),
+          padding: EdgeInsets.all(
+              widget.puzzleSize > 4 ? 2 : PuzzleLayout.tilePadding),
           child: Stack(
             children: [
               TileRiveAnimation(
-                isAtCorrectLocation: widget.tile.currentLocation == widget.tile.correctLocation,
+                isAtCorrectLocation:
+                    widget.tile.currentLocation == widget.tile.correctLocation,
                 isPuzzleSolved: widget.isPuzzleSolved,
               ),
               Positioned.fill(
                 child: Center(
                   child: Text(
                     '${widget.tile.value}',
-                    style: AppTextStyles.tile.copyWith(fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize)),
+                    style: AppTextStyles.tile.copyWith(
+                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize)),
                   ),
                 ),
               ),

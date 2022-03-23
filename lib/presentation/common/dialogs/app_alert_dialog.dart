@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/presentation/styles/app_colors.dart';
 import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:flutter/material.dart';
 
 class AppAlertDialog extends StatelessWidget {
   final String? title;
@@ -18,7 +18,8 @@ class AppAlertDialog extends StatelessWidget {
     this.onConfirm,
     this.onCancel,
     this.content,
-    this.insetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+    this.insetPadding =
+        const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   })  : assert(content == null ? title != null && onConfirm != null : true),
         super(key: key);
 
@@ -42,7 +43,8 @@ class AppAlertDialog extends StatelessWidget {
               filter: ImageFilter.blur(sigmaY: 8, sigmaX: 8),
               child: Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: Spacing.screenHPadding, vertical: Spacing.md),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.screenHPadding, vertical: Spacing.md),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: AppColors.primary.withOpacity(0.6),
@@ -73,7 +75,8 @@ class AppAlertDialog extends StatelessWidget {
                             const SizedBox(width: Spacing.sm),
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: onCancel ?? () => Navigator.of(context).pop(),
+                                onPressed: onCancel ??
+                                    () => Navigator.of(context).pop(),
                                 child: const Text('Cancel'),
                               ),
                             ),

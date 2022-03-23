@@ -24,7 +24,10 @@ class Location extends Equatable implements Comparable<Location> {
   /// The tile (2, 2) has tiles:
   /// (1, 2), (2, 1), (3, 2), (2, 3) Located around it
   bool isLocatedAround(Location _location) {
-    return isLeftOf(_location) || isRightOf(_location) || isBottomOf(_location) || isTopOf(_location);
+    return isLeftOf(_location) ||
+        isRightOf(_location) ||
+        isBottomOf(_location) ||
+        isTopOf(_location);
   }
 
   /// Check is a location is left of another

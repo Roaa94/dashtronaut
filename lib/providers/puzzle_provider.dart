@@ -34,7 +34,8 @@ class PuzzleProvider with ChangeNotifier {
   late List<Tile> tiles;
 
   /// list of [tiles] excluding white space tile
-  List<Tile> get tilesWithoutWhitespace => tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
+  List<Tile> get tilesWithoutWhitespace =>
+      tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
   int movesCount = 0;
 
@@ -83,15 +84,19 @@ class PuzzleProvider with ChangeNotifier {
   /// This causes the [tile.position] getter to get the correct position based on new [Location]'s
   void swapTilesAndUpdatePuzzle(Tile tile) {
     int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
-    int whiteSpaceTileIndex = tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);
+    int whiteSpaceTileIndex =
+        tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);
     // Store instances of the moved tile and the white space tile before changing their locations
     Tile _movedTile = tiles[movedTileIndex];
     Tile _whiteSpaceTile = tiles[whiteSpaceTileIndex];
 
-    tiles[movedTileIndex] = tiles[movedTileIndex].copyWith(currentLocation: _whiteSpaceTile.currentLocation);
-    tiles[whiteSpaceTileIndex] = _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
+    tiles[movedTileIndex] = tiles[movedTileIndex]
+        .copyWith(currentLocation: _whiteSpaceTile.currentLocation);
+    tiles[whiteSpaceTileIndex] =
+        _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
 
-    print('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
+    print(
+        'Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
 
     if (tiles[movedTileIndex].isAtCorrectLocation) {
       if (puzzle.isSolved) {
@@ -188,7 +193,8 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   void _generateNew() {
-    List<Location> _tilesCorrectLocations = Puzzle.generateTileCorrectLocations(n);
+    List<Location> _tilesCorrectLocations =
+        Puzzle.generateTileCorrectLocations(n);
     List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
 
     tiles = Puzzle.getTilesFromLocations(

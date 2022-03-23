@@ -23,8 +23,10 @@ class _TileRiveAnimationState extends State<TileRiveAnimation> {
 
   @override
   void initState() {
-    correctPositionAnimationController = OneShotAnimation('correctPosition', autoplay: false);
-    nonCorrectPositionAnimationController = OneShotAnimation('nonCorrectPosition', autoplay: false);
+    correctPositionAnimationController =
+        OneShotAnimation('correctPosition', autoplay: false);
+    nonCorrectPositionAnimationController =
+        OneShotAnimation('nonCorrectPosition', autoplay: false);
     super.initState();
   }
 
@@ -36,8 +38,10 @@ class _TileRiveAnimationState extends State<TileRiveAnimation> {
     );
 
     artboard.addController(controller!);
-    _isAtCorrectPositionSM = controller.findInput<bool>('isAtCorrectPosition') as SMIBool?;
-    _isPuzzleSolvedSM = controller.findInput<bool>('isPuzzleSolved') as SMIBool?;
+    _isAtCorrectPositionSM =
+        controller.findInput<bool>('isAtCorrectPosition') as SMIBool?;
+    _isPuzzleSolvedSM =
+        controller.findInput<bool>('isPuzzleSolved') as SMIBool?;
     _isAtCorrectPositionSM?.value = widget.isAtCorrectLocation;
     _isPuzzleSolvedSM?.value = widget.isPuzzleSolved;
   }
@@ -55,7 +59,10 @@ class _TileRiveAnimationState extends State<TileRiveAnimation> {
       'assets/rive/tile.riv',
       onInit: _onRiveInit,
       stateMachines: const ['tile'],
-      controllers: [correctPositionAnimationController, nonCorrectPositionAnimationController],
+      controllers: [
+        correctPositionAnimationController,
+        nonCorrectPositionAnimationController
+      ],
     );
   }
 }

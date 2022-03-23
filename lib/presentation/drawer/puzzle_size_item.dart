@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
+import 'package:Dashtronaut/presentation/styles/app_colors.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/providers/phrases_provider.dart';
 import 'package:Dashtronaut/providers/puzzle_provider.dart';
 import 'package:Dashtronaut/providers/stop_watch_provider.dart';
-import 'package:Dashtronaut/presentation/styles/app_colors.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleSizeItem extends StatelessWidget {
@@ -14,8 +14,10 @@ class PuzzleSizeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
-    PhrasesProvider phrasesProvider = Provider.of<PhrasesProvider>(context, listen: false);
+    StopWatchProvider stopWatchProvider =
+        Provider.of<StopWatchProvider>(context, listen: false);
+    PhrasesProvider phrasesProvider =
+        Provider.of<PhrasesProvider>(context, listen: false);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,9 +31,11 @@ class PuzzleSizeItem extends StatelessWidget {
                   puzzleProvider.resetPuzzleSize(size);
                   stopWatchProvider.stop();
                   if (size > 4) {
-                    phrasesProvider.setPhraseState(PhraseState.hardPuzzleSelected);
+                    phrasesProvider
+                        .setPhraseState(PhraseState.hardPuzzleSelected);
                   }
-                  if (Scaffold.of(context).hasDrawer && Scaffold.of(context).isDrawerOpen) {
+                  if (Scaffold.of(context).hasDrawer &&
+                      Scaffold.of(context).isDrawerOpen) {
                     Navigator.of(context).pop();
                   }
                 }
@@ -47,7 +51,8 @@ class PuzzleSizeItem extends StatelessWidget {
               ),
               child: Text(
                 '$size x $size',
-                style: AppTextStyles.buttonSm.copyWith(color: _isSelected ? AppColors.primary : Colors.white),
+                style: AppTextStyles.buttonSm.copyWith(
+                    color: _isSelected ? AppColors.primary : Colors.white),
               ),
             );
           },

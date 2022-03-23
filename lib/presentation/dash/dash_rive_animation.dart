@@ -20,7 +20,8 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
   final ValueNotifier<bool> _canTapDashNotifier = ValueNotifier<bool>(true);
 
   void _onRiveInit(Artboard artboard) {
-    final controller = StateMachineController.fromArtboard(artboard, 'dashtronaut');
+    final controller =
+        StateMachineController.fromArtboard(artboard, 'dashtronaut');
 
     artboard.addController(controller!);
   }
@@ -55,7 +56,8 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
               _canTapDashNotifier.value = false;
               phrasesProvider.setPhraseState(PhraseState.dashTapped);
               HapticFeedback.lightImpact();
-              Future.delayed(AnimationsManager.phraseBubbleTotalAnimationDuration, () {
+              Future.delayed(
+                  AnimationsManager.phraseBubbleTotalAnimationDuration, () {
                 phrasesProvider.setPhraseState(PhraseState.none);
                 _canTapDashNotifier.value = true;
               });

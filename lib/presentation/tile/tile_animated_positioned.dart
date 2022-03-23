@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/models/position.dart';
 import 'package:Dashtronaut/models/tile.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
+import 'package:flutter/material.dart';
 
 class TileAnimatedPositioned extends StatelessWidget {
   final Tile tile;

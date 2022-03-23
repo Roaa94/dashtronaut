@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:flutter/material.dart';
 
 class PulseTransition extends StatefulWidget {
   final Widget child;
@@ -15,7 +15,8 @@ class PulseTransition extends StatefulWidget {
   _PulseTransitionState createState() => _PulseTransitionState();
 }
 
-class _PulseTransitionState extends State<PulseTransition> with SingleTickerProviderStateMixin {
+class _PulseTransitionState extends State<PulseTransition>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scale;
 

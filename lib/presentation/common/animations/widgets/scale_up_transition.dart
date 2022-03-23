@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:flutter/material.dart';
 
 class ScaleUpTransition extends StatefulWidget {
   final Widget child;
@@ -15,7 +15,8 @@ class ScaleUpTransition extends StatefulWidget {
   _ScaleUpTransitionState createState() => _ScaleUpTransitionState();
 }
 
-class _ScaleUpTransitionState extends State<ScaleUpTransition> with SingleTickerProviderStateMixin {
+class _ScaleUpTransitionState extends State<ScaleUpTransition>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scale;
 

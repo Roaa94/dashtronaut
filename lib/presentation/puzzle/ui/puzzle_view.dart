@@ -2,9 +2,9 @@ import 'package:Dashtronaut/presentation/background/widgets/background_stack.dar
 import 'package:Dashtronaut/presentation/dash/dash_rive_animation.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:Dashtronaut/presentation/phrases/animated_phrase_bubble.dart';
+import 'package:Dashtronaut/presentation/puzzle/board/puzzle_board.dart';
 import 'package:Dashtronaut/providers/puzzle_provider.dart';
 import 'package:Dashtronaut/providers/stop_watch_provider.dart';
-import 'package:Dashtronaut/presentation/puzzle/board/puzzle_board.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

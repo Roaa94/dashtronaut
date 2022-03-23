@@ -1,9 +1,9 @@
-import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:Dashtronaut/models/position.dart';
+import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class DashLayout implements LayoutDelegate {
   @override
@@ -38,7 +38,8 @@ class DashLayout implements LayoutDelegate {
           dashHeight = MediaQuery.of(context).size.height * 0.35;
       }
     } else {
-      dashHeight = ((MediaQuery.of(context).size.height - puzzleWidth) / 2) * 0.85;
+      dashHeight =
+          ((MediaQuery.of(context).size.height - puzzleWidth) / 2) * 0.85;
     }
     return Size(dashHeight, dashHeight);
   }

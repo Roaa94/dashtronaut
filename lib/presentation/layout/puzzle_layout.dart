@@ -25,7 +25,8 @@ class PuzzleLayout implements LayoutDelegate {
         return MediaQuery.of(context).size.width - Spacing.screenHPadding * 2;
       case ScreenType.medium:
         if (screenTypeHelper.landscapeMode) {
-          return MediaQuery.of(context).size.flipped.width - Spacing.screenHPadding * 2;
+          return MediaQuery.of(context).size.flipped.width -
+              Spacing.screenHPadding * 2;
         } else {
           return 500;
         }
@@ -35,7 +36,9 @@ class PuzzleLayout implements LayoutDelegate {
   }
 
   double get distanceOutsidePuzzle {
-    double screenHeight = screenTypeHelper.landscapeMode ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height;
+    double screenHeight = screenTypeHelper.landscapeMode
+        ? MediaQuery.of(context).size.width
+        : MediaQuery.of(context).size.height;
     return ((screenHeight - containerWidth) / 2) + containerWidth;
   }
 
@@ -54,9 +57,16 @@ class PuzzleLayout implements LayoutDelegate {
   List<Widget> get horizontalPuzzleUIElements {
     return [
       Positioned(
-        width: distanceOutsidePuzzle - containerWidth - MediaQuery.of(context).padding.left - (!kIsWeb && Platform.isAndroid ? Spacing.md : 0),
-        top: !kIsWeb && Platform.isAndroid ? MediaQuery.of(context).padding.top + Spacing.md : MediaQuery.of(context).padding.bottom,
-        left: !kIsWeb && Platform.isAndroid ? Spacing.md : MediaQuery.of(context).padding.left,
+        width: distanceOutsidePuzzle -
+            containerWidth -
+            MediaQuery.of(context).padding.left -
+            (!kIsWeb && Platform.isAndroid ? Spacing.md : 0),
+        top: !kIsWeb && Platform.isAndroid
+            ? MediaQuery.of(context).padding.top + Spacing.md
+            : MediaQuery.of(context).padding.bottom,
+        left: !kIsWeb && Platform.isAndroid
+            ? Spacing.md
+            : MediaQuery.of(context).padding.left,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
@@ -100,6 +110,8 @@ class PuzzleLayout implements LayoutDelegate {
   }
 
   List<Widget> get buildUIElements {
-    return screenTypeHelper.landscapeMode ? horizontalPuzzleUIElements : verticalPuzzleUIElements;
+    return screenTypeHelper.landscapeMode
+        ? horizontalPuzzleUIElements
+        : verticalPuzzleUIElements;
   }
 }

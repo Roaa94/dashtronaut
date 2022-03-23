@@ -37,7 +37,8 @@ class PuzzleScore extends StatelessWidget {
               style: AppTextStyles.title,
             ),
             const SizedBox(height: Spacing.xs),
-            const Text('You solved the puzzle! Share your score to challenge your friends'),
+            const Text(
+                'You solved the puzzle! Share your score to challenge your friends'),
             const SizedBox(height: Spacing.sm),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +55,9 @@ class PuzzleScore extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(child: Text('$movesCount Moves', style: AppTextStyles.h1Bold)),
+                Expanded(
+                    child:
+                        Text('$movesCount Moves', style: AppTextStyles.h1Bold)),
               ],
             ),
             const SizedBox(height: Spacing.md),
@@ -75,21 +78,29 @@ class PuzzleScore extends StatelessWidget {
                 onPressed: () async {
                   try {
                     if (kIsWeb) {
-                      await ShareScoreHelper.openLink(ShareScoreHelper.getTwitterShareLink(movesCount, duration, tilesCount));
+                      await ShareScoreHelper.openLink(
+                          ShareScoreHelper.getTwitterShareLink(
+                              movesCount, duration, tilesCount));
                     } else {
-                      File file = await FileHelper.getFileFromUrl(ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize));
+                      File file = await FileHelper.getFileFromUrl(
+                          ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize));
                       await Share.shareFiles(
                         [file.path],
-                        text: ShareScoreHelper.getPuzzleSolvedTextMobile(movesCount, duration, tilesCount),
+                        text: ShareScoreHelper.getPuzzleSolvedTextMobile(
+                            movesCount, duration, tilesCount),
                       );
                     }
                   } catch (e) {
-                    await ShareScoreHelper.openLink(ShareScoreHelper.getTwitterShareLink(movesCount, duration, tilesCount));
+                    await ShareScoreHelper.openLink(
+                        ShareScoreHelper.getTwitterShareLink(
+                            movesCount, duration, tilesCount));
                     rethrow;
                   }
                 },
                 label: const Text('Share'),
-                icon: kIsWeb ? const Icon(FontAwesomeIcons.twitter) : const Icon(Icons.share),
+                icon: kIsWeb
+                    ? const Icon(FontAwesomeIcons.twitter)
+                    : const Icon(Icons.share),
               ),
             ),
           ],

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:Dashtronaut/models/position.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
+import 'package:flutter/material.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {
   final BackgroundLayerLayout layer;
@@ -12,10 +12,12 @@ class AnimatedBackgroundLayer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimatedBackgroundLayerState createState() => _AnimatedBackgroundLayerState();
+  _AnimatedBackgroundLayerState createState() =>
+      _AnimatedBackgroundLayerState();
 }
 
-class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer> with SingleTickerProviderStateMixin {
+class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<Position> _position;
 
@@ -54,10 +56,18 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer> with 
         width: widget.layer.size.width,
       ),
       builder: (c, image) => Positioned(
-        left: _position.isCompleted ? widget.layer.position.left : _position.value.left,
-        top: _position.isCompleted ? widget.layer.position.top : _position.value.top,
-        right: _position.isCompleted ? widget.layer.position.right : _position.value.right,
-        bottom: _position.isCompleted ? widget.layer.position.bottom : _position.value.bottom,
+        left: _position.isCompleted
+            ? widget.layer.position.left
+            : _position.value.left,
+        top: _position.isCompleted
+            ? widget.layer.position.top
+            : _position.value.top,
+        right: _position.isCompleted
+            ? widget.layer.position.right
+            : _position.value.right,
+        bottom: _position.isCompleted
+            ? widget.layer.position.bottom
+            : _position.value.bottom,
         child: image!,
       ),
     );

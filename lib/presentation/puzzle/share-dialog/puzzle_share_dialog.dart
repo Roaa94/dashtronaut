@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/presentation/common/dialogs/app_alert_dialog.dart';
 import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
+import 'package:Dashtronaut/presentation/layout/spacing.dart';
 import 'package:Dashtronaut/presentation/puzzle/share-dialog/puzzle_score.dart';
+import 'package:flutter/material.dart';
 
 class PuzzleSolvedDialog extends StatelessWidget {
   final int puzzleSize;
@@ -23,8 +23,11 @@ class PuzzleSolvedDialog extends StatelessWidget {
     ScreenTypeHelper _screenTypeHelper = ScreenTypeHelper(context);
 
     return AppAlertDialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: Spacing.screenHPadding, vertical: Spacing.md),
-      content: _screenTypeHelper.landscapeMode ? _landscapeContent : _portraitContent,
+      insetPadding: const EdgeInsets.symmetric(
+          horizontal: Spacing.screenHPadding, vertical: Spacing.md),
+      content: _screenTypeHelper.landscapeMode
+          ? _landscapeContent
+          : _portraitContent,
     );
   }
 

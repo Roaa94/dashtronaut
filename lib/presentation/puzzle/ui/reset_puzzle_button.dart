@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
 import 'package:Dashtronaut/presentation/common/animations/widgets/fade_in_transition.dart';
 import 'package:Dashtronaut/presentation/common/dialogs/app_alert_dialog.dart';
+import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:Dashtronaut/providers/puzzle_provider.dart';
 import 'package:Dashtronaut/providers/stop_watch_provider.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {
@@ -36,7 +36,8 @@ class ResetPuzzleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
+    StopWatchProvider stopWatchProvider =
+        Provider.of<StopWatchProvider>(context, listen: false);
 
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
@@ -44,7 +45,8 @@ class ResetPuzzleButton extends StatelessWidget {
         builder: (c, puzzleProvider, _) => Padding(
           padding: const EdgeInsets.only(top: 20),
           child: ElevatedButton(
-            onPressed: () => initResetPuzzle(context, puzzleProvider, stopWatchProvider),
+            onPressed: () =>
+                initResetPuzzle(context, puzzleProvider, stopWatchProvider),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,

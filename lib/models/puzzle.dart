@@ -54,16 +54,20 @@ class Puzzle extends Equatable {
   }
 
   /// Returns the tile at the top of the whitespace tile
-  Tile? get tileTopOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsTopOfWhiteSpace(tile));
+  Tile? get tileTopOfWhitespace =>
+      tiles.firstWhereOrNull((tile) => tileIsTopOfWhiteSpace(tile));
 
   /// Returns the tile at the bottom of the whitespace tile
-  Tile? get tileBottomOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsBottomOfWhiteSpace(tile));
+  Tile? get tileBottomOfWhitespace =>
+      tiles.firstWhereOrNull((tile) => tileIsBottomOfWhiteSpace(tile));
 
   /// Returns the tile at the right of the whitespace tile
-  Tile? get tileRightOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsRightOfWhiteSpace(tile));
+  Tile? get tileRightOfWhitespace =>
+      tiles.firstWhereOrNull((tile) => tileIsRightOfWhiteSpace(tile));
 
   /// Returns the tile at the left of the whitespace tile
-  Tile? get tileLeftOfWhitespace => tiles.firstWhereOrNull((tile) => tileIsLeftOfWhiteSpace(tile));
+  Tile? get tileLeftOfWhitespace =>
+      tiles.firstWhereOrNull((tile) => tileIsLeftOfWhiteSpace(tile));
 
   /// Given a puzzle size, generate a list of tile [Location]s
   ///

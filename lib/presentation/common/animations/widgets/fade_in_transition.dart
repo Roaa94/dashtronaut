@@ -15,7 +15,8 @@ class FadeInTransition extends StatefulWidget {
   _FadeInTransitionState createState() => _FadeInTransitionState();
 }
 
-class _FadeInTransitionState extends State<FadeInTransition> with SingleTickerProviderStateMixin {
+class _FadeInTransitionState extends State<FadeInTransition>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _opacity;
 

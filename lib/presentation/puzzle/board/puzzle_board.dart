@@ -3,11 +3,11 @@ import 'package:Dashtronaut/presentation/common/animations/utils/animations_mana
 import 'package:Dashtronaut/presentation/common/animations/widgets/pulse_transition.dart';
 import 'package:Dashtronaut/presentation/common/animations/widgets/scale_up_transition.dart';
 import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
-import 'package:Dashtronaut/providers/puzzle_provider.dart';
-import 'package:Dashtronaut/providers/stop_watch_provider.dart';
 import 'package:Dashtronaut/presentation/tile/tile_animated_positioned.dart';
 import 'package:Dashtronaut/presentation/tile/tile_content.dart';
 import 'package:Dashtronaut/presentation/tile/tile_gesture_detector.dart';
+import 'package:Dashtronaut/providers/puzzle_provider.dart';
+import 'package:Dashtronaut/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -19,14 +19,17 @@ class PuzzleBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StopWatchProvider stopWatchProvider = Provider.of<StopWatchProvider>(context, listen: false);
+    StopWatchProvider stopWatchProvider =
+        Provider.of<StopWatchProvider>(context, listen: false);
     return ScaleUpTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: Consumer<PuzzleProvider>(
         builder: (c, PuzzleProvider puzzleProvider, _) => RawKeyboardListener(
           onKey: (event) {
             puzzleProvider.handleKeyboardEvent(event);
-            if (event is RawKeyDownEvent && puzzleProvider.movesCount == 1 && keyboardListenerFocusNode.hasFocus) {
+            if (event is RawKeyDownEvent &&
+                puzzleProvider.movesCount == 1 &&
+                keyboardListenerFocusNode.hasFocus) {
               stopWatchProvider.start();
             }
           },
@@ -44,7 +47,8 @@ class PuzzleBoard extends StatelessWidget {
                     children: List.generate(
                       puzzleProvider.tilesWithoutWhitespace.length,
                       (index) {
-                        Tile _tile = puzzleProvider.tilesWithoutWhitespace[index];
+                        Tile _tile =
+                            puzzleProvider.tilesWithoutWhitespace[index];
                         return TileAnimatedPositioned(
                           tile: _tile,
                           isPuzzleSolved: puzzleProvider.puzzle.isSolved,
@@ -52,7 +56,9 @@ class PuzzleBoard extends StatelessWidget {
                           tileGestureDetector: TileGestureDetector(
                             tile: puzzleProvider.tilesWithoutWhitespace[index],
                             tileContent: PulseTransition(
-                              isActive: puzzleProvider.puzzle.tileIsMovable(_tile) && !puzzleProvider.puzzle.isSolved,
+                              isActive:
+                                  puzzleProvider.puzzle.tileIsMovable(_tile) &&
+                                      !puzzleProvider.puzzle.isSolved,
                               child: TileContent(
                                 tile: _tile,
                                 isPuzzleSolved: puzzleProvider.puzzle.isSolved,
