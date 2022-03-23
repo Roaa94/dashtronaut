@@ -39,10 +39,10 @@ class _StarsState extends State<Stars> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    StarsLayout _starsLayer = StarsLayout(context);
+    StarsLayout _starsLayout = StarsLayout(context);
 
     return CustomPaint(
-      painter: _starsLayer.getPainter(
+      painter: _starsLayout.getPainter(
         opacity: _opacity,
       ),
     );
