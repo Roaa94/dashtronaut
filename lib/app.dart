@@ -30,6 +30,18 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   void initState() {
+    if (!kIsWeb && Platform.isMacOS) {
+      DesktopWindow.getWindowSize().then((size) {
+        DesktopWindow.setMinWindowSize(Size(size.height * 0.5, size.height));
+      }).onError((error, stackTrace) {
+        DesktopWindow.setMinWindowSize(const Size(600, 1000));
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
     /// Precache Background layer images for better performance
     for (BackgroundLayerType layerType in BackgroundLayers.types) {
       precacheImage(
@@ -40,19 +52,11 @@ class _AppState extends State<App> {
 
     for (int size in Puzzle.supportedPuzzleSizes) {
       precacheImage(
-        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
-            .image,
+        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
         context,
       );
     }
-    if (!kIsWeb && Platform.isMacOS) {
-      DesktopWindow.getWindowSize().then((size) {
-        DesktopWindow.setMinWindowSize(Size(size.height * 0.5, size.height));
-      }).onError((error, stackTrace) {
-        DesktopWindow.setMinWindowSize(const Size(600, 1000));
-      });
-    }
-    super.initState();
+    super.didChangeDependencies();
   }
 
   // This widget is the root of your application.
