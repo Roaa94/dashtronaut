@@ -1,8 +1,9 @@
 # Dashtronaut
+## Slide Puzzle Game Built With Flutter 💙 For The Flutter Puzzle Hack Challenge
 
 [![HitCount](https://hits.dwyl.com/roaa94/flutter_puzzle_hack.svg?style=flat-square&show=unique)](http://hits.dwyl.com/roaa94/flutter_puzzle_hack)
 
-## Slide Puzzle Game Built For The Flutter Puzzle Hack Challenge
+
 ---
 
 # Tutorials
