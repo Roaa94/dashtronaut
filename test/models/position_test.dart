@@ -9,7 +9,8 @@ void main() {
 
     test('Supports value comparison', () {
       expect(const Position(left: 10, top: 10), equals(targetPosition));
-      expect(const Position(left: 10, top: 10, right: null, bottom: null), equals(targetPosition));
+      expect(const Position(left: 10, top: 10, right: null, bottom: null),
+          equals(targetPosition));
 
       expect(const Position(left: 10, top: 200), isNot(targetPosition));
       expect(const Position(left: 10, top: null), isNot(targetPosition));
@@ -29,8 +30,10 @@ void main() {
 
       test('Returns correct lerpDouble values between two positions', () {
         double t = 0.5;
-        double? newLeft = lerpDouble(startPosition.left ?? 0, endPosition.left ?? 0, t);
-        double? newTop = lerpDouble(startPosition.top ?? 0, endPosition.top ?? 0, t);
+        double? newLeft =
+            lerpDouble(startPosition.left ?? 0, endPosition.left ?? 0, t);
+        double? newTop =
+            lerpDouble(startPosition.top ?? 0, endPosition.top ?? 0, t);
         expect(
           Position.lerp(startPosition, endPosition, t),
           Position(left: newLeft, top: newTop),
@@ -41,8 +44,11 @@ void main() {
         expect(Position.lerp(startPosition, endPosition, 1), endPosition);
       });
 
-      test('Returns same start position if lerp double is 0 and one position param in null', () {
-        expect(Position.lerp(startPosition, const Position(left: 10), 0), startPosition);
+      test(
+          'Returns same start position if lerp double is 0 and one position param in null',
+          () {
+        expect(Position.lerp(startPosition, const Position(left: 10), 0),
+            startPosition);
       });
 
       test('toString prints correctly', () {

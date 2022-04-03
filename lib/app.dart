@@ -52,7 +52,8 @@ class _AppState extends State<App> {
 
     for (int size in Puzzle.supportedPuzzleSizes) {
       precacheImage(
-        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
+        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
+            .image,
         context,
       );
     }

@@ -4,7 +4,9 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 const String kTemporaryPath = 'temporaryPath';
 
-class MockPathProviderPlatform extends Mock with MockPlatformInterfaceMixin implements PathProviderPlatform {
+class MockPathProviderPlatform extends Mock
+    with MockPlatformInterfaceMixin
+    implements PathProviderPlatform {
   @override
   Future<String?> getTemporaryPath() async {
     return kTemporaryPath;
