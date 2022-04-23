@@ -48,3 +48,4 @@ app.*.map.json
 .firebase/
 
 coverage/html/
+pubspec.lock
