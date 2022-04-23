@@ -40,22 +40,26 @@ class _AppState extends State<App> {
     super.initState();
   }
 
+  bool _isInit = true;
+
   @override
   void didChangeDependencies() {
-    /// Precache Background layer images for better performance
-    for (BackgroundLayerType layerType in BackgroundLayers.types) {
-      precacheImage(
-        Image.asset('assets/images/background/${layerType.name}.png').image,
-        context,
-      );
-    }
+    if (_isInit) {
+      for (BackgroundLayerType layerType in BackgroundLayers.types) {
+        precacheImage(
+          Image.asset('assets/images/background/${layerType.name}.png').image,
+          context,
+        );
+      }
 
-    for (int size in Puzzle.supportedPuzzleSizes) {
-      precacheImage(
-        Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
-        context,
-      );
+      for (int size in Puzzle.supportedPuzzleSizes) {
+        precacheImage(
+          Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
+          context,
+        );
+      }
     }
+    _isInit = false;
     super.didChangeDependencies();
   }
 
