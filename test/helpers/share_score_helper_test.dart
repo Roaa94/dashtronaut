@@ -12,11 +12,13 @@ void main() {
     test('Gets ${puzzleSize}x$puzzleSize solved puzzle image', () {
       String imageUrl = ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize);
 
-      expect(imageUrl, '${ShareScoreHelper.puzzleSolvedImagesUrlRoot}/solved-3x3.png');
+      expect(imageUrl,
+          '${ShareScoreHelper.puzzleSolvedImagesUrlRoot}/solved-3x3.png');
     });
 
     test('Gets solved puzzle text with 55 moves and 08:20', () {
-      String puzzleSolvedText = ShareScoreHelper.getPuzzleSolvedText(movesCount, duration, tilesCount);
+      String puzzleSolvedText = ShareScoreHelper.getPuzzleSolvedText(
+          movesCount, duration, tilesCount);
 
       expect(
         puzzleSolvedText,
@@ -24,8 +26,11 @@ void main() {
       );
     });
 
-    test('Gets solved puzzle text with 55 moves and 08:20 with website link', () {
-      String puzzleSolvedTextMobile = ShareScoreHelper.getPuzzleSolvedTextMobile(movesCount, duration, tilesCount);
+    test('Gets solved puzzle text with 55 moves and 08:20 with website link',
+        () {
+      String puzzleSolvedTextMobile =
+          ShareScoreHelper.getPuzzleSolvedTextMobile(
+              movesCount, duration, tilesCount);
 
       expect(
         puzzleSolvedTextMobile,
@@ -34,7 +39,8 @@ void main() {
     });
 
     test('Gets solved puzzle Twitter intent link with 55 moves and 08:20', () {
-      String twitterShareLink = ShareScoreHelper.getTwitterShareLink(movesCount, duration, tilesCount);
+      String twitterShareLink = ShareScoreHelper.getTwitterShareLink(
+          movesCount, duration, tilesCount);
 
       expect(
         twitterShareLink,

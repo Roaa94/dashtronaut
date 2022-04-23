@@ -1,8 +1,34 @@
 # Dashtronaut
+## Slide Puzzle Game Built With Flutter 💙 For The Flutter Puzzle Hack Challenge
 
 [![HitCount](https://hits.dwyl.com/roaa94/flutter_puzzle_hack.svg?style=flat-square&show=unique)](http://hits.dwyl.com/roaa94/flutter_puzzle_hack)
 
-## Slide Puzzle Game Built For The Flutter Puzzle Hack Challenge
+<a href="https://devpost.com/software/dashtronaut">
+   <img width="100%" src="https://user-images.githubusercontent.com/50345358/164895579-98d1d022-d185-4eb1-93d4-019ffde4c599.png" alt="Dashtronaut Slide  Puzzle winning in the Flutter Puzzle Hack for Best educational content" />
+</a>
+
+
+# Inside The App
+
+![image](https://user-images.githubusercontent.com/50345358/161156238-e944054e-ca08-41ad-862b-cccff5852bfb.png)
+
+### [Launch Web App](https://play.dashtronaut.app)  🌍
+
+#### Download Links
+
+<a href="https://play.google.com/store/apps/details?id=com.multicaret.flutter.puzzle.hack">
+  <img width="200px" src="https://user-images.githubusercontent.com/50345358/161318656-3c9d06f0-8782-4d6f-9d85-af9ef0246766.png" alt="Dashtronaut on Google Play" />
+</a>
+<br />
+<a href="https://apps.apple.com/us/app/dashtronaut/id1609418987">
+  <img width="200px" src="https://user-images.githubusercontent.com/50345358/161318659-5a9514f4-f900-455e-81e9-8c5426fd366d.svg" alt="Dashtronaut on iOS App Store" />
+</a>
+<br />
+<a href="https://apps.apple.com/us/app/dashtronaut/id1609418987">
+  <img width="200px" src="https://user-images.githubusercontent.com/50345358/161318660-9fa21629-f903-4a6d-9dd2-ff3965bcd2ce.svg" alt="Dashtronaut on Mac App Store" />
+</a>
+
+
 ---
 
 # Tutorials
@@ -11,12 +37,14 @@
 
 ![app-architecture](https://user-images.githubusercontent.com/50345358/159139398-98de01a9-6248-4998-ac1b-6c0940362217.png)
 
+2. [Performance Improvements By Precaching Images and Warming Up SKSL Shaders](https://dashtronaut.app/tutorials/performance/)
 
 3. [Creating and Animating the Background Stars Using CustomPainter](https://dashtronaut.app/tutorials/background-stars)
 
 https://user-images.githubusercontent.com/50345358/158265025-5b66a0ca-6318-4b23-9e6a-1fda364ba11d.mp4
 
 ---
+
 
 ## Inspiration
 
