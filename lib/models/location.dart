@@ -1,4 +1,4 @@
-import 'package:Dashtronaut/models/tile.dart';
+import 'package:dashtronaut/models/tile.dart';
 import 'package:equatable/equatable.dart';
 
 /// 2-dimensional Location model

@@ -1,6 +1,6 @@
-import 'package:Dashtronaut/models/position.dart';
-import 'package:Dashtronaut/presentation/layout/layout_delegate.dart';
-import 'package:Dashtronaut/presentation/layout/screen_type_helper.dart';
+import 'package:dashtronaut/models/position.dart';
+import 'package:dashtronaut/presentation/layout/layout_delegate.dart';
+import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 

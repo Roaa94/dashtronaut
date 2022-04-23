@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
-import 'package:Dashtronaut/presentation/styles/app_colors.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/presentation/layout/spacing.dart';
+import 'package:dashtronaut/presentation/styles/app_colors.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class AppAlertDialog extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:Dashtronaut/providers/puzzle_provider.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/providers/puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

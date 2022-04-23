@@ -1,6 +1,6 @@
-import 'package:Dashtronaut/helpers/duration_helper.dart';
-import 'package:Dashtronaut/models/score.dart';
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
+import 'package:dashtronaut/helpers/duration_helper.dart';
+import 'package:dashtronaut/models/score.dart';
+import 'package:dashtronaut/presentation/layout/spacing.dart';
 import 'package:flutter/material.dart';
 
 class LatestScoreItem extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:Dashtronaut/presentation/common/animations/utils/position_tween.dart';
+import 'package:dashtronaut/presentation/common/animations/utils/position_tween.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

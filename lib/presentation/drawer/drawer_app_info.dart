@@ -1,4 +1,4 @@
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class DrawerAppInfo extends StatelessWidget {

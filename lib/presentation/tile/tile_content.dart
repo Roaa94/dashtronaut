@@ -1,8 +1,8 @@
-import 'package:Dashtronaut/models/tile.dart';
-import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
-import 'package:Dashtronaut/presentation/layout/puzzle_layout.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:Dashtronaut/presentation/tile/tile_rive_animation.dart';
+import 'package:dashtronaut/models/tile.dart';
+import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/presentation/tile/tile_rive_animation.dart';
 import 'package:flutter/material.dart';
 
 class TileContent extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:Dashtronaut/helpers/duration_helper.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:Dashtronaut/providers/stop_watch_provider.dart';
+import 'package:dashtronaut/helpers/duration_helper.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

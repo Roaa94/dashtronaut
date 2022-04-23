@@ -1,5 +1,5 @@
-import 'package:Dashtronaut/helpers/duration_helper.dart';
-import 'package:Dashtronaut/models/puzzle.dart';
+import 'package:dashtronaut/helpers/duration_helper.dart';
+import 'package:dashtronaut/models/puzzle.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

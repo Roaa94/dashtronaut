@@ -1,4 +1,4 @@
-import 'package:Dashtronaut/services/storage/storage_service.dart';
+import 'package:dashtronaut/services/storage/storage_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveStorageService implements StorageService {

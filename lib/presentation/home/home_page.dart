@@ -1,5 +1,5 @@
-import 'package:Dashtronaut/presentation/drawer/app_drawer.dart';
-import 'package:Dashtronaut/presentation/puzzle/ui/puzzle_view.dart';
+import 'package:dashtronaut/presentation/drawer/app_drawer.dart';
+import 'package:dashtronaut/presentation/puzzle/ui/puzzle_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:Dashtronaut/models/position.dart';
-import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
-import 'package:Dashtronaut/presentation/layout/background_layer_layout.dart';
+import 'package:dashtronaut/models/position.dart';
+import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedBackgroundLayer extends StatefulWidget {

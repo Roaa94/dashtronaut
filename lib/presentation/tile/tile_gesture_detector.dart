@@ -1,10 +1,10 @@
-import 'package:Dashtronaut/models/tile.dart';
-import 'package:Dashtronaut/presentation/common/animations/utils/animations_manager.dart';
-import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
-import 'package:Dashtronaut/presentation/puzzle/share-dialog/puzzle_share_dialog.dart';
-import 'package:Dashtronaut/providers/phrases_provider.dart';
-import 'package:Dashtronaut/providers/puzzle_provider.dart';
-import 'package:Dashtronaut/providers/stop_watch_provider.dart';
+import 'package:dashtronaut/models/tile.dart';
+import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/presentation/layout/phrase_bubble_layout.dart';
+import 'package:dashtronaut/presentation/puzzle/share-dialog/puzzle_share_dialog.dart';
+import 'package:dashtronaut/providers/phrases_provider.dart';
+import 'package:dashtronaut/providers/puzzle_provider.dart';
+import 'package:dashtronaut/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

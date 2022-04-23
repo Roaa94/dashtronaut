@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:Dashtronaut/presentation/drawer/app_version_section.dart';
-import 'package:Dashtronaut/presentation/drawer/drawer_app_info.dart';
-import 'package:Dashtronaut/presentation/drawer/latest_scores.dart';
-import 'package:Dashtronaut/presentation/drawer/puzzle_size_settings.dart';
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
-import 'package:Dashtronaut/presentation/styles/app_colors.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/presentation/drawer/app_version_section.dart';
+import 'package:dashtronaut/presentation/drawer/drawer_app_info.dart';
+import 'package:dashtronaut/presentation/drawer/latest_scores.dart';
+import 'package:dashtronaut/presentation/drawer/puzzle_size_settings.dart';
+import 'package:dashtronaut/presentation/layout/spacing.dart';
+import 'package:dashtronaut/presentation/styles/app_colors.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

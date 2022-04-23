@@ -1,4 +1,4 @@
-import 'package:Dashtronaut/helpers/share_score_helper.dart';
+import 'package:dashtronaut/helpers/share_score_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

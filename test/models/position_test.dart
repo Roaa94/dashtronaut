@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:Dashtronaut/models/position.dart';
+import 'package:dashtronaut/models/position.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

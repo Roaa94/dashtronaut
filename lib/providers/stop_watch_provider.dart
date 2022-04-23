@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:Dashtronaut/services/storage/storage_service.dart';
+import 'package:dashtronaut/services/storage/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class StopWatchProvider with ChangeNotifier {

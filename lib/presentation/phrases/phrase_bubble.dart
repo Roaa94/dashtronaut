@@ -1,8 +1,8 @@
-import 'package:Dashtronaut/presentation/layout/phrase_bubble_layout.dart';
-import 'package:Dashtronaut/presentation/layout/spacing.dart';
-import 'package:Dashtronaut/presentation/styles/app_colors.dart';
-import 'package:Dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:Dashtronaut/providers/phrases_provider.dart';
+import 'package:dashtronaut/presentation/layout/phrase_bubble_layout.dart';
+import 'package:dashtronaut/presentation/layout/spacing.dart';
+import 'package:dashtronaut/presentation/styles/app_colors.dart';
+import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/providers/phrases_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
