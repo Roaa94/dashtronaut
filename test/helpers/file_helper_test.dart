@@ -21,7 +21,8 @@ void main() {
 
     // Todo: make this test work
     test('returns file from asset', () async {
-      String imageUrl = 'https://dashtronaut.app/images/puzzle-solved/solved-3x3.png';
+      String imageUrl =
+          'https://dashtronaut.app/images/puzzle-solved/solved-3x3.png';
       var file = await FileHelper.getFileFromUrl(imageUrl);
 
       expect(file, isA<File>());
