@@ -25,8 +25,8 @@ class FileHelper {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final byteData = response.bodyBytes;
-    Directory _tempDirectory = await getTemporaryDirectory();
-    String _tempPath = '${_tempDirectory.path}/file.png';
-    return await writeFileAsBytes(byteData, _tempPath);
+    Directory tempDirectory = await getTemporaryDirectory();
+    String tempPath = '${tempDirectory.path}/file.png';
+    return await writeFileAsBytes(byteData, tempPath);
   }
 }

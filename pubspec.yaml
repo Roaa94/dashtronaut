@@ -55,6 +55,8 @@ dev_dependencies:
   flutter_launcher_icons: ^0.9.2
   flutter_native_splash: ^2.2.1
   mocktail: ^0.3.0
+  path_provider_platform_interface: ^2.0.4
+  plugin_platform_interface: ^2.1.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

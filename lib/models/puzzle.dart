@@ -75,15 +75,15 @@ class Puzzle extends Equatable {
   /// | 1,1 | 2,1 | 3, 1 |
   /// | 1,2 | 2,2 | 3, 2 |
   /// | 1,3 | 2,3 | 3, 3 |
-  static List<Location> generateTileCorrectLocations(int _n) {
-    List<Location> _tilesCorrectLocations = [];
-    for (int i = 0; i < _n; i++) {
-      for (int j = 0; j < _n; j++) {
-        Location _location = Location(y: i + 1, x: j + 1);
-        _tilesCorrectLocations.add(_location);
+  static List<Location> generateTileCorrectLocations(int n) {
+    List<Location> tilesCorrectLocations = [];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        Location location = Location(y: i + 1, x: j + 1);
+        tilesCorrectLocations.add(location);
       }
     }
-    return _tilesCorrectLocations;
+    return tilesCorrectLocations;
   }
 
   /// Returns a list of tiles from current & correct locations lists

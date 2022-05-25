@@ -34,11 +34,11 @@ class _AnimatedPhraseBubbleState extends State<AnimatedPhraseBubble>
 
   @override
   Widget build(BuildContext context) {
-    PhraseBubbleLayout _phraseBubbleLayout = PhraseBubbleLayout(context);
+    PhraseBubbleLayout phraseBubbleLayout = PhraseBubbleLayout(context);
 
     return Positioned(
-      right: _phraseBubbleLayout.position.right,
-      bottom: _phraseBubbleLayout.position.bottom,
+      right: phraseBubbleLayout.position.right,
+      bottom: phraseBubbleLayout.position.bottom,
       child: ScaleTransition(
         scale: _scale,
         alignment: Alignment.topRight,

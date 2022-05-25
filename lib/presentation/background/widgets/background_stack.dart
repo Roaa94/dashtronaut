@@ -12,7 +12,7 @@ class BackgroundStack extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    List<BackgroundLayerLayout> _backgroundLayers = BackgroundLayers()(context);
+    List<BackgroundLayerLayout> backgroundLayers = BackgroundLayers()(context);
 
     return Positioned.fill(
       child: Container(
@@ -30,8 +30,8 @@ class BackgroundStack extends StatelessWidget {
           children: [
             const Positioned.fill(child: Stars()),
             ...List.generate(
-              _backgroundLayers.length,
-              (i) => AnimatedBackgroundLayer(layer: _backgroundLayers[i]),
+              backgroundLayers.length,
+              (i) => AnimatedBackgroundLayer(layer: backgroundLayers[i]),
             ),
           ],
         ),

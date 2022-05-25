@@ -47,20 +47,20 @@ class PuzzleBoard extends StatelessWidget {
                     children: List.generate(
                       puzzleProvider.tilesWithoutWhitespace.length,
                       (index) {
-                        Tile _tile =
+                        Tile tile =
                             puzzleProvider.tilesWithoutWhitespace[index];
                         return TileAnimatedPositioned(
-                          tile: _tile,
+                          tile: tile,
                           isPuzzleSolved: puzzleProvider.puzzle.isSolved,
                           puzzleSize: puzzleProvider.n,
                           tileGestureDetector: TileGestureDetector(
                             tile: puzzleProvider.tilesWithoutWhitespace[index],
                             tileContent: PulseTransition(
                               isActive:
-                                  puzzleProvider.puzzle.tileIsMovable(_tile) &&
+                                  puzzleProvider.puzzle.tileIsMovable(tile) &&
                                       !puzzleProvider.puzzle.isSolved,
                               child: TileContent(
-                                tile: _tile,
+                                tile: tile,
                                 isPuzzleSolved: puzzleProvider.puzzle.isSolved,
                                 puzzleSize: puzzleProvider.n,
                               ),

@@ -20,12 +20,12 @@ class PuzzleSolvedDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenTypeHelper _screenTypeHelper = ScreenTypeHelper(context);
+    ScreenTypeHelper screenTypeHelper = ScreenTypeHelper(context);
 
     return AppAlertDialog(
       insetPadding: const EdgeInsets.symmetric(
           horizontal: Spacing.screenHPadding, vertical: Spacing.md),
-      content: _screenTypeHelper.landscapeMode
+      content: screenTypeHelper.landscapeMode
           ? _landscapeContent
           : _portraitContent,
     );

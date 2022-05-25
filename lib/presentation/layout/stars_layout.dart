@@ -40,39 +40,39 @@ class StarsLayout implements LayoutDelegate {
       starsMaxYOffset.ceil() <= 0 ? 1 : starsMaxYOffset.ceil());
 
   List<int> _getRandomStarsOffsetsList(int max) {
-    List<int> _offsets = [];
+    List<int> offsets = [];
     for (int i = 0; i <= totalStarsCount; i++) {
-      _offsets.add(random.nextInt(max));
+      offsets.add(random.nextInt(max));
     }
-    return _offsets;
+    return offsets;
   }
 
   List<double> get randomStarSizes {
-    List<double> _sizes = [];
+    List<double> sizes = [];
     for (int i = 0; i <= totalStarsCount; i++) {
-      _sizes.add(random.nextDouble() + 0.7);
+      sizes.add(random.nextDouble() + 0.7);
     }
-    return _sizes;
+    return sizes;
   }
 
   List<int> get fadeOutStarIndices {
-    List<int> _indices = [];
+    List<int> indices = [];
     for (int i = 0; i <= totalStarsCount; i++) {
       if (i % 5 == 0) {
-        _indices.add(i);
+        indices.add(i);
       }
     }
-    return _indices;
+    return indices;
   }
 
   List<int> get fadeInStarIndices {
-    List<int> _indices = [];
+    List<int> indices = [];
     for (int i = 0; i <= totalStarsCount; i++) {
       if (i % 3 == 0) {
-        _indices.add(i);
+        indices.add(i);
       }
     }
-    return _indices;
+    return indices;
   }
 
   CustomPainter getPainter({required Animation<double> opacity}) {

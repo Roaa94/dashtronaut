@@ -81,9 +81,9 @@ class PhrasesProvider with ChangeNotifier {
 
   PhraseState phraseState = PhraseState.none;
 
-  void setPhraseState(PhraseState _phraseState) {
-    phraseState = _phraseState;
-    if (_phraseState == PhraseState.dashTapped) {
+  void setPhraseState(PhraseState phraseState) {
+    phraseState = phraseState;
+    if (phraseState == PhraseState.dashTapped) {
       if (dashTapCount == maxDashTaps) {
         dashTapCount = 0;
       } else {

@@ -23,31 +23,31 @@ class Location extends Equatable implements Comparable<Location> {
   /// | 1,3 | 2,3 | 3, 3 |
   /// The tile (2, 2) has tiles:
   /// (1, 2), (2, 1), (3, 2), (2, 3) Located around it
-  bool isLocatedAround(Location _location) {
-    return isLeftOf(_location) ||
-        isRightOf(_location) ||
-        isBottomOf(_location) ||
-        isTopOf(_location);
+  bool isLocatedAround(Location location) {
+    return isLeftOf(location) ||
+        isRightOf(location) ||
+        isBottomOf(location) ||
+        isTopOf(location);
   }
 
   /// Check is a location is left of another
-  bool isLeftOf(Location _location) {
-    return _location.y == y && _location.x == x + 1;
+  bool isLeftOf(Location location) {
+    return location.y == y && location.x == x + 1;
   }
 
   /// Check is a location is right of another
-  bool isRightOf(Location _location) {
-    return _location.y == y && _location.x == x - 1;
+  bool isRightOf(Location location) {
+    return location.y == y && location.x == x - 1;
   }
 
   /// Check is a location is top of another
-  bool isTopOf(Location _location) {
-    return _location.x == x && _location.y == y + 1;
+  bool isTopOf(Location location) {
+    return location.x == x && location.y == y + 1;
   }
 
   /// Check is a location is bottom of another
-  bool isBottomOf(Location _location) {
-    return _location.x == x && _location.y == y - 1;
+  bool isBottomOf(Location location) {
+    return location.x == x && location.y == y - 1;
   }
 
   @override

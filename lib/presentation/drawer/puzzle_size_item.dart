@@ -24,10 +24,10 @@ class PuzzleSizeItem extends StatelessWidget {
       children: [
         Consumer<PuzzleProvider>(
           builder: (c, puzzleProvider, _) {
-            bool _isSelected = puzzleProvider.n == size;
+            bool isSelected = puzzleProvider.n == size;
             return ElevatedButton(
               onPressed: () {
-                if (!_isSelected) {
+                if (!isSelected) {
                   puzzleProvider.resetPuzzleSize(size);
                   stopWatchProvider.stop();
                   if (size > 4) {
@@ -47,12 +47,12 @@ class PuzzleSizeItem extends StatelessWidget {
                   side: const BorderSide(width: 1, color: Colors.white),
                 ),
                 minimumSize: const Size.fromHeight(50),
-                primary: _isSelected ? Colors.white : null,
+                primary: isSelected ? Colors.white : null,
               ),
               child: Text(
                 '$size x $size',
                 style: AppTextStyles.buttonSm.copyWith(
-                    color: _isSelected ? AppColors.primary : Colors.white),
+                    color: isSelected ? AppColors.primary : Colors.white),
               ),
             );
           },

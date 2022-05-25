@@ -42,13 +42,13 @@ class PuzzleProvider with ChangeNotifier {
   bool get hasStarted => movesCount > 0;
 
   int get correctTilesCount {
-    int _count = 0;
+    int count = 0;
     for (Tile tile in tiles) {
       if (tile.isAtCorrectLocation && !tile.tileIsWhiteSpace) {
-        _count++;
+        count++;
       }
     }
-    return _count;
+    return count;
   }
 
   /// Getter for puzzle object
@@ -83,19 +83,19 @@ class PuzzleProvider with ChangeNotifier {
   /// dragged by the user & the whitespace tile
   /// This causes the [tile.position] getter to get the correct position based on new [Location]'s
   void swapTilesAndUpdatePuzzle(Tile tile) {
-    int movedTileIndex = tiles.indexWhere((_tile) => _tile.value == tile.value);
+    int movedTileIndex = tiles.indexWhere((tile) => tile.value == tile.value);
     int whiteSpaceTileIndex =
-        tiles.indexWhere((_tile) => _tile.tileIsWhiteSpace);
+        tiles.indexWhere((tile) => tile.tileIsWhiteSpace);
     // Store instances of the moved tile and the white space tile before changing their locations
-    Tile _movedTile = tiles[movedTileIndex];
-    Tile _whiteSpaceTile = tiles[whiteSpaceTileIndex];
+    Tile movedTile = tiles[movedTileIndex];
+    Tile whiteSpaceTile = tiles[whiteSpaceTileIndex];
 
     tiles[movedTileIndex] = tiles[movedTileIndex]
-        .copyWith(currentLocation: _whiteSpaceTile.currentLocation);
+        .copyWith(currentLocation: whiteSpaceTile.currentLocation);
     tiles[whiteSpaceTileIndex] =
-        _whiteSpaceTile.copyWith(currentLocation: _movedTile.currentLocation);
+        whiteSpaceTile.copyWith(currentLocation: movedTile.currentLocation);
 
-    print(
+    log(
         'Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
 
     if (tiles[movedTileIndex].isAtCorrectLocation) {
@@ -123,13 +123,13 @@ class PuzzleProvider with ChangeNotifier {
       secondsElapsed: storageService.get(StorageKey.secondsElapsed),
     );
     try {
-      List<Score> _scores = _getScoresFromStorage();
-      if (_scores.length == maxStorableScores) {
-        _scores.removeAt(0);
+      List<Score> scores = _getScoresFromStorage();
+      if (scores.length == maxStorableScores) {
+        scores.removeAt(0);
       }
-      _scores.add(newScore);
-      storageService.set(StorageKey.scores, Score.toJsonList(_scores));
-      scores = _scores;
+      scores.add(newScore);
+      storageService.set(StorageKey.scores, Score.toJsonList(scores));
+      scores = scores;
     } catch (e) {
       storageService.remove(StorageKey.scores);
       log('Error updating scores in storage $e');
@@ -137,24 +137,24 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   List<Score> _getScoresFromStorage() {
-    List<Score> _storedScores = [];
+    List<Score> storedScores = [];
     try {
       final scores = storageService.get(StorageKey.scores);
       if (scores != null) {
-        _storedScores = Score.fromJsonList(scores);
+        storedScores = Score.fromJsonList(scores);
       }
     } catch (e) {
       storageService.remove(StorageKey.scores);
       log('Error retrieving scores from storage');
       log('$e');
     }
-    return _storedScores;
+    return storedScores;
   }
 
   Puzzle? _getPuzzleFromStorage() {
     try {
-      dynamic _puzzle = storageService.get(StorageKey.puzzle);
-      return Puzzle.fromJson(json.decode(json.encode(_puzzle)));
+      dynamic puzzle = storageService.get(StorageKey.puzzle);
+      return Puzzle.fromJson(json.decode(json.encode(puzzle)));
     } catch (e) {
       log('Error in local storage, clearing data...');
       storageService.clear();
@@ -178,11 +178,11 @@ class PuzzleProvider with ChangeNotifier {
     }
     // Set tiles & size from locale storage only of they exist and there is no forceRefresh flag (for reset)
     if (storageService.has(StorageKey.puzzle) && !forceRefresh) {
-      Puzzle? _puzzle = _getPuzzleFromStorage();
-      if (_puzzle != null) {
-        tiles = _puzzle.tiles;
-        n = _puzzle.n;
-        movesCount = _puzzle.movesCount;
+      Puzzle? puzzle = _getPuzzleFromStorage();
+      if (puzzle != null) {
+        tiles = puzzle.tiles;
+        n = puzzle.n;
+        movesCount = puzzle.movesCount;
         return;
       }
     }
@@ -193,21 +193,21 @@ class PuzzleProvider with ChangeNotifier {
   }
 
   void _generateNew() {
-    List<Location> _tilesCorrectLocations =
+    List<Location> tilesCorrectLocations =
         Puzzle.generateTileCorrectLocations(n);
-    List<Location> _tilesCurrentLocations = List.from(_tilesCorrectLocations);
+    List<Location> tilesCurrentLocations = List.from(tilesCorrectLocations);
 
     tiles = Puzzle.getTilesFromLocations(
-      correctLocations: _tilesCorrectLocations,
-      currentLocations: _tilesCurrentLocations,
+      correctLocations: tilesCorrectLocations,
+      currentLocations: tilesCurrentLocations,
     );
 
     while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
-      _tilesCurrentLocations.shuffle(random);
+      tilesCurrentLocations.shuffle(random);
 
       tiles = Puzzle.getTilesFromLocations(
-        correctLocations: _tilesCorrectLocations,
-        currentLocations: _tilesCurrentLocations,
+        correctLocations: tilesCorrectLocations,
+        currentLocations: tilesCurrentLocations,
       );
     }
   }

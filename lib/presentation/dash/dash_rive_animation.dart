@@ -17,7 +17,7 @@ class DashRiveAnimation extends StatefulWidget {
 class _DashRiveAnimationState extends State<DashRiveAnimation> {
   late final PhrasesProvider phrasesProvider;
 
-  final ValueNotifier<bool> _canTapDashNotifier = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> canTapDashNotifier = ValueNotifier<bool>(true);
 
   void _onRiveInit(Artboard artboard) {
     final controller =
@@ -34,32 +34,32 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
 
   @override
   Widget build(BuildContext context) {
-    DashLayout _dash = DashLayout(context);
+    DashLayout dash = DashLayout(context);
 
     return Positioned(
-      right: _dash.position.right,
-      bottom: _dash.position.bottom,
+      right: dash.position.right,
+      bottom: dash.position.bottom,
       child: ValueListenableBuilder(
-        valueListenable: _canTapDashNotifier,
+        valueListenable: canTapDashNotifier,
         child: SizedBox(
-          width: _dash.size.width,
-          height: _dash.size.height,
+          width: dash.size.width,
+          height: dash.size.height,
           child: RiveAnimation.asset(
             'assets/rive/dashtronaut.riv',
             onInit: _onRiveInit,
             stateMachines: const ['dashtronaut'],
           ),
         ),
-        builder: (c, bool _canTapDash, child) => GestureDetector(
+        builder: (c, bool canTapDash, child) => GestureDetector(
           onTap: () {
-            if (_canTapDash) {
-              _canTapDashNotifier.value = false;
+            if (canTapDash) {
+              canTapDashNotifier.value = false;
               phrasesProvider.setPhraseState(PhraseState.dashTapped);
               HapticFeedback.lightImpact();
               Future.delayed(
                   AnimationsManager.phraseBubbleTotalAnimationDuration, () {
                 phrasesProvider.setPhraseState(PhraseState.none);
-                _canTapDashNotifier.value = true;
+                canTapDashNotifier.value = true;
               });
             }
           },
