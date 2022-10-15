@@ -47,7 +47,7 @@ class PuzzleSizeItem extends StatelessWidget {
                   side: const BorderSide(width: 1, color: Colors.white),
                 ),
                 minimumSize: const Size.fromHeight(50),
-                primary: isSelected ? Colors.white : null,
+                backgroundColor: isSelected ? Colors.white : null,
               ),
               child: Text(
                 '$size x $size',
