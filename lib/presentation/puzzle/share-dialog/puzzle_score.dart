@@ -1,5 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
+import 'package:cross_file/cross_file.dart';
 import 'package:dashtronaut/helpers/duration_helper.dart';
 import 'package:dashtronaut/helpers/file_helper.dart';
 import 'package:dashtronaut/helpers/share_score_helper.dart';
@@ -84,8 +87,8 @@ class PuzzleScore extends StatelessWidget {
                     } else {
                       File file = await FileHelper.getFileFromUrl(
                           ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize));
-                      await Share.shareFiles(
-                        [file.path],
+                      await Share.shareXFiles(
+                        [XFile(file.path)],
                         text: ShareScoreHelper.getPuzzleSolvedTextMobile(
                             movesCount, duration, tilesCount),
                       );
