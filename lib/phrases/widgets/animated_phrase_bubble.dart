@@ -1,6 +1,6 @@
 import 'package:dashtronaut/phrases/widgets/phrase_bubble.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/presentation/layout/phrase_bubble_layout.dart';
+import 'package:dashtronaut/layout/phrase_bubble_layout.dart';
 import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

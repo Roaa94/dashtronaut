@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:dashtronaut/presentation/drawer/drawer_button.dart';
-import 'package:dashtronaut/presentation/layout/layout_delegate.dart';
-import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
-import 'package:dashtronaut/presentation/layout/spacing.dart';
+import 'package:dashtronaut/drawer/drawer_button.dart';
+import 'package:dashtronaut/layout/layout_delegate.dart';
+import 'package:dashtronaut/layout/screen_type_helper.dart';
+import 'package:dashtronaut/layout/spacing.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_header.dart';
 import 'package:dashtronaut/puzzle/widgets/reset_puzzle_button.dart';
 import 'package:flutter/foundation.dart';
