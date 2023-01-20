@@ -1,7 +1,7 @@
 import 'package:dashtronaut/background/utils/background_layers.dart';
 import 'package:dashtronaut/background/widgets/animated_background_layer.dart';
 import 'package:dashtronaut/background/widgets/stars.dart';
-import 'package:dashtronaut/layout/background_layer_layout.dart';
+import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 

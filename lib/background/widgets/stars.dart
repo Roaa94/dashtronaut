@@ -1,5 +1,5 @@
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/layout/stars_layout.dart';
+import 'package:dashtronaut/core/layout/stars_layout.dart';
 import 'package:flutter/material.dart';
 
 class Stars extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dashtronaut/layout/spacing.dart';
+import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';

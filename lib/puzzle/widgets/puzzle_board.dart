@@ -2,7 +2,7 @@ import 'package:dashtronaut/core/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/animations/widgets/pulse_transition.dart';
 import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
-import 'package:dashtronaut/layout/puzzle_layout.dart';
+import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/tile/tile_animated_positioned.dart';
 import 'package:dashtronaut/tile/tile_content.dart';
 import 'package:dashtronaut/tile/tile_gesture_detector.dart';

@@ -1,6 +1,6 @@
 import 'package:dashtronaut/core/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/layout/phrase_bubble_layout.dart';
+import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_share_dialog.dart';
 import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';

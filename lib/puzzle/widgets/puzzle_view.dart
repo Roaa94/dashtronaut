@@ -1,7 +1,7 @@
 import 'package:dashtronaut/phrases/widgets/animated_phrase_bubble.dart';
 import 'package:dashtronaut/background/widgets/background_stack.dart';
 import 'package:dashtronaut/dash/dash_rive_animation.dart';
-import 'package:dashtronaut/layout/puzzle_layout.dart';
+import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';

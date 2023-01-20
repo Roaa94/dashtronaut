@@ -1,5 +1,5 @@
 import 'package:dashtronaut/background/widgets/background_stack.dart';
-import 'package:dashtronaut/layout/background_layer_layout.dart';
+import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 /// Helper class that handles background layers

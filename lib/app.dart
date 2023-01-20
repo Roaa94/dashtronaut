@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dashtronaut/core/models/puzzle.dart';
 import 'package:dashtronaut/background/utils/background_layers.dart';
 import 'package:dashtronaut/home/home_page.dart';
-import 'package:dashtronaut/layout/background_layer_layout.dart';
+import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';

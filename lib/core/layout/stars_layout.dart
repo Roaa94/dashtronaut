@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:dashtronaut/background/utils/stars_painter.dart';
-import 'package:dashtronaut/layout/layout_delegate.dart';
-import 'package:dashtronaut/layout/screen_type_helper.dart';
+import 'package:dashtronaut/core/layout/layout_delegate.dart';
+import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:flutter/material.dart';
 
 class StarsLayout implements LayoutDelegate {

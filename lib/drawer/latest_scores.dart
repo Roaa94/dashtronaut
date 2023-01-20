@@ -1,6 +1,6 @@
 import 'package:dashtronaut/core/models/score.dart';
 import 'package:dashtronaut/drawer/latest_score_item.dart';
-import 'package:dashtronaut/layout/spacing.dart';
+import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:flutter/material.dart';

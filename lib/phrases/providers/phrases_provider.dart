@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dashtronaut/layout/phrase_bubble_layout.dart';
+import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
 import 'package:flutter/cupertino.dart';
 
 class PhrasesProvider with ChangeNotifier {

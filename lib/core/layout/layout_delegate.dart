@@ -1,4 +1,4 @@
-import 'package:dashtronaut/layout/screen_type_helper.dart';
+import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class LayoutDelegate {

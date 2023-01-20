@@ -5,7 +5,7 @@ import 'package:dashtronaut/drawer/app_version_section.dart';
 import 'package:dashtronaut/drawer/drawer_app_info.dart';
 import 'package:dashtronaut/drawer/latest_scores.dart';
 import 'package:dashtronaut/drawer/puzzle_size_settings.dart';
-import 'package:dashtronaut/layout/spacing.dart';
+import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:flutter/foundation.dart';

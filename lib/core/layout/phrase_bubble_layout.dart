@@ -1,7 +1,7 @@
 import 'package:dashtronaut/core/models/position.dart';
-import 'package:dashtronaut/layout/dash_layout.dart';
-import 'package:dashtronaut/layout/layout_delegate.dart';
-import 'package:dashtronaut/layout/screen_type_helper.dart';
+import 'package:dashtronaut/core/layout/dash_layout.dart';
+import 'package:dashtronaut/core/layout/layout_delegate.dart';
+import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
 enum PhraseState {

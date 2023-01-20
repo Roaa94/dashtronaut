@@ -1,6 +1,6 @@
 import 'package:dashtronaut/core/models/position.dart';
 import 'package:dashtronaut/core/animations/utils/position_tween.dart';
-import 'package:dashtronaut/layout/background_layer_layout.dart';
+import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 
 enum AnimatedElementType {
