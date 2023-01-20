@@ -1,45 +1,44 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:flutter/material.dart';
 
-class FadeInTransition extends StatefulWidget {
+class ScaleUpTransition extends StatefulWidget {
   final Widget child;
   final Duration? delay;
 
-  const FadeInTransition({
+  const ScaleUpTransition({
     Key? key,
     required this.child,
     this.delay,
   }) : super(key: key);
 
   @override
-  _FadeInTransitionState createState() => _FadeInTransitionState();
+  _ScaleUpTransitionState createState() => _ScaleUpTransitionState();
 }
 
-class _FadeInTransitionState extends State<FadeInTransition>
+class _ScaleUpTransitionState extends State<ScaleUpTransition>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
-  late final Animation<double> _opacity;
+  late final Animation<double> _scale;
 
   @override
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: AnimationsManager.fadeIn.duration,
+      duration: AnimationsManager.scaleUp.duration,
     );
 
-    _opacity = AnimationsManager.fadeIn.tween.animate(
+    _scale = AnimationsManager.scaleUp.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: AnimationsManager.fadeIn.curve,
+        curve: AnimationsManager.scaleUp.curve,
       ),
     );
+
     if (widget.delay == null) {
       _animationController.forward();
     } else {
       Future.delayed(widget.delay!, () {
-        if (mounted) {
-          _animationController.forward();
-        }
+        _animationController.forward();
       });
     }
     super.initState();
@@ -53,8 +52,8 @@ class _FadeInTransitionState extends State<FadeInTransition>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _opacity,
+    return ScaleTransition(
+      scale: _scale,
       child: widget.child,
     );
   }

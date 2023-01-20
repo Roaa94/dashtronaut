@@ -7,7 +7,7 @@ import 'package:dashtronaut/models/position.dart';
 import 'package:dashtronaut/models/puzzle.dart';
 import 'package:dashtronaut/models/score.dart';
 import 'package:dashtronaut/models/tile.dart';
-import 'package:dashtronaut/services/storage/storage_service.dart';
+import 'package:dashtronaut/core/services/storage/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 

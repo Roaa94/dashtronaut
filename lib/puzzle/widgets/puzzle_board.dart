@@ -1,7 +1,7 @@
 import 'package:dashtronaut/models/tile.dart';
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/presentation/common/animations/widgets/pulse_transition.dart';
-import 'package:dashtronaut/presentation/common/animations/widgets/scale_up_transition.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/widgets/pulse_transition.dart';
+import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
 import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:dashtronaut/presentation/tile/tile_animated_positioned.dart';
 import 'package:dashtronaut/presentation/tile/tile_content.dart';

@@ -1,7 +1,7 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/presentation/common/animations/widgets/fade_in_transition.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/widgets/fade_in_transition.dart';
 import 'package:dashtronaut/presentation/common/dialogs/app_alert_dialog.dart';
-import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';

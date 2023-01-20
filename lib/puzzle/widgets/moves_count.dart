@@ -1,4 +1,4 @@
-import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:dashtronaut/models/position.dart';
-import 'package:dashtronaut/presentation/common/animations/utils/position_tween.dart';
+import 'package:dashtronaut/core/animations/utils/position_tween.dart';
 import 'package:dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:flutter/material.dart';
 

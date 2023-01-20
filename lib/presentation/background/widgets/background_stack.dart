@@ -2,7 +2,7 @@ import 'package:dashtronaut/presentation/background/utils/background_layers.dart
 import 'package:dashtronaut/presentation/background/widgets/animated_background_layer.dart';
 import 'package:dashtronaut/presentation/background/widgets/stars.dart';
 import 'package:dashtronaut/presentation/layout/background_layer_layout.dart';
-import 'package:dashtronaut/presentation/styles/app_colors.dart';
+import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundStack extends StatelessWidget {

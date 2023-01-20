@@ -1,4 +1,4 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:flutter/material.dart';
 
 class PulseTransition extends StatefulWidget {

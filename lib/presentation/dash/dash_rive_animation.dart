@@ -1,4 +1,4 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/presentation/layout/dash_layout.dart';
 import 'package:dashtronaut/presentation/layout/phrase_bubble_layout.dart';
 import 'package:dashtronaut/phrases/providers/phrases_provider.dart';

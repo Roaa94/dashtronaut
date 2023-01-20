@@ -1,4 +1,4 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/presentation/layout/stars_layout.dart';
 import 'package:flutter/material.dart';
 

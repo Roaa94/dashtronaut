@@ -1,44 +1,45 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:flutter/material.dart';
 
-class ScaleUpTransition extends StatefulWidget {
+class FadeInTransition extends StatefulWidget {
   final Widget child;
   final Duration? delay;
 
-  const ScaleUpTransition({
+  const FadeInTransition({
     Key? key,
     required this.child,
     this.delay,
   }) : super(key: key);
 
   @override
-  _ScaleUpTransitionState createState() => _ScaleUpTransitionState();
+  _FadeInTransitionState createState() => _FadeInTransitionState();
 }
 
-class _ScaleUpTransitionState extends State<ScaleUpTransition>
+class _FadeInTransitionState extends State<FadeInTransition>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
-  late final Animation<double> _scale;
+  late final Animation<double> _opacity;
 
   @override
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: AnimationsManager.scaleUp.duration,
+      duration: AnimationsManager.fadeIn.duration,
     );
 
-    _scale = AnimationsManager.scaleUp.tween.animate(
+    _opacity = AnimationsManager.fadeIn.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: AnimationsManager.scaleUp.curve,
+        curve: AnimationsManager.fadeIn.curve,
       ),
     );
-
     if (widget.delay == null) {
       _animationController.forward();
     } else {
       Future.delayed(widget.delay!, () {
-        _animationController.forward();
+        if (mounted) {
+          _animationController.forward();
+        }
       });
     }
     super.initState();
@@ -52,8 +53,8 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _scale,
+    return FadeTransition(
+      opacity: _opacity,
       child: widget.child,
     );
   }

@@ -5,7 +5,7 @@ import 'package:dashtronaut/helpers/duration_helper.dart';
 import 'package:dashtronaut/helpers/file_helper.dart';
 import 'package:dashtronaut/helpers/share_score_helper.dart';
 import 'package:dashtronaut/presentation/layout/spacing.dart';
-import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

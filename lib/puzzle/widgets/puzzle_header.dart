@@ -1,10 +1,10 @@
-import 'package:dashtronaut/presentation/common/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/presentation/common/animations/widgets/fade_in_transition.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/widgets/fade_in_transition.dart';
 import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:dashtronaut/presentation/layout/spacing.dart';
 import 'package:dashtronaut/puzzle/widgets/correct_tiles_count.dart';
 import 'package:dashtronaut/puzzle/widgets/moves_count.dart';
-import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
+import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_stop_watch.dart';
 import 'package:flutter/material.dart';
 
