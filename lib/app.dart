@@ -5,7 +5,7 @@ import 'package:dashtronaut/background/utils/background_layers.dart';
 import 'package:dashtronaut/home/home_page.dart';
 import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
-import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
+import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:dashtronaut/core/services/storage/storage_service.dart';

@@ -1,7 +1,7 @@
 import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
 import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
-import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
+import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
-import 'package:dashtronaut/phrases/widgets/phrase_bubble.dart';
+import 'package:dashtronaut/dash/widgets/phrase_bubble.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
-import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
+import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
