@@ -83,9 +83,9 @@ class PuzzleProvider with ChangeNotifier {
   /// dragged by the user & the whitespace tile
   /// This causes the [tile.position] getter to get the correct position based on new [Location]'s
   void swapTilesAndUpdatePuzzle(Tile tile) {
-    int movedTileIndex = tiles.indexWhere((tile) => tile.value == tile.value);
-    int whiteSpaceTileIndex =
-        tiles.indexWhere((tile) => tile.tileIsWhiteSpace);
+    int movedTileIndex = tiles
+        .indexWhere((ctile) => ctile.currentLocation == tile.currentLocation);
+    int whiteSpaceTileIndex = tiles.indexWhere((tile) => tile.tileIsWhiteSpace);
     // Store instances of the moved tile and the white space tile before changing their locations
     Tile movedTile = tiles[movedTileIndex];
     Tile whiteSpaceTile = tiles[whiteSpaceTileIndex];
@@ -95,8 +95,7 @@ class PuzzleProvider with ChangeNotifier {
     tiles[whiteSpaceTileIndex] =
         whiteSpaceTile.copyWith(currentLocation: movedTile.currentLocation);
 
-    log(
-        'Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
+    log('Number of correct tiles ${puzzle.getNumberOfCorrectTiles()} | Is solved: ${puzzle.isSolved}');
 
     if (tiles[movedTileIndex].isAtCorrectLocation) {
       if (puzzle.isSolved) {
