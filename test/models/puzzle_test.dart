@@ -1,6 +1,6 @@
-import 'package:dashtronaut/models/location.dart';
-import 'package:dashtronaut/models/puzzle.dart';
-import 'package:dashtronaut/models/tile.dart';
+import 'package:dashtronaut/core/models/location.dart';
+import 'package:dashtronaut/core/models/puzzle.dart';
+import 'package:dashtronaut/core/models/tile.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:dashtronaut/models/puzzle.dart';
+import 'package:dashtronaut/core/models/puzzle.dart';
 import 'package:dashtronaut/presentation/drawer/puzzle_size_item.dart';
 import 'package:dashtronaut/presentation/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';

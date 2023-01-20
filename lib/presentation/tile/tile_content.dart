@@ -1,4 +1,4 @@
-import 'package:dashtronaut/models/tile.dart';
+import 'package:dashtronaut/core/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';

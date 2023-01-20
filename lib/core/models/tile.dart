@@ -1,5 +1,5 @@
-import 'package:dashtronaut/models/location.dart';
-import 'package:dashtronaut/models/position.dart';
+import 'package:dashtronaut/core/models/location.dart';
+import 'package:dashtronaut/core/models/position.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 

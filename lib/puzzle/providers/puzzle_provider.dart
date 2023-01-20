@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
 
-import 'package:dashtronaut/models/location.dart';
-import 'package:dashtronaut/models/position.dart';
-import 'package:dashtronaut/models/puzzle.dart';
-import 'package:dashtronaut/models/score.dart';
-import 'package:dashtronaut/models/tile.dart';
+import 'package:dashtronaut/core/models/location.dart';
+import 'package:dashtronaut/core/models/position.dart';
+import 'package:dashtronaut/core/models/puzzle.dart';
+import 'package:dashtronaut/core/models/score.dart';
+import 'package:dashtronaut/core/models/tile.dart';
 import 'package:dashtronaut/core/services/storage/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
