@@ -5,9 +5,9 @@ import 'package:dashtronaut/presentation/background/utils/background_layers.dart
 import 'package:dashtronaut/presentation/home/home_page.dart';
 import 'package:dashtronaut/presentation/layout/background_layer_layout.dart';
 import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:dashtronaut/providers/phrases_provider.dart';
+import 'package:dashtronaut/phrases/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
-import 'package:dashtronaut/providers/stop_watch_provider.dart';
+import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:dashtronaut/services/storage/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
