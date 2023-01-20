@@ -1,4 +1,4 @@
-import 'package:dashtronaut/helpers/duration_helper.dart';
+import 'package:dashtronaut/core/helpers/duration_helper.dart';
 import 'package:dashtronaut/core/models/score.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:flutter/material.dart';

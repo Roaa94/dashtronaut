@@ -1,4 +1,4 @@
-import 'package:dashtronaut/helpers/duration_helper.dart';
+import 'package:dashtronaut/core/helpers/duration_helper.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
