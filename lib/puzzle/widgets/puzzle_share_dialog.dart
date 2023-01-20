@@ -1,7 +1,7 @@
 import 'package:dashtronaut/presentation/common/dialogs/app_alert_dialog.dart';
 import 'package:dashtronaut/presentation/layout/screen_type_helper.dart';
 import 'package:dashtronaut/presentation/layout/spacing.dart';
-import 'package:dashtronaut/presentation/puzzle/share-dialog/puzzle_score.dart';
+import 'package:dashtronaut/puzzle/widgets/puzzle_score.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleSolvedDialog extends StatelessWidget {

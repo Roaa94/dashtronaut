@@ -2,8 +2,8 @@ import 'package:dashtronaut/presentation/background/widgets/background_stack.dar
 import 'package:dashtronaut/presentation/dash/dash_rive_animation.dart';
 import 'package:dashtronaut/presentation/layout/puzzle_layout.dart';
 import 'package:dashtronaut/presentation/phrases/animated_phrase_bubble.dart';
-import 'package:dashtronaut/presentation/puzzle/board/puzzle_board.dart';
-import 'package:dashtronaut/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

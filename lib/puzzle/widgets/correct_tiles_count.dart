@@ -1,22 +1,22 @@
 import 'package:dashtronaut/presentation/styles/app_text_styles.dart';
-import 'package:dashtronaut/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MovesCount extends StatelessWidget {
-  const MovesCount({Key? key}) : super(key: key);
+class CorrectTilesCount extends StatelessWidget {
+  const CorrectTilesCount({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Selector<PuzzleProvider, int>(
-      selector: (c, puzzleProvider) => puzzleProvider.movesCount,
-      builder: (c, int movesCount, _) => RichText(
+    return Consumer<PuzzleProvider>(
+      builder: (c, puzzleProvider, _) => RichText(
         text: TextSpan(
-          text: 'Moves: ',
+          text: 'Correct Tiles: ',
           style: AppTextStyles.body.copyWith(color: Colors.white),
           children: <TextSpan>[
             TextSpan(
-              text: '$movesCount',
+              text:
+                  '${puzzleProvider.correctTilesCount}/${puzzleProvider.puzzle.tiles.length - 1}',
               style: AppTextStyles.bodyBold.copyWith(color: Colors.white),
             ),
           ],
