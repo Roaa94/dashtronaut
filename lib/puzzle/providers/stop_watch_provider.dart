@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dashtronaut/core/services/storage/storage_service.dart';
+import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:flutter/cupertino.dart';
 
 class StopWatchProvider with ChangeNotifier {
@@ -16,7 +16,7 @@ class StopWatchProvider with ChangeNotifier {
   int secondsElapsed = 0;
 
   void init() {
-    secondsElapsed = storageService.get(StorageKey.secondsElapsed) ?? 0;
+    secondsElapsed = storageService.get(StorageKeys.secondsElapsed) ?? 0;
   }
 
   void start() {
@@ -26,7 +26,7 @@ class StopWatchProvider with ChangeNotifier {
       streamSubscription = timeStream.listen((seconds) {
         secondsElapsed++;
         notifyListeners();
-        storageService.set(StorageKey.secondsElapsed, secondsElapsed);
+        storageService.set(StorageKeys.secondsElapsed, secondsElapsed);
       });
     }
   }
@@ -36,7 +36,7 @@ class StopWatchProvider with ChangeNotifier {
       streamSubscription!.pause();
       secondsElapsed = 0;
       notifyListeners();
-      storageService.set(StorageKey.secondsElapsed, secondsElapsed);
+      storageService.set(StorageKeys.secondsElapsed, secondsElapsed);
     }
   }
 

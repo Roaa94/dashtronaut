@@ -38,6 +38,7 @@ dev_dependencies:
   path_provider_platform_interface: ^2.0.4
   plugin_platform_interface: ^2.1.2
   flutter_lints: ^2.0.1
+  hive_test: ^1.0.1
 
 flutter:
   uses-material-design: true

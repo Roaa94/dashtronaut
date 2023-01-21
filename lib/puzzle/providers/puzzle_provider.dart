@@ -7,9 +7,9 @@ import 'package:dashtronaut/core/models/position.dart';
 import 'package:dashtronaut/core/models/puzzle.dart';
 import 'package:dashtronaut/core/models/score.dart';
 import 'package:dashtronaut/core/models/tile.dart';
-import 'package:dashtronaut/core/services/storage/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:dashtronaut/core/services/storage/storage.dart';
 
 class PuzzleProvider with ChangeNotifier {
   final StorageService storageService;
@@ -23,7 +23,7 @@ class PuzzleProvider with ChangeNotifier {
     assert(Puzzle.supportedPuzzleSizes.contains(size));
     n = size;
     movesCount = 0;
-    storageService.remove(StorageKey.puzzle);
+    storageService.remove(StorageKeys.puzzle);
     generate(forceRefresh: true);
   }
 
@@ -119,7 +119,7 @@ class PuzzleProvider with ChangeNotifier {
     Score newScore = Score(
       movesCount: movesCount,
       puzzleSize: n,
-      secondsElapsed: storageService.get(StorageKey.secondsElapsed),
+      secondsElapsed: storageService.get(StorageKeys.secondsElapsed),
     );
     try {
       List<Score> scores = _getScoresFromStorage();
@@ -127,10 +127,10 @@ class PuzzleProvider with ChangeNotifier {
         scores.removeAt(0);
       }
       scores.add(newScore);
-      storageService.set(StorageKey.scores, Score.toJsonList(scores));
+      storageService.set(StorageKeys.scores, Score.toJsonList(scores));
       scores = scores;
     } catch (e) {
-      storageService.remove(StorageKey.scores);
+      storageService.remove(StorageKeys.scores);
       log('Error updating scores in storage $e');
     }
   }
@@ -138,12 +138,12 @@ class PuzzleProvider with ChangeNotifier {
   List<Score> _getScoresFromStorage() {
     List<Score> storedScores = [];
     try {
-      final scores = storageService.get(StorageKey.scores);
+      final scores = storageService.get(StorageKeys.scores);
       if (scores != null) {
         storedScores = Score.fromJsonList(scores);
       }
     } catch (e) {
-      storageService.remove(StorageKey.scores);
+      storageService.remove(StorageKeys.scores);
       log('Error retrieving scores from storage');
       log('$e');
     }
@@ -152,7 +152,7 @@ class PuzzleProvider with ChangeNotifier {
 
   Puzzle? _getPuzzleFromStorage() {
     try {
-      dynamic puzzle = storageService.get(StorageKey.puzzle);
+      dynamic puzzle = storageService.get(StorageKeys.puzzle);
       return Puzzle.fromJson(json.decode(json.encode(puzzle)));
     } catch (e) {
       log('Error in local storage, clearing data...');
@@ -163,7 +163,7 @@ class PuzzleProvider with ChangeNotifier {
 
   void _updatePuzzleInStorage() {
     try {
-      storageService.set(StorageKey.puzzle, puzzle.toJson());
+      storageService.set(StorageKeys.puzzle, puzzle.toJson());
     } catch (e) {
       log('Error updating puzzle in storage');
       log('$e');
@@ -172,11 +172,11 @@ class PuzzleProvider with ChangeNotifier {
 
   /// Generates tiles with shuffle
   void generate({bool forceRefresh = false}) {
-    if (storageService.has(StorageKey.scores)) {
+    if (storageService.has(StorageKeys.scores)) {
       scores = _getScoresFromStorage();
     }
     // Set tiles & size from locale storage only of they exist and there is no forceRefresh flag (for reset)
-    if (storageService.has(StorageKey.puzzle) && !forceRefresh) {
+    if (storageService.has(StorageKeys.puzzle) && !forceRefresh) {
       Puzzle? puzzle = _getPuzzleFromStorage();
       if (puzzle != null) {
         tiles = puzzle.tiles;
