@@ -1,5 +1,5 @@
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +8,7 @@ class MovesCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<PuzzleProvider, int>(
+    return Selector<OldPuzzleProvider, int>(
       selector: (c, puzzleProvider) => puzzleProvider.movesCount,
       builder: (c, int movesCount, _) => RichText(
         text: TextSpan(

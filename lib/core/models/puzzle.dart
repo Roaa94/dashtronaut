@@ -15,9 +15,6 @@ class Puzzle extends Equatable {
     this.movesCount = 0,
   }) : assert(n < 10);
 
-  /// List of supported puzzle sizes
-  static List<int> supportedPuzzleSizes = [3, 4, 5, 6];
-
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
 

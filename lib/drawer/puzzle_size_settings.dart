@@ -1,4 +1,4 @@
-import 'package:dashtronaut/core/models/puzzle.dart';
+import 'package:dashtronaut/core/constants.dart';
 import 'package:dashtronaut/drawer/puzzle_size_item.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
@@ -33,17 +33,17 @@ class PuzzleSizeSettings extends StatelessWidget {
           const SizedBox(height: 10),
           Row(
             children: List.generate(
-              Puzzle.supportedPuzzleSizes.length,
+              Constants.supportedPuzzleSizes.length,
               (index) => Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(
-                    end: index < Puzzle.supportedPuzzleSizes.length - 1
+                    end: index < Constants.supportedPuzzleSizes.length - 1
                         ? Spacing.xs / 2
                         : 0,
                     start: index > 0 ? Spacing.xs / 2 : 0,
                   ),
                   child: PuzzleSizeItem(
-                    size: Puzzle.supportedPuzzleSizes[index],
+                    size: Constants.supportedPuzzleSizes[index],
                   ),
                 ),
               ),

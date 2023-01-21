@@ -3,7 +3,7 @@ import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_share_dialog.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class TileGestureDetector extends StatelessWidget {
 
   Future<void> _showPuzzleSolvedDialog(
     BuildContext context,
-    PuzzleProvider puzzleProvider,
+    OldPuzzleProvider puzzleProvider,
     int secondsElapsed,
   ) async {
     await showDialog(
@@ -37,7 +37,7 @@ class TileGestureDetector extends StatelessWidget {
 
   void _swapTilesAndUpdatePuzzle(
     BuildContext context,
-    PuzzleProvider puzzleProvider,
+    OldPuzzleProvider puzzleProvider,
     StopWatchProvider stopWatchProvider,
     PhrasesProvider phrasesProvider,
   ) {
@@ -82,8 +82,8 @@ class TileGestureDetector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PuzzleProvider puzzleProvider =
-        Provider.of<PuzzleProvider>(context, listen: false);
+    OldPuzzleProvider puzzleProvider =
+        Provider.of<OldPuzzleProvider>(context, listen: false);
     StopWatchProvider stopWatchProvider =
         Provider.of<StopWatchProvider>(context, listen: false);
     PhrasesProvider phrasesProvider =

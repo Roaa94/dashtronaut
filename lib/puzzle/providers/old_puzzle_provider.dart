@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
 
+import 'package:dashtronaut/core/constants.dart';
 import 'package:dashtronaut/core/models/location.dart';
 import 'package:dashtronaut/core/models/position.dart';
 import 'package:dashtronaut/core/models/puzzle.dart';
@@ -11,16 +12,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 
-class PuzzleProvider with ChangeNotifier {
+class OldPuzzleProvider with ChangeNotifier {
   final StorageService storageService;
 
-  PuzzleProvider(this.storageService);
+  OldPuzzleProvider(this.storageService);
 
   /// One dimensional size of the puzzle => size = n x n (Default = 4x4)
-  int n = Puzzle.supportedPuzzleSizes[1];
+  int n = Constants.supportedPuzzleSizes[1];
 
   void resetPuzzleSize(int size) {
-    assert(Puzzle.supportedPuzzleSizes.contains(size));
+    assert(Constants.supportedPuzzleSizes.contains(size));
     n = size;
     movesCount = 0;
     storageService.remove(StorageKeys.puzzle);
@@ -113,8 +114,6 @@ class PuzzleProvider with ChangeNotifier {
 
   List<Score> scores = <Score>[];
 
-  static const int maxStorableScores = 10;
-
   void _updateScoresInStorage() {
     Score newScore = Score(
       movesCount: movesCount,
@@ -123,7 +122,7 @@ class PuzzleProvider with ChangeNotifier {
     );
     try {
       List<Score> scores = _getScoresFromStorage();
-      if (scores.length == maxStorableScores) {
+      if (scores.length == Constants.maxStorableScores) {
         scores.removeAt(0);
       }
       scores.add(newScore);

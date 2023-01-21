@@ -2,7 +2,7 @@ import 'package:dashtronaut/core/models/score.dart';
 import 'package:dashtronaut/drawer/latest_score_item.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class LatestScores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<PuzzleProvider, List<Score>>(
+    return Selector<OldPuzzleProvider, List<Score>>(
       selector: (c, puzzleProvider) => puzzleProvider.scores.reversed.toList(),
       builder: (c, List<Score> scores, child) => Container(
         padding: const EdgeInsets.symmetric(vertical: Spacing.md),

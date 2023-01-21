@@ -6,7 +6,7 @@ import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/tile_animated_positioned.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/tile_content.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/tile_gesture_detector.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,8 +23,8 @@ class PuzzleBoard extends StatelessWidget {
         Provider.of<StopWatchProvider>(context, listen: false);
     return ScaleUpTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
-      child: Consumer<PuzzleProvider>(
-        builder: (c, PuzzleProvider puzzleProvider, _) => RawKeyboardListener(
+      child: Consumer<OldPuzzleProvider>(
+        builder: (c, OldPuzzleProvider puzzleProvider, _) => RawKeyboardListener(
           onKey: (event) {
             puzzleProvider.handleKeyboardEvent(event);
             if (event is RawKeyDownEvent &&

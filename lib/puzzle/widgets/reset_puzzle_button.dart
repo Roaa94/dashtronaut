@@ -2,7 +2,7 @@ import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/animations/widgets/fade_in_transition.dart';
 import 'package:dashtronaut/core/widgets/app_alert_dialog.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +12,7 @@ class ResetPuzzleButton extends StatelessWidget {
 
   void initResetPuzzle(
     BuildContext context,
-    PuzzleProvider puzzleProvider,
+    OldPuzzleProvider puzzleProvider,
     StopWatchProvider stopWatchProvider,
   ) {
     if (puzzleProvider.hasStarted && !puzzleProvider.puzzle.isSolved) {
@@ -41,7 +41,7 @@ class ResetPuzzleButton extends StatelessWidget {
 
     return FadeInTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
-      child: Consumer<PuzzleProvider>(
+      child: Consumer<OldPuzzleProvider>(
         builder: (c, puzzleProvider, _) => Padding(
           padding: const EdgeInsets.only(top: 20),
           child: ElevatedButton(

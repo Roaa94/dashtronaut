@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:dashtronaut/core/constants.dart';
 import 'package:dashtronaut/core/models/puzzle.dart';
 import 'package:dashtronaut/background/utils/background_layers.dart';
 import 'package:dashtronaut/home/home_page.dart';
 import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
@@ -15,8 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'
     hide ChangeNotifierProvider;
 import 'package:provider/provider.dart';
-
-import 'core/services/storage/storage_service_provider.dart';
+import 'package:dashtronaut/core/services/storage/storage.dart';
 
 class DashtronautApp extends ConsumerStatefulWidget {
   const DashtronautApp({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _DashtronautAppState extends ConsumerState<DashtronautApp> {
         );
       }
 
-      for (int size in Puzzle.supportedPuzzleSizes) {
+      for (int size in Constants.supportedPuzzleSizes) {
         precacheImage(
           Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
               .image,
@@ -69,7 +69,7 @@ class _DashtronautAppState extends ConsumerState<DashtronautApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => PuzzleProvider(storageService)..generate(),
+          create: (_) => OldPuzzleProvider(storageService)..generate(),
         ),
         ChangeNotifierProvider(
           create: (_) => StopWatchProvider(storageService)..init(),

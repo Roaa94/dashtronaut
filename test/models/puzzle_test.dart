@@ -320,10 +320,6 @@ void main() {
       expect(puzzle3x3.isSolved, isTrue);
     });
 
-    test('Supported puzzle tiles include default 4x4', () {
-      expect(Puzzle.supportedPuzzleSizes.contains(4), isTrue);
-    });
-
     test('fromJson & toJson gives correct data', () {
       Puzzle puzzle = const Puzzle(
         n: 1,
