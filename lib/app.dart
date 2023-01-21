@@ -8,26 +8,24 @@ import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
-import 'package:dashtronaut/core/services/storage/storage_service.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'
+    hide ChangeNotifierProvider;
 import 'package:provider/provider.dart';
 
-class App extends StatefulWidget {
-  final StorageService storageService;
+import 'core/services/storage/storage_service_provider.dart';
 
-  const App({
-    Key? key,
-    required this.storageService,
-  }) : super(key: key);
+class DashtronautApp extends ConsumerStatefulWidget {
+  const DashtronautApp({Key? key}) : super(key: key);
 
   @override
-  State<App> createState() => _AppState();
+  ConsumerState<DashtronautApp> createState() => _DashtronautAppState();
 }
 
-class _AppState extends State<App> {
+class _DashtronautAppState extends ConsumerState<DashtronautApp> {
   @override
   void initState() {
     if (!kIsWeb && Platform.isMacOS) {
@@ -54,7 +52,8 @@ class _AppState extends State<App> {
 
       for (int size in Puzzle.supportedPuzzleSizes) {
         precacheImage(
-          Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png').image,
+          Image.asset('assets/images/puzzle-solved/solved-${size}x$size.png')
+              .image,
           context,
         );
       }
@@ -66,13 +65,14 @@ class _AppState extends State<App> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final storageService = ref.watch(storageServiceProvider);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => PuzzleProvider(widget.storageService)..generate(),
+          create: (_) => PuzzleProvider(storageService)..generate(),
         ),
         ChangeNotifierProvider(
-          create: (_) => StopWatchProvider(widget.storageService)..init(),
+          create: (_) => StopWatchProvider(storageService)..init(),
         ),
         ChangeNotifierProvider(
           create: (_) => PhrasesProvider(),

@@ -1,16 +1,29 @@
 import 'dart:async';
 
 import 'package:dashtronaut/app.dart';
-import 'package:dashtronaut/core/services/service_locator.dart';
-import 'package:dashtronaut/core/services/storage/storage_service.dart';
+import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() {
-  setupServiceLocator();
-  runZonedGuarded<Future<void>>(() async {
-    final StorageService storageService = getIt<StorageService>();
-    await storageService.init();
+  runZonedGuarded<Future<void>>(
+    () async {
+      // Hive-specific initialization
+      await Hive.initFlutter();
+      final StorageService initializedStorageService = HiveStorageService();
+      await initializedStorageService.init();
 
-    runApp(App(storageService: storageService));
-  }, (e, _) => throw e);
+      runApp(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(initializedStorageService),
+          ],
+          child: const DashtronautApp(),
+        ),
+      );
+    },
+    // ignore: only_throw_errors
+    (e, _) => throw e,
+  );
 }
