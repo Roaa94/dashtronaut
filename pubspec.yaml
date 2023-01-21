@@ -27,6 +27,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   desktop_window: ^0.4.0
   cross_file: ^0.3.3+2
+  flutter_riverpod: ^2.1.3
 
 dev_dependencies:
   flutter_test:
