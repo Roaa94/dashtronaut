@@ -1,4 +1,4 @@
-import 'package:dashtronaut/core/models/position.dart';
+import 'package:dashtronaut/puzzle/models/position.dart';
 import 'package:dashtronaut/core/layout/dash_layout.dart';
 import 'package:dashtronaut/core/layout/layout_delegate.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';

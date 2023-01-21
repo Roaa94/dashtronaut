@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:dashtronaut/core/models/tile.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/repositories/storage_repository.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

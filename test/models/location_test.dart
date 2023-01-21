@@ -1,4 +1,4 @@
-import 'package:dashtronaut/core/models/location.dart';
+import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

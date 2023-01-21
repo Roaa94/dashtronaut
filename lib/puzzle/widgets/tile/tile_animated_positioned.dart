@@ -1,5 +1,5 @@
-import 'package:dashtronaut/core/models/position.dart';
-import 'package:dashtronaut/core/models/tile.dart';
+import 'package:dashtronaut/puzzle/models/position.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:flutter/material.dart';
 

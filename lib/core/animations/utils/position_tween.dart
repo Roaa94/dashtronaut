@@ -1,4 +1,4 @@
-import 'package:dashtronaut/core/models/position.dart';
+import 'package:dashtronaut/puzzle/models/position.dart';
 import 'package:flutter/animation.dart';
 
 class PositionTween extends Tween<Position> {

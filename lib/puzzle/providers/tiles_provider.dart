@@ -1,9 +1,8 @@
-import 'dart:developer';
-import 'dart:math' hide log;
+import 'dart:math';
 
 import 'package:collection/collection.dart';
-import 'package:dashtronaut/core/models/location.dart';
-import 'package:dashtronaut/core/models/tile.dart';
+import 'package:dashtronaut/puzzle/models/location.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/tiles_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

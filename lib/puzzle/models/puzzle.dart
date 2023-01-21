@@ -1,5 +1,5 @@
-import 'package:dashtronaut/core/models/location.dart';
-import 'package:dashtronaut/core/models/tile.dart';
+import 'package:dashtronaut/puzzle/models/location.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 

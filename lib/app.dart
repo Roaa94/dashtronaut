@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dashtronaut/core/constants.dart';
-import 'package:dashtronaut/core/models/puzzle.dart';
 import 'package:dashtronaut/background/utils/background_layers.dart';
 import 'package:dashtronaut/home/home_page.dart';
 import 'package:dashtronaut/core/layout/background_layer_layout.dart';

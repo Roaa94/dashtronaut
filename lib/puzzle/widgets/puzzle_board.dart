@@ -1,4 +1,4 @@
-import 'package:dashtronaut/core/models/tile.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/animations/widgets/pulse_transition.dart';
 import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
