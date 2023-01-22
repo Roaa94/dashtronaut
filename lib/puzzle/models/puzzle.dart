@@ -1,10 +1,10 @@
+import 'package:dashtronaut/core/models/model.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:collection/collection.dart';
-import 'package:equatable/equatable.dart';
 
 /// Model for a Puzzle
-class Puzzle extends Equatable {
+class Puzzle extends Model {
   final int n;
   final List<Tile> tiles;
   final int movesCount;
@@ -13,7 +13,7 @@ class Puzzle extends Equatable {
     required this.n,
     required this.tiles,
     this.movesCount = 0,
-  }) : assert(n < 10);
+  });
 
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
@@ -179,6 +179,19 @@ class Puzzle extends Equatable {
     );
   }
 
+  Puzzle copyWith({
+    List<Tile>? tiles,
+    int? n,
+    int? movesCount,
+  }) {
+    return Puzzle(
+      n: n ?? this.n,
+      tiles: tiles ?? this.tiles,
+      movesCount: movesCount ?? this.movesCount,
+    );
+  }
+
+  @override
   Map<String, dynamic> toJson() => {
         'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
         'movesCount': movesCount,

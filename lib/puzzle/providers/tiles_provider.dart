@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:dashtronaut/puzzle/repositories/tiles_repository.dart';
+import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final tilesProvider = NotifierProvider<TilesNotifier, List<Tile>>(
@@ -14,8 +14,7 @@ final tilesProvider = NotifierProvider<TilesNotifier, List<Tile>>(
 class TilesNotifier extends Notifier<List<Tile>> {
   @override
   List<Tile> build() {
-    final n = ref.watch(puzzleSizeProvider);
-    return _generate(n).where((tile) => !tile.tileIsWhiteSpace).toList();
+    return _generate().where((tile) => !tile.tileIsWhiteSpace).toList();
   }
 
   void swapTiles(Tile movedTile) {
@@ -32,13 +31,14 @@ class TilesNotifier extends Notifier<List<Tile>> {
   }
 
   void _updateTilesInStorage() {
-    ref.watch(tilesRepositoryProvider).set(state);
+    ref.watch(puzzleRepositoryProvider).updateTiles(state);
   }
 
   /// Random value used in shuffling tiles
   final Random random = Random();
 
-  List<Tile> _generate(int n) {
+  List<Tile> _generate() {
+    final n = ref.watch(puzzleSizeProvider);
     var tiles = <Tile>[];
     List<Location> tilesCorrectLocations = generateTileCorrectLocations(n);
     List<Location> tilesCurrentLocations = List.from(tilesCorrectLocations);
@@ -48,7 +48,7 @@ class TilesNotifier extends Notifier<List<Tile>> {
       currentLocations: tilesCurrentLocations,
     );
 
-    while (!isSolvable(n) || numberOfCorrectTiles != 0) {
+    while (!isSolvable() || numberOfCorrectTiles != 0) {
       tilesCurrentLocations.shuffle(random);
 
       tiles = getTilesFromLocations(
@@ -99,7 +99,8 @@ class TilesNotifier extends Notifier<List<Tile>> {
   }
 
   /// Determines if the puzzle is solvable.
-  bool isSolvable(int n) {
+  bool isSolvable() {
+    final n = ref.watch(puzzleSizeProvider);
     final height = state.length ~/ n;
     assert(
       n * height == state.length,

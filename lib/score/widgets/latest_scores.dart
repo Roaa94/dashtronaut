@@ -1,5 +1,5 @@
 import 'package:dashtronaut/score/models/score.dart';
-import 'package:dashtronaut/drawer/latest_score_item.dart';
+import 'package:dashtronaut/score/widgets/latest_score_item.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
