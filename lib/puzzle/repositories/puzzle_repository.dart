@@ -24,7 +24,7 @@ class PuzzleStorageRepository extends StorageRepository<Puzzle> {
 
   void updateTiles(List<Tile> tiles) {
     update({
-      'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
+      'tiles': Tile.toJsonList(tiles),
     });
   }
 

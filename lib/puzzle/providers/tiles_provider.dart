@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:dashtronaut/configs/models/configs.dart';
+import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
@@ -17,6 +19,11 @@ class TilesNotifier extends Notifier<List<Tile>> {
     return _generate().where((tile) => !tile.tileIsWhiteSpace).toList();
   }
 
+  PuzzleStorageRepository get puzzleRepository =>
+      ref.watch(puzzleRepositoryProvider);
+
+  Configs get configs => ref.watch(configsProvider);
+
   void swapTiles(Tile movedTile) {
     state = [
       for (final tile in state)
@@ -27,11 +34,7 @@ class TilesNotifier extends Notifier<List<Tile>> {
         else
           tile
     ];
-    _updateTilesInStorage();
-  }
-
-  void _updateTilesInStorage() {
-    ref.watch(puzzleRepositoryProvider).updateTiles(state);
+    puzzleRepository.updateTiles(state);
   }
 
   /// Random value used in shuffling tiles

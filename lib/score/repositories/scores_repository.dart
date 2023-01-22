@@ -14,9 +14,7 @@ class ScoresStorageRepository extends StorageRepository<List<Score>> {
   String get storageKey => StorageKeys.scores;
 
   @override
-  List<Score> fromJson(dynamic json) {
-    return Score.fromJsonList(json);
-  }
+  List<Score> fromJson(dynamic json) => Score.fromJsonList(json);
 
   @override
   dynamic toJson(List<Score> item) => Score.toJsonList(item);

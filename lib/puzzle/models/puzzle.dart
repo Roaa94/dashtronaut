@@ -173,9 +173,7 @@ class Puzzle extends Equatable {
 
   factory Puzzle.fromJson(Map<String, dynamic> json) {
     return Puzzle(
-      tiles: json['tiles'] == null
-          ? []
-          : List<Tile>.from(json['tiles'].map((x) => Tile.fromJson(x))),
+      tiles: json['tiles'] == null ? [] : Tile.fromJsonList(json['tiles']),
       movesCount: json['movesCount'] ?? 0,
       n: json['n'],
     );

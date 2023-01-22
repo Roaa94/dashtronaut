@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/position.dart';
 import 'package:equatable/equatable.dart';
@@ -71,4 +73,11 @@ class Tile extends Equatable {
         correctLocation,
         currentLocation,
       ];
+
+  static List<dynamic> toJsonList(List<Tile> scores) =>
+      List<dynamic>.from(scores.map((x) => x.toJson()));
+
+  static List<Tile> fromJsonList(dynamic scores) => List<Tile>.from(
+    json.decode(json.encode(scores)).map((x) => Tile.fromJson(x)),
+  );
 }
