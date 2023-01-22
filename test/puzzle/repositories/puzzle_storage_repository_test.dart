@@ -6,8 +6,8 @@ import 'package:hive_test/hive_test.dart';
 import '../../utils/test_data.dart';
 
 void main() {
-  late final StorageService hiveStorageService;
-  late final PuzzleStorageRepository puzzleStorageRepository;
+  late StorageService hiveStorageService;
+  late PuzzleStorageRepository puzzleStorageRepository;
 
   setUp(() async {
     hiveStorageService = HiveStorageService();
@@ -47,6 +47,13 @@ void main() {
 
     final updatedPuzzle2x2 = puzzle2x2.copyWith(n: 3);
     expect(puzzleStorageRepository.get(), updatedPuzzle2x2);
+  });
+
+  test('Can clear puzzle data', () {
+    puzzleStorageRepository.set(puzzle2x2);
+    puzzleStorageRepository.clear();
+
+    expect(puzzleStorageRepository.get(), isNull);
   });
 
   tearDown(() async {

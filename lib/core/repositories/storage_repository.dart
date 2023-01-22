@@ -8,42 +8,28 @@ abstract class StorageRepository<T extends Model> {
 
   final StorageService storageService;
 
-  T fromJson(Map<String, dynamic> json);
-
   String get storageKey;
+
+  T fromJson(Map<String, dynamic> json);
 
   bool get hasData => storageService.has(storageKey);
 
-  T get() {
-    try {
-      final data = storageService.get(storageKey);
-      return fromJson(data);
-    } catch (e) {
-      log('Error getting $T from storage');
-      log('$e');
-      rethrow;
-    }
+  T? get() {
+    final data = storageService.get(storageKey);
+    return data == null ? null : fromJson(data);
   }
 
   void set(T item) {
-    try {
-      storageService.set(storageKey, item.toJson());
-    } catch (e) {
-      log('Error setting $T in storage');
-      log('$e');
-      rethrow;
-    }
+    storageService.set(storageKey, item.toJson());
   }
 
   void update(Map<String, dynamic> data) {
-    try {
-      final existingData = storageService.get(storageKey) as Map<String, dynamic>;
-      existingData.addAll(data);
-      storageService.set(storageKey, existingData);
-    } catch (e) {
-      log('Error setting $T in storage');
-      log('$e');
-      rethrow;
-    }
+    final existingData = storageService.get(storageKey) as Map<String, dynamic>;
+    existingData.addAll(data);
+    storageService.set(storageKey, existingData);
+  }
+
+  void clear() {
+    storageService.remove(storageKey);
   }
 }

@@ -34,7 +34,7 @@ class LatestScoreItem extends StatelessWidget {
                 Duration(seconds: score.secondsElapsed))),
           ),
           Expanded(
-            child: Text('${score.movesCount} Moves'),
+            child: Text('${score.winMovesCount} Moves'),
           ),
         ],
       ),

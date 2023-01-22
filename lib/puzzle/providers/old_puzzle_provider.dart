@@ -116,7 +116,7 @@ class OldPuzzleProvider with ChangeNotifier {
 
   void _updateScoresInStorage() {
     Score newScore = Score(
-      movesCount: movesCount,
+      winMovesCount: movesCount,
       puzzleSize: n,
       secondsElapsed: storageService.get(StorageKeys.secondsElapsed),
     );

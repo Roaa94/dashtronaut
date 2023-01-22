@@ -1,28 +1,31 @@
 import 'dart:convert';
 
-class Score {
+import 'package:dashtronaut/core/models/model.dart';
+
+class Score extends Model {
   final int secondsElapsed;
-  final int movesCount;
+  final int winMovesCount;
   final int puzzleSize;
 
   const Score({
     required this.secondsElapsed,
-    required this.movesCount,
+    required this.winMovesCount,
     required this.puzzleSize,
   });
 
   factory Score.fromJson(Map<String, dynamic> json) {
     return Score(
       secondsElapsed: json['secondsElapsed'],
-      movesCount: json['movesCount'],
+      winMovesCount: json['winMovesCount'],
       puzzleSize: json['puzzleSize'],
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'secondsElapsed': secondsElapsed,
-      'movesCount': movesCount,
+      'winMovesCount': winMovesCount,
       'puzzleSize': puzzleSize,
     };
   }
@@ -31,5 +34,9 @@ class Score {
       List<dynamic>.from(scores.map((x) => x.toJson()));
 
   static List<Score> fromJsonList(dynamic scores) => List<Score>.from(
-      json.decode(json.encode(scores)).map((x) => Score.fromJson(x)));
+        json.decode(json.encode(scores)).map((x) => Score.fromJson(x)),
+      );
+
+  @override
+  List<Object?> get props => [secondsElapsed, winMovesCount, puzzleSize];
 }

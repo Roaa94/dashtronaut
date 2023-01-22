@@ -1,7 +1,7 @@
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
-import 'package:dashtronaut/puzzle/widgets/puzzle_share_dialog.dart';
+import 'package:dashtronaut/score/widgets/puzzle_share_dialog.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
