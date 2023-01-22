@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:dashtronaut/core/models/model.dart';
+import 'package:equatable/equatable.dart';
 
-class Score extends Model {
+class Score extends Equatable {
   final int secondsElapsed;
   final int winMovesCount;
   final int puzzleSize;
@@ -21,7 +21,6 @@ class Score extends Model {
     );
   }
 
-  @override
   Map<String, dynamic> toJson() {
     return {
       'secondsElapsed': secondsElapsed,

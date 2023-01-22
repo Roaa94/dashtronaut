@@ -1,10 +1,10 @@
-import 'package:dashtronaut/core/models/model.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
 
 /// Model for a Puzzle
-class Puzzle extends Model {
+class Puzzle extends Equatable {
   final int n;
   final List<Tile> tiles;
   final int movesCount;
@@ -173,7 +173,9 @@ class Puzzle extends Model {
 
   factory Puzzle.fromJson(Map<String, dynamic> json) {
     return Puzzle(
-      tiles: List<Tile>.from(json['tiles'].map((x) => Tile.fromJson(x))),
+      tiles: json['tiles'] == null
+          ? []
+          : List<Tile>.from(json['tiles'].map((x) => Tile.fromJson(x))),
       movesCount: json['movesCount'] ?? 0,
       n: json['n'],
     );
@@ -191,7 +193,6 @@ class Puzzle extends Model {
     );
   }
 
-  @override
   Map<String, dynamic> toJson() => {
         'tiles': List<dynamic>.from(tiles.map((x) => x.toJson())),
         'movesCount': movesCount,

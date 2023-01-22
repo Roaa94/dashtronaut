@@ -1,16 +1,15 @@
-import 'dart:developer';
-
-import 'package:dashtronaut/core/models/model.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 
-abstract class StorageRepository<T extends Model> {
+abstract class StorageRepository<T> {
   StorageRepository(this.storageService);
 
   final StorageService storageService;
 
   String get storageKey;
 
-  T fromJson(Map<String, dynamic> json);
+  T fromJson(dynamic json);
+
+  dynamic toJson(T item);
 
   bool get hasData => storageService.has(storageKey);
 
@@ -20,11 +19,12 @@ abstract class StorageRepository<T extends Model> {
   }
 
   void set(T item) {
-    storageService.set(storageKey, item.toJson());
+    storageService.set(storageKey, toJson(item));
   }
 
   void update(Map<String, dynamic> data) {
-    final existingData = storageService.get(storageKey) as Map<String, dynamic>;
+    final existingData =
+        storageService.get(storageKey) as Map<String, dynamic>? ?? {};
     existingData.addAll(data);
     storageService.set(storageKey, existingData);
   }

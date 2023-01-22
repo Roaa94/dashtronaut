@@ -17,7 +17,10 @@ class PuzzleStorageRepository extends StorageRepository<Puzzle> {
   String get storageKey => StorageKeys.puzzle;
 
   @override
-  Puzzle fromJson(Map<String, dynamic> json) => Puzzle.fromJson(json);
+  Puzzle fromJson(dynamic json) => Puzzle.fromJson(json);
+
+  @override
+  Map<String, dynamic> toJson(Puzzle item) => item.toJson();
 
   void updateTiles(List<Tile> tiles) {
     update({
