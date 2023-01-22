@@ -6,5 +6,7 @@ class Configs {
 
   final List<int> supportedPuzzleSizes;
 
+  int get defaultPuzzleSize => supportedPuzzleSizes[1];
+
   final int maxStorableScores;
 }

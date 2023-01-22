@@ -1,4 +1,5 @@
 import 'package:dashtronaut/core/services/storage/storage.dart';
+import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/score/repositories/scores_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
@@ -22,3 +23,6 @@ class Listener<T> extends Mock {
 }
 
 class MockStorageService extends Mock implements StorageService {}
+
+class MockPuzzleStorageRepository extends Mock
+    implements PuzzleStorageRepository {}

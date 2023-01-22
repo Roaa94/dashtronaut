@@ -9,8 +9,6 @@ final scoresProvider = NotifierProvider<ScoresNotifier, List<Score>>(
 );
 
 class ScoresNotifier extends Notifier<List<Score>> {
-  ScoresNotifier();
-
   ScoresStorageRepository get scoresRepository =>
       ref.watch(scoresRepositoryProvider);
 
