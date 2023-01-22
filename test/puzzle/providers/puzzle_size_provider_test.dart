@@ -17,7 +17,7 @@ void main() {
   });
 
   test('initialized with $Configs.defaultPuzzleSize value', () {
-    final configs = Configs();
+    const configs = Configs();
 
     final providerContainer = ProviderContainer(
       overrides: [
@@ -54,7 +54,7 @@ void main() {
   test('updates state', () {
     final puzzleSizeListener = Listener<int>();
     const newValue = 2;
-    final configs = Configs();
+    const configs = Configs();
 
     when(() => mockPuzzleRepository.updatePuzzleSize(newValue))
         .thenAnswer((_) {});
@@ -90,7 +90,7 @@ void main() {
 
   test('updates repository when state is updated', () {
     const newValue = 2;
-    final configs = Configs();
+    const configs = Configs();
 
     when(() => mockPuzzleRepository.updatePuzzleSize(newValue))
         .thenAnswer((_) {});

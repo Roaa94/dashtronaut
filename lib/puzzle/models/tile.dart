@@ -45,7 +45,12 @@ class Tile extends Equatable {
 
   @override
   String toString() {
-    return 'Tile(value: $value, correctLocation: $correctLocation, currentLocation: $currentLocation)';
+    return 'Tile('
+        'value: $value, '
+        'correctLocation: $correctLocation, '
+        'currentLocation: $currentLocation, '
+        'tileIsWhiteSpace: $tileIsWhiteSpace'
+      ')';
   }
 
   factory Tile.fromJson(Map<String, dynamic> json) {
@@ -78,6 +83,6 @@ class Tile extends Equatable {
       List<dynamic>.from(scores.map((x) => x.toJson()));
 
   static List<Tile> fromJsonList(dynamic scores) => List<Tile>.from(
-    json.decode(json.encode(scores)).map((x) => Tile.fromJson(x)),
-  );
+        json.decode(json.encode(scores)).map((x) => Tile.fromJson(x)),
+      );
 }

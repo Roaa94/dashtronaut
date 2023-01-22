@@ -1,4 +1,5 @@
 import 'package:dashtronaut/core/services/storage/storage.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/score/repositories/scores_repository.dart';
 import 'package:mocktail/mocktail.dart';
@@ -26,3 +27,5 @@ class MockStorageService extends Mock implements StorageService {}
 
 class MockPuzzleStorageRepository extends Mock
     implements PuzzleStorageRepository {}
+
+class MockPuzzleSizeNotifier extends Mock implements PuzzleSizeNotifier {}

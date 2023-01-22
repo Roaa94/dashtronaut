@@ -80,17 +80,28 @@ void main() {
 
     test('toString prints correctly', () {
       expect(
-          tile.toString(),
-          equals(
-              'Tile(value: 2, correctLocation: (1, 2), currentLocation: (3, 1))'));
+        tile.toString(),
+        equals(
+          'Tile(value: 2, '
+          'correctLocation: (1, 2), '
+          'currentLocation: (3, 1), '
+          'tileIsWhiteSpace: false'
+          ')',
+        ),
+      );
     });
 
     test('copyWith updates tile', () {
       expect(
-          tile.copyWith().currentLocation, equals(const Location(x: 1, y: 3)));
+        tile.copyWith().currentLocation,
+        equals(const Location(x: 1, y: 3)),
+      );
+
       expect(
         tile
-            .copyWith(currentLocation: const Location(x: 2, y: 1))
+            .copyWith(
+              currentLocation: const Location(x: 2, y: 1),
+            )
             .currentLocation,
         equals(const Location(x: 2, y: 1)),
       );
