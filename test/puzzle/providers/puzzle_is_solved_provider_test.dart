@@ -81,4 +81,42 @@ void main() {
 
     verify(() => isSolvedListener(false, true)).called(1);
   });
+
+  test(
+      'puzzleIsSolvedProvider listener does not fire '
+      'when tilesProvider state is updated but the puzzle is not solved yet',
+      () async {
+    when(() => mockPuzzleRepository.get()).thenReturn(puzzle2x2);
+    final isSolvedListener = Listener<bool>();
+
+    const tileToMoveWithoutSolvingPuzzle = Tile(
+      value: 1,
+      currentLocation: Location(x: 1, y: 1),
+      correctLocation: Location(x: 1, y: 1),
+    );
+
+    final providerContainer = ProviderContainer(
+      overrides: [
+        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+      ],
+    );
+
+    providerContainer.listen(
+      puzzleIsSolvedProvider,
+      isSolvedListener,
+      fireImmediately: true,
+    );
+
+    addTearDown(providerContainer.dispose);
+
+    verify(() => isSolvedListener(null, false)).called(1);
+
+    providerContainer
+        .read(tilesProvider.notifier)
+        .swapTiles(tileToMoveWithoutSolvingPuzzle);
+
+    await Future.delayed(Duration.zero);
+
+    verifyNoMoreInteractions(isSolvedListener);
+  });
 }
