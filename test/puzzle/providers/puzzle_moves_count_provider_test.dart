@@ -34,7 +34,7 @@ void main() {
   test('initialized with data from repository when available', () {
     const movesCount = 10;
     when(mockPuzzleRepository.get).thenReturn(
-      puzzle2x2.copyWith(movesCount: movesCount),
+      puzzle2x2Solved.copyWith(movesCount: movesCount),
     );
 
     final providerContainer = ProviderContainer(

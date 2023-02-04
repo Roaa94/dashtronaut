@@ -4,7 +4,7 @@ import 'package:dashtronaut/puzzle/models/tile.dart';
 
 // 1  2
 // 3
-const puzzle2x2TilesCorrect = [
+const puzzle2x2TilesSolved = [
   Tile(
     value: 1,
     currentLocation: Location(x: 1, y: 1),
@@ -56,8 +56,14 @@ const puzzle2x2Tiles = [
 
 // 1   2
 // 3
-const puzzle2x2 = Puzzle(n: 2, tiles: puzzle2x2TilesCorrect);
+const puzzle2x2Solved = Puzzle(n: 2, tiles: puzzle2x2TilesSolved);
 
+// 1  2
+//    3
+const puzzle2x2 = Puzzle(n: 2, tiles: puzzle2x2Tiles);
+
+// 3
+// 2  1
 const solvable2x2PuzzleWithSeed2 = [
   Tile(
     value: 1,
@@ -81,6 +87,10 @@ const solvable2x2PuzzleWithSeed2 = [
     tileIsWhiteSpace: true,
   )
 ];
+
+// 3
+// 2  1
+const puzzle2x2Solvable = Puzzle(n: 2, tiles: solvable2x2PuzzleWithSeed2);
 
 const solvable2x2PuzzleWithSeed2Reset = [
   Tile(

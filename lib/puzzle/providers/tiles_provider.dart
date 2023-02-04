@@ -17,6 +17,11 @@ class TilesNotifier extends Notifier<List<Tile>> {
   /// Random value used in shuffling tiles
   final Random? random;
 
+  /// Get whitespace tile
+  Tile get whiteSpaceTile => state.firstWhere((tile) => tile.tileIsWhiteSpace);
+
+  bool get isSolved => getNumberOfCorrectTiles(state) == state.length - 1;
+
   @override
   List<Tile> build() {
     return puzzleRepository.get()?.tiles ?? generateSolvableTiles();
@@ -31,16 +36,18 @@ class TilesNotifier extends Notifier<List<Tile>> {
   }
 
   void swapTiles(Tile movedTile) {
-    state = [
-      for (final tile in state)
-        if (tile.currentLocation == movedTile.currentLocation)
-          tile.copyWith(currentLocation: whiteSpaceTile.currentLocation)
-        else if (tile == whiteSpaceTile)
-          tile.copyWith(currentLocation: movedTile.currentLocation)
-        else
-          tile
-    ];
-    puzzleRepository.updateTiles(state);
+    if (!isSolved) {
+      state = [
+        for (final tile in state)
+          if (tile.currentLocation == movedTile.currentLocation)
+            tile.copyWith(currentLocation: whiteSpaceTile.currentLocation)
+          else if (tile == whiteSpaceTile)
+            tile.copyWith(currentLocation: movedTile.currentLocation)
+          else
+            tile
+      ];
+      puzzleRepository.updateTiles(state);
+    }
   }
 
   List<Tile> generateSolvableTiles() {
@@ -161,9 +168,6 @@ class TilesNotifier extends Notifier<List<Tile>> {
     }
     return false;
   }
-
-  /// Get whitespace tile
-  Tile get whiteSpaceTile => state.firstWhere((tile) => tile.tileIsWhiteSpace);
 
   /// Check if a [Tile] is movable
   ///

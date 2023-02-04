@@ -26,37 +26,37 @@ void main() {
     });
 
     test('Can set & get data in storage', () {
-      puzzleStorageRepository.set(puzzle2x2);
+      puzzleStorageRepository.set(puzzle2x2Solved);
 
-      expect(puzzleStorageRepository.get(), puzzle2x2);
+      expect(puzzleStorageRepository.get(), puzzle2x2Solved);
     });
 
     test('Can update puzzle tiles', () {
-      puzzleStorageRepository.set(puzzle2x2);
+      puzzleStorageRepository.set(puzzle2x2Solved);
       puzzleStorageRepository.updateTiles(puzzle2x2Tiles);
 
-      final updatedPuzzle2x2 = puzzle2x2.copyWith(tiles: puzzle2x2Tiles);
+      final updatedPuzzle2x2 = puzzle2x2Solved.copyWith(tiles: puzzle2x2Tiles);
       expect(puzzleStorageRepository.get(), updatedPuzzle2x2);
     });
 
     test('Can update puzzle moves count', () {
-      puzzleStorageRepository.set(puzzle2x2);
+      puzzleStorageRepository.set(puzzle2x2Solved);
       puzzleStorageRepository.updateMovesCount(3);
 
-      final updatedPuzzle2x2 = puzzle2x2.copyWith(movesCount: 3);
+      final updatedPuzzle2x2 = puzzle2x2Solved.copyWith(movesCount: 3);
       expect(puzzleStorageRepository.get(), updatedPuzzle2x2);
     });
 
     test('Can update puzzle size', () {
-      puzzleStorageRepository.set(puzzle2x2);
+      puzzleStorageRepository.set(puzzle2x2Solved);
       puzzleStorageRepository.updatePuzzleSize(3);
 
-      final updatedPuzzle2x2 = puzzle2x2.copyWith(n: 3);
+      final updatedPuzzle2x2 = puzzle2x2Solved.copyWith(n: 3);
       expect(puzzleStorageRepository.get(), updatedPuzzle2x2);
     });
 
     test('Can clear puzzle data', () {
-      puzzleStorageRepository.set(puzzle2x2);
+      puzzleStorageRepository.set(puzzle2x2Solved);
       puzzleStorageRepository.clear();
 
       expect(puzzleStorageRepository.get(), isNull);
@@ -67,7 +67,7 @@ void main() {
     });
 
     test('hasData is true when there is data', () {
-      puzzleStorageRepository.set(puzzle2x2);
+      puzzleStorageRepository.set(puzzle2x2Solved);
 
       expect(puzzleStorageRepository.hasData, isTrue);
     });
@@ -96,13 +96,13 @@ void main() {
         addTearDown(providerContainer.dispose);
 
         try {
-          providerContainer.read(puzzleRepositoryProvider).set(puzzle2x2);
+          providerContainer.read(puzzleRepositoryProvider).set(puzzle2x2Solved);
         } catch (_) {}
 
         verify(
           () => mockStorageService.set(
             puzzleStorageRepository.storageKey,
-            puzzle2x2.toJson(),
+            puzzle2x2Solved.toJson(),
           ),
         ).called(1);
       },

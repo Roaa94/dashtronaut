@@ -35,7 +35,7 @@ void main() {
   });
 
   test('initialized with data from repository when available', () {
-    when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
+    when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solved);
 
     final providerContainer = ProviderContainer(
       overrides: [
@@ -47,7 +47,7 @@ void main() {
 
     expect(
       providerContainer.read(puzzleSizeProvider),
-      equals(puzzle2x2.n),
+      equals(puzzle2x2Solved.n),
     );
   });
 
