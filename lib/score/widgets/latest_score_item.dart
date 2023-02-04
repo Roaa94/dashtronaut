@@ -21,8 +21,11 @@ class LatestScoreItem extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         border: Border(
-            bottom:
-                BorderSide(color: Colors.white.withOpacity(0.5), width: 0.5)),
+          bottom: BorderSide(
+            color: Colors.white.withOpacity(0.5),
+            width: 0.5,
+          ),
+        ),
       ),
       child: Row(
         children: [
@@ -30,8 +33,11 @@ class LatestScoreItem extends StatelessWidget {
             child: Text('${score.puzzleSize}x${score.puzzleSize}'),
           ),
           Expanded(
-            child: Text(DurationHelper.toFormattedTime(
-                Duration(seconds: score.secondsElapsed))),
+            child: Text(
+              DurationHelper.toFormattedTime(
+                Duration(seconds: score.secondsElapsed),
+              ),
+            ),
           ),
           Expanded(
             child: Text('${score.winMovesCount} Moves'),
