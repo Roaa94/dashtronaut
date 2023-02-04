@@ -2,16 +2,15 @@ import 'dart:io';
 
 import 'package:dashtronaut/core/constants.dart';
 import 'package:dashtronaut/background/utils/background_layers.dart';
+import 'package:dashtronaut/core/styles/app_themes.dart';
 import 'package:dashtronaut/home/home_page.dart';
 import 'package:dashtronaut/core/layout/background_layer_layout.dart';
-import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'
     hide ChangeNotifierProvider;
 import 'package:provider/provider.dart';
@@ -80,30 +79,7 @@ class _DashtronautAppState extends ConsumerState<DashtronautApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Dashtronaut - Slide Puzzle Game',
-        darkTheme: ThemeData(
-          fontFamily: AppTextStyles.secondaryFontFamily,
-          brightness: Brightness.dark,
-          appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: Colors.black,
-            ),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: const BorderSide(color: Colors.white, width: 2),
-              ),
-              fixedSize: const Size.fromHeight(50),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              backgroundColor: Colors.white.withOpacity(0.2),
-            ),
-          ),
-        ),
+        darkTheme: AppThemes.dark,
         themeMode: ThemeMode.dark,
         home: const HomePage(),
       ),
