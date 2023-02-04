@@ -13,10 +13,10 @@ class TileGestureDetector extends StatelessWidget {
   final Widget tileContent;
 
   const TileGestureDetector({
-    Key? key,
+    super.key,
     required this.tile,
     required this.tileContent,
-  }) : super(key: key);
+  });
 
   Future<void> _showPuzzleSolvedDialog(
     BuildContext context,

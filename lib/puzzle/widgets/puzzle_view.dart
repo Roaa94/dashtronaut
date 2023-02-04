@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleView extends StatefulWidget {
-  const PuzzleView({Key? key}) : super(key: key);
+  const PuzzleView({super.key});
 
   @override
   State<PuzzleView> createState() => _PuzzleViewState();

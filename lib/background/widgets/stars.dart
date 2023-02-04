@@ -3,7 +3,7 @@ import 'package:dashtronaut/core/layout/stars_layout.dart';
 import 'package:flutter/material.dart';
 
 class Stars extends StatefulWidget {
-  const Stars({Key? key}) : super(key: key);
+  const Stars({super.key});
 
   @override
   _StarsState createState() => _StarsState();

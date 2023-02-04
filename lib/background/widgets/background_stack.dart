@@ -6,7 +6,7 @@ import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundStack extends StatelessWidget {
-  const BackgroundStack({Key? key}) : super(key: key);
+  const BackgroundStack({super.key});
 
   @override
   Widget build(BuildContext context) {

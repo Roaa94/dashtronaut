@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleBoard extends StatelessWidget {
-  PuzzleBoard({Key? key}) : super(key: key);
+  PuzzleBoard({super.key});
 
   final FocusNode keyboardListenerFocusNode = FocusNode();
 

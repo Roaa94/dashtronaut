@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MovesCount extends ConsumerWidget {
-  const MovesCount({Key? key}) : super(key: key);
+  const MovesCount({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

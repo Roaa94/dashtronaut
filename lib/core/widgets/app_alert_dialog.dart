@@ -13,15 +13,14 @@ class AppAlertDialog extends StatelessWidget {
   final EdgeInsets insetPadding;
 
   const AppAlertDialog({
-    Key? key,
+    super.key,
     this.title,
     this.onConfirm,
     this.onCancel,
     this.content,
     this.insetPadding =
         const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-  })  : assert(content == null ? title != null && onConfirm != null : true),
-        super(key: key);
+  })  : assert(content == null ? title != null && onConfirm != null : true);
 
   @override
   Widget build(BuildContext context) {

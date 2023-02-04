@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class LatestScoreItem extends StatelessWidget {
   final Score score;
 
-  const LatestScoreItem(this.score, {Key? key}) : super(key: key);
+  const LatestScoreItem(this.score, {super.key});
 
   @override
   Widget build(BuildContext context) {

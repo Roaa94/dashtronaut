@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
 class DashRiveAnimation extends StatefulWidget {
-  const DashRiveAnimation({Key? key}) : super(key: key);
+  const DashRiveAnimation({super.key});
 
   @override
   _DashRiveAnimationState createState() => _DashRiveAnimationState();

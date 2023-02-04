@@ -6,10 +6,10 @@ class PulseTransition extends StatefulWidget {
   final bool isActive;
 
   const PulseTransition({
-    Key? key,
+    super.key,
     required this.child,
     required this.isActive,
-  }) : super(key: key);
+  });
 
   @override
   _PulseTransitionState createState() => _PulseTransitionState();

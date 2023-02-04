@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PuzzleStopWatch extends StatelessWidget {
-  const PuzzleStopWatch({Key? key}) : super(key: key);
+  const PuzzleStopWatch({super.key});
 
   @override
   Widget build(BuildContext context) {

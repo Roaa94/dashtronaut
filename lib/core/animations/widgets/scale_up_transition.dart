@@ -6,10 +6,10 @@ class ScaleUpTransition extends StatefulWidget {
   final Duration? delay;
 
   const ScaleUpTransition({
-    Key? key,
+    super.key,
     required this.child,
     this.delay,
-  }) : super(key: key);
+  });
 
   @override
   _ScaleUpTransitionState createState() => _ScaleUpTransitionState();

@@ -8,8 +8,8 @@ class TileRiveAnimation extends StatefulWidget {
   const TileRiveAnimation({
     this.isAtCorrectLocation = false,
     this.isPuzzleSolved = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _TileRiveAnimationState createState() => _TileRiveAnimationState();

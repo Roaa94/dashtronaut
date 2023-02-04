@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CorrectTilesCount extends StatelessWidget {
-  const CorrectTilesCount({Key? key}) : super(key: key);
+  const CorrectTilesCount({super.key});
 
   @override
   Widget build(BuildContext context) {

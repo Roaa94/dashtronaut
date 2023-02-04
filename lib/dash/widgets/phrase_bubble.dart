@@ -10,10 +10,9 @@ class PhraseBubble extends StatelessWidget {
   final PhraseState state;
 
   const PhraseBubble({
-    Key? key,
+    super.key,
     required this.state,
-  })  : assert(state != PhraseState.none),
-        super(key: key);
+  })  : assert(state != PhraseState.none);
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class DrawerAppInfo extends StatelessWidget {
-  const DrawerAppInfo({Key? key}) : super(key: key);
+  const DrawerAppInfo({super.key});
 
   @override
   Widget build(BuildContext context) {

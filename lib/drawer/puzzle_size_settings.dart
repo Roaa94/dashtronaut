@@ -5,7 +5,7 @@ import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleSizeSettings extends StatelessWidget {
-  const PuzzleSizeSettings({Key? key}) : super(key: key);
+  const PuzzleSizeSettings({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class PuzzleSizeItem extends StatelessWidget {
   final int size;
 
-  const PuzzleSizeItem({required this.size, Key? key}) : super(key: key);
+  const PuzzleSizeItem({required this.size, super.key});
 
   @override
   Widget build(BuildContext context) {

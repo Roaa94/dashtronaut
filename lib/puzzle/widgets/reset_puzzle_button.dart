@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResetPuzzleButton extends StatelessWidget {
-  const ResetPuzzleButton({Key? key}) : super(key: key);
+  const ResetPuzzleButton({super.key});
 
   void initResetPuzzle(
     BuildContext context,

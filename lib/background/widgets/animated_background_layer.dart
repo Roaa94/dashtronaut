@@ -7,9 +7,9 @@ class AnimatedBackgroundLayer extends StatefulWidget {
   final BackgroundLayerLayout layer;
 
   const AnimatedBackgroundLayer({
-    Key? key,
+    super.key,
     required this.layer,
-  }) : super(key: key);
+  });
 
   @override
   _AnimatedBackgroundLayerState createState() =>

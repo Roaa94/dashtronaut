@@ -6,10 +6,10 @@ class FadeInTransition extends StatefulWidget {
   final Duration? delay;
 
   const FadeInTransition({
-    Key? key,
+    super.key,
     required this.child,
     this.delay,
-  }) : super(key: key);
+  });
 
   @override
   _FadeInTransitionState createState() => _FadeInTransitionState();

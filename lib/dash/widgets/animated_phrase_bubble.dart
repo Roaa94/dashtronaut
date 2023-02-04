@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AnimatedPhraseBubble extends StatefulWidget {
-  const AnimatedPhraseBubble({Key? key}) : super(key: key);
+  const AnimatedPhraseBubble({super.key});
 
   @override
   State<AnimatedPhraseBubble> createState() => _AnimatedPhraseBubbleState();

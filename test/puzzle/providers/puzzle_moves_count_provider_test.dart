@@ -54,7 +54,7 @@ void main() {
   test('updates state', () {
     final puzzleMovesCountListener = Listener<int>();
     const newValue = 2;
-    final configs = Configs();
+    const configs = Configs();
 
     when(() => mockPuzzleRepository.updateMovesCount(newValue))
         .thenAnswer((_) {});

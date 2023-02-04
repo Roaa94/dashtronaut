@@ -10,12 +10,12 @@ class TileAnimatedPositioned extends StatelessWidget {
   final Widget tileGestureDetector;
 
   const TileAnimatedPositioned({
-    Key? key,
+    super.key,
     required this.tile,
     required this.isPuzzleSolved,
     required this.puzzleSize,
     required this.tileGestureDetector,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

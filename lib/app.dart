@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 
 class DashtronautApp extends ConsumerStatefulWidget {
-  const DashtronautApp({Key? key}) : super(key: key);
+  const DashtronautApp({super.key});
 
   @override
   ConsumerState<DashtronautApp> createState() => _DashtronautAppState();
