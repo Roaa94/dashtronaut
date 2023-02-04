@@ -82,6 +82,33 @@ const solvable2x2PuzzleWithSeed2 = [
   )
 ];
 
+const solvable2x2PuzzleWithSeed2Reset = [
+  Tile(
+    value: 1,
+    correctLocation: Location(y: 1, x: 1),
+    currentLocation: Location(y: 2, x: 1),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 2,
+    correctLocation: Location(y: 1, x: 2),
+    currentLocation: Location(y: 1, x: 1),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 3,
+    correctLocation: Location(y: 2, x: 1),
+    currentLocation: Location(y: 1, x: 2),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 4,
+    correctLocation: Location(y: 2, x: 2),
+    currentLocation: Location(y: 2, x: 2),
+    tileIsWhiteSpace: true,
+  ),
+];
+
 const solvable3x3PuzzleWithSeed2 = [
   Tile(
     value: 1,
@@ -92,25 +119,25 @@ const solvable3x3PuzzleWithSeed2 = [
   Tile(
     value: 2,
     correctLocation: Location(y: 1, x: 2),
-    currentLocation: Location(y: 1, x: 3),
+    currentLocation: Location(y: 1, x: 1),
     tileIsWhiteSpace: false,
   ),
   Tile(
     value: 3,
     correctLocation: Location(y: 1, x: 3),
-    currentLocation: Location(y: 2, x: 3),
+    currentLocation: Location(y: 3, x: 2),
     tileIsWhiteSpace: false,
   ),
   Tile(
     value: 4,
     correctLocation: Location(y: 2, x: 1),
-    currentLocation: Location(y: 2, x: 2),
+    currentLocation: Location(y: 1, x: 2),
     tileIsWhiteSpace: false,
   ),
   Tile(
     value: 5,
     correctLocation: Location(y: 2, x: 2),
-    currentLocation: Location(y: 3, x: 2),
+    currentLocation: Location(y: 2, x: 3),
     tileIsWhiteSpace: false,
   ),
   Tile(
@@ -122,19 +149,19 @@ const solvable3x3PuzzleWithSeed2 = [
   Tile(
     value: 7,
     correctLocation: Location(y: 3, x: 1),
-    currentLocation: Location(y: 1, x: 1),
+    currentLocation: Location(y: 3, x: 3),
     tileIsWhiteSpace: false,
   ),
   Tile(
     value: 8,
     correctLocation: Location(y: 3, x: 2),
-    currentLocation: Location(y: 3, x: 3),
+    currentLocation: Location(y: 2, x: 2),
     tileIsWhiteSpace: false,
   ),
   Tile(
     value: 9,
     correctLocation: Location(y: 3, x: 3),
-    currentLocation: Location(y: 1, x: 2),
+    currentLocation: Location(y: 1, x: 3),
     tileIsWhiteSpace: true,
   ),
 ];

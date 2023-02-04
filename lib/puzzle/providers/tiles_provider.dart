@@ -142,7 +142,7 @@ class TilesNotifier extends Notifier<List<Tile>> {
 
       for (var b = a + 1; b < tiles.length; b++) {
         final tileB = tiles[b];
-        if (_isInversion(tileA, tileB)) {
+        if (isInversion(tileA, tileB)) {
           count++;
         }
       }
@@ -151,7 +151,7 @@ class TilesNotifier extends Notifier<List<Tile>> {
   }
 
   /// Determines if the two tiles are inverted.
-  bool _isInversion(Tile a, Tile b) {
+  bool isInversion(Tile a, Tile b) {
     if (!b.tileIsWhiteSpace && a.value != b.value) {
       if (b.value < a.value) {
         return b.currentLocation.compareTo(a.currentLocation) > 0;
