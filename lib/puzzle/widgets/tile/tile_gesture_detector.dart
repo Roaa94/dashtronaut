@@ -1,7 +1,7 @@
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
-import 'package:dashtronaut/score/widgets/puzzle_share_dialog.dart';
+import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
@@ -18,17 +18,16 @@ class TileGestureDetector extends StatelessWidget {
     required this.tileContent,
   });
 
+  // Todo: show this dialog based on a listener on puzzleIsSolvedProvider
+  //  in the puzzle board widget
   Future<void> _showPuzzleSolvedDialog(
     BuildContext context,
-    OldPuzzleProvider puzzleProvider,
     int secondsElapsed,
   ) async {
     await showDialog(
       context: context,
       builder: (c) {
-        return PuzzleSolvedDialog(
-          puzzleSize: puzzleProvider.n,
-          movesCount: puzzleProvider.movesCount,
+        return SolvedPuzzleDialog(
           solvingDuration: Duration(seconds: secondsElapsed),
         );
       },
@@ -58,7 +57,6 @@ class TileGestureDetector extends StatelessWidget {
         stopWatchProvider.stop();
         _showPuzzleSolvedDialog(
           context,
-          puzzleProvider,
           secondsElapsed,
         ).then((_) {
           puzzleProvider.generate(forceRefresh: true);

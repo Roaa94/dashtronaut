@@ -6,27 +6,28 @@ import 'package:dashtronaut/core/helpers/file_helper.dart';
 import 'package:dashtronaut/core/helpers/share_score_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 
-class PuzzleScore extends StatelessWidget {
+class SolvedPuzzleDialogInfo extends ConsumerWidget {
   final Duration duration;
-  final int movesCount;
-  final int puzzleSize;
 
-  const PuzzleScore({
+  const SolvedPuzzleDialogInfo({
     super.key,
     required this.duration,
-    required this.movesCount,
-    required this.puzzleSize,
   });
 
-  int get tilesCount => (puzzleSize * puzzleSize) - 1;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final puzzleSize = ref.watch(puzzleSizeProvider);
+    final movesCount = ref.watch(puzzleMovesCountProvider);
+    final tilesCount = (puzzleSize * puzzleSize) - 1;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,7 +40,8 @@ class PuzzleScore extends StatelessWidget {
             ),
             const SizedBox(height: Spacing.xs),
             const Text(
-                'You solved the puzzle! Share your score to challenge your friends'),
+              'You solved the puzzle! Share your score to challenge your friends',
+            ),
             const SizedBox(height: Spacing.sm),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,8 +59,11 @@ class PuzzleScore extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                    child:
-                        Text('$movesCount Moves', style: AppTextStyles.h1Bold)),
+                  child: Text(
+                    '$movesCount Moves',
+                    style: AppTextStyles.h1Bold,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: Spacing.md),
@@ -93,8 +98,12 @@ class PuzzleScore extends StatelessWidget {
                     }
                   } catch (e) {
                     await ShareScoreHelper.openLink(
-                        ShareScoreHelper.getTwitterShareLink(
-                            movesCount, duration, tilesCount));
+                      ShareScoreHelper.getTwitterShareLink(
+                        movesCount,
+                        duration,
+                        tilesCount,
+                      ),
+                    );
                     rethrow;
                   }
                 },

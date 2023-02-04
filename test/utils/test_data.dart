@@ -175,3 +175,5 @@ const solvable3x3PuzzleWithSeed2 = [
     tileIsWhiteSpace: true,
   ),
 ];
+
+const puzzle3x3 = Puzzle(n: 3, tiles: solvable3x3PuzzleWithSeed2);
