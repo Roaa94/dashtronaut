@@ -10,14 +10,14 @@ class TilesState extends Equatable {
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
 
-  bool get isSolved => numberOfCorrectTiles == tiles.length - 1;
+  bool get isSolved => correctTilesCount == tiles.length - 1;
 
   TilesState copyWith({List<Tile>? tiles}) {
     return TilesState(tiles: tiles ?? this.tiles);
   }
 
   /// Gets the number of tiles that are currently in their correct position.
-  int get numberOfCorrectTiles {
+  int get correctTilesCount {
     var count = 0;
     for (final tile in tiles) {
       if (!tile.tileIsWhiteSpace) {
