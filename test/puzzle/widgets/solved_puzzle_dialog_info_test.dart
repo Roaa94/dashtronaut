@@ -1,5 +1,6 @@
 import 'package:dashtronaut/core/helpers/duration_helper.dart';
 import 'package:dashtronaut/core/providers/is_web_provider.dart';
+import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
 import 'package:dashtronaut/puzzle/models/puzzle.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog_info.dart';
@@ -145,6 +146,42 @@ void main() {
           ),
           findsOneWidget,
         );
+      },
+    );
+  });
+
+  group('Share score tests', () {
+    late ShareScoreService mockShareScoreService;
+
+    setUp(() {
+      mockShareScoreService = MockShareScoreService();
+    });
+
+    testWidgets(
+      'Calls share from share score service when Share button is clicked',
+      (WidgetTester tester) async {
+        when(() => mockPuzzleRepository.get()).thenReturn(puzzle3x3);
+        when(() => mockShareScoreService.share()).thenAnswer((_) async {});
+
+        await tester.pumpProviderApp(
+          const SolvedPuzzleDialogInfo(
+            // Todo: get from Riverpod provider and test
+            solvingDuration: solvingDuration,
+          ),
+          overrides: [
+            // Todo: find a way to override NotifierProvider's instead
+            puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+            shareScoreServiceProvider.overrideWithValue(mockShareScoreService),
+          ],
+        );
+
+        await tester.tap(
+          find.byWidgetPredicate(
+              (widget) => widget is Icon && widget.icon == Icons.share),
+        );
+        await tester.pumpAndSettle();
+
+        verify(() => mockShareScoreService.share()).called(1);
       },
     );
   });
