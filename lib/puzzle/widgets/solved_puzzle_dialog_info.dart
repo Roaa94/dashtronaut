@@ -5,9 +5,9 @@ import 'package:dashtronaut/core/helpers/duration_helper.dart';
 import 'package:dashtronaut/core/helpers/file_helper.dart';
 import 'package:dashtronaut/core/helpers/share_score_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
+import 'package:dashtronaut/core/providers/is_web_provider.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,11 +15,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 
 class SolvedPuzzleDialogInfo extends ConsumerWidget {
-  final Duration duration;
+  final Duration solvingDuration;
 
   const SolvedPuzzleDialogInfo({
     super.key,
-    required this.duration,
+    required this.solvingDuration,
   });
 
   @override
@@ -27,6 +27,7 @@ class SolvedPuzzleDialogInfo extends ConsumerWidget {
     final puzzleSize = ref.watch(puzzleSizeProvider);
     final movesCount = ref.watch(puzzleMovesCountProvider);
     final tilesCount = (puzzleSize * puzzleSize) - 1;
+    final isWeb = ref.watch(isWebProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +53,7 @@ class SolvedPuzzleDialogInfo extends ConsumerWidget {
                       const Icon(Icons.watch_later_outlined),
                       const SizedBox(width: 5),
                       Text(
-                        DurationHelper.toFormattedTime(duration),
+                        DurationHelper.toFormattedTime(solvingDuration),
                         style: AppTextStyles.h1Bold,
                       ),
                     ],
@@ -83,24 +84,32 @@ class SolvedPuzzleDialogInfo extends ConsumerWidget {
               child: ElevatedButton.icon(
                 onPressed: () async {
                   try {
-                    if (kIsWeb) {
+                    if (isWeb) {
                       await ShareScoreHelper.openLink(
-                          ShareScoreHelper.getTwitterShareLink(
-                              movesCount, duration, tilesCount));
+                        ShareScoreHelper.getTwitterShareLink(
+                          movesCount,
+                          solvingDuration,
+                          tilesCount,
+                        ),
+                      );
                     } else {
                       File file = await FileHelper.getFileFromUrl(
-                          ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize));
+                        ShareScoreHelper.getPuzzleSolvedImageUrl(puzzleSize),
+                      );
                       await Share.shareXFiles(
                         [XFile(file.path)],
                         text: ShareScoreHelper.getPuzzleSolvedTextMobile(
-                            movesCount, duration, tilesCount),
+                          movesCount,
+                          solvingDuration,
+                          tilesCount,
+                        ),
                       );
                     }
                   } catch (e) {
                     await ShareScoreHelper.openLink(
                       ShareScoreHelper.getTwitterShareLink(
                         movesCount,
-                        duration,
+                        solvingDuration,
                         tilesCount,
                       ),
                     );
@@ -108,7 +117,7 @@ class SolvedPuzzleDialogInfo extends ConsumerWidget {
                   }
                 },
                 label: const Text('Share'),
-                icon: kIsWeb
+                icon: isWeb
                     ? const Icon(FontAwesomeIcons.twitter)
                     : const Icon(Icons.share),
               ),

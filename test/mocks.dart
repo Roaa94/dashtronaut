@@ -2,6 +2,7 @@ import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/score/repositories/scores_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
@@ -30,3 +31,7 @@ class MockPuzzleStorageRepository extends Mock
     implements PuzzleStorageRepository {}
 
 class MockPuzzleSizeNotifier extends Mock implements PuzzleSizeNotifier, Notifier<int> {}
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class MockRoute extends Mock implements Route<dynamic> {}

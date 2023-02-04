@@ -2,7 +2,6 @@ import 'package:dashtronaut/core/widget_keys.dart';
 import 'package:dashtronaut/core/widgets/app_alert_dialog.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog_info.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +17,6 @@ class SolvedPuzzleDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(MediaQuery.of(context).size);
-    print(MediaQuery.of(context).orientation == Orientation.landscape);
     final puzzleSize = ref.watch(puzzleSizeProvider);
 
     final imageName = 'solved-${puzzleSize}x$puzzleSize.png';
@@ -31,7 +28,7 @@ class SolvedPuzzleDialog extends ConsumerWidget {
     );
 
     Widget solvedPuzzleInfo = SolvedPuzzleDialogInfo(
-      duration: solvingDuration,
+      solvingDuration: solvingDuration,
     );
 
     Widget portraitContent = ConstrainedBox(

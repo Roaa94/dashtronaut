@@ -7,6 +7,7 @@ extension PumpApp on WidgetTester {
   Future<void> pumpProviderApp(
     Widget widget, {
     List<Override> overrides = const [],
+    NavigatorObserver? navigatorObserver,
   }) async {
     return pumpWidget(
       ProviderScope(
@@ -15,6 +16,9 @@ extension PumpApp on WidgetTester {
           theme: AppThemes.dark,
           themeMode: ThemeMode.dark,
           home: widget,
+          navigatorObservers: [
+            if (navigatorObserver != null) navigatorObserver,
+          ],
         ),
       ),
     );
