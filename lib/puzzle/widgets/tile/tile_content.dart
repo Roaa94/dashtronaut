@@ -18,24 +18,24 @@ class TileContent extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<TileContent> createState() => _TileContentState();
+  ConsumerState<TileContent> createState() => TileContentState();
 }
 
-class _TileContentState extends ConsumerState<TileContent>
+class TileContentState extends ConsumerState<TileContent>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _animationController;
+  late final AnimationController animationController;
   late Animation<double> _scale;
 
   @override
   void initState() {
-    _animationController = AnimationController(
+    animationController = AnimationController(
       vsync: this,
       duration: AnimationsManager.tileHover.duration,
     );
 
     _scale = AnimationsManager.tileHover.tween.animate(
       CurvedAnimation(
-        parent: _animationController,
+        parent: animationController,
         curve: AnimationsManager.tileHover.curve,
       ),
     );
@@ -51,12 +51,12 @@ class _TileContentState extends ConsumerState<TileContent>
     return MouseRegion(
       onEnter: (_) {
         if (!isPuzzleSolved) {
-          _animationController.forward();
+          animationController.forward();
         }
       },
       onExit: (_) {
         if (!isPuzzleSolved) {
-          _animationController.reverse();
+          animationController.reverse();
         }
       },
       child: ScaleTransition(
