@@ -1,5 +1,4 @@
 import 'package:dashtronaut/core/services/storage/storage.dart';
-import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
