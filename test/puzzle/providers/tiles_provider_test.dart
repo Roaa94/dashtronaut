@@ -5,6 +5,7 @@ import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,7 +35,7 @@ void main() {
       addTearDown(providerContainer.dispose);
 
       expect(
-        providerContainer.read(tilesProvider),
+        providerContainer.read(tilesProvider).tiles,
         equals(puzzle2x2Solved.tiles),
       );
     });
@@ -53,7 +54,7 @@ void main() {
       addTearDown(providerContainer.dispose);
 
       expect(
-        providerContainer.read(tilesProvider),
+        providerContainer.read(tilesProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2),
       );
     });
@@ -72,7 +73,7 @@ void main() {
       addTearDown(providerContainer.dispose);
 
       expect(
-        providerContainer.read(tilesProvider),
+        providerContainer.read(tilesProvider).tiles,
         equals(solvable3x3PuzzleWithSeed2),
       );
     });
@@ -82,7 +83,7 @@ void main() {
     test('can reset tiles state', () {
       final random = Random(seed);
       const configs = Configs(defaultPuzzleSize: 2);
-      final tilesListener = Listener<List<Tile>>();
+      final tilesListener = Listener<TilesState>();
       final providerContainer = ProviderContainer(
         overrides: [
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
@@ -103,22 +104,22 @@ void main() {
 
       verify(() => tilesListener(
             null,
-            solvable2x2PuzzleWithSeed2,
+            const TilesState(tiles: solvable2x2PuzzleWithSeed2),
           )).called(1);
 
       expect(
-        providerContainer.read(tilesProvider),
+        providerContainer.read(tilesProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2),
       );
 
       providerContainer.read(tilesProvider.notifier).reset();
       verify(() => tilesListener(
-            solvable2x2PuzzleWithSeed2,
-            solvable2x2PuzzleWithSeed2Reset,
+            const TilesState(tiles: solvable2x2PuzzleWithSeed2),
+            const TilesState(tiles: solvable2x2PuzzleWithSeed2Reset),
           )).called(1);
 
       expect(
-        providerContainer.read(tilesProvider),
+        providerContainer.read(tilesProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2Reset),
       );
     });
@@ -137,7 +138,7 @@ void main() {
 
       addTearDown(providerContainer.dispose);
       expect(
-        providerContainer.read(tilesProvider),
+        providerContainer.read(tilesProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2),
       );
 
@@ -192,7 +193,10 @@ void main() {
 
       providerContainer.read(tilesProvider.notifier).swapTiles(tileToMove);
 
-      expect(providerContainer.read(tilesProvider), newTiles);
+      expect(
+        providerContainer.read(tilesProvider).tiles,
+        newTiles,
+      );
     });
 
     test('Updates repository when swapping tiles', () {
@@ -212,7 +216,7 @@ void main() {
     });
 
     test('Does not swap tiles when puzzle is already solved', () {
-      final tilesListener = Listener<List<Tile>>();
+      final tilesListener = Listener<TilesState>();
       when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solved);
 
       final providerContainer = ProviderContainer(
@@ -230,7 +234,12 @@ void main() {
 
       addTearDown(providerContainer.dispose);
 
-      verify(() => tilesListener(null, puzzle2x2Solved.tiles)).called(1);
+      verify(
+        () => tilesListener(
+          null,
+          TilesState(tiles: puzzle2x2Solved.tiles),
+        ),
+      ).called(1);
 
       providerContainer.read(tilesProvider.notifier).swapTiles(tileToMove);
 
@@ -339,199 +348,6 @@ void main() {
 
       expect(tile2.value < tile1.value, isTrue);
       expect(tilesNotifier.isInversion(tile1, tile2), isTrue);
-    });
-  });
-
-  group('Tile methods', () {
-    test('isSolved is true when tiles are in a solved arrangement', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solved);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).isSolved,
-        isTrue,
-      );
-    });
-
-    test('isSolved is false when tiles are not in a solved arrangement', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).isSolved,
-        isFalse,
-      );
-    });
-
-    test('Can get whitespace tile', () {
-      const whiteSpaceTileOf2x2CorrectPuzzle = Tile(
-        value: 4,
-        tileIsWhiteSpace: true,
-        currentLocation: Location(x: 2, y: 2),
-        correctLocation: Location(x: 2, y: 2),
-      );
-
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solved);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).whiteSpaceTile,
-        whiteSpaceTileOf2x2CorrectPuzzle,
-      );
-    });
-
-    test('Tile is movable when located around the whitespace tile', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      const movableTile = Tile(
-        value: 1,
-        currentLocation: Location(x: 1, y: 1),
-        correctLocation: Location(x: 1, y: 1),
-      );
-
-      expect(
-        providerContainer
-            .read(tilesProvider.notifier)
-            .tileIsMovable(movableTile),
-        isTrue,
-      );
-    });
-
-    test('Tile is not movable when not located around the whitespace tile', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      const nonMovableTile = Tile(
-        value: 2,
-        currentLocation: Location(x: 2, y: 1),
-        correctLocation: Location(x: 2, y: 1),
-      );
-
-      expect(
-        providerContainer
-            .read(tilesProvider.notifier)
-            .tileIsMovable(nonMovableTile),
-        isFalse,
-      );
-    });
-
-    test('Finds tile on top of whitespace tile', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      const topOfWhitespaceTile = Tile(
-        value: 1,
-        currentLocation: Location(x: 1, y: 1),
-        correctLocation: Location(x: 1, y: 1),
-      );
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).tileTopOfWhitespace,
-        equals(topOfWhitespaceTile),
-      );
-    });
-
-    test('Finds tile on right of whitespace tile', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      const rightOfWhitespaceTile = Tile(
-        value: 3,
-        currentLocation: Location(x: 2, y: 2),
-        correctLocation: Location(x: 1, y: 2),
-      );
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).tileRightOfWhitespace,
-        equals(rightOfWhitespaceTile),
-      );
-    });
-
-    test('Finds tile on the left of whitespace tile', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solvable);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      const leftOfWhitespaceTile = Tile(
-        value: 3,
-        correctLocation: Location(y: 2, x: 1),
-        currentLocation: Location(y: 1, x: 1),
-      );
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).tileLeftOfWhitespace,
-        equals(leftOfWhitespaceTile),
-      );
-    });
-
-    test('Finds tile bottom of whitespace tile', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solvable);
-
-      final providerContainer = ProviderContainer(
-        overrides: [
-          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        ],
-      );
-      addTearDown(providerContainer.dispose);
-
-      const bottomOfWhitespaceTile = Tile(
-        value: 1,
-        correctLocation: Location(y: 1, x: 1),
-        currentLocation: Location(y: 2, x: 2),
-      );
-
-      expect(
-        providerContainer.read(tilesProvider.notifier).tileBottomOfWhitespace,
-        equals(bottomOfWhitespaceTile),
-      );
     });
   });
 }

@@ -4,49 +4,48 @@ import 'package:collection/collection.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
+import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tilesProvider = NotifierProvider<TilesNotifier, List<Tile>>(
+final tilesProvider = NotifierProvider<TilesNotifier, TilesState>(
   () => TilesNotifier(),
 );
 
-class TilesNotifier extends Notifier<List<Tile>> {
+class TilesNotifier extends Notifier<TilesState> {
   TilesNotifier({this.random});
 
   /// Random value used in shuffling tiles
   final Random? random;
 
-  /// Get whitespace tile
-  Tile get whiteSpaceTile => state.firstWhere((tile) => tile.tileIsWhiteSpace);
-
-  bool get isSolved => getNumberOfCorrectTiles(state) == state.length - 1;
-
   @override
-  List<Tile> build() {
-    return puzzleRepository.get()?.tiles ?? generateSolvableTiles();
+  TilesState build() {
+    return TilesState(
+      tiles: puzzleRepository.get()?.tiles ?? generateSolvableTiles(),
+    );
   }
 
   PuzzleStorageRepository get puzzleRepository =>
       ref.watch(puzzleRepositoryProvider);
 
   void reset() {
-    state = generateSolvableTiles();
-    puzzleRepository.updateTiles(state);
+    state = TilesState(tiles: generateSolvableTiles());
+    puzzleRepository.updateTiles(state.tiles);
   }
 
   void swapTiles(Tile movedTile) {
-    if (!isSolved) {
-      state = [
-        for (final tile in state)
+    if (!state.isSolved) {
+      final newTiles = [
+        for (final tile in state.tiles)
           if (tile.currentLocation == movedTile.currentLocation)
-            tile.copyWith(currentLocation: whiteSpaceTile.currentLocation)
-          else if (tile == whiteSpaceTile)
+            tile.copyWith(currentLocation: state.whiteSpaceTile.currentLocation)
+          else if (tile == state.whiteSpaceTile)
             tile.copyWith(currentLocation: movedTile.currentLocation)
           else
             tile
       ];
-      puzzleRepository.updateTiles(state);
+      state = state.copyWith(tiles: newTiles);
+      puzzleRepository.updateTiles(state.tiles);
     }
   }
 
@@ -70,6 +69,19 @@ class TilesNotifier extends Notifier<List<Tile>> {
       );
     }
     return tiles;
+  }
+
+  /// Gets the number of tiles that are currently in their correct position.
+  int getNumberOfCorrectTiles(List<Tile> tiles) {
+    var count = 0;
+    for (final tile in tiles) {
+      if (!tile.tileIsWhiteSpace) {
+        if (tile.currentLocation == tile.correctLocation) {
+          count++;
+        }
+      }
+    }
+    return count;
   }
 
   List<Location> generateTileCorrectLocations(int n) {
@@ -96,19 +108,6 @@ class TilesNotifier extends Notifier<List<Tile>> {
         tileIsWhiteSpace: i == correctLocations.length - 1,
       ),
     );
-  }
-
-  /// Gets the number of tiles that are currently in their correct position.
-  int getNumberOfCorrectTiles(List<Tile> tiles) {
-    var numberOfCorrectTiles = 0;
-    for (final tile in tiles) {
-      if (!tile.tileIsWhiteSpace) {
-        if (tile.currentLocation == tile.correctLocation) {
-          numberOfCorrectTiles++;
-        }
-      }
-    }
-    return numberOfCorrectTiles;
   }
 
   /// Determines if the puzzle is solvable.
@@ -168,52 +167,4 @@ class TilesNotifier extends Notifier<List<Tile>> {
     }
     return false;
   }
-
-  /// Check if a [Tile] is movable
-  ///
-  /// A tile if movable if it's not a whitespace tile
-  /// and if it's located around the whitespace tile
-  /// (top of, bottom of, right of, or left of)
-  bool tileIsMovable(Tile tile) {
-    if (tile.tileIsWhiteSpace) {
-      return false;
-    }
-    return tile.currentLocation.isLocatedAround(whiteSpaceTile.currentLocation);
-  }
-
-  /// Check if a tile is left of the whitespace tile
-  bool tileIsLeftOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isLeftOf(whiteSpaceTile.currentLocation);
-  }
-
-  /// Check if a tile is right of the whitespace tile
-  bool tileIsRightOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isRightOf(whiteSpaceTile.currentLocation);
-  }
-
-  /// Check if a tile is top of the whitespace tile
-  bool tileIsTopOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isTopOf(whiteSpaceTile.currentLocation);
-  }
-
-  /// Check if a tile is bottom of the whitespace tile
-  bool tileIsBottomOfWhiteSpace(Tile tile) {
-    return tile.currentLocation.isBottomOf(whiteSpaceTile.currentLocation);
-  }
-
-  /// Returns the tile at the top of the whitespace tile
-  Tile? get tileTopOfWhitespace =>
-      state.firstWhereOrNull((tile) => tileIsTopOfWhiteSpace(tile));
-
-  /// Returns the tile at the bottom of the whitespace tile
-  Tile? get tileBottomOfWhitespace =>
-      state.firstWhereOrNull((tile) => tileIsBottomOfWhiteSpace(tile));
-
-  /// Returns the tile at the right of the whitespace tile
-  Tile? get tileRightOfWhitespace =>
-      state.firstWhereOrNull((tile) => tileIsRightOfWhiteSpace(tile));
-
-  /// Returns the tile at the left of the whitespace tile
-  Tile? get tileLeftOfWhitespace =>
-      state.firstWhereOrNull((tile) => tileIsLeftOfWhiteSpace(tile));
 }
