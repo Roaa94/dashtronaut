@@ -24,7 +24,8 @@ class PuzzleBoard extends StatelessWidget {
     return ScaleUpTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
       child: Consumer<OldPuzzleProvider>(
-        builder: (c, OldPuzzleProvider puzzleProvider, _) => RawKeyboardListener(
+        builder: (c, OldPuzzleProvider puzzleProvider, _) =>
+            RawKeyboardListener(
           onKey: (event) {
             puzzleProvider.handleKeyboardEvent(event);
             if (event is RawKeyDownEvent &&
@@ -59,11 +60,7 @@ class PuzzleBoard extends StatelessWidget {
                               isActive:
                                   puzzleProvider.puzzle.tileIsMovable(tile) &&
                                       !puzzleProvider.puzzle.isSolved,
-                              child: TileContent(
-                                tile: tile,
-                                isPuzzleSolved: puzzleProvider.puzzle.isSolved,
-                                puzzleSize: puzzleProvider.n,
-                              ),
+                              child: TileContent(tile: tile),
                             ),
                           ),
                         );

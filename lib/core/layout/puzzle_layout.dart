@@ -44,6 +44,8 @@ class PuzzleLayout implements LayoutDelegate {
 
   static const double tilePadding = 4;
 
+  static const double smallTilePadding = 2;
+
   static double? tileTextSize(int puzzleSize) {
     return puzzleSize > 5
         ? 20

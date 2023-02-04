@@ -1,27 +1,27 @@
+import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/tile_rive_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TileContent extends StatefulWidget {
+class TileContent extends ConsumerStatefulWidget {
   final Tile tile;
-  final bool isPuzzleSolved;
-  final int puzzleSize;
 
   const TileContent({
-    Key? key,
+    super.key,
     required this.tile,
-    required this.isPuzzleSolved,
-    required this.puzzleSize,
-  }) : super(key: key);
+  });
 
   @override
-  State<TileContent> createState() => _TileContentState();
+  ConsumerState<TileContent> createState() => _TileContentState();
 }
 
-class _TileContentState extends State<TileContent>
+class _TileContentState extends ConsumerState<TileContent>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late Animation<double> _scale;
@@ -44,14 +44,18 @@ class _TileContentState extends State<TileContent>
 
   @override
   Widget build(BuildContext context) {
+    final isPuzzleSolved = ref.watch(puzzleIsSolvedProvider);
+    final puzzleSize = ref.watch(puzzleSizeProvider);
+    final configs = ref.watch(configsProvider);
+
     return MouseRegion(
       onEnter: (_) {
-        if (!widget.isPuzzleSolved) {
+        if (!isPuzzleSolved) {
           _animationController.forward();
         }
       },
       onExit: (_) {
-        if (!widget.isPuzzleSolved) {
+        if (!isPuzzleSolved) {
           _animationController.reverse();
         }
       },
@@ -59,20 +63,24 @@ class _TileContentState extends State<TileContent>
         scale: _scale,
         child: Padding(
           padding: EdgeInsets.all(
-              widget.puzzleSize > 4 ? 2 : PuzzleLayout.tilePadding),
+            puzzleSize > configs.smallTilePuzzleSize
+                ? PuzzleLayout.smallTilePadding
+                : PuzzleLayout.tilePadding,
+          ),
           child: Stack(
             children: [
               TileRiveAnimation(
                 isAtCorrectLocation:
                     widget.tile.currentLocation == widget.tile.correctLocation,
-                isPuzzleSolved: widget.isPuzzleSolved,
+                isPuzzleSolved: isPuzzleSolved,
               ),
               Positioned.fill(
                 child: Center(
                   child: Text(
                     '${widget.tile.value}',
                     style: AppTextStyles.tile.copyWith(
-                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize)),
+                      fontSize: PuzzleLayout.tileTextSize(puzzleSize),
+                    ),
                   ),
                 ),
               ),
