@@ -4,7 +4,8 @@ PODS:
   - FlutterMacOS (1.0.0)
   - package_info_plus_macos (0.0.1):
     - FlutterMacOS
-  - path_provider_macos (0.0.1):
+  - path_provider_foundation (0.0.1):
+    - Flutter
     - FlutterMacOS
   - share_plus_macos (0.0.1):
     - FlutterMacOS
@@ -15,7 +16,7 @@ DEPENDENCIES:
   - desktop_window (from `Flutter/ephemeral/.symlinks/plugins/desktop_window/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - package_info_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos`)
-  - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
+  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/macos`)
   - share_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/share_plus_macos/macos`)
   - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
 
@@ -26,8 +27,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
   package_info_plus_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos
-  path_provider_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos
+  path_provider_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/macos
   share_plus_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/share_plus_macos/macos
   url_launcher_macos:
@@ -35,12 +36,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   desktop_window: fb7c4f12c1129f947ac482296b6f14059d57a3c3
-  FlutterMacOS: ae6af50a8ea7d6103d888583d46bd8328a7e9811
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   package_info_plus_macos: f010621b07802a241d96d01876d6705f15e77c1c
-  path_provider_macos: 05fb0ef0cedf3e5bd179b9e41a638682b37133ea
+  path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
   share_plus_macos: 853ee48e7dce06b633998ca0735d482dd671ade4
   url_launcher_macos: c04e4fa86382d4f94f6b38f14625708be3ae52e2
 
-PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7
 
 COCOAPODS: 1.11.2

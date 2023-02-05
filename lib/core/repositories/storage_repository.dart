@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dashtronaut/core/services/storage/storage.dart';
 
 abstract class StorageRepository<T> {
@@ -15,7 +17,7 @@ abstract class StorageRepository<T> {
 
   T? get() {
     final data = storageService.get(storageKey);
-    return data == null ? null : fromJson(data);
+    return data == null ? null : fromJson(json.decode(json.encode(data)));
   }
 
   void set(T item) {
