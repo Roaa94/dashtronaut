@@ -7,6 +7,7 @@ import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/score/repositories/scores_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -45,3 +46,9 @@ class MockShareScoreService extends Mock implements ShareScoreService {}
 class MockUrlService extends Mock implements UrlService {}
 
 class MockFileShareService extends Mock implements FileShareService {}
+
+class MockUrlLauncher extends Mock
+    with MockPlatformInterfaceMixin
+    implements UrlLauncherPlatform {}
+
+class MockLaunchOptions extends Mock implements LaunchOptions {}
