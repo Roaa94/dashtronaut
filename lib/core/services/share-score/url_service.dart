@@ -7,17 +7,17 @@ final urlLauncherServiceProvider = Provider<UrlService>(
 );
 
 abstract class UrlService {
-  Future<void> openLink(String url, {VoidCallback? onError});
+  Future<void> openLink(String url);
 }
 
 class UrlLauncherService extends UrlService {
   @override
-  Future<void> openLink(String url, {VoidCallback? onError}) async {
+  Future<void> openLink(String url) async {
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
-    } else if (onError != null) {
-      onError();
+    } else {
+      throw 'Url cannot be opened!';
     }
   }
 }

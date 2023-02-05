@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dashtronaut/core/providers/is_web_provider.dart';
 import 'package:dashtronaut/core/services/share-score/file_share_service.dart';
-import 'package:dashtronaut/core/services/share-score/url_launcher_service.dart';
+import 'package:dashtronaut/core/services/share-score/url_service.dart';
 import 'package:dashtronaut/score/models/score.dart';
 import 'package:dashtronaut/score/providers/score_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,8 +38,6 @@ class AdaptiveShareScoreService extends ShareScoreService {
   final bool isWeb;
   final UrlService urlLauncherService;
   final FileShareService fileShareService;
-
-  int get tilesCount => score.puzzleSize * score.puzzleSize - 1;
 
   Future<void> _openLink() async {
     try {
