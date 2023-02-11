@@ -9,9 +9,9 @@ abstract class StorageRepository<T> {
 
   String get storageKey;
 
-  T fromJson(dynamic json);
+  T fromJson(dynamic json) => json;
 
-  dynamic toJson(T item);
+  dynamic toJson(T item) => item;
 
   bool get hasData => storageService.has(storageKey);
 
