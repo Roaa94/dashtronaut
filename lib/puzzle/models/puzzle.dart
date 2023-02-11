@@ -10,6 +10,7 @@ class Puzzle extends Equatable {
   final int movesCount;
 
   const Puzzle({
+    // Todo: Allow these values to be nullable
     required this.n,
     required this.tiles,
     this.movesCount = 0,
