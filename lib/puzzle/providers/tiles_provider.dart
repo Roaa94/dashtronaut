@@ -20,8 +20,11 @@ class TilesNotifier extends Notifier<TilesState> {
 
   @override
   TilesState build() {
+    final existingTiles = puzzleRepository.get()?.tiles;
     return TilesState(
-      tiles: puzzleRepository.get()?.tiles ?? generateSolvableTiles(),
+      tiles: existingTiles != null && existingTiles.isNotEmpty
+          ? existingTiles
+          : generateSolvableTiles(),
     );
   }
 

@@ -100,10 +100,12 @@ void main() {
 
       addTearDown(providerContainer.dispose);
 
-      verify(() => tilesListener(
-            null,
-            const TilesState(tiles: solvable2x2PuzzleWithSeed2),
-          )).called(1);
+      verify(
+        () => tilesListener(
+          null,
+          const TilesState(tiles: solvable2x2PuzzleWithSeed2),
+        ),
+      ).called(1);
 
       expect(
         providerContainer.read(tilesProvider).tiles,

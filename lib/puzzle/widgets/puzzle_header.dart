@@ -35,17 +35,20 @@ class PuzzleHeader extends StatelessWidget {
               children: [
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                      minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
+                    minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md,
+                  ),
                   child: const PuzzleStopWatch(),
                 ),
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                      minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
+                    minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md,
+                  ),
                   child: const MovesCount(),
                 ),
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                      minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md),
+                    minWidth: (puzzleLayout.containerWidth / 3) - Spacing.md,
+                  ),
                   child: const CorrectTilesCount(),
                 ),
               ],
