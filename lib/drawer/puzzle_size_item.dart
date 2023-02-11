@@ -3,7 +3,6 @@ import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
-import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +13,6 @@ class PuzzleSizeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StopWatchProvider stopWatchProvider =
-        Provider.of<StopWatchProvider>(context, listen: false);
     PhrasesProvider phrasesProvider =
         Provider.of<PhrasesProvider>(context, listen: false);
 
@@ -29,7 +26,8 @@ class PuzzleSizeItem extends StatelessWidget {
               onPressed: () {
                 if (!isSelected) {
                   puzzleProvider.resetPuzzleSize(size);
-                  stopWatchProvider.stop();
+                  // Todo: stop the stop watch
+                  // stopWatchProvider.stop();
                   if (size > 4) {
                     phrasesProvider
                         .setPhraseState(PhraseState.hardPuzzleSelected);

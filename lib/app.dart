@@ -7,7 +7,6 @@ import 'package:dashtronaut/home/home_page.dart';
 import 'package:dashtronaut/core/layout/background_layer_layout.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/providers/old_puzzle_provider.dart';
-import 'package:dashtronaut/puzzle/providers/stop_watch_provider.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -68,9 +67,6 @@ class _DashtronautAppState extends ConsumerState<DashtronautApp> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => OldPuzzleProvider(storageService)..generate(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => StopWatchProvider(storageService)..init(),
         ),
         ChangeNotifierProvider(
           create: (_) => PhrasesProvider(),
