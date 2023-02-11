@@ -68,13 +68,12 @@ void main() {
 
     addTearDown(providerContainer.dispose);
 
-    puzzleMovesCountProvider.addListener(
-      providerContainer,
+    providerContainer.listen(
+      puzzleMovesCountProvider,
       puzzleMovesCountListener,
-      onError: (_, __) {},
-      onDependencyMayHaveChanged: () {},
       fireImmediately: true,
     );
+
     verify(() => puzzleMovesCountListener(null, 0)).called(1);
 
     providerContainer.read(puzzleMovesCountProvider.notifier).update(newValue);

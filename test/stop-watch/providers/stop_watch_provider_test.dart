@@ -21,11 +21,9 @@ void main() {
       ],
     );
 
-    stopWatchProvider.addListener(
-      providerContainer,
+    providerContainer.listen(
+      stopWatchProvider,
       stopWatchListener,
-      onError: (_, __) {},
-      onDependencyMayHaveChanged: () {},
       fireImmediately: true,
     );
 
@@ -52,11 +50,9 @@ void main() {
         ],
       );
 
-      stopWatchProvider.addListener(
-        providerContainer,
+      providerContainer.listen(
+        stopWatchProvider,
         stopWatchListener,
-        onError: (_, __) {},
-        onDependencyMayHaveChanged: () {},
         fireImmediately: true,
       );
 
@@ -83,11 +79,9 @@ void main() {
         ],
       );
 
-      stopWatchProvider.addListener(
-        providerContainer,
+      providerContainer.listen(
+        stopWatchProvider,
         stopWatchListener,
-        onError: (_, __) {},
-        onDependencyMayHaveChanged: () {},
         fireImmediately: true,
       );
 
@@ -129,11 +123,9 @@ void main() {
         ],
       );
 
-      stopWatchProvider.addListener(
-        providerContainer,
+      providerContainer.listen(
+        stopWatchProvider,
         stopWatchListener,
-        onError: (_, __) {},
-        onDependencyMayHaveChanged: () {},
         fireImmediately: true,
       );
 

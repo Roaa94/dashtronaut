@@ -36,11 +36,9 @@ void main() {
 
     addTearDown(providerContainer.dispose);
 
-    scoresProvider.addListener(
-      providerContainer,
+    providerContainer.listen(
+      scoresProvider,
       scoresListener,
-      onError: (_, __) {},
-      onDependencyMayHaveChanged: () {},
       fireImmediately: true,
     );
 
@@ -62,11 +60,9 @@ void main() {
 
     addTearDown(providerContainer.dispose);
 
-    scoresProvider.addListener(
-      providerContainer,
+    providerContainer.listen(
+      scoresProvider,
       scoresListener,
-      onError: (_, __) {},
-      onDependencyMayHaveChanged: () {},
       fireImmediately: true,
     );
 
@@ -88,11 +84,9 @@ void main() {
 
     addTearDown(providerContainer.dispose);
 
-    scoresProvider.addListener(
-      providerContainer,
+    providerContainer.listen(
+      scoresProvider,
       scoresListener,
-      onError: (_, __) {},
-      onDependencyMayHaveChanged: () {},
       fireImmediately: true,
     );
 
@@ -126,11 +120,9 @@ void main() {
 
     addTearDown(providerContainer.dispose);
 
-    scoresProvider.addListener(
-      providerContainer,
+    providerContainer.listen(
+      scoresProvider,
       scoresListener,
-      onError: (_, __) {},
-      onDependencyMayHaveChanged: () {},
       fireImmediately: true,
     );
 

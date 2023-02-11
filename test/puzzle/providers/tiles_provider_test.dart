@@ -92,11 +92,9 @@ void main() {
         ],
       );
 
-      tilesProvider.addListener(
-        providerContainer,
+      providerContainer.listen(
+        tilesProvider,
         tilesListener,
-        onError: (_, __) {},
-        onDependencyMayHaveChanged: () {},
         fireImmediately: true,
       );
 
@@ -224,11 +222,10 @@ void main() {
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
         ],
       );
-      tilesProvider.addListener(
-        providerContainer,
+
+      providerContainer.listen(
+        tilesProvider,
         tilesListener,
-        onError: (_, __) {},
-        onDependencyMayHaveChanged: () {},
         fireImmediately: true,
       );
 
