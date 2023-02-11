@@ -15,6 +15,8 @@ class Tile extends Equatable {
     required this.value,
     required this.correctLocation,
     required this.currentLocation,
+    // Todo: technically a tile is whitespace if it's the last one,
+    //  so this field should be eliminated
     this.tileIsWhiteSpace = false,
   });
 

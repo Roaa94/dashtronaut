@@ -81,7 +81,7 @@ void main() {
     test('toString prints correctly', () {
       Location location = const Location(x: 2, y: 1);
 
-      expect(location.toString(), '(1, 2)');
+      expect(location.toString(), '(x: 2, y: 1)');
     });
   });
 }

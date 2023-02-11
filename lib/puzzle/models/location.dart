@@ -51,7 +51,7 @@ class Location extends Equatable implements Comparable<Location> {
   }
 
   @override
-  String toString() => '($y, $x)';
+  String toString() => '(x: $x, y: $y)';
 
   @override
   int compareTo(Location other) {

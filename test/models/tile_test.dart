@@ -83,8 +83,8 @@ void main() {
         tile.toString(),
         equals(
           'Tile(value: 2, '
-          'correctLocation: (1, 2), '
-          'currentLocation: (3, 1), '
+          'correctLocation: (x: 2, y: 1), '
+          'currentLocation: (x: 1, y: 3), '
           'tileIsWhiteSpace: false'
           ')',
         ),
