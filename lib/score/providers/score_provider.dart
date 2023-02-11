@@ -4,7 +4,7 @@ import 'package:dashtronaut/score/models/score.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Todo: test this provider
-final scoreProvider = Provider((ref) {
+final scoreProvider = Provider<Score>((ref) {
   return Score(
     // Todo: add correct secondsElapsed
     secondsElapsed: 20,
