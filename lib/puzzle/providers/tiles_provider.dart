@@ -5,6 +5,7 @@ import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final tilesProvider = NotifierProvider<TilesNotifier, TilesState>(
@@ -45,6 +46,27 @@ class TilesNotifier extends Notifier<TilesState> {
       ];
       state = state.copyWith(tiles: newTiles);
       puzzleRepository.updateTiles(state.tiles);
+    }
+  }
+
+  /// Handle Keyboard event and move appropriate tile
+  void handleKeyboardEvent(RawKeyEvent event) {
+    if (event is RawKeyDownEvent) {
+      final physicalKey = event.data.physicalKey;
+      Tile? tile;
+      if (physicalKey == PhysicalKeyboardKey.arrowDown) {
+        tile = state.tileTopOfWhitespace;
+      } else if (physicalKey == PhysicalKeyboardKey.arrowUp) {
+        tile = state.tileBottomOfWhitespace;
+      } else if (physicalKey == PhysicalKeyboardKey.arrowRight) {
+        tile = state.tileLeftOfWhitespace;
+      } else if (physicalKey == PhysicalKeyboardKey.arrowLeft) {
+        tile = state.tileRightOfWhitespace;
+      }
+
+      if (tile != null) {
+        swapTiles(tile);
+      }
     }
   }
 
