@@ -12,6 +12,10 @@ class TilesState extends Equatable {
 
   bool get isSolved => correctTilesCount == tiles.length - 1;
 
+  /// list of [tiles] excluding white space tile
+  List<Tile> get withoutWhitespace =>
+      tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
+
   TilesState copyWith({List<Tile>? tiles}) {
     return TilesState(tiles: tiles ?? this.tiles);
   }

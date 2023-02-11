@@ -14,6 +14,35 @@ void main() {
     expect(tilesState.isSolved, isTrue);
   });
 
+  test('gets tiles list without whitespace tile', () {
+    // 1   2
+    // 3
+    final tilesState = TilesState(tiles: puzzle2x2Solved.tiles);
+
+    const expectedTilesWithoutWhitespaceTile = [
+      Tile(
+        value: 1,
+        currentLocation: Location(x: 1, y: 1),
+        correctLocation: Location(x: 1, y: 1),
+      ),
+      Tile(
+        value: 2,
+        currentLocation: Location(x: 2, y: 1),
+        correctLocation: Location(x: 2, y: 1),
+      ),
+      Tile(
+        value: 3,
+        currentLocation: Location(x: 1, y: 2),
+        correctLocation: Location(x: 1, y: 2),
+      ),
+    ];
+
+    expect(
+      tilesState.withoutWhitespace,
+      equals(expectedTilesWithoutWhitespaceTile),
+    );
+  });
+
   test('isSolved is false when tiles are not in a solved arrangement', () {
     // 1  2
     //    3
