@@ -10,6 +10,7 @@ import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
 import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/score/repositories/scores_repository.dart';
+import 'package:dashtronaut/stop-watch/repositories/stop_watch_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -76,3 +77,6 @@ class MockTilesNotifier extends Mock
 
 class MockPuzzleSizeNotifier extends Mock
     implements PuzzleSizeNotifier, MockNotifier<int> {}
+
+class MockStopWatchStorageRepository extends Mock
+    implements StopWatchStorageRepository {}

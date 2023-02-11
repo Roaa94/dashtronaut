@@ -119,6 +119,9 @@ const solvable2x2PuzzleWithSeed2Reset = [
   ),
 ];
 
+// 2  4
+// 6  8  5
+// 1  3  7
 const solvable3x3PuzzleWithSeed2 = [
   Tile(
     value: 1,
