@@ -5,7 +5,7 @@ import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/puzzle/widgets/correct_tiles_count.dart';
 import 'package:dashtronaut/puzzle/widgets/moves_count.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
-import 'package:dashtronaut/puzzle/widgets/puzzle_stop_watch.dart';
+import 'package:dashtronaut/stop-watch/widgets/puzzle_stop_watch.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleHeader extends StatelessWidget {
