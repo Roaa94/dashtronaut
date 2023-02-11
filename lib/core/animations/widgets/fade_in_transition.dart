@@ -22,26 +22,32 @@ class _FadeInTransitionState extends State<FadeInTransition>
 
   @override
   void initState() {
+    final fadeInDuration = AnimationsManager.fadeIn.duration;
+
     _animationController = AnimationController(
       vsync: this,
-      duration: AnimationsManager.fadeIn.duration,
+      duration: fadeInDuration + (widget.delay ?? Duration.zero),
     );
+
+    // Todo: test this logic
+    var intervalStart = 0.0;
+    if (widget.delay != null &&
+        widget.delay!.inSeconds < fadeInDuration.inSeconds) {
+      intervalStart = widget.delay!.inSeconds /
+          (fadeInDuration.inSeconds + widget.delay!.inSeconds);
+    }
 
     _opacity = AnimationsManager.fadeIn.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: AnimationsManager.fadeIn.curve,
+        curve: Interval(
+          intervalStart,
+          1,
+          curve: AnimationsManager.fadeIn.curve,
+        ),
       ),
     );
-    if (widget.delay == null) {
-      _animationController.forward();
-    } else {
-      Future.delayed(widget.delay!, () {
-        if (mounted) {
-          _animationController.forward();
-        }
-      });
-    }
+    _animationController.forward();
     super.initState();
   }
 

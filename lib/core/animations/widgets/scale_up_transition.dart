@@ -22,25 +22,31 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition>
 
   @override
   void initState() {
+    final scaleUpDuration = AnimationsManager.scaleUp.duration;
     _animationController = AnimationController(
       vsync: this,
-      duration: AnimationsManager.scaleUp.duration,
+      duration: scaleUpDuration + (widget.delay ?? Duration.zero),
     );
+
+    // Todo: test this logic
+    var intervalStart = 0.0;
+    if (widget.delay != null &&
+        widget.delay!.inSeconds < scaleUpDuration.inSeconds) {
+      intervalStart = widget.delay!.inSeconds /
+          (scaleUpDuration.inSeconds + widget.delay!.inSeconds);
+    }
 
     _scale = AnimationsManager.scaleUp.tween.animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: AnimationsManager.scaleUp.curve,
+        curve: Interval(
+          intervalStart,
+          1,
+          curve: AnimationsManager.scaleUp.curve,
+        ),
       ),
     );
-
-    if (widget.delay == null) {
-      _animationController.forward();
-    } else {
-      Future.delayed(widget.delay!, () {
-        _animationController.forward();
-      });
-    }
+    _animationController.forward();
     super.initState();
   }
 
