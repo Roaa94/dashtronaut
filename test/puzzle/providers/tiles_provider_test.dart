@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:dashtronaut/configs/models/configs.dart';
 import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
+import 'package:dashtronaut/puzzle/models/puzzle.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
 import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
@@ -348,5 +350,51 @@ void main() {
       expect(tile2.value < tile1.value, isTrue);
       expect(tilesNotifier.isInversion(tile1, tile2), isTrue);
     });
+  });
+
+  test('updating puzzle size resets tiles', () async {
+    final random = Random(seed);
+    const currentSize = 2;
+    const newSize = 3;
+    final tilesListener = Listener<TilesState>();
+    when(() => mockPuzzleRepository.get()).thenReturn(
+      const Puzzle(
+        n: currentSize,
+        movesCount: 0,
+        tiles: [],
+      ),
+    );
+
+    final providerContainer = ProviderContainer(
+      overrides: [
+        tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+      ],
+    );
+
+    addTearDown(providerContainer.dispose);
+
+    providerContainer.listen(
+      tilesProvider,
+      tilesListener,
+      fireImmediately: true,
+    );
+
+    verify(
+      () => tilesListener.call(
+        null,
+        const TilesState(tiles: solvable2x2PuzzleWithSeed2),
+      ),
+    ).called(1);
+
+    providerContainer.read(puzzleSizeProvider.notifier).update(newSize);
+    await Future.delayed(Duration.zero);
+
+    verify(
+      () => tilesListener.call(
+        const TilesState(tiles: solvable2x2PuzzleWithSeed2),
+        const TilesState(tiles: solvable3x3PuzzleWithSeed2SizeReset),
+      ),
+    ).called(1);
   });
 }

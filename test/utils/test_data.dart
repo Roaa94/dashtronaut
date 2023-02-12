@@ -179,4 +179,60 @@ const solvable3x3PuzzleWithSeed2 = [
   ),
 ];
 
+const solvable3x3PuzzleWithSeed2SizeReset = [
+  Tile(
+    value: 1,
+    correctLocation: Location(x: 1, y: 1),
+    currentLocation: Location(x: 1, y: 3),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 2,
+    correctLocation: Location(x: 2, y: 1),
+    currentLocation: Location(x: 3, y: 1),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 3,
+    correctLocation: Location(x: 3, y: 1),
+    currentLocation: Location(x: 3, y: 2),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 4,
+    correctLocation: Location(x: 1, y: 2),
+    currentLocation: Location(x: 2, y: 2),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 5,
+    correctLocation: Location(x: 2, y: 2),
+    currentLocation: Location(x: 2, y: 3),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 6,
+    correctLocation: Location(x: 3, y: 2),
+    currentLocation: Location(x: 1, y: 2),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 7,
+    correctLocation: Location(x: 1, y: 3),
+    currentLocation: Location(x: 1, y: 1),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 8,
+    correctLocation: Location(x: 2, y: 3),
+    currentLocation: Location(x: 3, y: 3),
+    tileIsWhiteSpace: false,
+  ),
+  Tile(
+    value: 9,
+    correctLocation: Location(x: 3, y: 3),
+    currentLocation: Location(x: 2, y: 1),
+    tileIsWhiteSpace: true,
+  ),
+];
 const puzzle3x3 = Puzzle(n: 3, tiles: solvable3x3PuzzleWithSeed2);
