@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dashtronaut/drawer/drawer_button.dart';
+import 'package:dashtronaut/drawer/widgets/drawer_button.dart';
 import 'package:dashtronaut/core/layout/layout_delegate.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';

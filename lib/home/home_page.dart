@@ -1,4 +1,4 @@
-import 'package:dashtronaut/drawer/app_drawer.dart';
+import 'package:dashtronaut/drawer/widgets/app_drawer.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_view.dart';
 import 'package:flutter/material.dart';
 

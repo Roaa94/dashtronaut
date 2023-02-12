@@ -1,5 +1,5 @@
 import 'package:dashtronaut/core/constants.dart';
-import 'package:dashtronaut/drawer/puzzle_size_item.dart';
+import 'package:dashtronaut/drawer/widgets/puzzle_size_item.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +15,14 @@ class PuzzleSizeSettings extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(
-          right: Spacing.md, left: drawerStartPadding, bottom: Spacing.md),
+        right: Spacing.md,
+        left: drawerStartPadding,
+        bottom: Spacing.md,
+      ),
       decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.white, width: 2)),
+        border: Border(
+          bottom: BorderSide(color: Colors.white, width: 2),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
