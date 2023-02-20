@@ -29,8 +29,9 @@ class StopWatchNotifier extends Notifier<int> {
   }
 
   void stop() {
-    if (streamSubscription != null && !streamSubscription!.isPaused) {
+    if (streamSubscription != null) {
       streamSubscription!.cancel();
+      timeStream = null;
       state = 0;
       stopWatchRepository.set(state);
     }

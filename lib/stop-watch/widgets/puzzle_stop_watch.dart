@@ -10,16 +10,19 @@ class PuzzleStopWatch extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(puzzleMovesCountProvider, (previous, next) {
-      if (next == 1) {
-        // Start the stop watch with the first move
-        ref.read(stopWatchProvider.notifier).start();
-      }
-      if (next == 0) {
-        // Moves count have been reset to 0, stop the stop watch
-        ref.read(stopWatchProvider.notifier).stop();
-      }
-    });
+    ref.listen(
+      puzzleMovesCountProvider,
+      (previous, next) {
+        if (next == 1) {
+          // Start the stop watch with the first move
+          ref.read(stopWatchProvider.notifier).start();
+        }
+        if (next == 0) {
+          // Moves count have been reset to 0, stop the stop watch
+          ref.read(stopWatchProvider.notifier).stop();
+        }
+      },
+    );
 
     Duration duration = Duration(
       seconds: ref.watch(stopWatchProvider),

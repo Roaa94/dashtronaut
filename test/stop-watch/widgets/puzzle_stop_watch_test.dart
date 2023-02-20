@@ -1,8 +1,6 @@
 import 'package:dashtronaut/core/helpers/duration_helper.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/stop-watch/repositories/stop_watch_repository.dart';
 import 'package:dashtronaut/stop-watch/widgets/puzzle_stop_watch.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
