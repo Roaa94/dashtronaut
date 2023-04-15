@@ -46,8 +46,9 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          solvable2x2PuzzleWithSeed2Reset,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: solvable2x2PuzzleWithSeed2Reset,
+          movesCount: 0,
         ),
       ).called(1);
     },
@@ -78,8 +79,9 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          solvable2x2PuzzleWithSeed2,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: solvable2x2PuzzleWithSeed2,
+          movesCount: 0,
         ),
       ).called(1);
     },
@@ -139,13 +141,10 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          solvable2x2PuzzleWithSeed2Reset,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: solvable2x2PuzzleWithSeed2Reset,
+          movesCount: 0,
         ),
-      ).called(1);
-
-      verify(
-        () => mockPuzzleRepository.updateMovesCount(0),
       ).called(1);
     },
   );

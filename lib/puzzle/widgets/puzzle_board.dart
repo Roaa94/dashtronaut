@@ -57,7 +57,6 @@ class PuzzleBoard extends ConsumerWidget {
                 onRestartPressed: () {
                   ref.read(stopWatchProvider.notifier).stop();
                   ref.read(tilesProvider.notifier).reset();
-                  ref.read(puzzleMovesCountProvider.notifier).reset();
                   Navigator.of(context).pop();
                 },
               );
@@ -109,12 +108,7 @@ class PuzzleBoard extends ConsumerWidget {
                     top: tilePosition.top,
                     child: GestureDetector(
                       onTap: () {
-                        if (isMovable) {
-                          ref.read(tilesProvider.notifier).swapTiles(tile);
-                          ref
-                              .read(puzzleMovesCountProvider.notifier)
-                              .increment();
-                        }
+                        ref.read(tilesProvider.notifier).swapTiles(tile);
                       },
                       child: PuzzleTile(
                         isMovable: isMovable,

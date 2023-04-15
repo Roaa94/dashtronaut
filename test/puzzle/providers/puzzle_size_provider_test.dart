@@ -56,7 +56,7 @@ void main() {
     const newValue = 2;
     const configs = Configs();
 
-    when(() => mockPuzzleRepository.updatePuzzleSize(newValue))
+    when(() => mockPuzzleRepository.updatePuzzle(puzzleSize: newValue))
         .thenAnswer((_) {});
 
     final providerContainer = ProviderContainer(
@@ -92,7 +92,7 @@ void main() {
     const newValue = 2;
     const configs = Configs();
 
-    when(() => mockPuzzleRepository.updatePuzzleSize(newValue))
+    when(() => mockPuzzleRepository.updatePuzzle(puzzleSize: newValue))
         .thenAnswer((_) {});
 
     final providerContainer = ProviderContainer(
@@ -106,6 +106,8 @@ void main() {
 
     providerContainer.read(puzzleSizeProvider.notifier).update(newValue);
 
-    verify(() => mockPuzzleRepository.updatePuzzleSize(newValue)).called(1);
+    verify(
+      () => mockPuzzleRepository.updatePuzzle(puzzleSize: newValue),
+    ).called(1);
   });
 }

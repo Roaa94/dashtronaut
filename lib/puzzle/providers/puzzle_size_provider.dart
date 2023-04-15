@@ -20,6 +20,6 @@ class PuzzleSizeNotifier extends Notifier<int> {
 
   void update(int value) {
     state = value;
-    puzzleRepository.updatePuzzleSize(value);
+    puzzleRepository.updatePuzzle(puzzleSize: value);
   }
 }

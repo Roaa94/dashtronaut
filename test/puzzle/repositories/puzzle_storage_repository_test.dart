@@ -32,7 +32,7 @@ void main() {
 
     test('Can update puzzle tiles', () {
       puzzleStorageRepository.set(puzzle2x2Solved);
-      puzzleStorageRepository.updateTiles(puzzle2x2Tiles);
+      puzzleStorageRepository.updatePuzzle(tiles: puzzle2x2Tiles);
 
       final updatedPuzzle2x2 = puzzle2x2Solved.copyWith(tiles: puzzle2x2Tiles);
       expect(puzzleStorageRepository.get(), updatedPuzzle2x2);
@@ -40,7 +40,7 @@ void main() {
 
     test('Can update puzzle moves count', () {
       puzzleStorageRepository.set(puzzle2x2Solved);
-      puzzleStorageRepository.updateMovesCount(3);
+      puzzleStorageRepository.updatePuzzle(movesCount: 3);
 
       final updatedPuzzle2x2 = puzzle2x2Solved.copyWith(movesCount: 3);
       expect(puzzleStorageRepository.get(), updatedPuzzle2x2);
@@ -48,7 +48,7 @@ void main() {
 
     test('Can update puzzle size', () {
       puzzleStorageRepository.set(puzzle2x2Solved);
-      puzzleStorageRepository.updatePuzzleSize(3);
+      puzzleStorageRepository.updatePuzzle(puzzleSize: 3);
 
       final updatedPuzzle2x2 = puzzle2x2Solved.copyWith(n: 3);
       expect(puzzleStorageRepository.get(), updatedPuzzle2x2);

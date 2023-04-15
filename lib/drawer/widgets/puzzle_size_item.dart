@@ -23,7 +23,6 @@ class PuzzleSizeItem extends ConsumerWidget {
           onPressed: () {
             if (!isSelected) {
               ref.read(puzzleSizeProvider.notifier).update(size);
-              ref.read(puzzleMovesCountProvider.notifier).update(0);
               ref.read(tilesProvider.notifier).reset();
               // Todo: stop the stop watch (test if this is already achieved by
               // the listener in PuzzleStopWatch widget

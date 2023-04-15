@@ -4,8 +4,12 @@ import 'package:equatable/equatable.dart';
 
 class TilesState extends Equatable {
   final List<Tile> tiles;
+  final int movesCount;
 
-  const TilesState({required this.tiles});
+  const TilesState({
+    required this.tiles,
+    this.movesCount = 0,
+  });
 
   /// Get whitespace tile
   Tile get whiteSpaceTile => tiles.firstWhere((tile) => tile.tileIsWhiteSpace);
@@ -16,8 +20,11 @@ class TilesState extends Equatable {
   List<Tile> get withoutWhitespace =>
       tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
-  TilesState copyWith({List<Tile>? tiles}) {
-    return TilesState(tiles: tiles ?? this.tiles);
+  TilesState copyWith({List<Tile>? tiles, int? movesCount}) {
+    return TilesState(
+      tiles: tiles ?? this.tiles,
+      movesCount: movesCount ?? this.movesCount,
+    );
   }
 
   /// Gets the number of tiles that are currently in their correct position.

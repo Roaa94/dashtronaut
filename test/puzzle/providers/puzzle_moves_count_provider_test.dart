@@ -1,5 +1,3 @@
-import 'package:dashtronaut/configs/models/configs.dart';
-import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,108 +14,9 @@ void main() {
     mockPuzzleRepository = MockPuzzleStorageRepository();
   });
 
-  test('initialized with 0 value', () {
-    final providerContainer = ProviderContainer(
-      overrides: [
-        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-      ],
-    );
-
-    addTearDown(providerContainer.dispose);
-
-    expect(
-      providerContainer.read(puzzleMovesCountProvider),
-      equals(0),
-    );
-  });
-
-  test('initialized with data from repository when available', () {
-    const movesCount = 10;
-    when(mockPuzzleRepository.get).thenReturn(
-      puzzle2x2Solved.copyWith(movesCount: movesCount),
-    );
-
-    final providerContainer = ProviderContainer(
-      overrides: [
-        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-      ],
-    );
-
-    addTearDown(providerContainer.dispose);
-
-    expect(
-      providerContainer.read(puzzleMovesCountProvider),
-      equals(movesCount),
-    );
-  });
-
-  test('updates state', () {
-    final puzzleMovesCountListener = Listener<int>();
-    const newValue = 2;
-
-    when(() => mockPuzzleRepository.updateMovesCount(newValue))
-        .thenAnswer((_) {});
-
-    final providerContainer = ProviderContainer(
-      overrides: [
-        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-      ],
-    );
-
-    addTearDown(providerContainer.dispose);
-
-    providerContainer.listen(
-      puzzleMovesCountProvider,
-      puzzleMovesCountListener,
-      fireImmediately: true,
-    );
-
-    verify(() => puzzleMovesCountListener(null, 0)).called(1);
-
-    providerContainer.read(puzzleMovesCountProvider.notifier).update(newValue);
-
-    verify(() => puzzleMovesCountListener(0, newValue)).called(1);
-    verifyNoMoreInteractions(puzzleMovesCountListener);
-  });
-
-  test('increments state', () {
-    final puzzleMovesCountListener = Listener<int>();
-    const initialValue = 0;
-    const newValue = 1;
-
-    when(() => mockPuzzleRepository.updateMovesCount(newValue))
-        .thenAnswer((_) {});
-
-    final providerContainer = ProviderContainer(
-      overrides: [
-        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-      ],
-    );
-
-    addTearDown(providerContainer.dispose);
-
-    providerContainer.listen(
-      puzzleMovesCountProvider,
-      puzzleMovesCountListener,
-      fireImmediately: true,
-    );
-
-    verify(() => puzzleMovesCountListener(null, initialValue)).called(1);
-
-    providerContainer.read(puzzleMovesCountProvider.notifier).increment();
-
-    verify(() => puzzleMovesCountListener(initialValue, newValue)).called(1);
-    verifyNoMoreInteractions(puzzleMovesCountListener);
-  });
-
-  test('resets state', () {
-    final puzzleMovesCountListener = Listener<int>();
-
-    const initialValue = 10;
+  test('Returns 2 for a puzzle with 2 move counts', () {
     when(() => mockPuzzleRepository.get())
-        .thenReturn(puzzle3x3.copyWith(movesCount: initialValue));
-
-    when(() => mockPuzzleRepository.updateMovesCount(0)).thenAnswer((_) {});
+        .thenReturn(puzzle2x2.copyWith(movesCount: 2));
 
     final providerContainer = ProviderContainer(
       overrides: [
@@ -127,36 +26,9 @@ void main() {
 
     addTearDown(providerContainer.dispose);
 
-    providerContainer.listen(
-      puzzleMovesCountProvider,
-      puzzleMovesCountListener,
-      fireImmediately: true,
+    expect(
+      providerContainer.read(puzzleMovesCountProvider),
+      equals(2),
     );
-
-    verify(() => puzzleMovesCountListener(null, initialValue)).called(1);
-
-    providerContainer.read(puzzleMovesCountProvider.notifier).reset();
-
-    verify(() => puzzleMovesCountListener(initialValue, 0)).called(1);
-    verifyNoMoreInteractions(puzzleMovesCountListener);
-  });
-
-  test('updates repository when state is updated', () {
-    const newValue = 2;
-
-    when(() => mockPuzzleRepository.updateMovesCount(newValue))
-        .thenAnswer((_) {});
-
-    final providerContainer = ProviderContainer(
-      overrides: [
-        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-      ],
-    );
-
-    addTearDown(providerContainer.dispose);
-
-    providerContainer.read(puzzleMovesCountProvider.notifier).update(newValue);
-
-    verify(() => mockPuzzleRepository.updateMovesCount(newValue)).called(1);
   });
 }

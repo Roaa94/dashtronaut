@@ -42,7 +42,6 @@ void main() {
   );
 }
 
-// Todo: figure out the issue with ProviderScope throwing when updated
 class DashtronautWidgetbook extends StatelessWidget {
   const DashtronautWidgetbook({super.key});
 
@@ -60,19 +59,6 @@ class DashtronautWidgetbook extends StatelessWidget {
             ],
           ),
         ),
-        // FrameAddon(
-        //   setting: FrameSetting.firstAsSelected(
-        //     frames: [
-        //       WidgetbookFrame(
-        //         setting: DeviceSetting.firstAsSelected(
-        //           devices: [
-        //             Apple.iPhone12,
-        //           ],
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
         LocalizationAddon(
           setting: LocalizationSetting.firstAsSelected(
             locales: [const Locale('en')],
@@ -120,7 +106,16 @@ class DashtronautWidgetbook extends StatelessWidget {
           ],
         ),
         const WidgetbookCategory(
-          name: 'Puzzle Solved',
+          name: 'Puzzle UI',
+          children: [
+            WidgetbookComponent(
+              name: 'PuzzleHeader',
+              useCases: [],
+            ),
+          ],
+        ),
+        const WidgetbookCategory(
+          name: 'Dialogs',
           children: [
             WidgetbookComponent(
               name: 'Puzzle Solved Dialog',
@@ -294,7 +289,7 @@ Widget puzzleSolvedDialog(BuildContext context) {
           divisions: 200,
         )
         .toInt(),
-    isWeb: false,
+    isWeb: context.knobs.boolean(label: 'Is On Web Platform'),
     onSharePressed: () {},
     onRestartPressed: () {},
   );

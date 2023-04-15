@@ -143,6 +143,7 @@ const tiles2x2BelowAndRightOfWhitespace2 = [
 
 void main() {
   late PuzzleStorageRepository mockPuzzleRepository;
+  const initialMovesCount = 10;
 
   setUp(() {
     mockPuzzleRepository = MockPuzzleStorageRepository();
@@ -152,7 +153,11 @@ void main() {
     'arrowDown Key event moves tile top of whitespace',
     (WidgetTester tester) async {
       when(() => mockPuzzleRepository.get()).thenReturn(
-        const Puzzle(n: 2, tiles: tiles2x2AboveAndRightOfWhitespace),
+        const Puzzle(
+          n: 2,
+          tiles: tiles2x2AboveAndRightOfWhitespace,
+          movesCount: initialMovesCount,
+        ),
       );
 
       await tester.pumpProviderApp(
@@ -168,8 +173,9 @@ void main() {
       );
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          tiles2x2BelowAndRightOfWhitespace2,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: tiles2x2BelowAndRightOfWhitespace2,
+          movesCount: initialMovesCount + 1,
         ),
       ).called(1);
     },
@@ -179,7 +185,11 @@ void main() {
     'arrowLeft Key event moves tile right of whitespace',
     (WidgetTester tester) async {
       when(() => mockPuzzleRepository.get()).thenReturn(
-        const Puzzle(n: 2, tiles: tiles2x2AboveAndRightOfWhitespace),
+        const Puzzle(
+          n: 2,
+          tiles: tiles2x2AboveAndRightOfWhitespace,
+          movesCount: initialMovesCount,
+        ),
       );
 
       await tester.pumpProviderApp(
@@ -195,8 +205,9 @@ void main() {
       );
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          tiles2x2AboveAndLeftOfWhitespace,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: tiles2x2AboveAndLeftOfWhitespace,
+          movesCount: initialMovesCount + 1,
         ),
       ).called(1);
     },
@@ -206,7 +217,11 @@ void main() {
     'arrowUp Key event moves tile bottom of whitespace',
     (WidgetTester tester) async {
       when(() => mockPuzzleRepository.get()).thenReturn(
-        const Puzzle(n: 2, tiles: tiles2x2BelowAndLeftOfWhitespace),
+        const Puzzle(
+          n: 2,
+          tiles: tiles2x2BelowAndLeftOfWhitespace,
+          movesCount: initialMovesCount,
+        ),
       );
 
       await tester.pumpProviderApp(
@@ -222,8 +237,9 @@ void main() {
       );
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          tiles2x2AboveAndLeftOfWhitespace,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: tiles2x2AboveAndLeftOfWhitespace,
+          movesCount: initialMovesCount + 1,
         ),
       ).called(1);
     },
@@ -233,7 +249,11 @@ void main() {
     'arrowRight Key event moves tile left of whitespace',
     (WidgetTester tester) async {
       when(() => mockPuzzleRepository.get()).thenReturn(
-        const Puzzle(n: 2, tiles: tiles2x2BelowAndLeftOfWhitespace),
+        const Puzzle(
+          n: 2,
+          tiles: tiles2x2BelowAndLeftOfWhitespace,
+          movesCount: initialMovesCount,
+        ),
       );
 
       await tester.pumpProviderApp(
@@ -249,8 +269,9 @@ void main() {
       );
 
       verify(
-        () => mockPuzzleRepository.updateTiles(
-          tiles2x2BelowAndRightOfWhitespace1,
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: tiles2x2BelowAndRightOfWhitespace1,
+          movesCount: initialMovesCount + 1,
         ),
       ).called(1);
     },

@@ -19,7 +19,6 @@ class ResetPuzzleButton extends ConsumerWidget {
           title: 'Are you sure you want to reset your puzzle?',
           onConfirm: () {
             ref.read(tilesProvider.notifier).reset();
-            ref.read(puzzleMovesCountProvider.notifier).update(0);
           },
         );
       },

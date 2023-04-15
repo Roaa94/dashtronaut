@@ -23,17 +23,23 @@ class PuzzleStorageRepository extends StorageRepository<Puzzle> {
   @override
   Map<String, dynamic> toJson(Puzzle item) => item.toJson();
 
-  void updateTiles(List<Tile> tiles) {
-    update({
-      'tiles': Tile.toJsonList(tiles),
-    });
-  }
-
-  void updateMovesCount(int movesCount) {
-    update({'movesCount': movesCount});
-  }
-
-  void updatePuzzleSize(int n) {
-    update({'n': n});
+  void updatePuzzle({
+    List<Tile>? tiles,
+    int? movesCount,
+    int? puzzleSize,
+  }) {
+    final data = <String, dynamic>{};
+    if (tiles != null) {
+      data['tiles'] = Tile.toJsonList(tiles);
+    }
+    if (movesCount != null) {
+      data['movesCount'] = movesCount;
+    }
+    if (puzzleSize != null) {
+      data['n'] = puzzleSize;
+    }
+    if (data.isNotEmpty) {
+      update(data);
+    }
   }
 }

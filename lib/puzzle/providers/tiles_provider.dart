@@ -25,6 +25,7 @@ class TilesNotifier extends Notifier<TilesState> {
       tiles: existingTiles != null && existingTiles.isNotEmpty
           ? existingTiles
           : slidePuzzleLogic.generateSolvableTiles(random),
+      movesCount: puzzleRepository.get()?.movesCount ?? 0,
     );
   }
 
@@ -38,8 +39,14 @@ class TilesNotifier extends Notifier<TilesState> {
       );
 
   void reset() {
-    state = TilesState(tiles: slidePuzzleLogic.generateSolvableTiles(random));
-    puzzleRepository.updateTiles(state.tiles);
+    state = TilesState(
+      tiles: slidePuzzleLogic.generateSolvableTiles(random),
+      movesCount: 0,
+    );
+    puzzleRepository.updatePuzzle(
+      tiles: state.tiles,
+      movesCount: state.movesCount,
+    );
   }
 
   void swapTiles(Tile movedTile) {
@@ -53,8 +60,14 @@ class TilesNotifier extends Notifier<TilesState> {
           else
             tile
       ];
-      state = state.copyWith(tiles: newTiles);
-      puzzleRepository.updateTiles(state.tiles);
+      state = state.copyWith(
+        tiles: newTiles,
+        movesCount: state.movesCount + 1,
+      );
+      puzzleRepository.updatePuzzle(
+        tiles: state.tiles,
+        movesCount: state.movesCount,
+      );
     }
   }
 

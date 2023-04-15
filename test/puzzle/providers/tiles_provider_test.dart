@@ -147,7 +147,10 @@ void main() {
       providerContainer.read(tilesProvider.notifier).reset();
 
       verify(
-        () => mockPuzzleRepository.updateTiles(solvable2x2PuzzleWithSeed2Reset),
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: solvable2x2PuzzleWithSeed2Reset,
+          movesCount: 0,
+        ),
       ).called(1);
     });
   });
@@ -202,7 +205,9 @@ void main() {
     });
 
     test('Updates repository when swapping tiles', () {
-      when(mockPuzzleRepository.get).thenReturn(puzzle2x2);
+      const initialMovesCount = 20;
+      when(mockPuzzleRepository.get)
+          .thenReturn(puzzle2x2.copyWith(movesCount: initialMovesCount));
 
       final providerContainer = ProviderContainer(
         overrides: [
@@ -213,7 +218,10 @@ void main() {
 
       providerContainer.read(tilesProvider.notifier).swapTiles(tileToMove);
       verify(
-        () => mockPuzzleRepository.updateTiles(newTiles),
+        () => mockPuzzleRepository.updatePuzzle(
+          tiles: newTiles,
+          movesCount: initialMovesCount + 1,
+        ),
       ).called(1);
     });
 
