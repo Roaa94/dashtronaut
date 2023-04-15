@@ -1,4 +1,3 @@
-
 import 'package:dashtronaut/core/helpers/duration_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/providers/is_web_provider.dart';
@@ -9,19 +8,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 
-class SolvedPuzzleDialogInfo extends ConsumerWidget {
-  final Duration solvingDuration;
-
+class SolvedPuzzleDialogInfo extends StatelessWidget {
   const SolvedPuzzleDialogInfo({
     super.key,
     required this.solvingDuration,
+    required this.movesCount,
+    this.isWeb = false,
+    this.onSharePressed,
+    this.onRestartPressed,
   });
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final movesCount = ref.watch(puzzleMovesCountProvider);
-    final isWeb = ref.watch(isWebProvider);
+  final Duration solvingDuration;
+  final int movesCount;
+  final bool isWeb;
+  final VoidCallback? onSharePressed;
+  final VoidCallback? onRestartPressed;
 
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -67,7 +71,7 @@ class SolvedPuzzleDialogInfo extends ConsumerWidget {
           children: [
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: onRestartPressed,
                 label: const Text('Restart'),
                 icon: const Icon(Icons.refresh),
               ),
@@ -75,7 +79,7 @@ class SolvedPuzzleDialogInfo extends ConsumerWidget {
             const SizedBox(width: Spacing.sm),
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: ref.watch(shareScoreServiceProvider).share,
+                onPressed: onSharePressed,
                 label: const Text('Share'),
                 icon: isWeb
                     ? const Icon(FontAwesomeIcons.twitter)

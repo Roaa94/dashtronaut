@@ -2,23 +2,29 @@ import 'package:dashtronaut/core/widget_keys.dart';
 import 'package:dashtronaut/core/widgets/app_alert_dialog.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SolvedPuzzleDialog extends ConsumerWidget {
-  final Duration solvingDuration;
-
+class SolvedPuzzleDialog extends StatelessWidget {
   const SolvedPuzzleDialog({
     super.key,
     required this.solvingDuration,
+    required this.puzzleSize,
+    required this.movesCount,
+    this.isWeb = false,
+    this.onSharePressed,
+    this.onRestartPressed,
   });
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final puzzleSize = ref.watch(puzzleSizeProvider);
+  final Duration solvingDuration;
+  final int puzzleSize;
+  final int movesCount;
+  final bool isWeb;
+  final VoidCallback? onSharePressed;
+  final VoidCallback? onRestartPressed;
 
+  @override
+  Widget build(BuildContext context) {
     final imageName = 'solved-${puzzleSize}x$puzzleSize.png';
     ScreenTypeHelper screenTypeHelper = ScreenTypeHelper(context);
 
@@ -29,6 +35,10 @@ class SolvedPuzzleDialog extends ConsumerWidget {
 
     Widget solvedPuzzleInfo = SolvedPuzzleDialogInfo(
       solvingDuration: solvingDuration,
+      movesCount: movesCount,
+      isWeb: isWeb,
+      onSharePressed: onSharePressed,
+      onRestartPressed: onRestartPressed,
     );
 
     Widget portraitContent = ConstrainedBox(

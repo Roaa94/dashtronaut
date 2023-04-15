@@ -131,6 +131,10 @@ class DashtronautWidgetbook extends StatelessWidget {
               name: 'Puzzle Solved Dialog',
               useCases: [
                 WidgetbookUseCase(
+                  name: 'Default',
+                  builder: puzzleSolvedDialog,
+                ),
+                WidgetbookUseCase(
                   name: '3x3 Puzzle',
                   builder: puzzleSolvedDialog3x3,
                 ),
@@ -268,70 +272,79 @@ Widget puzzleTile(BuildContext context) {
   );
 }
 
-Widget puzzleSolvedDialog3x3(BuildContext context) {
-  return ProviderScope(
-    overrides: [
-      configsProvider.overrideWith(
-        (_) => const Configs(
-          defaultPuzzleSize: 3,
-        ),
-      ),
-      puzzleSizeProvider,
-      shareScoreServiceProvider,
-    ],
-    child: const SolvedPuzzleDialog(
-      solvingDuration: Duration(seconds: 20),
+Widget puzzleSolvedDialog(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: context.knobs.options<int>(
+      label: 'Puzzle Size',
+      labelBuilder: (value) => '${value}x$value',
+      options: [3, 4, 5, 6],
     ),
+    solvingDuration: Duration(
+      seconds: context.knobs
+          .slider(
+            label: 'Solving duration in seconds',
+            initialValue: 20,
+            min: 10,
+            max: 2000,
+            divisions: 200,
+          )
+          .toInt(),
+    ),
+    movesCount: context.knobs
+        .slider(
+          label: 'Moves Count',
+          initialValue: 20,
+          min: 10,
+          max: 2000,
+          divisions: 200,
+        )
+        .toInt(),
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
+  );
+}
+
+Widget puzzleSolvedDialog3x3(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: 3,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
   );
 }
 
 Widget puzzleSolvedDialog4x4(BuildContext context) {
-  return ProviderScope(
-    overrides: [
-      configsProvider.overrideWith(
-        (_) => const Configs(
-          defaultPuzzleSize: 4,
-        ),
-      ),
-      puzzleSizeProvider,
-      shareScoreServiceProvider,
-    ],
-    child: const SolvedPuzzleDialog(
-      solvingDuration: Duration(seconds: 20),
-    ),
+  return SolvedPuzzleDialog(
+    puzzleSize: 4,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
   );
 }
 
 Widget puzzleSolvedDialog5x5(BuildContext context) {
-  return ProviderScope(
-    overrides: [
-      configsProvider.overrideWith(
-        (_) => const Configs(
-          defaultPuzzleSize: 5,
-        ),
-      ),
-      puzzleSizeProvider,
-      shareScoreServiceProvider,
-    ],
-    child: const SolvedPuzzleDialog(
-      solvingDuration: Duration(seconds: 20),
-    ),
+  return SolvedPuzzleDialog(
+    puzzleSize: 5,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
   );
 }
 
 Widget puzzleSolvedDialog6x6(BuildContext context) {
-  return ProviderScope(
-    overrides: [
-      configsProvider.overrideWith(
-        (_) => const Configs(
-          defaultPuzzleSize: 6,
-        ),
-      ),
-      puzzleSizeProvider,
-      shareScoreServiceProvider,
-    ],
-    child: const SolvedPuzzleDialog(
-      solvingDuration: Duration(seconds: 20),
-    ),
+  return SolvedPuzzleDialog(
+    puzzleSize: 6,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
   );
 }
