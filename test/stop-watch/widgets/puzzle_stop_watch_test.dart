@@ -1,4 +1,5 @@
 import 'package:dashtronaut/core/helpers/duration_helper.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/stop-watch/repositories/stop_watch_repository.dart';
 import 'package:dashtronaut/stop-watch/widgets/puzzle_stop_watch.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,6 +33,26 @@ void main() {
       final finder = find.text(
         DurationHelper.toFormattedTime(const Duration(seconds: elapsed)),
       );
+      expect(finder, findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'Initially idle at 00:00',
+    (WidgetTester tester) async {
+      when(() => mockStopWatchRepository.get()).thenReturn(null);
+
+      await tester.pumpProviderApp(
+        const PuzzleStopWatch(),
+        overrides: [
+          stopWatchRepositoryProvider
+              .overrideWithValue(mockStopWatchRepository),
+          puzzleMovesCountProvider.overrideWithValue(0),
+        ],
+      );
+
+      await tester.pumpAndSettle();
+      final finder = find.text('00:00');
       expect(finder, findsOneWidget);
     },
   );

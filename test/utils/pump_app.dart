@@ -8,9 +8,11 @@ extension PumpApp on WidgetTester {
     Widget widget, {
     List<Override> overrides = const [],
     NavigatorObserver? navigatorObserver,
+    ProviderContainer? parentContainer,
   }) async {
     return pumpWidget(
       ProviderScope(
+        parent: parentContainer,
         overrides: overrides,
         child: MaterialApp(
           theme: AppThemes.dark,
