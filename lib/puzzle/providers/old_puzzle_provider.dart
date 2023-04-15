@@ -179,7 +179,7 @@ class OldPuzzleProvider with ChangeNotifier {
       Puzzle? puzzle = _getPuzzleFromStorage();
       if (puzzle != null) {
         tiles = puzzle.tiles;
-        n = puzzle.n;
+        // n = puzzle.n;
         movesCount = puzzle.movesCount;
         return;
       }
@@ -200,7 +200,7 @@ class OldPuzzleProvider with ChangeNotifier {
       currentLocations: tilesCurrentLocations,
     );
 
-    while (!puzzle.isSolvable() || puzzle.getNumberOfCorrectTiles() != 0) {
+    while (/*!puzzle.isSolvable() || */puzzle.getNumberOfCorrectTiles() != 0) {
       tilesCurrentLocations.shuffle(random);
 
       tiles = Puzzle.getTilesFromLocations(

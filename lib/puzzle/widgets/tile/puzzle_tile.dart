@@ -65,7 +65,7 @@ class PuzzleTileState extends ConsumerState<PuzzleTile>
           widget.onTileInteraction?.call(details.velocity.pixelsPerSecond.dx);
         },
         onVerticalDragEnd: (details) {
-          widget.onTileInteraction?.call(details.velocity.pixelsPerSecond.dy);
+          widget.onTileInteraction?.call(null, details.velocity.pixelsPerSecond.dy);
         },
         onTap: () {
           widget.onTileInteraction?.call();

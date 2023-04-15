@@ -39,7 +39,7 @@ abstract class StorageRepository<T> implements Repository<T> {
   @override
   void update(Map<String, dynamic> data) {
     final existingData =
-        storageService.get(storageKey) as Map<String, dynamic>? ?? {};
+        storageService.get(storageKey) as Map<dynamic, dynamic>? ?? {};
     existingData.addAll(data);
     storageService.set(storageKey, existingData);
   }

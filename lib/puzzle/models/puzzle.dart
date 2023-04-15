@@ -5,12 +5,11 @@ import 'package:equatable/equatable.dart';
 
 /// Model for a Puzzle
 class Puzzle extends Equatable {
-  final int n;
+  final int? n;
   final List<Tile> tiles;
   final int movesCount;
 
   const Puzzle({
-    // Todo: Allow these values to be nullable
     required this.n,
     required this.tiles,
     this.movesCount = 0,
@@ -135,28 +134,6 @@ class Puzzle extends Equatable {
   }
 
   /// Determines if the puzzle is solvable.
-  bool isSolvable() {
-    final height = tiles.length ~/ n;
-    assert(
-      n * height == tiles.length,
-      'tiles must be equal to n * height',
-    );
-    final inversions = countInversions();
-
-    if (n.isOdd) {
-      return inversions.isEven;
-    }
-
-    final whitespace = tiles.singleWhere((tile) => tile.tileIsWhiteSpace);
-    final whitespaceRow = whitespace.currentLocation.y;
-
-    if (((height - whitespaceRow) + 1).isOdd) {
-      return inversions.isEven;
-    } else {
-      return inversions.isOdd;
-    }
-  }
-
   bool get isSolved => getNumberOfCorrectTiles() == tiles.length - 1;
 
   /// Gets the number of tiles that are currently in their correct position.

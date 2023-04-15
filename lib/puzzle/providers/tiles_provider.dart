@@ -31,6 +31,8 @@ class TilesNotifier extends Notifier<TilesState> {
   PuzzleStorageRepository get puzzleRepository =>
       ref.watch(puzzleRepositoryProvider);
 
+  int get puzzleSize => ref.watch(puzzleSizeProvider);
+
   void reset() {
     state = TilesState(tiles: generateSolvableTiles());
     puzzleRepository.updateTiles(state.tiles);
@@ -96,9 +98,9 @@ class TilesNotifier extends Notifier<TilesState> {
   }
 
   List<Tile> generateSolvableTiles() {
-    final n = ref.watch(puzzleSizeProvider);
     var tiles = <Tile>[];
-    List<Location> tilesCorrectLocations = generateTileCorrectLocations(n);
+    List<Location> tilesCorrectLocations =
+        generateTileCorrectLocations(puzzleSize);
     List<Location> tilesCurrentLocations = List.from(tilesCorrectLocations);
 
     tiles = getTilesFromLocations(
@@ -158,15 +160,14 @@ class TilesNotifier extends Notifier<TilesState> {
 
   /// Determines if the puzzle is solvable.
   bool isSolvable(List<Tile> tiles) {
-    final n = ref.watch(puzzleSizeProvider);
-    final height = tiles.length ~/ n;
+    final height = tiles.length ~/ puzzleSize;
     assert(
-      n * height == tiles.length,
+      puzzleSize * height == tiles.length,
       'tiles must be equal to n * height',
     );
     final inversions = countInversions(tiles);
 
-    if (n.isOdd) {
+    if (puzzleSize.isOdd) {
       return inversions.isEven;
     }
 

@@ -29,10 +29,15 @@ class PuzzleBoard extends ConsumerWidget {
     // - show the dialog
     // - stop the stop watch
     // - show a phrase with `PhraseState.puzzleSolved`
+    // - Trigger `HapticFeedback.vibrate()`
     //
     // Resetting puzzle with dialog should:
     // - Reset the stop watch (not start it, starting happens with first tile move)
     // - Reset phrases state to `PhraseState.none`
+    //
+    // For any tile movement:
+    // - Increase moves count provider
+    // - If a tile gets to correct location, trigger `HapticFeedback.mediumImpact()`
 
     return ScaleUpTransition(
       delay: AnimationsManager.bgLayerAnimationDuration,
@@ -66,7 +71,7 @@ class PuzzleBoard extends ConsumerWidget {
                       onTileInteraction: ([double? dx, double? dy]) {
                         ref
                             .read(tilesProvider.notifier)
-                            .handleTileInteraction(tile, dy, dx);
+                            .handleTileInteraction(tile, dx, dy);
                       },
                     ),
                   );
