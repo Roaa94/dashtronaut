@@ -2,11 +2,11 @@ import 'package:collection/collection.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:equatable/equatable.dart';
 
-class TilesState extends Equatable {
+class PuzzleState extends Equatable {
   final List<Tile> tiles;
   final int movesCount;
 
-  const TilesState({
+  const PuzzleState({
     required this.tiles,
     this.movesCount = 0,
   });
@@ -20,8 +20,8 @@ class TilesState extends Equatable {
   List<Tile> get withoutWhitespace =>
       tiles.where((tile) => !tile.tileIsWhiteSpace).toList();
 
-  TilesState copyWith({List<Tile>? tiles, int? movesCount}) {
-    return TilesState(
+  PuzzleState copyWith({List<Tile>? tiles, int? movesCount}) {
+    return PuzzleState(
       tiles: tiles ?? this.tiles,
       movesCount: movesCount ?? this.movesCount,
     );

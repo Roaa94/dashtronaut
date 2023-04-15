@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:dashtronaut/core/widgets/app_alert_dialog.dart';
 import 'package:dashtronaut/puzzle/models/puzzle.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/puzzle/widgets/reset_puzzle_button.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ void main() {
         overrides: [
           // Todo: find a way to override NotifierProvider's instead
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
         ],
       );
 
@@ -71,7 +71,7 @@ void main() {
         overrides: [
           // Todo: find a way to override NotifierProvider's instead
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
         ],
       );
 
@@ -130,7 +130,7 @@ void main() {
         overrides: [
           // Todo: find a way to override NotifierProvider's instead
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
         ],
       );
 

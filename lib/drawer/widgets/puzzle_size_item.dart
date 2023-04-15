@@ -2,7 +2,7 @@ import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +23,7 @@ class PuzzleSizeItem extends ConsumerWidget {
           onPressed: () {
             if (!isSelected) {
               ref.read(puzzleSizeProvider.notifier).update(size);
-              ref.read(tilesProvider.notifier).reset();
+              ref.read(puzzleProvider.notifier).reset();
               // Todo: stop the stop watch (test if this is already achieved by
               // the listener in PuzzleStopWatch widget
               // stopWatchProvider.stop();

@@ -6,8 +6,8 @@ import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/puzzle.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,7 +37,7 @@ void main() {
       addTearDown(providerContainer.dispose);
 
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         equals(puzzle2x2Solved.tiles),
       );
     });
@@ -49,14 +49,14 @@ void main() {
       final providerContainer = ProviderContainer(
         overrides: [
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
           configsProvider.overrideWithValue(configs),
         ],
       );
       addTearDown(providerContainer.dispose);
 
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2),
       );
     });
@@ -68,14 +68,14 @@ void main() {
       final providerContainer = ProviderContainer(
         overrides: [
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
           configsProvider.overrideWithValue(configs),
         ],
       );
       addTearDown(providerContainer.dispose);
 
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         equals(solvable3x3PuzzleWithSeed2),
       );
     });
@@ -85,17 +85,17 @@ void main() {
     test('can reset tiles state', () {
       final random = Random(seed);
       const configs = Configs(defaultPuzzleSize: 2);
-      final tilesListener = Listener<TilesState>();
+      final tilesListener = Listener<PuzzleState>();
       final providerContainer = ProviderContainer(
         overrides: [
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
           configsProvider.overrideWithValue(configs),
         ],
       );
 
       providerContainer.listen(
-        tilesProvider,
+        puzzleProvider,
         tilesListener,
         fireImmediately: true,
       );
@@ -105,23 +105,23 @@ void main() {
       verify(
         () => tilesListener(
           null,
-          const TilesState(tiles: solvable2x2PuzzleWithSeed2),
+          const PuzzleState(tiles: solvable2x2PuzzleWithSeed2),
         ),
       ).called(1);
 
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2),
       );
 
-      providerContainer.read(tilesProvider.notifier).reset();
+      providerContainer.read(puzzleProvider.notifier).reset();
       verify(() => tilesListener(
-            const TilesState(tiles: solvable2x2PuzzleWithSeed2),
-            const TilesState(tiles: solvable2x2PuzzleWithSeed2Reset),
+            const PuzzleState(tiles: solvable2x2PuzzleWithSeed2),
+            const PuzzleState(tiles: solvable2x2PuzzleWithSeed2Reset),
           )).called(1);
 
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2Reset),
       );
     });
@@ -133,18 +133,18 @@ void main() {
       final providerContainer = ProviderContainer(
         overrides: [
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-          tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+          puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
           configsProvider.overrideWithValue(configs),
         ],
       );
 
       addTearDown(providerContainer.dispose);
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         equals(solvable2x2PuzzleWithSeed2),
       );
 
-      providerContainer.read(tilesProvider.notifier).reset();
+      providerContainer.read(puzzleProvider.notifier).reset();
 
       verify(
         () => mockPuzzleRepository.updatePuzzle(
@@ -196,10 +196,10 @@ void main() {
       );
       addTearDown(providerContainer.dispose);
 
-      providerContainer.read(tilesProvider.notifier).swapTiles(tileToMove);
+      providerContainer.read(puzzleProvider.notifier).swapTiles(tileToMove);
 
       expect(
-        providerContainer.read(tilesProvider).tiles,
+        providerContainer.read(puzzleProvider).tiles,
         newTiles,
       );
     });
@@ -216,7 +216,7 @@ void main() {
       );
       addTearDown(providerContainer.dispose);
 
-      providerContainer.read(tilesProvider.notifier).swapTiles(tileToMove);
+      providerContainer.read(puzzleProvider.notifier).swapTiles(tileToMove);
       verify(
         () => mockPuzzleRepository.updatePuzzle(
           tiles: newTiles,
@@ -226,7 +226,7 @@ void main() {
     });
 
     test('Does not swap tiles when puzzle is already solved', () {
-      final tilesListener = Listener<TilesState>();
+      final tilesListener = Listener<PuzzleState>();
       when(mockPuzzleRepository.get).thenReturn(puzzle2x2Solved);
 
       final providerContainer = ProviderContainer(
@@ -236,7 +236,7 @@ void main() {
       );
 
       providerContainer.listen(
-        tilesProvider,
+        puzzleProvider,
         tilesListener,
         fireImmediately: true,
       );
@@ -246,11 +246,11 @@ void main() {
       verify(
         () => tilesListener(
           null,
-          TilesState(tiles: puzzle2x2Solved.tiles),
+          PuzzleState(tiles: puzzle2x2Solved.tiles),
         ),
       ).called(1);
 
-      providerContainer.read(tilesProvider.notifier).swapTiles(tileToMove);
+      providerContainer.read(puzzleProvider.notifier).swapTiles(tileToMove);
 
       verifyNoMoreInteractions(tilesListener);
     });
@@ -260,7 +260,7 @@ void main() {
     final random = Random(seed);
     const currentSize = 2;
     const newSize = 3;
-    final tilesListener = Listener<TilesState>();
+    final tilesListener = Listener<PuzzleState>();
     when(() => mockPuzzleRepository.get()).thenReturn(
       const Puzzle(
         n: currentSize,
@@ -271,7 +271,7 @@ void main() {
 
     final providerContainer = ProviderContainer(
       overrides: [
-        tilesProvider.overrideWith(() => TilesNotifier(random: random)),
+        puzzleProvider.overrideWith(() => PuzzleNotifier(random: random)),
         puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
       ],
     );
@@ -279,7 +279,7 @@ void main() {
     addTearDown(providerContainer.dispose);
 
     providerContainer.listen(
-      tilesProvider,
+      puzzleProvider,
       tilesListener,
       fireImmediately: true,
     );
@@ -287,7 +287,7 @@ void main() {
     verify(
       () => tilesListener.call(
         null,
-        const TilesState(tiles: solvable2x2PuzzleWithSeed2),
+        const PuzzleState(tiles: solvable2x2PuzzleWithSeed2),
       ),
     ).called(1);
 
@@ -296,8 +296,8 @@ void main() {
 
     verify(
       () => tilesListener.call(
-        const TilesState(tiles: solvable2x2PuzzleWithSeed2),
-        const TilesState(tiles: solvable3x3PuzzleWithSeed2SizeReset),
+        const PuzzleState(tiles: solvable2x2PuzzleWithSeed2),
+        const PuzzleState(tiles: solvable3x3PuzzleWithSeed2SizeReset),
       ),
     ).called(1);
   });

@@ -10,7 +10,7 @@ import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_keyboard_listener.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
@@ -26,7 +26,7 @@ class PuzzleBoard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final puzzleIsSolved = ref.watch(puzzleIsSolvedProvider);
     final puzzleSize = ref.watch(puzzleSizeProvider);
-    final tilesState = ref.watch(tilesProvider);
+    final tilesState = ref.watch(puzzleProvider);
     final movesCount = ref.watch(puzzleMovesCountProvider);
     final secondsElapsed = ref.watch(stopWatchProvider);
     final isWeb = ref.watch(isWebProvider);
@@ -56,7 +56,7 @@ class PuzzleBoard extends ConsumerWidget {
                 onSharePressed: ref.read(shareScoreServiceProvider).share,
                 onRestartPressed: () {
                   ref.read(stopWatchProvider.notifier).stop();
-                  ref.read(tilesProvider.notifier).reset();
+                  ref.read(puzzleProvider.notifier).reset();
                   Navigator.of(context).pop();
                 },
               );
@@ -108,7 +108,7 @@ class PuzzleBoard extends ConsumerWidget {
                     top: tilePosition.top,
                     child: GestureDetector(
                       onTap: () {
-                        ref.read(tilesProvider.notifier).swapTiles(tile);
+                        ref.read(puzzleProvider.notifier).swapTiles(tile);
                       },
                       child: PuzzleTile(
                         isMovable: isMovable,

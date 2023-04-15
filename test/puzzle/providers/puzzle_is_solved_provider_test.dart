@@ -1,7 +1,7 @@
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -74,7 +74,7 @@ void main() {
     verify(() => isSolvedListener(null, false)).called(1);
 
     providerContainer
-        .read(tilesProvider.notifier)
+        .read(puzzleProvider.notifier)
         .swapTiles(tileToMoveToSolvePuzzle);
 
     await Future.delayed(Duration.zero);
@@ -112,7 +112,7 @@ void main() {
     verify(() => isSolvedListener(null, false)).called(1);
 
     providerContainer
-        .read(tilesProvider.notifier)
+        .read(puzzleProvider.notifier)
         .swapTiles(tileToMoveWithoutSolvingPuzzle);
 
     await Future.delayed(Duration.zero);

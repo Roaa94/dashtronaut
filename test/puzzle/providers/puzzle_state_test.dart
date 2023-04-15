@@ -1,6 +1,6 @@
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../utils/test_data.dart';
@@ -9,7 +9,7 @@ void main() {
   test('isSolved is true when tiles are in a solved arrangement', () {
     // 1   2
     // 3
-    final tilesState = TilesState(tiles: puzzle2x2Solved.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2Solved.tiles);
 
     expect(tilesState.isSolved, isTrue);
   });
@@ -17,7 +17,7 @@ void main() {
   test('gets tiles list without whitespace tile', () {
     // 1   2
     // 3
-    final tilesState = TilesState(tiles: puzzle2x2Solved.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2Solved.tiles);
 
     const expectedTilesWithoutWhitespaceTile = [
       Tile(
@@ -46,7 +46,7 @@ void main() {
   test('isSolved is false when tiles are not in a solved arrangement', () {
     // 1  2
     //    3
-    final tilesState = TilesState(tiles: puzzle2x2.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
 
     expect(tilesState.isSolved, isFalse);
   });
@@ -59,7 +59,7 @@ void main() {
       correctLocation: Location(x: 2, y: 2),
     );
 
-    final tilesState = TilesState(tiles: puzzle2x2Solved.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2Solved.tiles);
 
     expect(
       tilesState.whiteSpaceTile,
@@ -70,7 +70,7 @@ void main() {
   test('Tile is movable when located around the whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = TilesState(tiles: puzzle2x2.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const movableTile = Tile(
       value: 1,
@@ -87,7 +87,7 @@ void main() {
   test('Tile is not movable when not located around the whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = TilesState(tiles: puzzle2x2.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const nonMovableTile = Tile(
       value: 2,
@@ -104,7 +104,7 @@ void main() {
   test('Finds tile on top of whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = TilesState(tiles: puzzle2x2.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const topOfWhitespaceTile = Tile(
       value: 1,
@@ -121,7 +121,7 @@ void main() {
   test('Finds tile on right of whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = TilesState(tiles: puzzle2x2.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const rightOfWhitespaceTile = Tile(
       value: 3,
@@ -138,7 +138,7 @@ void main() {
   test('Finds tile on the left of whitespace tile', () {
     // 3
     // 2  1
-    final tilesState = TilesState(tiles: puzzle2x2Solvable.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2Solvable.tiles);
 
     const leftOfWhitespaceTile = Tile(
       value: 3,
@@ -155,7 +155,7 @@ void main() {
   test('Finds tile bottom of whitespace tile', () {
     // 3
     // 2  1
-    final tilesState = TilesState(tiles: puzzle2x2Solvable.tiles);
+    final tilesState = PuzzleState(tiles: puzzle2x2Solvable.tiles);
 
     const bottomOfWhitespaceTile = Tile(
       value: 1,

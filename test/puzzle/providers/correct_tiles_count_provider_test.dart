@@ -1,7 +1,7 @@
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -63,7 +63,7 @@ void main() {
     verify(() => correctTilesCountListener(null, 2)).called(1);
 
     providerContainer
-        .read(tilesProvider.notifier)
+        .read(puzzleProvider.notifier)
         .swapTiles(tileToMoveToSolvePuzzle);
 
     await Future.delayed(Duration.zero);

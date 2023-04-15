@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 
 class PuzzleKeyboardListener extends ConsumerStatefulWidget {
   const PuzzleKeyboardListener({
@@ -23,7 +23,7 @@ class _PuzzleKeyboardListenerState
   Widget build(BuildContext context) {
     return RawKeyboardListener(
       onKey: (event) {
-        ref.read(tilesProvider.notifier).handleKeyboardEvent(event);
+        ref.read(puzzleProvider.notifier).handleKeyboardEvent(event);
       },
       focusNode: keyboardListenerFocusNode,
       child: Builder(

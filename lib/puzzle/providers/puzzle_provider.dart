@@ -3,25 +3,25 @@ import 'dart:math';
 import 'package:dashtronaut/core/services/game-logic/slide_puzzle_logic.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_state.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_state.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tilesProvider = NotifierProvider<TilesNotifier, TilesState>(
-  () => TilesNotifier(),
+final puzzleProvider = NotifierProvider<PuzzleNotifier, PuzzleState>(
+  () => PuzzleNotifier(),
 );
 
-class TilesNotifier extends Notifier<TilesState> {
-  TilesNotifier({this.random});
+class PuzzleNotifier extends Notifier<PuzzleState> {
+  PuzzleNotifier({this.random});
 
   /// Random value used in shuffling tiles
   final Random? random;
 
   @override
-  TilesState build() {
+  PuzzleState build() {
     final existingTiles = puzzleRepository.get()?.tiles;
-    return TilesState(
+    return PuzzleState(
       tiles: existingTiles != null && existingTiles.isNotEmpty
           ? existingTiles
           : slidePuzzleLogic.generateSolvableTiles(random),
@@ -39,7 +39,7 @@ class TilesNotifier extends Notifier<TilesState> {
       );
 
   void reset() {
-    state = TilesState(
+    state = PuzzleState(
       tiles: slidePuzzleLogic.generateSolvableTiles(random),
       movesCount: 0,
     );

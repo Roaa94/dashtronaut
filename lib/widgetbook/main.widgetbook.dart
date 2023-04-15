@@ -9,7 +9,7 @@ import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
-import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
@@ -158,7 +158,7 @@ Widget puzzleBoard3x3(BuildContext context) {
         ),
       ),
       puzzleSizeProvider,
-      tilesProvider,
+      puzzleProvider,
       puzzleIsSolvedProvider,
     ],
     child: const Center(
@@ -183,7 +183,7 @@ Widget puzzleBoard5x5(BuildContext context) {
         ),
       ),
       puzzleSizeProvider,
-      tilesProvider,
+      puzzleProvider,
       puzzleIsSolvedProvider,
     ],
     child: const Center(
@@ -201,7 +201,7 @@ Widget puzzleBoard6x6(BuildContext context) {
         ),
       ),
       puzzleSizeProvider,
-      tilesProvider,
+      puzzleProvider,
       puzzleIsSolvedProvider,
       puzzleMovesCountProvider,
     ],
