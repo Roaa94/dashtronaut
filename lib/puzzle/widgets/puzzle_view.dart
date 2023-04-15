@@ -16,7 +16,7 @@ class PuzzleView extends StatelessWidget {
         const BackgroundStack(),
         ...puzzleLayout.buildUIElements,
         const PuzzleBoard(),
-        const DashRiveAnimation(),
+        // const DashRiveAnimation(),
         const AnimatedPhraseBubble(),
       ],
     );

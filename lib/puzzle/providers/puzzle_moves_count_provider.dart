@@ -18,4 +18,14 @@ class PuzzleMovesCountNotifier extends Notifier<int> {
     state = value;
     puzzleRepository.updateMovesCount(value);
   }
+
+  void increment() {
+    state = state + 1;
+    puzzleRepository.updateMovesCount(state);
+  }
+
+  void reset() {
+    state = 0;
+    puzzleRepository.updateMovesCount(0);
+  }
 }

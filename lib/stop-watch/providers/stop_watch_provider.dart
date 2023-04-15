@@ -10,7 +10,16 @@ final stopWatchProvider = NotifierProvider<StopWatchNotifier, int>(
 class StopWatchNotifier extends Notifier<int> {
   @override
   int build() {
-    return stopWatchRepository.get() ?? 0;
+    final storedDuration = stopWatchRepository.get();
+    if (storedDuration != null && storedDuration > 0) {
+      start();
+    }
+    ref.onDispose(() {
+      streamSubscription?.cancel();
+      timeStream = null;
+      state = 0;
+    });
+    return storedDuration ?? 0;
   }
 
   StopWatchStorageRepository get stopWatchRepository =>
@@ -26,6 +35,10 @@ class StopWatchNotifier extends Notifier<int> {
       state = state + 1;
       stopWatchRepository.set(state);
     });
+  }
+
+  void pause() {
+    streamSubscription?.pause();
   }
 
   void stop() {

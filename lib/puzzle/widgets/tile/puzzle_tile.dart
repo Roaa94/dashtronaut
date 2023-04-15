@@ -7,28 +7,18 @@ import 'package:dashtronaut/puzzle/widgets/tile/tile_rive_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum TileInteractiveType {
-  tap,
-  verticalDrag,
-  horizontalDrag,
-}
-
-typedef TileInteractionCallback = void Function([double? dx, double? dy]);
-
 class PuzzleTile extends ConsumerStatefulWidget {
   const PuzzleTile({
     super.key,
     required this.tile,
     this.isPuzzleSolved = false,
     required this.puzzleSize,
-    this.onTileInteraction,
     this.isMovable = false,
   });
 
   final Tile tile;
   final bool isPuzzleSolved;
   final int puzzleSize;
-  final TileInteractionCallback? onTileInteraction;
   final bool isMovable;
 
   @override
@@ -60,51 +50,40 @@ class PuzzleTileState extends ConsumerState<PuzzleTile>
   Widget build(BuildContext context) {
     return PulseTransition(
       isActive: widget.isMovable,
-      child: GestureDetector(
-        onHorizontalDragEnd: (details) {
-          widget.onTileInteraction?.call(details.velocity.pixelsPerSecond.dx);
+      child: MouseRegion(
+        onEnter: (_) {
+          if (!widget.isPuzzleSolved) {
+            animationController.forward();
+          }
         },
-        onVerticalDragEnd: (details) {
-          widget.onTileInteraction?.call(null, details.velocity.pixelsPerSecond.dy);
+        onExit: (_) {
+          if (!widget.isPuzzleSolved) {
+            animationController.reverse();
+          }
         },
-        onTap: () {
-          widget.onTileInteraction?.call();
-        },
-        child: MouseRegion(
-          onEnter: (_) {
-            if (!widget.isPuzzleSolved) {
-              animationController.forward();
-            }
-          },
-          onExit: (_) {
-            if (!widget.isPuzzleSolved) {
-              animationController.reverse();
-            }
-          },
-          child: ScaleTransition(
-            scale: _scale,
-            child: Padding(
-              padding:
-                  EdgeInsets.all(PuzzleLayout.tilePadding(widget.puzzleSize)),
-              child: Stack(
-                children: [
-                  TileRiveAnimation(
-                    isAtCorrectLocation: widget.tile.currentLocation ==
-                        widget.tile.correctLocation,
-                    isPuzzleSolved: widget.isPuzzleSolved,
-                  ),
-                  Positioned.fill(
-                    child: Center(
-                      child: Text(
-                        '${widget.tile.value}',
-                        style: AppTextStyles.tile.copyWith(
-                          fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
-                        ),
+        child: ScaleTransition(
+          scale: _scale,
+          child: Padding(
+            padding:
+                EdgeInsets.all(PuzzleLayout.tilePadding(widget.puzzleSize)),
+            child: Stack(
+              children: [
+                TileRiveAnimation(
+                  isAtCorrectLocation: widget.tile.currentLocation ==
+                      widget.tile.correctLocation,
+                  isPuzzleSolved: widget.isPuzzleSolved,
+                ),
+                Positioned.fill(
+                  child: Center(
+                    child: Text(
+                      '${widget.tile.value}',
+                      style: AppTextStyles.tile.copyWith(
+                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -54,7 +54,6 @@ void main() {
   test('updates state', () {
     final puzzleMovesCountListener = Listener<int>();
     const newValue = 2;
-    const configs = Configs();
 
     when(() => mockPuzzleRepository.updateMovesCount(newValue))
         .thenAnswer((_) {});
@@ -62,7 +61,6 @@ void main() {
     final providerContainer = ProviderContainer(
       overrides: [
         puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-        configsProvider.overrideWithValue(configs),
       ],
     );
 
@@ -79,10 +77,67 @@ void main() {
     providerContainer.read(puzzleMovesCountProvider.notifier).update(newValue);
 
     verify(() => puzzleMovesCountListener(0, newValue)).called(1);
-    expect(
-      providerContainer.read(puzzleMovesCountProvider),
-      equals(newValue),
+    verifyNoMoreInteractions(puzzleMovesCountListener);
+  });
+
+  test('increments state', () {
+    final puzzleMovesCountListener = Listener<int>();
+    const initialValue = 0;
+    const newValue = 1;
+
+    when(() => mockPuzzleRepository.updateMovesCount(newValue))
+        .thenAnswer((_) {});
+
+    final providerContainer = ProviderContainer(
+      overrides: [
+        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+      ],
     );
+
+    addTearDown(providerContainer.dispose);
+
+    providerContainer.listen(
+      puzzleMovesCountProvider,
+      puzzleMovesCountListener,
+      fireImmediately: true,
+    );
+
+    verify(() => puzzleMovesCountListener(null, initialValue)).called(1);
+
+    providerContainer.read(puzzleMovesCountProvider.notifier).increment();
+
+    verify(() => puzzleMovesCountListener(initialValue, newValue)).called(1);
+    verifyNoMoreInteractions(puzzleMovesCountListener);
+  });
+
+  test('resets state', () {
+    final puzzleMovesCountListener = Listener<int>();
+
+    const initialValue = 10;
+    when(() => mockPuzzleRepository.get())
+        .thenReturn(puzzle3x3.copyWith(movesCount: initialValue));
+
+    when(() => mockPuzzleRepository.updateMovesCount(0)).thenAnswer((_) {});
+
+    final providerContainer = ProviderContainer(
+      overrides: [
+        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+      ],
+    );
+
+    addTearDown(providerContainer.dispose);
+
+    providerContainer.listen(
+      puzzleMovesCountProvider,
+      puzzleMovesCountListener,
+      fireImmediately: true,
+    );
+
+    verify(() => puzzleMovesCountListener(null, initialValue)).called(1);
+
+    providerContainer.read(puzzleMovesCountProvider.notifier).reset();
+
+    verify(() => puzzleMovesCountListener(initialValue, 0)).called(1);
     verifyNoMoreInteractions(puzzleMovesCountListener);
   });
 

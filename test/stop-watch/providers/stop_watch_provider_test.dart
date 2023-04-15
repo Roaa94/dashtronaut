@@ -40,6 +40,35 @@ void main() {
   });
 
   test(
+    'Can pause the stream',
+        () async {
+      final stopWatchListener = Listener<int>();
+      final providerContainer = ProviderContainer(
+        overrides: [
+          stopWatchRepositoryProvider
+              .overrideWithValue(mockStopWatchRepository),
+        ],
+      );
+
+      providerContainer.listen(
+        stopWatchProvider,
+        stopWatchListener,
+        fireImmediately: true,
+      );
+
+      verify(() => stopWatchListener(null, 0)).called(1);
+      providerContainer.read(stopWatchProvider.notifier).start();
+
+      await Future.delayed(const Duration(seconds: 1));
+      verify(() => stopWatchListener(0, 1)).called(1);
+
+      providerContainer.read(stopWatchProvider.notifier).pause();
+      await Future.delayed(const Duration(seconds: 2));
+      verifyNoMoreInteractions(stopWatchListener);
+    },
+  );
+
+  test(
     'Can stop the stream and reset the elapsed time to 0 seconds',
     () async {
       final stopWatchListener = Listener<int>();
