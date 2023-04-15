@@ -52,6 +52,28 @@ class TilesNotifier extends Notifier<TilesState> {
     }
   }
 
+  void handleTileInteraction(Tile tile, [double? dx, double? dy]) {
+    bool tileIsMovable = state.tileIsMovable(tile);
+    if (tileIsMovable) {
+      if (dx != null) {
+        // Horizontal drag event
+        bool canMoveRight = dx >= 0 && state.tileIsLeftOfWhiteSpace(tile);
+        bool canMoveLeft = dx <= 0 && state.tileIsRightOfWhiteSpace(tile);
+        if (canMoveLeft || canMoveRight) {
+          swapTiles(tile);
+        }
+      } else if (dy != null) {
+        bool canMoveUp = dy <= 0 && state.tileIsBottomOfWhiteSpace(tile);
+        bool canMoveDown = dy >= 0 && state.tileIsTopOfWhiteSpace(tile);
+        if (canMoveUp || canMoveDown) {
+          swapTiles(tile);
+        }
+      } else {
+        swapTiles(tile);
+      }
+    }
+  }
+
   /// Handle Keyboard event and move appropriate tile
   void handleKeyboardEvent(RawKeyEvent event) {
     if (event is RawKeyDownEvent) {

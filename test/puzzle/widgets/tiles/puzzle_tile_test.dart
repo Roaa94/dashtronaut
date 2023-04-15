@@ -1,7 +1,7 @@
 import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
-import 'package:dashtronaut/puzzle/widgets/tile/tile_content.dart';
+import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,7 +21,7 @@ void main() {
       'when mouse enters tile area and puzzle is not solved yet',
       (WidgetTester tester) async {
         await tester.pumpProviderApp(
-          const TileContent(
+          const PuzzleTile(
             tile: tile,
             isPuzzleSolved: false,
             puzzleSize: 3,
@@ -38,7 +38,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(MouseRegion).first));
 
         var tileContentWidgetState =
-            tester.state(find.byType(TileContent)) as TileContentState;
+            tester.state(find.byType(PuzzleTile)) as PuzzleTileState;
 
         expect(
           tileContentWidgetState.animationController.isAnimating,
@@ -46,12 +46,12 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        final scaleTransitionWidgetFinder = find.byType(ScaleTransition);
+        final scaleTransitionWidgetFinder = find.byType(ScaleTransition).last;
         final scaleTransitionWidget =
             tester.widget(scaleTransitionWidgetFinder) as ScaleTransition;
 
         tileContentWidgetState =
-            tester.state(find.byType(TileContent)) as TileContentState;
+            tester.state(find.byType(PuzzleTile)) as PuzzleTileState;
 
         expect(
           scaleTransitionWidget.scale.value,
@@ -70,7 +70,7 @@ void main() {
       'when mouse leaves tile area and puzzle is not solved yet',
       (WidgetTester tester) async {
         await tester.pumpProviderApp(
-          const TileContent(
+          const PuzzleTile(
             tile: tile,
             isPuzzleSolved: false,
             puzzleSize: 3,
@@ -89,7 +89,7 @@ void main() {
         await gesture.moveTo(const Offset(-100, -100));
         await tester.pumpAndSettle();
 
-        final scaleTransitionWidgetFinder = find.byType(ScaleTransition);
+        final scaleTransitionWidgetFinder = find.byType(ScaleTransition).last;
         final scaleTransitionWidget =
             tester.widget(scaleTransitionWidgetFinder) as ScaleTransition;
 
@@ -105,7 +105,7 @@ void main() {
       'when mouse enters tile area and puzzle is already solved',
       (WidgetTester tester) async {
         await tester.pumpProviderApp(
-          const TileContent(
+          const PuzzleTile(
             tile: tile,
             isPuzzleSolved: true,
             puzzleSize: 3,
@@ -121,7 +121,7 @@ void main() {
 
         await gesture.moveTo(tester.getCenter(find.byType(MouseRegion).first));
         var tileContentWidgetState =
-            tester.state(find.byType(TileContent)) as TileContentState;
+            tester.state(find.byType(PuzzleTile)) as PuzzleTileState;
         expect(
           tileContentWidgetState.animationController.isAnimating,
           isFalse,
@@ -130,7 +130,7 @@ void main() {
         await tester.pumpAndSettle();
 
         tileContentWidgetState =
-            tester.state(find.byType(TileContent)) as TileContentState;
+            tester.state(find.byType(PuzzleTile)) as PuzzleTileState;
 
         expect(
           tileContentWidgetState.animationController.isCompleted,

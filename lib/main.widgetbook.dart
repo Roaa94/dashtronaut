@@ -6,14 +6,17 @@ import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:dashtronaut/core/styles/app_themes.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
+import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
+import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
-import 'package:dashtronaut/puzzle/widgets/tile/tile_content.dart';
+import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:widgetbook/widgetbook.dart';
-import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
 
 void main() {
   runZonedGuarded<Future<void>>(
@@ -32,12 +35,19 @@ void main() {
           child: const DashtronautWidgetbook(),
         ),
       );
+
+      // runApp(
+      //   DashtronautWidgetbook(
+      //     storageService: initializedStorageService,
+      //   ),
+      // );
     },
     // ignore: only_throw_errors
     (e, _) => throw e,
   );
 }
 
+// Todo: figure out the issue with ProviderScope throwing when updated
 class DashtronautWidgetbook extends StatelessWidget {
   const DashtronautWidgetbook({super.key});
 
@@ -80,6 +90,41 @@ class DashtronautWidgetbook extends StatelessWidget {
       ],
       directories: [
         const WidgetbookCategory(
+          name: 'Puzzle Board',
+          children: [
+            WidgetbookComponent(
+              name: 'PuzzleBoard',
+              useCases: [
+                WidgetbookUseCase(
+                  name: '3x3 Puzzle',
+                  builder: puzzleBoard3x3,
+                ),
+                WidgetbookUseCase(
+                  name: '4x4 Puzzle',
+                  builder: puzzleBoard4x4,
+                ),
+                WidgetbookUseCase(
+                  name: '5x5 Puzzle',
+                  builder: puzzleBoard5x5,
+                ),
+                WidgetbookUseCase(
+                  name: '6x6 Puzzle',
+                  builder: puzzleBoard6x6,
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'PuzzleTile',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: puzzleTile,
+                )
+              ],
+            ),
+          ],
+        ),
+        const WidgetbookCategory(
           name: 'Puzzle Solved',
           children: [
             WidgetbookComponent(
@@ -105,29 +150,74 @@ class DashtronautWidgetbook extends StatelessWidget {
             ),
           ],
         ),
-        const WidgetbookFolder(
-          name: 'Puzzle Board',
-          children: [
-            WidgetbookCategory(
-              name: 'Tiles',
-              children: [
-                WidgetbookComponent(
-                  name: 'TileContent',
-                  useCases: [
-                    WidgetbookUseCase(
-                        name: 'Default', builder: defaultTileContent)
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
       ],
     );
   }
 }
 
-Widget defaultTileContent(BuildContext context) {
+Widget puzzleBoard3x3(BuildContext context) {
+  return ProviderScope(
+    overrides: [
+      configsProvider.overrideWith(
+        (_) => const Configs(
+          defaultPuzzleSize: 3,
+        ),
+      ),
+      puzzleSizeProvider,
+      tilesProvider,
+      puzzleIsSolvedProvider,
+    ],
+    child: const Center(
+      child: PuzzleBoard(),
+    ),
+  );
+}
+
+Widget puzzleBoard4x4(BuildContext context) {
+  return const Center(
+    child: PuzzleBoard(),
+  );
+}
+
+Widget puzzleBoard5x5(BuildContext context) {
+  return ProviderScope(
+    parent: ProviderScope.containerOf(context),
+    overrides: [
+      configsProvider.overrideWith(
+        (_) => const Configs(
+          defaultPuzzleSize: 5,
+        ),
+      ),
+      puzzleSizeProvider,
+      tilesProvider,
+      puzzleIsSolvedProvider,
+    ],
+    child: const Center(
+      child: PuzzleBoard(),
+    ),
+  );
+}
+
+Widget puzzleBoard6x6(BuildContext context) {
+  return ProviderScope(
+    overrides: [
+      configsProvider.overrideWith(
+        (_) => const Configs(
+          defaultPuzzleSize: 6,
+        ),
+      ),
+      puzzleSizeProvider,
+      tilesProvider,
+      puzzleIsSolvedProvider,
+      puzzleMovesCountProvider,
+    ],
+    child: const Center(
+      child: PuzzleBoard(),
+    ),
+  );
+}
+
+Widget puzzleTile(BuildContext context) {
   final size = context.knobs.slider(
     label: 'Size',
     min: 100,
@@ -140,13 +230,28 @@ Widget defaultTileContent(BuildContext context) {
     child: SizedBox(
       width: size,
       height: size,
-      child: TileContent(
+      child: PuzzleTile(
+        isMovable: context.knobs.boolean(
+          label: 'Is the Tile Movable?',
+          description:
+              'Movable tiles (tiles around white space), will pulse continuously',
+        ),
         isPuzzleSolved: context.knobs.boolean(
           label: 'Is Puzzle Solved?',
           description: 'If the puzzle is solved, hovering over '
               'the tile should not animate it',
         ),
         tile: Tile(
+          currentLocation: Location(
+            x: context.knobs.boolean(
+              label: 'Is Tile at Correct Location?',
+              description: 'This will run the Rive animation',
+            )
+                ? 2
+                : 3,
+            y: 1,
+          ),
+          correctLocation: const Location(x: 2, y: 1),
           value: context.knobs
               .slider(
                 label: 'Tile Value',
@@ -156,8 +261,6 @@ Widget defaultTileContent(BuildContext context) {
                 initialValue: 1,
               )
               .toInt(),
-          currentLocation: const Location(x: 1, y: 3),
-          correctLocation: const Location(x: 2, y: 1),
         ),
         puzzleSize: 3,
       ),

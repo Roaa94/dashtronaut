@@ -2,7 +2,17 @@ import 'dart:convert';
 
 import 'package:dashtronaut/core/services/storage/storage.dart';
 
-abstract class StorageRepository<T> {
+abstract class Repository<T> {
+  T? get();
+
+  void set(T item);
+
+  void update(Map<String, dynamic> data);
+
+  void clear();
+}
+
+abstract class StorageRepository<T> implements Repository<T> {
   StorageRepository(this.storageService);
 
   final StorageService storageService;
@@ -15,15 +25,18 @@ abstract class StorageRepository<T> {
 
   bool get hasData => storageService.has(storageKey);
 
+  @override
   T? get() {
     final data = storageService.get(storageKey);
     return data == null ? null : fromJson(json.decode(json.encode(data)));
   }
 
+  @override
   void set(T item) {
     storageService.set(storageKey, toJson(item));
   }
 
+  @override
   void update(Map<String, dynamic> data) {
     final existingData =
         storageService.get(storageKey) as Map<String, dynamic>? ?? {};
@@ -31,6 +44,7 @@ abstract class StorageRepository<T> {
     storageService.set(storageKey, existingData);
   }
 
+  @override
   void clear() {
     storageService.remove(storageKey);
   }
