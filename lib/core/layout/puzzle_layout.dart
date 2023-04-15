@@ -42,9 +42,10 @@ class PuzzleLayout implements LayoutDelegate {
     return ((screenHeight - containerWidth) / 2) + containerWidth;
   }
 
-  static const double tilePadding = 4;
+  static const double defaultTilePadding = 4;
 
   static const double smallTilePadding = 2;
+  static const int smallTilePuzzleSize = 4;
 
   static double? tileTextSize(int puzzleSize) {
     return puzzleSize > 5
@@ -54,6 +55,12 @@ class PuzzleLayout implements LayoutDelegate {
             : puzzleSize > 3
                 ? 30
                 : null;
+  }
+
+  static double tilePadding(int puzzleSize) {
+    return puzzleSize > smallTilePuzzleSize
+        ? smallTilePadding
+        : defaultTilePadding;
   }
 
   List<Widget> get horizontalPuzzleUIElements {

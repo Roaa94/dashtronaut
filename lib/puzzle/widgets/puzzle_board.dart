@@ -4,6 +4,7 @@ import 'package:dashtronaut/core/animations/widgets/pulse_transition.dart';
 import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/providers/tiles_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_keyboard_listener.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/tile_animated_positioned.dart';
@@ -18,6 +19,7 @@ class PuzzleBoard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final puzzleIsSolved = ref.watch(puzzleIsSolvedProvider);
+    final puzzleSize = ref.watch(puzzleSizeProvider);
     final tilesState = ref.watch(tilesProvider);
 
     return ScaleUpTransition(
@@ -39,7 +41,11 @@ class PuzzleBoard extends ConsumerWidget {
                       tileContent: PulseTransition(
                         isActive:
                             tilesState.tileIsMovable(tile) && !puzzleIsSolved,
-                        child: TileContent(tile: tile),
+                        child: TileContent(
+                          tile: tile,
+                          isPuzzleSolved: puzzleIsSolved,
+                          puzzleSize: puzzleSize,
+                        ),
                       ),
                     ),
                   );

@@ -4,8 +4,11 @@ import 'package:dashtronaut/configs/models/configs.dart';
 import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:dashtronaut/core/styles/app_themes.dart';
+import 'package:dashtronaut/puzzle/models/location.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
+import 'package:dashtronaut/puzzle/widgets/tile/tile_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -52,19 +55,19 @@ class DashtronautWidgetbook extends StatelessWidget {
             ],
           ),
         ),
-        FrameAddon(
-          setting: FrameSetting.firstAsSelected(
-            frames: [
-              WidgetbookFrame(
-                setting: DeviceSetting.firstAsSelected(
-                  devices: [
-                    Apple.iPhone12,
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        // FrameAddon(
+        //   setting: FrameSetting.firstAsSelected(
+        //     frames: [
+        //       WidgetbookFrame(
+        //         setting: DeviceSetting.firstAsSelected(
+        //           devices: [
+        //             Apple.iPhone12,
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
         LocalizationAddon(
           setting: LocalizationSetting.firstAsSelected(
             locales: [const Locale('en')],
@@ -102,9 +105,64 @@ class DashtronautWidgetbook extends StatelessWidget {
             ),
           ],
         ),
+        const WidgetbookFolder(
+          name: 'Puzzle Board',
+          children: [
+            WidgetbookCategory(
+              name: 'Tiles',
+              children: [
+                WidgetbookComponent(
+                  name: 'TileContent',
+                  useCases: [
+                    WidgetbookUseCase(
+                        name: 'Default', builder: defaultTileContent)
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ],
     );
   }
+}
+
+Widget defaultTileContent(BuildContext context) {
+  final size = context.knobs.slider(
+    label: 'Size',
+    min: 100,
+    max: 400,
+    divisions: 300,
+    initialValue: 150,
+  );
+
+  return Center(
+    child: SizedBox(
+      width: size,
+      height: size,
+      child: TileContent(
+        isPuzzleSolved: context.knobs.boolean(
+          label: 'Is Puzzle Solved?',
+          description: 'If the puzzle is solved, hovering over '
+              'the tile should not animate it',
+        ),
+        tile: Tile(
+          value: context.knobs
+              .slider(
+                label: 'Tile Value',
+                divisions: 9,
+                max: 9,
+                min: 1,
+                initialValue: 1,
+              )
+              .toInt(),
+          currentLocation: const Location(x: 1, y: 3),
+          correctLocation: const Location(x: 2, y: 1),
+        ),
+        puzzleSize: 3,
+      ),
+    ),
+  );
 }
 
 Widget puzzleSolvedDialog3x3(BuildContext context) {

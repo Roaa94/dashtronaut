@@ -3,7 +3,6 @@ class Configs {
     this.supportedPuzzleSizes = const [3, 4, 5, 6],
     this.maxStorableScores = 10,
     this.defaultPuzzleSize = 4,
-    this.smallTilePuzzleSize = 4,
   });
 
   final List<int> supportedPuzzleSizes;
@@ -11,6 +10,4 @@ class Configs {
   final int defaultPuzzleSize;
 
   final int maxStorableScores;
-
-  final int smallTilePuzzleSize;
 }

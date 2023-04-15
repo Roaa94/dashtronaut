@@ -28,7 +28,7 @@ dependencies:
   cross_file: ^0.3.3+4
   flutter_riverpod: ^2.3.4
   url_launcher_platform_interface: ^2.1.2
-  widgetbook: 3.0.0-beta.11
+  widgetbook: 3.0.0-beta.14
   dio: ^5.1.1
   share_plus_platform_interface: ^3.2.1
 
