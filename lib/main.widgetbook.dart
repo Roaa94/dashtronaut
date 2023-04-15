@@ -41,7 +41,6 @@ class DashtronautWidgetbook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      appInfo: AppInfo(name: 'Dashtronaut'),
       addons: [
         CustomThemeAddon(
           setting: ThemeSetting.firstAsSelected(
@@ -77,12 +76,12 @@ class DashtronautWidgetbook extends StatelessWidget {
         ),
       ],
       directories: [
-        WidgetbookCategory(
+        const WidgetbookCategory(
           name: 'Puzzle Solved',
           children: [
             WidgetbookComponent(
               name: 'Puzzle Solved Dialog',
-              useCases: const [
+              useCases: [
                 WidgetbookUseCase(
                   name: '3x3 Puzzle',
                   builder: puzzleSolvedDialog3x3,

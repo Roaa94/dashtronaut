@@ -57,7 +57,9 @@ void main() {
 
       try {
         providerContainer.read(stopWatchRepositoryProvider).set(elapsedSeconds);
-      } catch (e) {}
+      } catch (e) {
+        //...
+      }
 
       verify(
         () => mockStorageService.set(

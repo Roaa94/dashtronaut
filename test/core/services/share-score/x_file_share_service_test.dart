@@ -49,7 +49,6 @@ void main() {
 
   test('shareFileFromUrl calls shareXFiles successfully', () async {
     const shareText = 'share';
-    const filePath = '$kTemporaryPath/file.png';
     when(
       () => sharePlatform.shareXFiles(
         any(),

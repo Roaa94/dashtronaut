@@ -1,4 +1,3 @@
-import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/puzzle/widgets/correct_tiles_count.dart';
 import 'package:flutter_test/flutter_test.dart';

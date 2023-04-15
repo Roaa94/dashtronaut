@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:dashtronaut/core/services/http/http_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart' as path;
-import 'package:cross_file/cross_file.dart';
 import 'package:share_plus_platform_interface/share_plus_platform_interface.dart';
 
 final fileShareServiceProvider = Provider<FileShareService>(
