@@ -35,39 +35,79 @@ void main() {
   });
 
   test(
-      'updating tilesProvider and changing number of correct tiles'
-      ' will update correctTilesCountProvider', () async {
-    when(() => mockPuzzleRepository.get()).thenReturn(puzzle2x2);
-    final correctTilesCountListener = Listener<int>();
+    'updating tilesProvider by moving a tile to a correct location'
+    ' will update correctTilesCountProvider',
+    () async {
+      when(() => mockPuzzleRepository.get()).thenReturn(puzzle2x2);
+      final correctTilesCountListener = Listener<int>();
 
-    const tileToMoveToSolvePuzzle = Tile(
-      value: 3,
-      currentLocation: Location(x: 2, y: 2),
-      correctLocation: Location(x: 1, y: 2),
-    );
+      const tileToMoveToSolvePuzzle = Tile(
+        value: 3,
+        currentLocation: Location(x: 2, y: 2),
+        correctLocation: Location(x: 1, y: 2),
+      );
 
-    final providerContainer = ProviderContainer(
-      overrides: [
-        puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-      ],
-    );
+      final providerContainer = ProviderContainer(
+        overrides: [
+          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+        ],
+      );
 
-    providerContainer.listen(
-      correctTilesCountProvider,
-      correctTilesCountListener,
-      fireImmediately: true,
-    );
+      providerContainer.listen(
+        correctTilesCountProvider,
+        correctTilesCountListener,
+        fireImmediately: true,
+      );
 
-    addTearDown(providerContainer.dispose);
+      addTearDown(providerContainer.dispose);
 
-    verify(() => correctTilesCountListener(null, 2)).called(1);
+      verify(() => correctTilesCountListener(null, 2)).called(1);
 
-    providerContainer
-        .read(puzzleProvider.notifier)
-        .swapTiles(tileToMoveToSolvePuzzle);
+      providerContainer
+          .read(puzzleProvider.notifier)
+          .swapTiles(tileToMoveToSolvePuzzle);
 
-    await Future.delayed(Duration.zero);
+      await Future.delayed(Duration.zero);
 
-    verify(() => correctTilesCountListener(2, 3)).called(1);
-  });
+      verify(() => correctTilesCountListener(2, 3)).called(1);
+    },
+  );
+
+  test(
+    'updating tilesProvider by moving a tile to a non-correct location'
+    ' will not update correctTilesCountProvider',
+    () async {
+      // 3
+      // 2  1
+      when(() => mockPuzzleRepository.get()).thenReturn(puzzle2x2Solvable);
+      final correctTilesCountListener = Listener<int>();
+
+      final tileToMoveToNonCorrectLocation =
+          puzzle2x2.tiles.firstWhere((tile) => tile.value == 1);
+
+      final providerContainer = ProviderContainer(
+        overrides: [
+          puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+        ],
+      );
+
+      providerContainer.listen(
+        correctTilesCountProvider,
+        correctTilesCountListener,
+        fireImmediately: true,
+      );
+
+      addTearDown(providerContainer.dispose);
+
+      verify(() => correctTilesCountListener(null, 0)).called(1);
+
+      providerContainer
+          .read(puzzleProvider.notifier)
+          .swapTiles(tileToMoveToNonCorrectLocation);
+
+      await Future.delayed(Duration.zero);
+
+      verifyNoMoreInteractions(correctTilesCountListener);
+    },
+  );
 }
