@@ -13,13 +13,11 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.5
   collection: ^1.16.0
-  provider: ^6.0.5
   equatable: ^2.0.5
   package_info_plus: ^3.1.0
   rive: ^0.10.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  get_it: ^7.2.0
   share_plus: ^6.3.2
   path_provider: ^2.0.14
   url_launcher: ^6.1.10
