@@ -2,10 +2,16 @@ import 'dart:async';
 
 import 'package:dashtronaut/configs/models/configs.dart';
 import 'package:dashtronaut/configs/providers/configs_provider.dart';
+import 'package:dashtronaut/core/providers/is_web_provider.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:dashtronaut/core/styles/app_themes.dart';
+import 'package:dashtronaut/dash/phrases.dart';
+import 'package:dashtronaut/dash/widgets/animated_phrase_bubble.dart';
+import 'package:dashtronaut/dash/widgets/dash.dart';
+import 'package:dashtronaut/dash/widgets/dash_rive_animation.dart';
 import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
+import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
@@ -13,6 +19,7 @@ import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
+import 'package:dashtronaut/stop-watch/providers/stop_watch_provider.dart';
 import 'package:dashtronaut/widgetbook/fake_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -106,11 +113,34 @@ class DashtronautWidgetbook extends StatelessWidget {
           ],
         ),
         const WidgetbookCategory(
-          name: 'Puzzle UI',
+          name: 'Dash UI',
           children: [
             WidgetbookComponent(
-              name: 'PuzzleHeader',
-              useCases: [],
+              name: 'Dash',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: defaultDash,
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'AnimatedPhraseBubble',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: defaultAnimatedPhraseBubble,
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'DashRiveAnimation',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: defaultDashRiveAnimation,
+                ),
+              ],
             ),
           ],
         ),
@@ -149,6 +179,49 @@ class DashtronautWidgetbook extends StatelessWidget {
   }
 }
 
+Widget defaultDashRiveAnimation(BuildContext context) {
+  return Center(
+    child: Stack(
+      children: const [
+        DashRiveAnimation(),
+      ],
+    ),
+  );
+}
+
+Widget defaultDash(BuildContext context) {
+  return const Center(
+    child: Dash(),
+  );
+}
+
+Widget defaultAnimatedPhraseBubble(BuildContext context) {
+  return Center(
+    child: Stack(
+      children: [
+        AnimatedPhraseBubble(
+          phraseStatus: context.knobs.options(
+            label: 'Status',
+            labelBuilder: (option) => option.name,
+            options: PhraseStatus.values,
+          ),
+          dashTapCount: context.knobs
+              .slider(
+                label: 'Dash Tap Count',
+                description:
+                    'One status where phrases are shown is when Dash is tapped, which goes into an array of phrases based on the tap count',
+                initialValue: 1,
+                min: 0,
+                max: Phrases.dashTappedPhrases.length - 1,
+                divisions: Phrases.dashTappedPhrases.length - 1,
+              )
+              .toInt(),
+        ),
+      ],
+    ),
+  );
+}
+
 Widget puzzleBoard3x3(BuildContext context) {
   return ProviderScope(
     overrides: [
@@ -160,6 +233,10 @@ Widget puzzleBoard3x3(BuildContext context) {
       puzzleSizeProvider,
       puzzleProvider,
       puzzleIsSolvedProvider,
+      correctTilesCountProvider,
+      puzzleMovesCountProvider,
+      stopWatchProvider,
+      isWebProvider,
     ],
     child: const Center(
       child: PuzzleBoard(),
@@ -185,6 +262,10 @@ Widget puzzleBoard5x5(BuildContext context) {
       puzzleSizeProvider,
       puzzleProvider,
       puzzleIsSolvedProvider,
+      correctTilesCountProvider,
+      puzzleMovesCountProvider,
+      stopWatchProvider,
+      isWebProvider,
     ],
     child: const Center(
       child: PuzzleBoard(),
@@ -204,6 +285,10 @@ Widget puzzleBoard6x6(BuildContext context) {
       puzzleProvider,
       puzzleIsSolvedProvider,
       puzzleMovesCountProvider,
+      correctTilesCountProvider,
+      puzzleMovesCountProvider,
+      stopWatchProvider,
+      isWebProvider,
     ],
     child: const Center(
       child: PuzzleBoard(),

@@ -4,16 +4,6 @@ import 'package:dashtronaut/core/layout/layout_delegate.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:flutter/cupertino.dart';
 
-enum PhraseState {
-  none,
-  puzzleStarted,
-  puzzleSolved,
-  hardPuzzleSelected,
-  puzzleTakingTooLong,
-  dashTapped,
-  doingGreat,
-}
-
 class PhraseBubbleLayout implements LayoutDelegate {
   @override
   final BuildContext context;

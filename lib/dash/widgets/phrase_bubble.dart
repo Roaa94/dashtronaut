@@ -1,18 +1,16 @@
-import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/core/styles/app_colors.dart';
 import 'package:dashtronaut/core/styles/app_text_styles.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class PhraseBubble extends StatelessWidget {
-  final PhraseState state;
-
   const PhraseBubble({
     super.key,
-    required this.state,
-  })  : assert(state != PhraseState.none);
+    required this.text,
+  });
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +54,12 @@ class PhraseBubble extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             border: Border.all(width: 1, color: AppColors.primary),
           ),
-          child: Consumer<PhrasesProvider>(
-            builder: (c, phrasesProvider, _) {
-              String phrase = phrasesProvider.getPhrase(state);
-
-              return Text(
-                phrase,
-                style: AppTextStyles.h2.copyWith(
-                  color: AppColors.primary,
-                  fontSize: phrase.length > 20 ? 16 : 20,
-                ),
-              );
-            },
+          child: Text(
+            text,
+            style: AppTextStyles.h2.copyWith(
+              color: AppColors.primary,
+              fontSize: text.length > 20 ? 16 : 20,
+            ),
           ),
         ),
       ],

@@ -17,7 +17,8 @@ class StopWatchNotifier extends Notifier<int> {
     ref.onDispose(() {
       streamSubscription?.cancel();
       timeStream = null;
-      state = 0;
+      // Todo: investigate
+      // state = 0;
     });
     return storedDuration ?? 0;
   }
@@ -41,6 +42,7 @@ class StopWatchNotifier extends Notifier<int> {
     streamSubscription?.pause();
   }
 
+  // Todo: add resume
   void stop() {
     if (streamSubscription != null) {
       streamSubscription!.cancel();

@@ -1,35 +1,26 @@
-import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/dash_layout.dart';
-import 'package:dashtronaut/core/layout/phrase_bubble_layout.dart';
-import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rive/rive.dart';
 
-class DashRiveAnimation extends StatefulWidget {
-  const DashRiveAnimation({super.key});
+class DashRiveAnimation extends ConsumerStatefulWidget {
+  const DashRiveAnimation({
+    super.key,
+    this.onDashTapped,
+  });
+
+  final VoidCallback? onDashTapped;
 
   @override
   _DashRiveAnimationState createState() => _DashRiveAnimationState();
 }
 
-class _DashRiveAnimationState extends State<DashRiveAnimation> {
-  late final PhrasesProvider phrasesProvider;
-
-  final ValueNotifier<bool> canTapDashNotifier = ValueNotifier<bool>(true);
-
+class _DashRiveAnimationState extends ConsumerState<DashRiveAnimation> {
   void _onRiveInit(Artboard artboard) {
     final controller =
         StateMachineController.fromArtboard(artboard, 'dashtronaut');
 
     artboard.addController(controller!);
-  }
-
-  @override
-  void initState() {
-    phrasesProvider = Provider.of<PhrasesProvider>(context, listen: false);
-    super.initState();
   }
 
   @override
@@ -39,8 +30,8 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
     return Positioned(
       right: dash.position.right,
       bottom: dash.position.bottom,
-      child: ValueListenableBuilder(
-        valueListenable: canTapDashNotifier,
+      child: GestureDetector(
+        onTap: widget.onDashTapped,
         child: SizedBox(
           width: dash.size.width,
           height: dash.size.height,
@@ -49,21 +40,6 @@ class _DashRiveAnimationState extends State<DashRiveAnimation> {
             onInit: _onRiveInit,
             stateMachines: const ['dashtronaut'],
           ),
-        ),
-        builder: (c, bool canTapDash, child) => GestureDetector(
-          onTap: () {
-            if (canTapDash) {
-              canTapDashNotifier.value = false;
-              phrasesProvider.setPhraseState(PhraseState.dashTapped);
-              HapticFeedback.lightImpact();
-              Future.delayed(
-                  AnimationsManager.phraseBubbleTotalAnimationDuration, () {
-                phrasesProvider.setPhraseState(PhraseState.none);
-                canTapDashNotifier.value = true;
-              });
-            }
-          },
-          child: child,
         ),
       ),
     );
