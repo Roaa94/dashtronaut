@@ -31,45 +31,42 @@ class PuzzleBoard extends ConsumerWidget {
       }
     });
 
-    return ScaleUpTransition(
-      delay: AnimationsManager.bgLayerAnimationDuration,
-      child: PuzzleKeyboardListener(
-        child: Center(
-          child: SizedBox(
-            width: PuzzleLayout(context).containerWidth,
-            height: PuzzleLayout(context).containerWidth,
-            child: Stack(
-              children: List.generate(
-                tilesState.withoutWhitespace.length,
-                (index) {
-                  Tile tile = tilesState.withoutWhitespace[index];
-                  double tileWidth =
-                      PuzzleLayout(context).containerWidth / puzzleSize;
-                  final tilePosition = tile.getPosition(context, tileWidth);
-                  final isMovable =
-                      tilesState.tileIsMovable(tile) && !puzzleIsSolved;
+    return PuzzleKeyboardListener(
+      child: Center(
+        child: SizedBox(
+          width: PuzzleLayout(context).containerWidth,
+          height: PuzzleLayout(context).containerWidth,
+          child: Stack(
+            children: List.generate(
+              tilesState.withoutWhitespace.length,
+              (index) {
+                Tile tile = tilesState.withoutWhitespace[index];
+                double tileWidth =
+                    PuzzleLayout(context).containerWidth / puzzleSize;
+                final tilePosition = tile.getPosition(context, tileWidth);
+                final isMovable =
+                    tilesState.tileIsMovable(tile) && !puzzleIsSolved;
 
-                  return AnimatedPositioned(
-                    duration: const Duration(milliseconds: 150),
-                    curve: Curves.easeInOut,
-                    width: tileWidth,
-                    height: tileWidth,
-                    left: tilePosition.left,
-                    top: tilePosition.top,
-                    child: GestureDetector(
-                      onTap: () {
-                        ref.read(puzzleProvider.notifier).swapTiles(tile);
-                      },
-                      child: PuzzleTile(
-                        isMovable: isMovable,
-                        tile: tile,
-                        isPuzzleSolved: puzzleIsSolved,
-                        puzzleSize: puzzleSize,
-                      ),
+                return AnimatedPositioned(
+                  duration: const Duration(milliseconds: 150),
+                  curve: Curves.easeInOut,
+                  width: tileWidth,
+                  height: tileWidth,
+                  left: tilePosition.left,
+                  top: tilePosition.top,
+                  child: GestureDetector(
+                    onTap: () {
+                      ref.read(puzzleProvider.notifier).swapTiles(tile);
+                    },
+                    child: PuzzleTile(
+                      isMovable: isMovable,
+                      tile: tile,
+                      isPuzzleSolved: puzzleIsSolved,
+                      puzzleSize: puzzleSize,
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ),
         ),

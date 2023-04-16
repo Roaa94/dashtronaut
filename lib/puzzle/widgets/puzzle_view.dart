@@ -1,4 +1,6 @@
 import 'package:dashtronaut/background/widgets/background_stack.dart';
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
+import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/core/providers/is_web_provider.dart';
 import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
@@ -70,7 +72,10 @@ class PuzzleView extends ConsumerWidget {
       children: [
         const BackgroundStack(),
         ...puzzleLayout.buildUIElements,
-        const PuzzleBoard(),
+        const ScaleUpTransition(
+          delay: AnimationsManager.bgLayerAnimationDuration,
+          child: PuzzleBoard(),
+        ),
         const Dash(),
       ],
     );
