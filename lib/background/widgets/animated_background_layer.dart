@@ -23,21 +23,29 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer>
 
   @override
   void initState() {
+    final duration = AnimationsManager.bgLayer(widget.layer).duration;
     _animationController = AnimationController(
-      duration: AnimationsManager.bgLayer(widget.layer).duration,
+      duration: duration,
       vsync: this,
     );
+
+    const delay = Duration(milliseconds: 400);
+
+    final intervalStart =
+        delay.inSeconds / (duration.inSeconds + delay.inSeconds);
 
     _position = AnimationsManager.bgLayer(widget.layer).tween.animate(
           CurvedAnimation(
             parent: _animationController,
-            curve: AnimationsManager.bgLayer(widget.layer).curve,
+            curve: Interval(
+              intervalStart,
+              1,
+              curve: AnimationsManager.bgLayer(widget.layer).curve,
+            ),
           ),
         );
 
-    Future.delayed(const Duration(milliseconds: 400), () {
-      _animationController.forward();
-    });
+    _animationController.forward();
     super.initState();
   }
 
