@@ -2,8 +2,6 @@
 import 'dart:developer';
 
 import 'package:dashtronaut/puzzle/models/tile.dart';
-import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
-import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
