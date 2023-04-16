@@ -92,6 +92,36 @@ const solvable2x2PuzzleWithSeed2 = [
 // 2  1
 const puzzle2x2Solvable = Puzzle(n: 2, tiles: solvable2x2PuzzleWithSeed2);
 
+// 3  1
+//    2
+const puzzle2x2Solvable2 = Puzzle(n: 2, tiles: solvable2x2Puzzle);
+
+// 3  1
+//    2
+const solvable2x2Puzzle = [
+  Tile(
+    value: 1,
+    correctLocation: Location(y: 1, x: 1),
+    currentLocation: Location(y: 1, x: 2),
+  ),
+  Tile(
+    value: 2,
+    correctLocation: Location(y: 1, x: 2),
+    currentLocation: Location(y: 2, x: 2),
+  ),
+  Tile(
+    value: 3,
+    correctLocation: Location(y: 2, x: 1),
+    currentLocation: Location(y: 1, x: 1),
+  ),
+  Tile(
+    value: 4,
+    correctLocation: Location(y: 2, x: 2),
+    currentLocation: Location(y: 2, x: 1),
+    tileIsWhiteSpace: true,
+  )
+];
+
 const solvable2x2PuzzleWithSeed2Reset = [
   Tile(
     value: 1,
