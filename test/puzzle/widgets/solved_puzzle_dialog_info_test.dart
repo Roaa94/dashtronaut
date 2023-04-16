@@ -38,31 +38,6 @@ void main() {
     },
   );
 
-  // Todo: implement this test when dialog is used
-  // testWidgets(
-  //   'Can pop when Restart button is clicked',
-  //   (WidgetTester tester) async {
-  //     final mockNavigatorObserver = MockNavigatorObserver();
-  //
-  //     await tester.pumpProviderApp(
-  //       const SolvedPuzzleDialogInfo(
-  //         solvingDuration: solvingDuration,
-  //         movesCount: 20,
-  //       ),
-  //       navigatorObserver: mockNavigatorObserver,
-  //     );
-  //
-  //     await tester.pumpAndSettle();
-  //
-  //     await tester.tap(
-  //       find.byWidgetPredicate(
-  //           (widget) => widget is Icon && widget.icon == Icons.refresh),
-  //     );
-  //
-  //     verify(() => mockNavigatorObserver.didPop(any(), any()));
-  //   },
-  // );
-
   group('Share icon tests', () {
     testWidgets(
       'Renders Twitter icon when platform is web',
@@ -108,40 +83,5 @@ void main() {
         );
       },
     );
-  });
-
-  group('Share score tests', () {
-    late ShareScoreService mockShareScoreService;
-
-    setUp(() {
-      mockShareScoreService = MockShareScoreService();
-    });
-
-    // Todo: implement this test when the dialog gets used
-    // testWidgets(
-    //   'Calls share from share score service when Share button is clicked',
-    //   (WidgetTester tester) async {
-    //     when(() => mockPuzzleRepository.get()).thenReturn(puzzle3x3);
-    //     when(() => mockShareScoreService.share()).thenAnswer((_) async {});
-    //
-    //     await tester.pumpProviderApp(
-    //       const SolvedPuzzleDialogInfo(
-    //         solvingDuration: solvingDuration,
-    //       ),
-    //       overrides: [
-    //         puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
-    //         shareScoreServiceProvider.overrideWithValue(mockShareScoreService),
-    //       ],
-    //     );
-    //
-    //     await tester.tap(
-    //       find.byWidgetPredicate(
-    //           (widget) => widget is Icon && widget.icon == Icons.share),
-    //     );
-    //     await tester.pumpAndSettle();
-    //
-    //     verify(() => mockShareScoreService.share()).called(1);
-    //   },
-    // );
   });
 }

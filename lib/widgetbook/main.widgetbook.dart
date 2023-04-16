@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dashtronaut/configs/models/configs.dart';
 import 'package:dashtronaut/configs/providers/configs_provider.dart';
 import 'package:dashtronaut/core/providers/is_web_provider.dart';
+import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
 import 'package:dashtronaut/core/services/storage/storage.dart';
 import 'package:dashtronaut/core/styles/app_themes.dart';
 import 'package:dashtronaut/dash/phrases.dart';
@@ -237,6 +238,7 @@ Widget puzzleBoard3x3(BuildContext context) {
       puzzleMovesCountProvider,
       stopWatchProvider,
       isWebProvider,
+      shareScoreServiceProvider,
     ],
     child: const Center(
       child: PuzzleBoard(),
@@ -266,6 +268,7 @@ Widget puzzleBoard5x5(BuildContext context) {
       puzzleMovesCountProvider,
       stopWatchProvider,
       isWebProvider,
+      shareScoreServiceProvider,
     ],
     child: const Center(
       child: PuzzleBoard(),
@@ -289,6 +292,7 @@ Widget puzzleBoard6x6(BuildContext context) {
       puzzleMovesCountProvider,
       stopWatchProvider,
       isWebProvider,
+      shareScoreServiceProvider,
     ],
     child: const Center(
       child: PuzzleBoard(),

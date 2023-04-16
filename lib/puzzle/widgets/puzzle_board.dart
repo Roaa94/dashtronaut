@@ -1,14 +1,20 @@
-
 import 'dart:developer';
 
+import 'package:dashtronaut/core/providers/is_web_provider.dart';
+import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
+import 'package:dashtronaut/dash/phrases.dart';
+import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_keyboard_listener.dart';
+import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
+import 'package:dashtronaut/stop-watch/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,11 +27,49 @@ class PuzzleBoard extends ConsumerWidget {
     final puzzleIsSolved = ref.watch(puzzleIsSolvedProvider);
     final puzzleSize = ref.watch(puzzleSizeProvider);
     final tilesState = ref.watch(puzzleProvider);
+    final movesCount = ref.watch(puzzleMovesCountProvider);
+    final secondsElapsed = ref.watch(stopWatchProvider);
+    final isWeb = ref.watch(isWebProvider);
 
     ref.listen(correctTilesCountProvider, (previous, next) {
       if (previous != null && next > previous) {
-        log('Triggering Haptic feedback!');
-        HapticFeedback.mediumImpact();
+        if (next < ((puzzleSize * puzzleSize) - 1)) {
+          log('Triggering Haptic feedback!');
+          HapticFeedback.mediumImpact();
+        }
+      }
+    });
+
+    // Todo: set up listeners for solving puzzle & phrases
+    // Starting the puzzle should: (moves count = 1)
+    // - Show a phrase with `PhraseState.puzzleStarted`
+    //
+    // Solving puzzle should:
+    // - Adds score to list
+    ref.listen(puzzleIsSolvedProvider, (previous, next) async {
+      if (next != previous && next) {
+        // Puzzle is solved!
+        HapticFeedback.vibrate();
+        ref.read(stopWatchProvider.notifier).pause();
+        ref.read(phraseStatusProvider.notifier).state =
+            PhraseStatus.puzzleSolved;
+
+        showDialog(
+          context: context,
+          builder: (context) {
+            return SolvedPuzzleDialog(
+              movesCount: movesCount,
+              solvingDuration: Duration(seconds: secondsElapsed),
+              puzzleSize: puzzleSize,
+              isWeb: isWeb,
+              onSharePressed: ref.read(shareScoreServiceProvider).share,
+              onRestartPressed: () {
+                ref.read(puzzleProvider.notifier).reset();
+                Navigator.of(context).pop(true);
+              },
+            );
+          },
+        );
       }
     });
 

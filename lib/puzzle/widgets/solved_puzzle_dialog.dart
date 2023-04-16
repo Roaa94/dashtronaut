@@ -1,3 +1,4 @@
+import 'package:dashtronaut/core/constants.dart';
 import 'package:dashtronaut/core/widget_keys.dart';
 import 'package:dashtronaut/core/widgets/app_alert_dialog.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
@@ -23,14 +24,22 @@ class SolvedPuzzleDialog extends StatelessWidget {
   final VoidCallback? onSharePressed;
   final VoidCallback? onRestartPressed;
 
+  String? get imageName {
+    if (Constants.supportedPuzzleSizes.contains(puzzleSize)) {
+      return 'solved-${puzzleSize}x$puzzleSize.png';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final imageName = 'solved-${puzzleSize}x$puzzleSize.png';
     ScreenTypeHelper screenTypeHelper = ScreenTypeHelper(context);
 
     Widget solvedPuzzleImage = ClipRRect(
       borderRadius: BorderRadius.circular(15),
-      child: Image.asset('assets/images/puzzle-solved/$imageName'),
+      child: imageName == null
+          ? Container()
+          : Image.asset('assets/images/puzzle-solved/$imageName'),
     );
 
     Widget solvedPuzzleInfo = SolvedPuzzleDialogInfo(
