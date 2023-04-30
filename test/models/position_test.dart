@@ -45,7 +45,8 @@ void main() {
       });
 
       test(
-          'Returns same start position if lerp double is 0 and one position param in null',
+          'Returns same start position if lerp double '
+              'is 0 and one position param in null',
           () {
         expect(Position.lerp(startPosition, const Position(left: 10), 0),
             startPosition);

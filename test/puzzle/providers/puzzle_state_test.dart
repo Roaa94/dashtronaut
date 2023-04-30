@@ -9,15 +9,23 @@ void main() {
   test('isSolved is true when tiles are in a solved arrangement', () {
     // 1   2
     // 3
-    final tilesState = PuzzleState(tiles: puzzle2x2Solved.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2Solved.tiles);
 
-    expect(tilesState.isSolved, isTrue);
+    expect(puzzleState.isSolved, isTrue);
+  });
+
+  test('can copy', () {
+    final puzzleState = PuzzleState(tiles: puzzle2x2Solved.tiles);
+
+    final newPuzzleState = puzzleState.copyWith();
+
+    expect(newPuzzleState, puzzleState);
   });
 
   test('gets tiles list without whitespace tile', () {
     // 1   2
     // 3
-    final tilesState = PuzzleState(tiles: puzzle2x2Solved.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2Solved.tiles);
 
     const expectedTilesWithoutWhitespaceTile = [
       Tile(
@@ -38,7 +46,7 @@ void main() {
     ];
 
     expect(
-      tilesState.withoutWhitespace,
+      puzzleState.withoutWhitespace,
       equals(expectedTilesWithoutWhitespaceTile),
     );
   });
@@ -46,9 +54,9 @@ void main() {
   test('isSolved is false when tiles are not in a solved arrangement', () {
     // 1  2
     //    3
-    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2.tiles);
 
-    expect(tilesState.isSolved, isFalse);
+    expect(puzzleState.isSolved, isFalse);
   });
 
   test('Can get whitespace tile', () {
@@ -59,10 +67,10 @@ void main() {
       correctLocation: Location(x: 2, y: 2),
     );
 
-    final tilesState = PuzzleState(tiles: puzzle2x2Solved.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2Solved.tiles);
 
     expect(
-      tilesState.whiteSpaceTile,
+      puzzleState.whiteSpaceTile,
       whiteSpaceTileOf2x2CorrectPuzzle,
     );
   });
@@ -70,7 +78,7 @@ void main() {
   test('Tile is movable when located around the whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const movableTile = Tile(
       value: 1,
@@ -79,7 +87,7 @@ void main() {
     );
 
     expect(
-      tilesState.tileIsMovable(movableTile),
+      puzzleState.tileIsMovable(movableTile),
       isTrue,
     );
   });
@@ -87,7 +95,7 @@ void main() {
   test('Tile is not movable when not located around the whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const nonMovableTile = Tile(
       value: 2,
@@ -96,7 +104,7 @@ void main() {
     );
 
     expect(
-      tilesState.tileIsMovable(nonMovableTile),
+      puzzleState.tileIsMovable(nonMovableTile),
       isFalse,
     );
   });
@@ -104,7 +112,7 @@ void main() {
   test('Finds tile on top of whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const topOfWhitespaceTile = Tile(
       value: 1,
@@ -113,7 +121,7 @@ void main() {
     );
 
     expect(
-      tilesState.tileTopOfWhitespace,
+      puzzleState.tileTopOfWhitespace,
       equals(topOfWhitespaceTile),
     );
   });
@@ -121,7 +129,7 @@ void main() {
   test('Finds tile on right of whitespace tile', () {
     // 1  2
     //    3
-    final tilesState = PuzzleState(tiles: puzzle2x2.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2.tiles);
 
     const rightOfWhitespaceTile = Tile(
       value: 3,
@@ -130,7 +138,7 @@ void main() {
     );
 
     expect(
-      tilesState.tileRightOfWhitespace,
+      puzzleState.tileRightOfWhitespace,
       equals(rightOfWhitespaceTile),
     );
   });
@@ -138,7 +146,7 @@ void main() {
   test('Finds tile on the left of whitespace tile', () {
     // 3
     // 2  1
-    final tilesState = PuzzleState(tiles: puzzle2x2Solvable.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2Solvable.tiles);
 
     const leftOfWhitespaceTile = Tile(
       value: 3,
@@ -147,7 +155,7 @@ void main() {
     );
 
     expect(
-      tilesState.tileLeftOfWhitespace,
+      puzzleState.tileLeftOfWhitespace,
       equals(leftOfWhitespaceTile),
     );
   });
@@ -155,7 +163,7 @@ void main() {
   test('Finds tile bottom of whitespace tile', () {
     // 3
     // 2  1
-    final tilesState = PuzzleState(tiles: puzzle2x2Solvable.tiles);
+    final puzzleState = PuzzleState(tiles: puzzle2x2Solvable.tiles);
 
     const bottomOfWhitespaceTile = Tile(
       value: 1,
@@ -164,7 +172,7 @@ void main() {
     );
 
     expect(
-      tilesState.tileBottomOfWhitespace,
+      puzzleState.tileBottomOfWhitespace,
       equals(bottomOfWhitespaceTile),
     );
   });

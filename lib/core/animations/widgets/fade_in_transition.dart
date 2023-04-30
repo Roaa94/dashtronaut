@@ -29,10 +29,14 @@ class _FadeInTransitionState extends State<FadeInTransition>
       duration: fadeInDuration + (widget.delay ?? Duration.zero),
     );
 
-    // Todo: test this logic
+    // Adding delay using Interval
+    // For example, if the scale duration is 0.7 seconds, and the delay
+    // is 1.2 second, then the total animation duration becomes 1.9
+    // But the animation should start at 1.2 seconds, which is 1.2/1.9 into
+    // the animation duration
+    // => interval start = delay / (delay + duration)
     var intervalStart = 0.0;
-    if (widget.delay != null &&
-        widget.delay!.inSeconds < fadeInDuration.inSeconds) {
+    if (widget.delay != null) {
       intervalStart = widget.delay!.inSeconds /
           (fadeInDuration.inSeconds + widget.delay!.inSeconds);
     }
