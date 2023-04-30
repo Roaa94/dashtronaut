@@ -32,7 +32,7 @@ class _AnimatedBackgroundLayerState extends State<AnimatedBackgroundLayer>
     const delay = Duration(milliseconds: 400);
 
     final intervalStart =
-        delay.inSeconds / (duration.inSeconds + delay.inSeconds);
+        delay.inMicroseconds / (duration.inMicroseconds + delay.inMicroseconds);
 
     _position = AnimationsManager.bgLayer(widget.layer).tween.animate(
           CurvedAnimation(

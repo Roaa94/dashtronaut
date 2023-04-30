@@ -46,6 +46,10 @@ class PuzzleTileState extends ConsumerState<PuzzleTile>
     super.initState();
   }
 
+  static const double defaultTilePadding = 4;
+  static const double smallTilePadding = 2;
+  static const int smallTilePuzzleSize = 4;
+
   @override
   Widget build(BuildContext context) {
     return PulseTransition(
@@ -64,8 +68,11 @@ class PuzzleTileState extends ConsumerState<PuzzleTile>
         child: ScaleTransition(
           scale: _scale,
           child: Padding(
-            padding:
-                EdgeInsets.all(PuzzleLayout.tilePadding(widget.puzzleSize)),
+            padding: EdgeInsets.all(
+              widget.puzzleSize > smallTilePuzzleSize
+                  ? smallTilePadding
+                  : defaultTilePadding,
+            ),
             child: Stack(
               children: [
                 TileRiveAnimation(
@@ -78,7 +85,13 @@ class PuzzleTileState extends ConsumerState<PuzzleTile>
                     child: Text(
                       '${widget.tile.value}',
                       style: AppTextStyles.tile.copyWith(
-                        fontSize: PuzzleLayout.tileTextSize(widget.puzzleSize),
+                        fontSize: widget.puzzleSize > 5
+                            ? 20
+                            : widget.puzzleSize > 4
+                                ? 25
+                                : widget.puzzleSize > 3
+                                    ? 30
+                                    : null,
                       ),
                     ),
                   ),

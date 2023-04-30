@@ -5,7 +5,6 @@ import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
 import 'package:dashtronaut/dash/phrases.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
-import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
@@ -20,7 +19,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PuzzleBoard extends ConsumerWidget {
-  const PuzzleBoard({super.key});
+  const PuzzleBoard({
+    super.key,
+    this.puzzleContainerWidth = 300,
+  });
+
+  final double puzzleContainerWidth;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -76,15 +80,14 @@ class PuzzleBoard extends ConsumerWidget {
     return PuzzleKeyboardListener(
       child: Center(
         child: SizedBox(
-          width: PuzzleLayout(context).containerWidth,
-          height: PuzzleLayout(context).containerWidth,
+          width: puzzleContainerWidth,
+          height: puzzleContainerWidth,
           child: Stack(
             children: List.generate(
               tilesState.withoutWhitespace.length,
               (index) {
                 Tile tile = tilesState.withoutWhitespace[index];
-                double tileWidth =
-                    PuzzleLayout(context).containerWidth / puzzleSize;
+                double tileWidth = puzzleContainerWidth / puzzleSize;
                 final tilePosition = tile.getPosition(context, tileWidth);
                 final isMovable =
                     tilesState.tileIsMovable(tile) && !puzzleIsSolved;
