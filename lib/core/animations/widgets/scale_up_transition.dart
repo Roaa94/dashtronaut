@@ -36,8 +36,8 @@ class _ScaleUpTransitionState extends State<ScaleUpTransition>
     // => interval start = delay / (delay + duration)
     var intervalStart = 0.0;
     if (widget.delay != null) {
-      intervalStart = widget.delay!.inSeconds /
-          (scaleUpDuration.inSeconds + widget.delay!.inSeconds);
+      intervalStart = widget.delay!.inMicroseconds /
+          (scaleUpDuration.inMicroseconds + widget.delay!.inMicroseconds);
     }
 
     _scale = AnimationsManager.scaleUp.tween.animate(

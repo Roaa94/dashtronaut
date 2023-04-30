@@ -34,7 +34,7 @@ void main() {
   testWidgets(
     'Scale up animation is triggered after delay',
     (WidgetTester tester) async {
-      const delay = Duration(seconds: 1);
+      const delay = Duration(milliseconds: 300);
       await tester.pumpProviderApp(
         ScaleUpTransition(
           delay: delay,

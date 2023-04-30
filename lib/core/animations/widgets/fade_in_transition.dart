@@ -36,9 +36,9 @@ class _FadeInTransitionState extends State<FadeInTransition>
     // the animation duration
     // => interval start = delay / (delay + duration)
     var intervalStart = 0.0;
-    if (widget.delay != null) {
-      intervalStart = widget.delay!.inSeconds /
-          (fadeInDuration.inSeconds + widget.delay!.inSeconds);
+    if (widget.delay != null && widget.delay! > Duration.zero) {
+      intervalStart = widget.delay!.inMicroseconds /
+          (fadeInDuration.inMicroseconds + widget.delay!.inMicroseconds);
     }
 
     _opacity = AnimationsManager.fadeIn.tween.animate(
