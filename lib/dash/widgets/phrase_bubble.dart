@@ -26,7 +26,7 @@ class PhraseBubble extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
-              border: Border.all(width: 1, color: Colors.white),
+              border: Border.all(width: 1, color: AppColors.primary),
             ),
           ),
         ),
