@@ -9,12 +9,13 @@ import 'package:dashtronaut/dash/providers/phrases_provider.dart';
 import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_keyboard_listener.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
+import 'package:dashtronaut/score/providers/score_provider.dart';
+import 'package:dashtronaut/score/providers/scores_provider.dart';
 import 'package:dashtronaut/stop-watch/providers/stop_watch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,8 +30,6 @@ class PuzzleBoard extends ConsumerWidget {
     final puzzleIsSolved = ref.watch(puzzleIsSolvedProvider);
     final puzzleSize = ref.watch(puzzleSizeProvider);
     final tilesState = ref.watch(puzzleProvider);
-    final movesCount = ref.watch(puzzleMovesCountProvider);
-    final secondsElapsed = ref.watch(stopWatchProvider);
     final isWeb = ref.watch(isWebProvider);
 
     ref.listen(correctTilesCountProvider, (previous, next) {
@@ -55,15 +54,15 @@ class PuzzleBoard extends ConsumerWidget {
         ref.read(stopWatchProvider.notifier).pause();
         ref.read(phraseStatusProvider.notifier).state =
             PhraseStatus.puzzleSolved;
+        final score = ref.read(scoreProvider);
+        ref.read(scoresProvider.notifier).addScore(score);
 
         Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
           showDialog(
             context: context,
             builder: (context) {
               return SolvedPuzzleDialog(
-                movesCount: movesCount,
-                solvingDuration: Duration(seconds: secondsElapsed),
-                puzzleSize: puzzleSize,
+                score: score,
                 isWeb: isWeb,
                 onSharePressed: ref.read(shareScoreServiceProvider).share,
                 onRestartPressed: () {

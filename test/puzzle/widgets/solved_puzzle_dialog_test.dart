@@ -1,6 +1,7 @@
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:dashtronaut/core/widget_keys.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
+import 'package:dashtronaut/score/models/score.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -13,13 +14,14 @@ void main() {
     'Renders solved puzzle dialog with correct image from puzzle size',
     (WidgetTester tester) async {
       const puzzleSize = 3;
-      const solvingDuration = Duration(milliseconds: 2000);
 
       await tester.pumpProviderApp(
         const SolvedPuzzleDialog(
-          solvingDuration: solvingDuration,
-          puzzleSize: 3,
-          movesCount: movesCount,
+          score: Score(
+            secondsElapsed: 2,
+            puzzleSize: 3,
+            winMovesCount: movesCount,
+          ),
         ),
       );
 
@@ -40,9 +42,11 @@ void main() {
     (WidgetTester tester) async {
       await tester.pumpProviderApp(
         const SolvedPuzzleDialog(
-          solvingDuration: Duration.zero,
-          puzzleSize: 3,
-          movesCount: movesCount,
+          score: Score(
+            secondsElapsed: 2,
+            puzzleSize: 3,
+            winMovesCount: movesCount,
+          ),
         ),
       );
 
@@ -70,9 +74,11 @@ void main() {
             ),
           ),
           child: const SolvedPuzzleDialog(
-            solvingDuration: Duration.zero,
-            puzzleSize: 3,
-            movesCount: movesCount,
+            score: Score(
+              secondsElapsed: 2,
+              puzzleSize: 3,
+              winMovesCount: movesCount,
+            ),
           ),
         ),
       );

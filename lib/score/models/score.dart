@@ -15,6 +15,8 @@ class Score extends Equatable {
     required this.puzzleSize,
   });
 
+  Duration get winDuration => Duration(seconds: secondsElapsed);
+
   factory Score.fromJson(Map<String, dynamic> json) {
     return Score(
       secondsElapsed: json['secondsElapsed'],

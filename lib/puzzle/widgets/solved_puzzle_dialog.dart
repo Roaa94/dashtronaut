@@ -4,29 +4,26 @@ import 'package:dashtronaut/core/widgets/app_alert_dialog.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog_info.dart';
+import 'package:dashtronaut/score/models/score.dart';
 import 'package:flutter/material.dart';
 
 class SolvedPuzzleDialog extends StatelessWidget {
   const SolvedPuzzleDialog({
     super.key,
-    required this.solvingDuration,
-    required this.puzzleSize,
-    required this.movesCount,
+    required this.score,
     this.isWeb = false,
     this.onSharePressed,
     this.onRestartPressed,
   });
 
-  final Duration solvingDuration;
-  final int puzzleSize;
-  final int movesCount;
+  final Score score;
   final bool isWeb;
   final VoidCallback? onSharePressed;
   final VoidCallback? onRestartPressed;
 
   String? get imageName {
-    if (Constants.supportedPuzzleSizes.contains(puzzleSize)) {
-      return 'solved-${puzzleSize}x$puzzleSize.png';
+    if (Constants.supportedPuzzleSizes.contains(score.puzzleSize)) {
+      return 'solved-${score.puzzleSize}x${score.puzzleSize}.png';
     }
     return null;
   }
@@ -43,8 +40,8 @@ class SolvedPuzzleDialog extends StatelessWidget {
     );
 
     Widget solvedPuzzleInfo = SolvedPuzzleDialogInfo(
-      solvingDuration: solvingDuration,
-      movesCount: movesCount,
+      solvingDuration: score.winDuration,
+      movesCount: score.winMovesCount,
       isWeb: isWeb,
       onSharePressed: onSharePressed,
       onRestartPressed: onRestartPressed,

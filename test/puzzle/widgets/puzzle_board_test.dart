@@ -1,4 +1,3 @@
-import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
 import 'package:dashtronaut/dash/phrases.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
@@ -7,6 +6,9 @@ import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
 import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
+import 'package:dashtronaut/score/models/score.dart';
+import 'package:dashtronaut/score/providers/scores_provider.dart';
+import 'package:dashtronaut/score/repositories/scores_repository.dart';
 import 'package:dashtronaut/stop-watch/providers/stop_watch_provider.dart';
 import 'package:dashtronaut/stop-watch/repositories/stop_watch_repository.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ import '../../utils/test_data.dart';
 void main() {
   late PuzzleStorageRepository mockPuzzleRepository;
   late StopWatchStorageRepository mockStopWatchRepository;
+  late ScoresStorageRepository mockScoresRepository;
   late ShareScoreService mockShareScoreService;
 
   int hapticCount = 0;
@@ -41,6 +44,7 @@ void main() {
     mockPuzzleRepository = MockPuzzleStorageRepository();
     mockStopWatchRepository = MockStopWatchStorageRepository();
     mockShareScoreService = MockShareScoreService();
+    mockScoresRepository = MockScoresRepository();
   });
 
   tearDown(() {
@@ -65,6 +69,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
 
@@ -97,6 +102,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
 
@@ -138,6 +144,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
       await tester.pump();
@@ -179,6 +186,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
       await tester.pump();
@@ -207,6 +215,7 @@ void main() {
     (WidgetTester tester) async {
       when(() => mockPuzzleRepository.get()).thenReturn(puzzle2x2);
       when(() => mockStopWatchRepository.get()).thenReturn(0);
+      when(() => mockScoresRepository.get()).thenReturn([]);
 
       late WidgetRef ref;
       await tester.pumpProviderApp(
@@ -220,6 +229,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
       await tester.pump();
@@ -234,12 +244,12 @@ void main() {
             widget.child is PuzzleTile &&
             (widget.child as PuzzleTile).tile.value == 3,
       );
+      expect(ref.read(scoresProvider), []);
       await tester.tap(tileFinder);
       await tester.pumpAndSettle();
-      expect(
-        ref.read(phraseStatusProvider),
-        PhraseStatus.puzzleSolved,
-      );
+      const score = Score(secondsElapsed: 0, winMovesCount: 1, puzzleSize: 2);
+      verify(() => mockScoresRepository.set([score])).called(1);
+      expect(ref.read(scoresProvider), [score]);
     },
   );
 
@@ -264,6 +274,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
       await tester.pump();
@@ -304,6 +315,7 @@ void main() {
           stopWatchRepositoryProvider
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
 
@@ -343,6 +355,7 @@ void main() {
               .overrideWithValue(mockStopWatchRepository),
           puzzleRepositoryProvider.overrideWithValue(mockPuzzleRepository),
           shareScoreServiceProvider.overrideWithValue(mockShareScoreService),
+          scoresRepositoryProvider.overrideWithValue(mockScoresRepository),
         ],
       );
       await tester.pump();
