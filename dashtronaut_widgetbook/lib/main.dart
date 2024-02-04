@@ -21,14 +21,14 @@ import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
 import 'package:dashtronaut/stop-watch/providers/stop_watch_provider.dart';
-import 'package:dashtronaut/widgetbook/fake_data.dart';
+import 'package:dashtronaut_widgetbook/fake_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 void main() {
   runZonedGuarded<Future<void>>(
-    () async {
+        () async {
       // Todo: use appBuilder instead
       runApp(
         ProviderScope(
@@ -46,7 +46,7 @@ void main() {
       // );
     },
     // ignore: only_throw_errors
-    (e, _) => throw e,
+        (e, _) => throw e,
   );
 }
 
@@ -208,14 +208,14 @@ Widget defaultAnimatedPhraseBubble(BuildContext context) {
           ),
           dashTapCount: context.knobs
               .slider(
-                label: 'Dash Tap Count',
-                description:
-                    'One status where phrases are shown is when Dash is tapped, which goes into an array of phrases based on the tap count',
-                initialValue: 1,
-                min: 0,
-                max: Phrases.dashTappedPhrases.length - 1,
-                divisions: Phrases.dashTappedPhrases.length - 1,
-              )
+            label: 'Dash Tap Count',
+            description:
+            'One status where phrases are shown is when Dash is tapped, which goes into an array of phrases based on the tap count',
+            initialValue: 1,
+            min: 0,
+            max: Phrases.dashTappedPhrases.length - 1,
+            divisions: Phrases.dashTappedPhrases.length - 1,
+          )
               .toInt(),
         ),
       ],
@@ -227,7 +227,7 @@ Widget puzzleBoard3x3(BuildContext context) {
   return ProviderScope(
     overrides: [
       configsProvider.overrideWith(
-        (_) => const Configs(
+            (_) => const Configs(
           defaultPuzzleSize: 3,
         ),
       ),
@@ -257,7 +257,7 @@ Widget puzzleBoard5x5(BuildContext context) {
     parent: ProviderScope.containerOf(context),
     overrides: [
       configsProvider.overrideWith(
-        (_) => const Configs(
+            (_) => const Configs(
           defaultPuzzleSize: 5,
         ),
       ),
@@ -280,7 +280,7 @@ Widget puzzleBoard6x6(BuildContext context) {
   return ProviderScope(
     overrides: [
       configsProvider.overrideWith(
-        (_) => const Configs(
+            (_) => const Configs(
           defaultPuzzleSize: 6,
         ),
       ),
@@ -317,7 +317,7 @@ Widget puzzleTile(BuildContext context) {
         isMovable: context.knobs.boolean(
           label: 'Is the Tile Movable?',
           description:
-              'Movable tiles (tiles around white space), will pulse continuously',
+          'Movable tiles (tiles around white space), will pulse continuously',
         ),
         isPuzzleSolved: context.knobs.boolean(
           label: 'Is Puzzle Solved?',
@@ -337,12 +337,12 @@ Widget puzzleTile(BuildContext context) {
           correctLocation: const Location(x: 2, y: 1),
           value: context.knobs
               .slider(
-                label: 'Tile Value',
-                divisions: 9,
-                max: 9,
-                min: 1,
-                initialValue: 1,
-              )
+            label: 'Tile Value',
+            divisions: 9,
+            max: 9,
+            min: 1,
+            initialValue: 1,
+          )
               .toInt(),
         ),
         puzzleSize: 3,
@@ -361,22 +361,22 @@ Widget puzzleSolvedDialog(BuildContext context) {
     solvingDuration: Duration(
       seconds: context.knobs
           .slider(
-            label: 'Solving duration in seconds',
-            initialValue: 20,
-            min: 10,
-            max: 2000,
-            divisions: 200,
-          )
+        label: 'Solving duration in seconds',
+        initialValue: 20,
+        min: 10,
+        max: 2000,
+        divisions: 200,
+      )
           .toInt(),
     ),
     movesCount: context.knobs
         .slider(
-          label: 'Moves Count',
-          initialValue: 20,
-          min: 10,
-          max: 2000,
-          divisions: 200,
-        )
+      label: 'Moves Count',
+      initialValue: 20,
+      min: 10,
+      max: 2000,
+      divisions: 200,
+    )
         .toInt(),
     isWeb: context.knobs.boolean(label: 'Is On Web Platform'),
     onSharePressed: () {},
