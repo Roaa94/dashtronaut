@@ -1,4 +1,4 @@
-import 'package:dashtronaut/models/location.dart';
+import 'package:dashtronaut/puzzle/models/location.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -35,10 +35,33 @@ void main() {
       expect(targetLocation.isLocatedAround(const Location(x: 2, y: 2)), false);
     });
 
-    test('Compare locations - Check if a location before or after another', () {
-      expect(targetLocation.compareTo(const Location(x: 3, y: 3)), -1);
-      expect(targetLocation.compareTo(const Location(x: 1, y: 1)), 1);
-      expect(targetLocation.compareTo(const Location(x: 2, y: 2)), 0);
+    group('Location comparison', () {
+      test(
+        'returns -1 when location A is before location B',
+        () {
+          const locationA = Location(x: 2, y: 2);
+          const locationB = Location(x: 3, y: 3);
+          expect(locationA.compareTo(locationB), equals(-1));
+        },
+      );
+
+      test(
+        'returns 0 when location A is the same as location B',
+        () {
+          const locationA = Location(x: 2, y: 2);
+          const locationB = Location(x: 2, y: 2);
+          expect(locationA.compareTo(locationB), equals(0));
+        },
+      );
+
+      test(
+        'returns 1 when location A is after location B',
+        () {
+          const locationA = Location(x: 2, y: 2);
+          const locationB = Location(x: 1, y: 1);
+          expect(locationA.compareTo(locationB), equals(1));
+        },
+      );
     });
 
     test('Returns correct model from json map', () {
@@ -58,7 +81,7 @@ void main() {
     test('toString prints correctly', () {
       Location location = const Location(x: 2, y: 1);
 
-      expect(location.toString(), '(1, 2)');
+      expect(location.toString(), '(x: 2, y: 1)');
     });
   });
 }

@@ -1,0 +1,32 @@
+name: dashtronaut_widgetbook
+description: "A new Flutter project."
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dashtronaut:
+    path: ../
+  cupertino_icons: ^1.0.2
+  widgetbook: ^3.7.1
+  widgetbook_annotation: ^3.1.0
+  flutter_riverpod: ^2.4.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  widgetbook_generator: ^3.7.0
+  build_runner: ^2.4.8
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/puzzle-solved/
+    - assets/rive/
+    - assets/images/background/

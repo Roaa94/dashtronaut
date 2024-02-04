@@ -1,3 +1,20 @@
+import 'dart:io';
+
+import 'package:dashtronaut/core/services/http/http_service.dart';
+import 'package:dashtronaut/core/services/share-score/file_share_service.dart';
+import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
+import 'package:dashtronaut/core/services/share-score/url_service.dart';
+import 'package:dashtronaut/core/services/storage/storage.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_state.dart';
+import 'package:dashtronaut/puzzle/repositories/puzzle_repository.dart';
+import 'package:dashtronaut/score/repositories/scores_repository.dart';
+import 'package:dashtronaut/stop-watch/repositories/stop_watch_repository.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -12,3 +29,54 @@ class MockPathProviderPlatform extends Mock
     return kTemporaryPath;
   }
 }
+
+class MockScoresRepository extends Mock implements ScoresStorageRepository {}
+
+class Listener<T> extends Mock {
+  void call(T? previous, T value);
+}
+
+class MockStorageService extends Mock implements StorageService {}
+
+class MockPuzzleStorageRepository extends Mock
+    implements PuzzleStorageRepository {}
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class MockRoute extends Mock implements Route<dynamic> {}
+
+class MockShareScoreService extends Mock implements ShareScoreService {}
+
+class MockUrlService extends Mock implements UrlService {}
+
+class MockFileShareService extends Mock implements FileShareService {}
+
+class MockUrlLauncher extends Mock
+    with MockPlatformInterfaceMixin
+    implements UrlLauncherPlatform {}
+
+class MockLaunchOptions extends Mock implements LaunchOptions {}
+
+class MockFile extends Mock implements File {
+  @override
+  final String path;
+
+  MockFile(this.path) {
+    when(() => writeAsBytes(any())).thenAnswer((_) async => MockFile(path));
+  }
+}
+
+class MockHttpService extends Mock implements HttpService {}
+
+class MockDio extends Mock implements Dio {}
+
+class MockNotifier<T> extends Mock implements Notifier<T> {}
+
+class MockTilesNotifier extends Mock
+    implements PuzzleNotifier, MockNotifier<PuzzleState> {}
+
+class MockPuzzleSizeNotifier extends Mock
+    implements PuzzleSizeNotifier, MockNotifier<int> {}
+
+class MockStopWatchStorageRepository extends Mock
+    implements StopWatchStorageRepository {}

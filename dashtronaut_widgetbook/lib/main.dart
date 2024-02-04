@@ -1,0 +1,405 @@
+import 'package:dashtronaut/configs/models/configs.dart';
+import 'package:dashtronaut/configs/providers/configs_provider.dart';
+import 'package:dashtronaut/core/providers/is_web_provider.dart';
+import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
+import 'package:dashtronaut/core/services/storage/storage.dart';
+import 'package:dashtronaut/core/styles/app_themes.dart';
+import 'package:dashtronaut/dash/phrases.dart';
+import 'package:dashtronaut/dash/widgets/animated_phrase_bubble.dart';
+import 'package:dashtronaut/dash/widgets/dash.dart';
+import 'package:dashtronaut/dash/widgets/dash_rive_animation.dart';
+import 'package:dashtronaut/puzzle/models/location.dart';
+import 'package:dashtronaut/puzzle/models/tile.dart';
+import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
+import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
+import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
+import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
+import 'package:dashtronaut/stop-watch/providers/stop_watch_provider.dart';
+import 'package:dashtronaut_widgetbook/fake_data.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart';
+
+void main() {
+  runApp(const DashtronautWidgetbook());
+}
+
+@App()
+class DashtronautWidgetbook extends StatelessWidget {
+  const DashtronautWidgetbook({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Widgetbook.material(
+      appBuilder: (context, child) => ProviderScope(
+        overrides: [
+          storageServiceProvider.overrideWithValue(FakeStorageService()),
+        ],
+        child: child,
+      ),
+      addons: [
+        MaterialThemeAddon(
+          themes: [
+            WidgetbookTheme(
+              name: 'Dark',
+              data: AppThemes.dark,
+            ),
+          ],
+        ),
+      ],
+      // directories: directories,
+      directories: [
+        WidgetbookCategory(
+          name: 'Puzzle Board',
+          children: [
+            WidgetbookComponent(
+              name: 'PuzzleBoard',
+              useCases: [
+                WidgetbookUseCase(
+                  name: '3x3 Puzzle',
+                  builder: puzzleBoard3x3,
+                ),
+                WidgetbookUseCase(
+                  name: '4x4 Puzzle',
+                  builder: puzzleBoard4x4,
+                ),
+                WidgetbookUseCase(
+                  name: '5x5 Puzzle',
+                  builder: puzzleBoard5x5,
+                ),
+                WidgetbookUseCase(
+                  name: '6x6 Puzzle',
+                  builder: puzzleBoard6x6,
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'PuzzleTile',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: puzzleTile,
+                )
+              ],
+            ),
+          ],
+        ),
+        WidgetbookCategory(
+          name: 'Dash UI',
+          children: [
+            WidgetbookComponent(
+              name: 'Dash',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: defaultDash,
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'AnimatedPhraseBubble',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: defaultAnimatedPhraseBubble,
+                ),
+              ],
+            ),
+            WidgetbookComponent(
+              name: 'DashRiveAnimation',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: defaultDashRiveAnimation,
+                ),
+              ],
+            ),
+          ],
+        ),
+        WidgetbookCategory(
+          name: 'Dialogs',
+          children: [
+            WidgetbookComponent(
+              name: 'Puzzle Solved Dialog',
+              useCases: [
+                WidgetbookUseCase(
+                  name: 'Default',
+                  builder: puzzleSolvedDialog,
+                ),
+                WidgetbookUseCase(
+                  name: '3x3 Puzzle',
+                  builder: puzzleSolvedDialog3x3,
+                ),
+                WidgetbookUseCase(
+                  name: '4x4 Puzzle',
+                  builder: puzzleSolvedDialog4x4,
+                ),
+                WidgetbookUseCase(
+                  name: '5x5 Puzzle',
+                  builder: puzzleSolvedDialog5x5,
+                ),
+                WidgetbookUseCase(
+                  name: '6x6 Puzzle',
+                  builder: puzzleSolvedDialog6x6,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+Widget defaultDashRiveAnimation(BuildContext context) {
+  return const Center(
+    child: Stack(
+      children: [
+        DashRiveAnimation(),
+      ],
+    ),
+  );
+}
+
+Widget defaultDash(BuildContext context) {
+  return const Center(
+    child: Dash(),
+  );
+}
+
+Widget defaultAnimatedPhraseBubble(BuildContext context) {
+  return Center(
+    child: Stack(
+      children: [
+        AnimatedPhraseBubble(
+          phraseStatus: context.knobs.list(
+            label: 'Status',
+            labelBuilder: (option) => option.name,
+            options: PhraseStatus.values,
+          ),
+          dashTapCount: context.knobs.double
+              .slider(
+                label: 'Dash Tap Count',
+                description:
+                    'One status where phrases are shown is when Dash is tapped, which goes into an array of phrases based on the tap count',
+                initialValue: 1,
+                min: 0,
+                max: Phrases.dashTappedPhrases.length - 1,
+                divisions: Phrases.dashTappedPhrases.length - 1,
+              )
+              .toInt(),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget puzzleTile(BuildContext context) {
+  final size = context.knobs.double.slider(
+    label: 'Size',
+    min: 100,
+    max: 400,
+    divisions: 300,
+    initialValue: 150,
+  );
+
+  return Center(
+    child: SizedBox(
+      width: size,
+      height: size,
+      child: PuzzleTile(
+        isMovable: context.knobs.boolean(
+          label: 'Is the Tile Movable?',
+          description:
+              'Movable tiles (tiles around white space), will pulse continuously',
+        ),
+        isPuzzleSolved: context.knobs.boolean(
+          label: 'Is Puzzle Solved?',
+          description: 'If the puzzle is solved, hovering over '
+              'the tile should not animate it',
+        ),
+        tile: Tile(
+          currentLocation: Location(
+            x: context.knobs.boolean(
+              label: 'Is Tile at Correct Location?',
+              description: 'This will run the Rive animation',
+            )
+                ? 2
+                : 3,
+            y: 1,
+          ),
+          correctLocation: const Location(x: 2, y: 1),
+          value: context.knobs.int
+              .slider(
+                label: 'Tile Value',
+                divisions: 9,
+                max: 9,
+                min: 1,
+                initialValue: 1,
+              )
+              .toInt(),
+        ),
+        puzzleSize: 3,
+      ),
+    ),
+  );
+}
+
+Widget puzzleBoard3x3(BuildContext context) {
+  return ProviderScope(
+    overrides: [
+      configsProvider.overrideWith(
+        (_) => const Configs(
+          defaultPuzzleSize: 3,
+        ),
+      ),
+      puzzleSizeProvider,
+      puzzleProvider,
+      puzzleIsSolvedProvider,
+      correctTilesCountProvider,
+      puzzleMovesCountProvider,
+      stopWatchProvider,
+      isWebProvider,
+      shareScoreServiceProvider,
+    ],
+    child: const Center(
+      child: PuzzleBoard(),
+    ),
+  );
+}
+
+Widget puzzleBoard5x5(BuildContext context) {
+  return ProviderScope(
+    parent: ProviderScope.containerOf(context),
+    overrides: [
+      configsProvider.overrideWith(
+        (_) => const Configs(
+          defaultPuzzleSize: 5,
+        ),
+      ),
+      puzzleSizeProvider,
+      puzzleProvider,
+      puzzleIsSolvedProvider,
+      correctTilesCountProvider,
+      puzzleMovesCountProvider,
+      stopWatchProvider,
+      isWebProvider,
+      shareScoreServiceProvider,
+    ],
+    child: const Center(
+      child: PuzzleBoard(),
+    ),
+  );
+}
+
+Widget puzzleBoard6x6(BuildContext context) {
+  return ProviderScope(
+    overrides: [
+      configsProvider.overrideWith(
+        (_) => const Configs(
+          defaultPuzzleSize: 6,
+        ),
+      ),
+      puzzleSizeProvider,
+      puzzleProvider,
+      puzzleIsSolvedProvider,
+      puzzleMovesCountProvider,
+      correctTilesCountProvider,
+      puzzleMovesCountProvider,
+      stopWatchProvider,
+      isWebProvider,
+      shareScoreServiceProvider,
+    ],
+    child: const Center(
+      child: PuzzleBoard(),
+    ),
+  );
+}
+
+Widget puzzleSolvedDialog(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: context.knobs.list<int>(
+      label: 'Puzzle Size',
+      labelBuilder: (value) => '${value}x$value',
+      options: [3, 4, 5, 6],
+    ),
+    solvingDuration: Duration(
+      seconds: context.knobs.int
+          .slider(
+            label: 'Solving duration in seconds',
+            initialValue: 20,
+            min: 10,
+            max: 2000,
+            divisions: 200,
+          )
+          .toInt(),
+    ),
+    movesCount: context.knobs.int
+        .slider(
+          label: 'Moves Count',
+          initialValue: 20,
+          min: 10,
+          max: 2000,
+          divisions: 200,
+        )
+        .toInt(),
+    isWeb: context.knobs.boolean(label: 'Is On Web Platform'),
+    onSharePressed: () {},
+    onRestartPressed: () {},
+  );
+}
+
+Widget puzzleSolvedDialog3x3(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: 3,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
+  );
+}
+
+Widget puzzleBoard4x4(BuildContext context) {
+  return const Center(
+    child: PuzzleBoard(),
+  );
+}
+
+Widget puzzleSolvedDialog4x4(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: 4,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
+  );
+}
+
+Widget puzzleSolvedDialog5x5(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: 5,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
+  );
+}
+
+Widget puzzleSolvedDialog6x6(BuildContext context) {
+  return SolvedPuzzleDialog(
+    puzzleSize: 6,
+    solvingDuration: const Duration(seconds: 20),
+    movesCount: 20,
+    isWeb: false,
+    onSharePressed: () {},
+    onRestartPressed: () {},
+  );
+}

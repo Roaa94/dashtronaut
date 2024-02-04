@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dashtronaut/models/position.dart';
+import 'package:dashtronaut/puzzle/models/position.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -45,7 +45,8 @@ void main() {
       });
 
       test(
-          'Returns same start position if lerp double is 0 and one position param in null',
+          'Returns same start position if lerp double '
+              'is 0 and one position param in null',
           () {
         expect(Position.lerp(startPosition, const Position(left: 10), 0),
             startPosition);
