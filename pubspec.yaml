@@ -11,14 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.5
-  collection: ^1.16.0
+  cupertino_icons: ^1.0.6
+  collection: ^1.18.0
   equatable: ^2.0.5
-  package_info_plus: ^3.1.0
-  rive: ^0.10.4
+  package_info_plus: ^5.0.1
+  rive: ^0.12.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  share_plus: ^6.3.2
+  share_plus: ^7.2.2
   path_provider: ^2.0.14
   url_launcher: ^6.1.10
   font_awesome_flutter: ^10.4.0
@@ -26,20 +26,19 @@ dependencies:
   cross_file: ^0.3.3+4
   flutter_riverpod: ^2.3.4
   url_launcher_platform_interface: ^2.1.2
-  widgetbook: 3.0.0-beta.14
   dio: ^5.1.1
   share_plus_platform_interface: ^3.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  http_mock_adapter: ^0.4.2
+  http_mock_adapter: ^0.6.1
   flutter_launcher_icons: ^0.13.0
   flutter_native_splash: ^2.2.19
-  mocktail: ^0.3.0
+  mocktail: ^1.0.3
   path_provider_platform_interface: ^2.0.6
   plugin_platform_interface: ^2.1.4
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
   hive_test: ^1.0.1
 
 flutter:
