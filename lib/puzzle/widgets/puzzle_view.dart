@@ -4,7 +4,7 @@ import 'package:dashtronaut/core/animations/widgets/scale_up_transition.dart';
 import 'package:dashtronaut/core/layout/screen_type_helper.dart';
 import 'package:dashtronaut/core/layout/spacing.dart';
 import 'package:dashtronaut/dash/widgets/dash.dart';
-import 'package:dashtronaut/drawer/widgets/drawer_button.dart';
+import 'package:dashtronaut/drawer/widgets/app_drawer_button.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_board.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_header.dart';
 import 'package:dashtronaut/puzzle/widgets/reset_puzzle_button.dart';
@@ -79,7 +79,7 @@ class PuzzleView extends ConsumerWidget {
                   ? Spacing.screenHPadding
                   : screenPadding.top,
             ),
-            child: const DrawerButton(),
+            child: const AppDrawerButton(),
           ),
         ),
         Expanded(

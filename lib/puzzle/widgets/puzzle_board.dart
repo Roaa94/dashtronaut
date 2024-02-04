@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/layout/puzzle_layout.dart';
 import 'package:dashtronaut/core/providers/is_web_provider.dart';
 import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
@@ -9,8 +10,8 @@ import 'package:dashtronaut/puzzle/models/tile.dart';
 import 'package:dashtronaut/puzzle/providers/correct_tiles_count_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_is_solved_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_moves_count_provider.dart';
-import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/providers/puzzle_provider.dart';
+import 'package:dashtronaut/puzzle/providers/puzzle_size_provider.dart';
 import 'package:dashtronaut/puzzle/widgets/puzzle_keyboard_listener.dart';
 import 'package:dashtronaut/puzzle/widgets/solved_puzzle_dialog.dart';
 import 'package:dashtronaut/puzzle/widgets/tile/puzzle_tile.dart';
@@ -47,7 +48,7 @@ class PuzzleBoard extends ConsumerWidget {
     //
     // Solving puzzle should:
     // - Adds score to list
-    ref.listen(puzzleIsSolvedProvider, (previous, next) async {
+    ref.listen(puzzleIsSolvedProvider, (previous, next) {
       if (next != previous && next) {
         // Puzzle is solved!
         HapticFeedback.vibrate();
@@ -55,22 +56,29 @@ class PuzzleBoard extends ConsumerWidget {
         ref.read(phraseStatusProvider.notifier).state =
             PhraseStatus.puzzleSolved;
 
-        showDialog(
-          context: context,
-          builder: (context) {
-            return SolvedPuzzleDialog(
-              movesCount: movesCount,
-              solvingDuration: Duration(seconds: secondsElapsed),
-              puzzleSize: puzzleSize,
-              isWeb: isWeb,
-              onSharePressed: ref.read(shareScoreServiceProvider).share,
-              onRestartPressed: () {
-                ref.read(puzzleProvider.notifier).reset();
-                Navigator.of(context).pop(true);
-              },
-            );
-          },
-        );
+        Future.delayed(AnimationsManager.puzzleSolvedDialogDelay, () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return SolvedPuzzleDialog(
+                movesCount: movesCount,
+                solvingDuration: Duration(seconds: secondsElapsed),
+                puzzleSize: puzzleSize,
+                isWeb: isWeb,
+                onSharePressed: ref.read(shareScoreServiceProvider).share,
+                onRestartPressed: () {
+                  ref.read(puzzleProvider.notifier).reset();
+                  Navigator.of(context).pop(true);
+                },
+              );
+            },
+          ).then((result) {
+            if (result == null) {
+              // Dialog dismissed
+              ref.read(puzzleProvider.notifier).reset();
+            }
+          });
+        });
       }
     });
 

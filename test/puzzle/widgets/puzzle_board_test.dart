@@ -1,3 +1,4 @@
+import 'package:dashtronaut/core/animations/utils/animations_manager.dart';
 import 'package:dashtronaut/core/services/share-score/share_score_service.dart';
 import 'package:dashtronaut/dash/phrases.dart';
 import 'package:dashtronaut/dash/providers/phrases_provider.dart';
@@ -112,7 +113,7 @@ void main() {
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(hapticCount, 1);
     },
   );
@@ -152,7 +153,7 @@ void main() {
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(
         ref.read(stopWatchProvider),
         secondsElapsedWhenSolved,
@@ -193,7 +194,7 @@ void main() {
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(
         ref.read(phraseStatusProvider),
         PhraseStatus.puzzleSolved,
@@ -234,7 +235,7 @@ void main() {
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(
         ref.read(phraseStatusProvider),
         PhraseStatus.puzzleSolved,
@@ -278,7 +279,7 @@ void main() {
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       await tester.tap(find.text('Restart'));
       await tester.pump();
@@ -286,6 +287,8 @@ void main() {
       expect(ref.read(puzzleMovesCountProvider), 0);
     },
   );
+
+  // Todo: add dialog dismiss test case
 
   testWidgets(
     'Dialog pops when Restart button is clicked',
@@ -317,7 +320,7 @@ void main() {
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       await tester.tap(find.text('Restart'));
       await tester.pump();
@@ -349,13 +352,13 @@ void main() {
       //    3
       // We can tap to move tile of value 3 to solve the puzzle
       final tileFinder = find.byWidgetPredicate(
-            (widget) =>
-        widget is GestureDetector &&
+        (widget) =>
+            widget is GestureDetector &&
             widget.child is PuzzleTile &&
             (widget.child as PuzzleTile).tile.value == 3,
       );
       await tester.tap(tileFinder);
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       await tester.tap(find.text('Share'));
       await tester.pump();
