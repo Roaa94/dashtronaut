@@ -37,20 +37,20 @@ class PuzzleView extends ConsumerWidget {
         left: screenPadding.left,
         top: Spacing.screenHPadding,
       ),
-      child: Row(
+      child: const Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                DrawerButton(),
+              children: [
+                AppDrawerButton(),
                 SizedBox(height: 20),
                 PuzzleHeader(),
                 ResetPuzzleButton(),
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 3,
             child: Align(
               alignment: Alignment.centerLeft,
