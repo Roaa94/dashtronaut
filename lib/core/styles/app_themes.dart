@@ -6,6 +6,7 @@ class AppThemes {
   static ThemeData get dark => ThemeData(
         fontFamily: AppTextStyles.secondaryFontFamily,
         brightness: Brightness.dark,
+        useMaterial3: false,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.light,
