@@ -85,7 +85,8 @@ class PuzzleLayout implements LayoutDelegate {
       Positioned(
         top: kIsWeb
             ? Spacing.md
-            : !kIsWeb && (Platform.isAndroid || Platform.isMacOS)
+            : !kIsWeb &&
+                    (Platform.isAndroid || Platform.isMacOS || Platform.isLinux)
                 ? MediaQuery.of(context).padding.top + Spacing.md
                 : MediaQuery.of(context).padding.top,
         left: Spacing.screenHPadding,
