@@ -33,7 +33,10 @@ class AppDrawer extends StatelessWidget {
                           Orientation.landscape
                   ? 500
                   : MediaQuery.of(context).size.width * 0.8,
-              margin: kIsWeb || Platform.isAndroid || Platform.isMacOS
+              margin: kIsWeb ||
+                      Platform.isAndroid ||
+                      Platform.isMacOS ||
+                      Platform.isLinux
                   ? const EdgeInsets.symmetric(vertical: 20)
                   : EdgeInsets.only(
                       top: MediaQuery.of(context).orientation ==
